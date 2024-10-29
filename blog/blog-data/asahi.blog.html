@@ -5,76 +5,63 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ブログ|神奈川工科大学EDTC</title>
-    <link rel="stylesheet" href="../../css/reset.css">
-    <link rel="stylesheet" href="../../css/base.css">
-    <link rel="stylesheet" href="../../css/blog-base.css">
-    <link rel="stylesheet" href="../../css/blog-temp.css">
+    <link rel="stylesheet" href="./../../css/reset.css">
+    <link rel="stylesheet" href="./../../css/base.css">
+    <link rel="stylesheet" href="./../../css/blog-base.css">
+    <link rel="stylesheet" href="./../../css/blog-temp.css">
         <!-- icon link tag -->
-        <link rel="icon" href="/favicon.ico">
-        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon-180x180.png">
+        <link rel="icon" href="../../favicon.ico">
+        <link rel="apple-touch-icon" sizes="180x180" href="./../../apple-touch-icon-180x180.png">
 </head><!--headの終わり-->
 
 <body><!--本文の開始-->
     <!-- Header Start -->
-    <header class="site-header">
-        <div class="header-logo-menu">
-            <div class="logo-area">
-                <a href="../../base.html" class="edtc-top">
-                    <img id="logo" src="../../img/EDTC-Logo-Full-White.png" alt="EDTC">
-                </a>
-            </div>
-            <!--モバイルのみ表示-->
-            <nav class="sp-only">
-                <div class="gnav-toggle">
-                    <input id="gnav-input" type="checkbox" class="gnav-hidden">
-                    <label id="gnav-open" for="gnav-input"><span></span></label>
-                    <label class="gnav-unshown" id="gnav-close" for="gnav-input"></label>
-                    <div id="gnav-content">
-                        <ul class="gnav-menu">
-                            <li class="gnav-item"><a href="../../base.html">Home<br>ホーム</a></li>
-                            <li class="gnav-item"><a href="../../blog.html">Blog<br>ブログ</a></li>
-                            <li class="gnav-item"><a href="../../service.html">Services<br>サービス</a></li>
-                            <li class="gnav-item"><a
-                                    href="https://kaitedtc.com/base.html#access-content">Access<br>アクセス</a></li>
-                            <li class="gnav-item"><a href="../../contact-us.html">Contact<br>お問い合わせ</a></li>
-                        </ul>
-                        <ul class="snsbtniti">
-                            <li><a href="https://twitter.com/kait_edtc" target="_blank" class="flowbtn8 fl_tw2"><i
-                                        class="fab fa-twitter"></i></a></li>
-                            <li><a href="https://www.youtube.com/channel/UCUOc_IpnlHh1DnHf4riqs0w" target="_blank"
-                                    class="flowbtn8 fl_yu2"><i class="fab fa-youtube"></i></a></li>
-                            <li><a href="https://www.instagram.com/kait.edtc/" target="_blank"
-                                    class="flowbtn8 insta_btn2"><i class="fab fa-instagram"></i></a></li>
-                        </ul>
-                    </div>
+    <header><!--ヘッダーのコード　PCはそのままスマホはハンバーガーメニューにしているため住み分け -->
+        <a href="./../../base.html"><img src="./../../img/EDTC-icon.png" alt="EDTC"
+            style="display: block; height: 60px; width: auto;"></a>
+        <a href="./../../base.html" class="title">EDTC</a>
+        <!--==========モバイルのみ表示==========-->
+        <nav class="sp-only">
+            <div class="gnav-toggle">
+                <input id="gnav-input" type="checkbox" class="gnav-hidden">
+                <label id="gnav-open" for="gnav-input"><span></span></label>
+                <label class="gnav-unshown" id="gnav-close" for="gnav-input"></label>
+                <div id="gnav-content">
+                    <ul class="gnav-menu">
+                        <li class="gnav-item"><a href="./../../base.html">Home<br>ホーム</a></li>
+                        <li class="gnav-item"><a href="./../../blog.html">Blog<br>ブログ</a></li>
+                        <li class="gnav-item"><a href="./../../product-top.html">Services<br>サービス</a></li>
+                        <li class="gnav-item"><a href="./../../contact-us.html">Contact<br>お問い合わせ</a></li>
+                    </ul>
+                    <ul class="snsbtniti">
+                        <li><a href="https://twitter.com/kait_edtc" target="_blank" class="flowbtn8 fl_tw2"><i
+                                    class="fab fa-twitter"></i></a></li>
+                        <li><a href="https://www.youtube.com/channel/UCUOc_IpnlHh1DnHf4riqs0w" target="_blank"
+                                class="flowbtn8 fl_yu2"><i class="fab fa-youtube"></i></a></li>
+                        <li><a href="https://www.instagram.com/kait.edtc/" target="_blank"
+                                class="flowbtn8 insta_btn2"><i class="fab fa-instagram"></i></a></li>
+                    </ul>
                 </div>
-            </nav>
-
-            <!--PCのみ表示-->
-            <nav class="pc-only">
-                <ul class="gnav-menu">
-                    <li class="gnav-item"><a href="../../base.html">Home<br>ホーム</a></li>
-                    <li class="gnav-item"><a href="../../blog.html">Blog<br>ブログ</a></li>
-                    <li class="gnav-item"><a href="../../service.html">Services<br>サービス</a></li>
-                    <li class="gnav-item"><a href="../../contact-us.html">Contact<br>お問い合わせ</a></li>
-                    <li class="snsbtnitiy"><a href="https://twitter.com/kait_edtc" target="_blank"
-                            class="flowbtn8 fl_tw2"><i class="fab fa-twitter"></i></a></li>
-                    <li class="snsbtnitiy"><a href="https://www.youtube.com/channel/UCUOc_IpnlHh1DnHf4riqs0w"
-                            target="_blank" class="flowbtn8 fl_yu2"><i class="fab fa-youtube"></i></a></li>
-                    <li class="snsbtnitiy"><a href="https://www.instagram.com/kait.edtc/" target="_blank"
-                            class="flowbtn8 insta_btn2"><i class="fab fa-instagram"></i></a></li>
-                </ul>
-            </nav>
-        </div>
+            </div>
+        </nav>
+        <!--==========PCのみ表示==========-->
+        <nav class="pc-only">
+            <ul>
+                <li><a href="./../../base.html">main</a></li>
+                <li><a href="./../../blog.html">blog</a></li>
+                <li><a href="./../../product-top.html">product</a></li>
+                <li><a href="./../../contact-us.html">contact</a></li>
+            </ul>
+        </nav>
     </header>
     <!-- Header End -->
     <!--main strt-->
     <div class="blog-area">
         <span style="font-size: 40px;font-weight: bold;">神奈川工科大学見学体験ツアー</span><br>
         <span style="font-size: 20px;">あさひ学苑の子供たちと、神奈川工科大学探検とKAIT工房で缶バッチづくりをしました。</span><br>
-        <img src='../img/24-0629-asahi1.png' style="width: 375px;height: auto;margin-left: 10px;">
-        <img src='../img/24-0629-asahi3.png' style="width: 375px;height: auto;margin-left: 10px;">
-        <img src='../img/24-0629-asahi5.png' style="width: 375px;height: auto;margin-left: 10px;">
+        <img src='./../blog-img/24-0629-asahi1.png' style="width: 375px;height: auto;margin-left: 10px;">
+        <img src='./../blog-img/24-0629-asahi3.png' style="width: 375px;height: auto;margin-left: 10px;">
+        <img src='./../blog-img/24-0629-asahi5.png' style="width: 375px;height: auto;margin-left: 10px;">
         <br>
         大学探検では、KAIT広場や教室、食堂などを巡りました。
         KAIT広場では一緒に記念撮影をしたり、教室の席に座って大学生気分になったり、食堂では大学生が食べるメニューや景色をみて楽しく大学内を探検しました。<br>
@@ -93,30 +80,36 @@
         <p class="syomei">番倉</p>
 
     </div>
-    <div id="reset"><a href="../../blog.html" style="color: black;">前のページにもどる</a></div>
+    <div id="reset"><a href="./../../blog.html" style="color: black;">前のページにもどる</a></div>
 
     <!--main end-->
     <!-- Footer Start -->
-    <footer class="footer-area">
-        <div class="inner">
-            <div class="logo-area footer-logo">
-                <img class="logo" src="../../img/EDTC-kait-edtc-logo.png" alt="ロゴ:kait_edtc" width="100%" height="auto">
-            </div>
-            <address>〒243-0292　神奈川県厚木市下萩野1030<br><br>学校法人 幾徳学苑　神奈川工科大学</address>
-            <div>Mail : kait.edtc@gmail.com</div>
-            <nav class="footer-nav">
-                <ul class="snsbtniti">
-                    <li><a href="https://twitter.com/kait_edtc" target="_blank" class="flowbtn8 fl_tw2"><i
-                                class="fab fa-twitter"></i></a></li>
-                    <li><a href="https://www.youtube.com/channel/UCUOc_IpnlHh1DnHf4riqs0w" target="_blank"
-                            class="flowbtn8 fl_yu2"><i class="fab fa-youtube"></i></a></li>
-                    <li><a href="https://www.instagram.com/kait.edtc/" target="_blank" class="flowbtn8 insta_btn2"><i
-                                class="fab fa-instagram"></i></a></li>
-                </ul>
-            </nav>
-
+    <footer>
+        <div class="flex">
+            <ul class="footer-list">
+                <li style="text-align: center;">
+                    <p class="gyou-a"></p>
+                    <a href="./../../base.html">ホーム　</a>
+                    <a href="./../../blog.html">ブログ　</a>
+                    <a href="./../../product-top.html">サービス　</a>
+                    <hr size="100%">
+                </li>
+                <li  style="text-align: center;">
+                    <a href="./../../contact-us.html">お問い合わせ</a>
+                    <hr size="100%">
+                    <p class="gyou"></p>
+                    <b><img src="./../../img/EDTC-icon.png" alt="EDTCロゴ" height="50px" width="auto" class="syasinn">
+                        <font size="12">EDTC</font>
+                    </b>
+                    <p class="gyou"></p>
+                    <p>
+                        <font size="3">学校法人 幾徳学園　神奈川工科大学<br>mail :kait.edtc@gmail.com</font>
+                    </p>
+                    <p class="gyou-b"></p>
+                    <p>©　2024　KAIT　EDTC　All Rights Reserved</p>
+                </li>
+            </ul>
         </div>
-        <small class="footer-area-copy">Copyright © 2022 EDTC , All rights reserved.</small>
     </footer>
     <!-- Footer End -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"
