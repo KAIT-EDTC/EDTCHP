@@ -1,0 +1,207 @@
+
+/*=========== デバイスごとのスタイルのスタイル ==========*/
+/*PC用のスタイル 768-->820*/
+@media screen and (min-width:820px) {
+    .inner {
+        max-width: 1200px;
+    }
+}
+
+/*モバイルとPCで表示に関するスタイル*/
+.sp-only {
+    display: block; /*モバイルでは表示*/
+}
+
+.pc-only {
+    display: none; /*モバイルでは非表示*/
+}
+
+/*PC用のスタイル*/
+
+@media screen and (min-width:820px) {
+    .sp-only {
+        display: none; /*PCでは非表示*/
+    }
+
+    .pc-only {
+        display: block; /*PCでは表示*/
+    }
+}
+
+/*====================================================================================
+======================================================================================
+======================================================================================*/
+/* headerの設定 */
+/* pcメニューの設定 */
+header{
+    padding: 30px 4% 10px;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+}
+h1 {
+    margin: 0; padding: 0;
+    font-size: 20px;
+}
+a {	
+    text-decoration: none;
+    color: #4b4b4b;
+}ul {
+    list-style: none;
+    margin: 0;
+    display: flex;
+}
+li {
+    margin: 0 0 0 15px;
+    font-size: 14px;
+}
+nav {
+    margin: 0 10% 0 auto;
+}
+/*モバイルのみ表示*/
+
+/*ハンバーガーメニューのスタイル*/
+/*ハンバーガーメニュー*/
+.gnav-toggle {
+    position: relative;
+    margin-top: 12px;
+}
+
+/*チェックボックスなどを非表示にする*/
+.gnav-hidden {
+    display: none;
+}
+
+/*アイコンのスペース*/
+#gnav-open {
+    display: inline-block;
+    width: 30px;
+    height: 22px;
+    vertical-align: middle;
+}
+
+/*ハンバーガーの三本線を表現*/
+#gnav-open span,
+#gnav-open span::before,
+#gnav-open span::after {
+    content: '';
+    position: absolute;
+    height: 3px; /*線の太さ*/
+    width: 25px; /*線の長さ*/
+    border-radius: 3px;
+    background: #555;
+    display: block;
+    cursor: pointer;
+}
+
+#gnav-open span::before {
+    bottom: -8px;
+}
+
+#gnav-open span::after {
+    bottom: -16px;
+}
+
+/*閉じる用の薄黒箇所*/
+#gnav-close {
+    display: none;
+    position: fixed;
+    z-index: 90;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #000;
+    opacity: 0;
+    transition: 0.3s ease-in-out;
+}
+
+/*チェックがついたら表示させる*/
+#gnav-input:checked ~ #gnav-close {
+    display: block;
+    opacity: 0.5;
+
+}
+
+#gnav-input:checked ~ #gnav-content {
+    transform: translateX(0%);
+    box-shadow: 6px 0 25px rgba(0, 0, 0, 0.15);
+} 
+
+/*メニューの中身*/
+#gnav-content{
+    overflow: auto;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 300;
+    width: 70%;
+    max-width: 300px;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    transition: 0.3s ease-in-out;
+    transform: translateX(-105%);
+    z-index: 30px;
+}
+
+.gnav-menu {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 50px;
+    text-transform: uppercase;/*小文字、大文字の混在を大文字に統一*/
+    z-index: 30px;
+}
+
+.gnav-item {
+    margin: 10px;
+    padding-bottom: 20px;
+}
+
+.gnav-item a {
+    color: #fff;
+    font-size: 12px;
+    display: block;
+    width: 200px;
+    text-align: center;
+}
+
+/*疑似要素で1行目のスタイル指定*/
+.gnav-item a::first-line {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.gnav-item a:hover {
+    color: #85a7cc;
+}
+/* footerの設定 */
+.footer{
+    color: white;
+    background-color: #333;
+}
+.footer-area-copy {
+    color: #ccc;
+    font-size: 12px;
+    width: 100%;
+    background-color: #333;
+}
+.flex {
+    display: flex; /*横並び*/
+    background-color: #333;
+    color:#fff;
+}
+.flex .image {
+    width: 60px; /*画像サイズ指定*/
+    margin: 0;
+    padding: 0;
+    position: relative;
+}
+.flex .text {
+    margin: 0 0 0 20px;
+    padding: 0;
+    text-align: center;
+}

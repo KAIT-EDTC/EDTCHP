@@ -1,0 +1,73 @@
+main {
+    margin: 0;
+    
+    /* 謎の余白対策 */
+    padding: 2% 0 0 0; 
+    background: #F8F7F3;
+}
+
+/* select(昇順・降順) */
+.pdct-arngmnt {
+    padding: 0.3%;
+    margin: 0 0 1% 0;
+    display: block;
+    margin-right: 2%;
+    margin-left: auto;
+    text-align: center;
+    width: fit-content;
+}
+
+/* ul */
+.pdct-area {
+    border: 1px solid #55555555;
+    padding: 1% 5% 5% 5%;
+    text-align: center;
+    flex-wrap: wrap;
+    display: flex;
+}
+
+.pdct-box {
+/* li */
+    border: 5px solid #55555555;
+    border-radius: 20%;
+    flex: 1 0 32%;
+    padding: 3%;
+    margin-bottom: 20px ;
+    background-color: #EBEAE7;
+    font-family: YakuHanJP_Noto,"游ゴシック Medium","Yu Gothic Medium","游ゴシック体",YuGothic,sans-serif;
+}
+.pdct-box .pdct-anker{
+    display: block;
+    height: 100%;
+    width: 100%;
+}
+
+/* p(商品名) */
+.pdct-name {
+    padding: 0 0 1% 0;
+    font-size: 1.5em;
+    /* font-family: YakuHanJP_Noto,"游ゴシック Medium","Yu Gothic Medium","游ゴシック体",YuGothic,sans-serif; */
+}
+/* マウスオーバー */
+.pdct-name:hover {
+    cursor: pointer;
+    transform: scale(1.1, 1.1);
+    color: #b0b0b055;
+}
+
+/* img */
+/* min-maxでとって */
+.pdct-img {
+    width: 300px;
+    height: auto;
+    object-fit: cover;
+    border-radius: 20%;
+}
+
+/* div(商品の値段と製作者名) */
+.pdct-desc {
+    white-space: nowrap;
+    padding: 2% 5%;
+    font-size: 1.5em;
+    /* font-family: YakuHanJP_Noto,"游ゴシック Medium","Yu Gothic Medium","游ゴシック体",YuGothic,sans-serif; */
+}

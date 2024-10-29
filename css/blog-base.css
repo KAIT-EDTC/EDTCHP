@@ -1,0 +1,85 @@
+
+/* 前提としてタグの書き方　.エリア名　.関数名{}とする */
+body {
+    background-color: #e6e6e6;;
+    /* background-color: 名前の通り背景色を指定 */
+}
+li {
+    width: 100%;
+    /* width: 横幅の大きさを指定％でもPXでも指定可能 */
+}
+
+
+.blog-area {
+    display: flex;
+    /* padding: 0 0 0 2%; /*上、右、下、左 */
+    /* display: このブロックの並べ方や大きさを指定 */
+}
+.blog-title{
+    position: relative;
+}
+.blog-title p{
+    color: #000000;
+    -webkit-text-stroke: 2px #ffffff;
+    /* blog-titleの中のPタブに記述するという意味 */
+    font-size: 15vw;;
+    font-weight: bold;
+    /* 文字の大きさ、文字の太さを指定している */
+    /* padding: 要素間の隙間を設定　今回はtopなので上側の店って */
+    position: absolute;
+    /* 今回は中央ぞろえ */
+    left:50%;
+    top:50%;
+    transform:translate(-50%,-50%);
+    margin: 0;
+}
+.blog-area .image {
+    height: 200px; 
+    /* height: 高さ指定 */
+    width: 100%;
+    object-fit: cover;
+}
+.dates {
+    text-align: center;
+    font-size: 25px;
+    margin: 0 30px 0 30px;
+    background-color: #a9a9a9;
+    /*padding-bottom: 20px;*/
+    font-weight: bold;
+    
+    
+}
+.two_figures{
+    text-align: center;
+    padding-bottom: 4%;
+}
+
+figure {
+    display: inline-block;      /*インラインブロック要素にする*/
+    
+    /*padding-left: 40%;*/
+    width: 40%;
+    
+}
+
+figure h2 {
+    font-size: 20px;
+    background-color: rgba(98, 202, 250, 0.83);
+}
+.syomei{
+    text-align: right;
+    /*padding-left: 20px;*/
+}
+
+.blog-fig{
+    padding: 10px; 
+    margin-bottom: 10px; 
+    border: 1px solid #333333; 
+    border-radius: 10px; 
+    background-color:#e6e6e6;
+}
+.blog-mainimg{
+    width: 100%;
+    height: auto;
+}
+

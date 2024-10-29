@@ -1,0 +1,64 @@
+main {
+    margin: 0;
+    /* padding-top: 10%; */
+    width: 100%;
+    /* min-height: 80vh; */
+    background: #d2dee7;
+}
+.cost-content ul {
+    display: block;
+}
+.cost-content li {
+    font-size: 25px;
+    font-weight: bold;
+    padding: 20px;
+}
+.pdct-box {
+    margin-left: 60px;
+    padding-top: 50px;
+    font-size: 25px;
+}
+.subtitle {
+    font-size: 30px;
+    padding: 40px 43%;
+    border-top: solid 4px #55555555;
+    border-bottom: solid 4px #55555555;
+}
+.pdct-box {
+    display: flex;
+}
+.pdct-box .pdct-cost{
+    padding: 0 190px 0;
+}
+.pdct-box h2{
+    font-size: 30px;
+    padding-bottom: 15px;
+}
+.desc-content {
+    padding-left: 15px;
+}
+.desc-content span {
+    font-size: 25px;
+    font-weight: bold;
+}
+.pdct-img img {
+    height: 300px;
+    width: 300px;
+    border-radius: 50%;
+    margin-bottom: 100px;
+}
+.cost-content, .desc-content {
+    position:relative;
+}
+/* 疑似要素の縦棒 */
+.cost-content ul::before, .desc-content span::before {
+    position: absolute;
+    margin-left: 7px;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    content: '';
+    border-radius: 7px;
+    background: #68636381;
+}

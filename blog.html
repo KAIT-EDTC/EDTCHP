@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ブログ|神奈川工科大学EDTC</title>
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/blog-base.css">
+        <!-- icon link tag -->
+        <link rel="icon" href="/favicon.ico">
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon-180x180.png">
+</head>
+
+<body>
+    <header><!--ヘッダーのコード　PCはそのままスマホはハンバーガーメニューにしているため住み分け -->
+        <a href="base.html"><img src="img/EDTC-icon.png" alt="EDTC"
+            style="display: block; height: 60px; width: auto;"></a>
+    <a href="base.html" class="title">EDTC</a>
+    <!--==========モバイルのみ表示==========-->
+    <nav class="sp-only">
+        <div class="gnav-toggle">
+            <input id="gnav-input" type="checkbox" class="gnav-hidden">
+            <label id="gnav-open" for="gnav-input"><span></span></label>
+            <label class="gnav-unshown" id="gnav-close" for="gnav-input"></label>
+            <div id="gnav-content">
+                <ul class="gnav-menu">
+                    <li class="gnav-item"><a href="./base.html">Home<br>ホーム</a></li>
+                    <li class="gnav-item"><a href="./blog.html">Blog<br>ブログ</a></li>
+                    <li class="gnav-item"><a href="./product-top.html">Services<br>サービス</a></li>
+                    <li class="gnav-item"><a href="./contact-us.html">Contact<br>お問い合わせ</a></li>
+                </ul>
+                <ul class="snsbtniti">
+                    <li><a href="https://twitter.com/kait_edtc" target="_blank" class="flowbtn8 fl_tw2"><i
+                                class="fab fa-twitter"></i></a></li>
+                    <li><a href="https://www.youtube.com/channel/UCUOc_IpnlHh1DnHf4riqs0w" target="_blank"
+                            class="flowbtn8 fl_yu2"><i class="fab fa-youtube"></i></a></li>
+                    <li><a href="https://www.instagram.com/kait.edtc/" target="_blank"
+                            class="flowbtn8 insta_btn2"><i class="fab fa-instagram"></i></a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!--==========PCのみ表示==========-->
+    <nav class="pc-only">
+        <ul>
+            <li><a href="./base.html">main</a></li>
+            <li><a href="./blog.html">blog</a></li>
+            <li><a href="./product-top.html">product</a></li>
+            <li><a href="contact-us.html">contact</a></li>
+        </ul>
+    </nav>
+    </div>
+    </header>
+    <main>
+        <div class="mar"></div>
+        <div class="blog-title"><!--DIVとはとにかく何か要素を付けるときにあとからCSSを付けやすくするために分けて書くための物-->
+            <p>
+                Blog
+            </p>
+            <img src="img/EDTC-Blog-shin.jpg" alt="かわいいしんくん" class="blog-mainimg">
+        </div>
+        <div class="blog-area">
+            <!-- blogareaのクラスでブログ全体に対してのCSS付与をしている -->
+            <div>
+                <div class="dates">2024</div>
+                <!-- クラス名通り日付を書く部分 -->
+                <div class="two_figures"><!-- 二つの要素をまとめるクラス(二個毎に付ける) -->
+                    <a href="blog/blog-data/yugyou5-blog.html">
+                        <figure class="blog-fig">
+                            <!-- フィギュア関数によって青色のエリアを定義詳細な設定はCSSにて -->
+                            <h2>第五回遊行塾に行ってきました(6月22日)</h2>
+                            <img class="image" src="blog/blog-img/24-0622-yugyou1.jpg" alt="" style="width: 100%;"><br>
+                            <!-- もしIMGなどにCSSを書き込む場合styleをaltなどの横に書いてから宣言すること -->
+                            <figcaption>
+                                <!-- フィギュア内に記述するようの関数詳しいことはフィギュアHTMLで検索してみて -->
+                                前期最終回となる遊行塾でしたが、楽しく学べる授業を提供できたと思います。
+                                当サイト初のブログになりますので至らぬ点もあるかと思いますが読んでいただけたら幸いです。
+                                <div class="syomei">山口</div>
+                            </figcaption>
+                        </figure>
+                    </a>
+                    <a href="blog/blog-data/asahi.blog.html">
+                        <figure class="blog-fig">
+                            <!-- フィギュア関数によって青色のエリアを定義詳細な設定はCSSにて -->
+                            <h2>6/29 神奈川工科大学見学体験ツアーを行いました</h2>
+                            <img class="image" src="blog/blog-img/24-0629-asahi1.png" alt="" style="width: 100%;"><br>
+                            <!-- もしIMGなどにCSSを書き込む場合styleをaltなどの横に書いてから宣言すること -->
+                            <figcaption>
+                                <!-- フィギュア内に記述するようの関数詳しいことはフィギュアHTMLで検索してみて -->
+                                本年度二回目となるあさひ学苑さんとのイベントを行いました。
+                                今回も弊学に来ていただき学内を探索したり工房にて缶バッチ制作をしていただきました
+                                <div class="syomei">yamaguchi</div>
+                            </figcaption>
+                        </figure>
+                    </a>
+                </div>
+                <div class="two_figures"> 
+                    <a href="blog/blog-data/kouryukai.html">
+                        <figure class="blog-fig">
+                            <!-- フィギュア関数によって青色のエリアを定義詳細な設定はCSSにて -->
+                            <h2>7/11 地域連携サークル交流会に参加しました</h2>
+                            <img class="image" src="blog/blog-img/24-0711-kouryu.jpg" alt="" style="width: 100%;"><br>
+                            <!-- もしIMGなどにCSSを書き込む場合styleをaltなどの横に書いてから宣言すること -->
+                            <figcaption>
+                                <!-- フィギュア内に記述するようの関数詳しいことはフィギュアHTMLで検索してみて -->
+                今回はKAIT内部のサークルの集い地域連携サークル交流会にご招待いただいたので参加してきました。
+                                <div class="syomei">ヤマグチ</div>
+                            </figcaption>
+                        </figure>
+                    </a>
+                </div>
+            </div>
+            <!-- 基本的にはspanタグでCSSを適応し今後使い続けそうなもののみCSSファイルに書きます -->
+            <!-- スマートフォンからの閲覧もあるので基本的にはpxではなく％で指定したいです -->
+            <!-- <img src="" alt="" style="width: 375px;height: auto;margin-left: 10px;"> -->
+            <p class="syomei"><!--名前--></p>
+        </div>
+    </main>
+    <footer>
+        <div class="flex">
+            <ul class="footer-list">
+                <li style="text-align: center;">
+                    <p class="gyou-a"></p>
+                    <a href="./base.html">ホーム　</a>
+                    <a href="./blog.html">ブログ　</a>
+                    <a href="./product-top.html">サービス　</a>
+                    <hr size="100%">
+                </li>
+                <li  style="text-align: center;">
+                    <a href="./contact-us.html">お問い合わせ</a>
+                    <hr size="100%">
+                    <p class="gyou"></p>
+                    <b><img src="img/EDTC-icon.png" alt="EDTCロゴ" height="50px" width="auto" class="syasinn">
+                        <font size="12">EDTC</font>
+                    </b>
+                    <p class="gyou"></p>
+                    <p>
+                        <font size="3">学校法人 幾徳学園　神奈川工科大学<br>mail :kait.edtc@gmail.com</font>
+                    </p>
+                    <p class="gyou-b"></p>
+                    <p>©　2024　KAIT　EDTC　All Rights Reserved</p>
+                </li>
+            </ul>
+        </div>
+    </footer>
+
+</body>
+
+</html>
