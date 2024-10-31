@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ブザー</title>
+    <link rel="stylesheet" href="./../../css/reset.css">
+    <link rel="stylesheet" href="./../../css/base.css">
+    <link rel="stylesheet" href="./../../css/buzzer_rivised.css">
+</head>
+
+<body>
+    <header><!--ヘッダーのコード　PCはそのままスマホはハンバーガーメニューにしているため住み分け -->
+        <a href="./../../base.html"><img src="./../../img/EDTC-icon.png" alt="EDTC"
+                style="display: block; height: 60px; width: auto;"></a>
+        <a href="./../../base.html" class="title">EDTC</a>
+        <!--==========モバイルのみ表示==========-->
+        <nav class="sp-only">
+            <div class="gnav-toggle">
+                <input id="gnav-input" type="checkbox" class="gnav-hidden">
+                <label id="gnav-open" for="gnav-input"><span></span></label>
+                <label class="gnav-unshown" id="gnav-close" for="gnav-input"></label>
+                <div id="gnav-content">
+                    <ul class="gnav-menu">
+                        <li class="gnav-item"><a href="./../../base.html">Home<br>ホーム</a></li>
+                        <li class="gnav-item"><a href="./../../blog.html">Blog<br>ブログ</a></li>
+                        <li class="gnav-item"><a href="./../../product-top.html">Services<br>サービス</a></li>
+                        <li class="gnav-item"><a href="./../../contact-us.html">Contact<br>お問い合わせ</a></li>
+                    </ul>
+                    <ul class="snsbtniti">
+                        <li><a href="https://twitter.com/kait_edtc" target="_blank" class="flowbtn8 fl_tw2"><i
+                                    class="fab fa-twitter"></i></a></li>
+                        <li><a href="https://www.youtube.com/channel/UCUOc_IpnlHh1DnHf4riqs0w" target="_blank"
+                                class="flowbtn8 fl_yu2"><i class="fab fa-youtube"></i></a></li>
+                        <li><a href="https://www.instagram.com/kait.edtc/" target="_blank"
+                                class="flowbtn8 insta_btn2"><i class="fab fa-instagram"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <!--==========PCのみ表示==========-->
+        <nav class="pc-only">
+            <ul>
+                <li><a href="./../../base.html">main</a></li>
+                <li><a href="./../../blog.html">blog</a></li>
+                <li><a href="./../../product-top.html">product</a></li>
+                <li><a href="./../../contact-us.html">contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <div class="pdct-box">
+            <div class="pdct-overview">
+                <h2>お絵描きロボットの概要</h2>
+                <p>
+                    お絵描きロボットは直感的なプログラミングのみで、自分が思った通りの図形を描いてくれるロボットです<br>
+                    リアルタイムで描きたい図形を変えられるので、プログラミングの"視覚化"が体験できます。<br>
+                    授業ではプログラミングだけでなく、ロボットの製作から行う予定ですので、ハードウェアとソフトウェアの二つを体験できます！
+                </p>
+            </div>
+            <hr>
+            <div class="pdct-cost">
+                <img src="./../img/drawRobot.jpg" alt="商品：お絵描きロボットの画像">
+                <ul>
+                    <li class="cost-price">
+                        <span>値段</span>
+                        <p>製作中のため具体的な値段は未定</p>
+                    </li>
+                    <li class="cost-customers">
+                        <span>対応人数</span>
+                        <p>大人数でも対応可能</p>
+                    </li>
+                    <li class="cost-time">
+                        <span>製作時間</span>
+                        <p>ハードウェア時点：前期</p>
+                        <p>ソフトウェア時点：後期</p>
+                    </li>
+                </ul>
+            </div>
+            <hr>
+            <div class="pdct-contact">
+                <input type="button" value="商品トップに戻る" onclick="location.href='./../../product-top.html'">
+                <input type="button" value="お問い合わせ" onclick="location.href='./../../contact-us.html'">
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="flex">
+            <ul class="footer-list">
+                <li style="text-align: center;">
+                    <p class="gyou-a"></p>
+                    <a href="./../../base.html">ホーム　</a>
+                    <a href="./../../blog.html">ブログ　</a>
+                    <a href="./../../product-top.html">サービス　</a>
+                    <hr size="100%">
+                </li>
+                <li style="text-align: center;">
+                    <a href="./../../contact-us.html">お問い合わせ</a>
+                    <hr size="100%">
+                    <p class="gyou"></p>
+                    <b><img src="./../../img/EDTC-icon.png" alt="EDTCロゴ" height="50px" width="auto" class="syasinn">
+                        <font size="12">EDTC</font>
+                    </b>
+                    <p class="gyou"></p>
+                    <p>
+                        <font size="3">学校法人 幾徳学園　神奈川工科大学<br>mail :kait.edtc@gmail.com</font>
+                    </p>
+                    <p class="gyou-b"></p>
+                    <p>©　2024　KAIT　EDTC　All Rights Reserved</p>
+                </li>
+            </ul>
+        </div>
+    </footer>
+    <script type="text/javascript" src="js/slider.js"></script>
+</body>
+
+</html>
