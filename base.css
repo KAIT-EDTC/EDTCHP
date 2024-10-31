@@ -1,0 +1,324 @@
+/*=========== デバイスごとのスタイルのスタイル ==========*/
+/*PC用のスタイル 768-->820*/
+@media screen and (min-width:820px) {
+    .inner {
+        max-width: 1200px;
+    }
+}
+
+/*モバイルとPCで表示に関するスタイル*/
+.sp-only {
+    display: block;
+    /*モバイルでは表示*/
+}
+
+.pc-only {
+    display: none;
+    /*モバイルでは非表示*/
+}
+
+/*PC用のスタイル*/
+
+@media screen and (min-width:820px) {
+    .sp-only {
+        display: none;
+        /*PCでは非表示*/
+    }
+
+    .pc-only {
+        display: block;
+        /*PCでは表示*/
+    }
+}
+
+/*====================================================================================
+======================================================================================
+======================================================================================*/
+/* headerの設定 */
+/* pcメニューの設定 */
+header {
+    padding: 5px 0 10px 4%;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+    z-index: 3;
+}
+
+.mar{
+    padding: 38px;
+}
+.contact-area{
+    display: block;
+    text-align: center;    
+}
+
+.title {
+    margin-top: 8px;
+    padding: 0;
+    font-size: 25px;
+    font-weight: bold;
+}
+
+a {
+    text-decoration: none;
+    color: #4b4b4b;
+}
+
+ul {
+    list-style: none;
+    display: flex;
+}
+
+li {
+    margin: 0 0 0 15px;
+    font-size: 14px;
+}
+
+nav {
+    margin: 0 10% 0 auto;
+}
+
+/*モバイルのみ表示*/
+
+/*ハンバーガーメニューのスタイル*/
+/*ハンバーガーメニュー*/
+.gnav-toggle {
+    position: relative;
+    margin-top: 12px;
+}
+
+/*チェックボックスなどを非表示にする*/
+.gnav-hidden {
+    display: none;
+}
+
+/*アイコンのスペース*/
+#gnav-open {
+    display: inline-block;
+    width: 30px;
+    height: 22px;
+    vertical-align: middle;
+}
+
+/*ハンバーガーの三本線を表現*/
+#gnav-open span,
+#gnav-open span::before,
+#gnav-open span::after {
+    content: '';
+    position: absolute;
+    height: 3px;
+    /*線の太さ*/
+    width: 25px;
+    /*線の長さ*/
+    border-radius: 3px;
+    background: #555;
+    display: block;
+    cursor: pointer;
+}
+
+#gnav-open span::before {
+    bottom: -8px;
+}
+
+#gnav-open span::after {
+    bottom: -16px;
+}
+
+/*閉じる用の薄黒箇所*/
+#gnav-close {
+    display: none;
+    position: fixed;
+    z-index: 90;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #000;
+    opacity: 0;
+    transition: 0.3s ease-in-out;
+}
+
+/*チェックがついたら表示させる*/
+#gnav-input:checked~#gnav-close {
+    display: block;
+    opacity: 0.5;
+
+}
+
+#gnav-input:checked~#gnav-content {
+    transform: translateX(0%);
+    box-shadow: 6px 0 25px rgba(0, 0, 0, 0.15);
+}
+
+/*メニューの中身*/
+#gnav-content {
+    overflow: auto;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 300;
+    width: 70%;
+    max-width: 300px;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    transition: 0.3s ease-in-out;
+    transform: translateX(-105%);
+    z-index: 30px;
+}
+
+.gnav-menu {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 50px;
+    text-transform: uppercase;
+    /*小文字、大文字の混在を大文字に統一*/
+    z-index: 30px;
+}
+
+.gnav-item {
+    margin: 10px;
+    padding-bottom: 20px;
+}
+
+.gnav-item a {
+    color: #fff;
+    font-size: 12px;
+    display: block;
+    width: 200px;
+    text-align: center;
+}
+
+/*疑似要素で1行目のスタイル指定*/
+.gnav-item a::first-line {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.gnav-item a:hover {
+    color: #85a7cc;
+}
+
+/* footerの設定 */
+.flex p{ /*Added Programs*/
+    text-align: center;
+}
+.flex a{
+    margin: 0 auto; 
+    text-align: center;
+    color: antiquewhite;
+}
+footer .footer-list {
+    display: block;
+    margin: 0 auto;
+}
+
+footer .gyou{
+    margin-top: 5px;
+}
+
+footer .gyou-a{
+    margin-top: 15px;
+}
+
+footer .gyou-b{
+    margin-top: 3px;
+    margin-bottom: 15px;
+}
+
+footer .syasinn{
+    vertical-align: text-bottom;
+}
+.footer{
+    color: white;
+    background-color: #333;
+}
+.footer-area-copy {
+    color: #ccc;
+    font-size: 12px;
+    width: 100%;
+    background-color: #333;
+}
+.flex {
+    display: flex; /*横並び*/
+    background-color: #333;
+    color:#fff;
+}
+.flex .image {
+    width: 60px; /*画像サイズ指定*/
+    margin: 0;
+    padding: 0;
+    position: relative;
+}
+.flex .text {
+    margin: 0 0 0 20px;
+    padding: 0;
+    text-align: center;
+}
+
+/*団体訓の設定*/
+.about{
+    background-color: rgb(233, 233, 233);
+}
+.about h1{
+    text-align: center;
+    font-size: 55px;
+    color:rgb(71, 71, 71);
+    font-weight:700;
+    -webkit-text-stroke:1px #a4a2a2;
+}
+.about .fmozi{
+    font-size: 60px;
+    font-weight: bold;
+}
+.about .EDTCs{
+    padding-left: 30px;
+    font-size: 40px;
+    display: block;
+}
+.about .manabu{
+    font-size: 40px;
+    font-weight: bold;
+    padding: 30px;
+    text-align: center;
+}
+.about .manabu1{
+    font-size: 20px;
+    padding: 30px;
+    text-align: center;
+}
+.about .EDTCcode{
+    white-space: nowrap;
+    font-size: 20px;
+    padding-left: 30px;
+    font-weight: bold;
+}
+.news{
+    background-color: rgb(248, 247, 243);
+
+}
+.news h2{
+    padding-top: 30px;
+    margin-left: 30px;
+    font-size: 50px;
+    -webkit-text-stroke: 1px rgb(121, 139, 146);
+}
+.news ul {
+    display:contents;
+}
+.news li{
+    margin:10px 40px 0px 40px;
+    font-size: 20px;
+    border-bottom:1px solid #515050;
+}
+.itiran{
+    text-align: right;
+    margin-right: 10%;
+    font-size: 20px;
+    font-weight: 300;
+    margin: 10px;
+}
+
