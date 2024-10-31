@@ -1,51 +1,20 @@
-<!DOCTYPE html>     <!--HTMLを書き始めます。決まり文句-->
-<html lang="ja">    <!--言語設定。基本は英語になっている"en"→"jp"変更しないと翻訳しますか？が出てくる-->
-<head>              <!--ページが読み込まれてもウェブブラウザーには表示されない部分です。-->
-    <!-- EDTC HQ design template v1.0 -->
-    <!-- EDTC-Content-Type="A" -->
-        <!--文字化け防止-->
-        <meta charset="UTF-8">
-        <!--Internet Explorerを最新の状態で表示する。 このコードはなくてもいい-->
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <!--initial-scale=1はデバイスの幅に合わせて表示の切り替えが可能,user-scalable=yesはユーザー側がサイト内の拡大縮小操作可能-->
-        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes">
-        <!--電話番号の自動リンクを無効化にする-->
-        <meta name="format-detection" contact="telephone=no">
-        
-    <!-- begin extra meta tag  -->
-    <!--OGP設定-->
-    <!--<meta property="og:image" content="img/IMG_7077.JPG">-->
-    <!-- end extra meta tag -->
+<!DOCTYPE html> <!--HTMLを書き始めます。決まり文句-->
+<html lang="ja"> <!--言語設定。基本は英語になっている"en"→"jp"変更しないと翻訳しますか？が出てくる-->
+<!-- css link tag -->
+<link rel="stylesheet" href="./../../css/reset.css">
+<link rel="stylesheet" href="./../../css/base.css">
+<link rel="stylesheet" href="./../../css/blog-base.css">
+<!-- icon link tag -->
+<link rel="icon" href="./../../favicon.ico">
+<link rel="apple-touch-icon" sizes="180x180" href="./../../apple-touch-icon-180x180.png">
 
-    <!-- css link tag -->
-    <!-- <link rel="stylesheet" href="C:\Users\yoyo\Desktop\神奈川工科\EDTC\EDTC\reset_css\reset.css" /> -->
-    <link rel="stylesheet" href="./../../css/reset.css">
-    <link rel="stylesheet" href="./../../css/base.css">
-    <link rel="stylesheet" href="./../../css/blog-base.css">
-    <link rel="stylesheet" href="./../../css/blog-temp.css">
+<title>ブログ | EDTC (KAIT EDTC) 神奈川工科大学</title> <!--タブに表示される-->
 
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Sans+JP:400,700|Open+Sans:400,700&disply=swap">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css">
-
-    <!-- icon link tag -->
-    <link rel="icon" href="./../../favicon.ico">
-    <link rel="apple-touch-icon" sizes="180x180" href="./../../apple-touch-icon-180x180.png">
-
-    <!-- jquery v3.5.1 load -->
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-
-    <!--==============レイアウトを制御する独自のCSSを読み込み===============-->
-    <link rel="stylesheet" type="text/css" href="https://coco-factory.jp/ugokuweb/wp-content/themes/ugokuweb/data/reset.css">
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css">
-    <link rel="stylesheet" type="text/css" href="https://coco-factory.jp/ugokuweb/wp-content/themes/ugokuweb/data/6-1-2/css/6-1-2.css">
-    
-    <title>ブログ | EDTC (KAIT EDTC) 神奈川工科大学</title> <!--タブに表示される-->
-</head><!--headの終わり-->
 <body><!--本文の開始-->
     <!-- Header Start -->
     <header><!--ヘッダーのコード　PCはそのままスマホはハンバーガーメニューにしているため住み分け -->
         <a href="./../../base.html"><img src="./../../img/EDTC-icon.png" alt="EDTC"
-            style="display: block; height: 60px; width: auto;"></a>
+                style="display: block; height: 60px; width: auto;"></a>
         <a href="./../../base.html" class="title">EDTC</a>
         <!--==========モバイルのみ表示==========-->
         <nav class="sp-only">
@@ -83,27 +52,33 @@
     </header>
     <!-- Header End -->
     <!--main strt-->
-<div class="blog-area">
-    <span style="font-size: 40px;font-weight: bold;text-align: center;">地域連携サークル交流会に参加しました</span><br>
-    <img src="./../blog-img/24-0711-kouryu2.jpg" alt="" align=left style="width: 30%;height: auto;margin-left: 10px;">
-    今回の地域連携サークル交流会ではEDTCを含む４つのサークルと二つの研究室が参加しました。<br>
-    各サークルや研究室が普段の活動について発表しました。<br>
-    弊サークルからは１０人も参加させていただき代表で三年の恩田先輩が発表を行ってくださいました。<br>
-    <br>
-    他サークルの発表にはかなり感化されるものが多く地域に向けた活動や学校に向けた活動など様々な発表が行われましたが特に小中学生向けに活動しているサークルさんの活動から多くのヒントを得ることができ、個人的にとても満足しています。
-    また将来的にかかわっていくであろう研究室の話も聞くことができとてもためになりました。
-    各サークルの発表が終わった後は立食形式での食事会があり先輩後輩分け隔てなく情報交換をしたりより深い活動の話をして盛り上がりました！<br></div>
+    <main>
+        <div class="mar"></div>
+        <div class="blog-text">
+            <span style="font-size: 40px;font-weight: bold;text-align: center;">地域連携サークル交流会に参加しました</span><br>
+            <img src="./../../img/24-0711-kouryu2.jpg" alt="" align=left
+                style="width: 30%;height: auto;margin-left: 10px;">
+            今回の地域連携サークル交流会ではEDTCを含む４つのサークルと二つの研究室が参加しました。<br>
+            各サークルや研究室が普段の活動について発表しました。<br>
+            弊サークルからは１０人も参加させていただき代表で三年の恩田先輩が発表を行ってくださいました。<br>
+            <br>
+            他サークルの発表にはかなり感化されるものが多く地域に向けた活動や学校に向けた活動など様々な発表が行われましたが特に小中学生向けに活動しているサークルさんの活動から多くのヒントを得ることができ、個人的にとても満足しています。
+            また将来的にかかわっていくであろう研究室の話も聞くことができとてもためになりました。
+            各サークルの発表が終わった後は立食形式での食事会があり先輩後輩分け隔てなく情報交換をしたりより深い活動の話をして盛り上がりました！<br>
+        </div>
 
 
-    <div class="blog-area">
-<span style="font-size: 40px;font-weight: bold;text-align: center;">最後に閉会後の先輩たちをのせておこうと思います</span>
-    <img src="./../blog-img/24-0711-kouryu.jpg" alt="" style="width: 80%;height: auto;display:block;margin: 10%;">
-    <!-- <img src="../img/1721022797861.jpg" alt="" style="width: 200px;height: auto;"> -->
-    <p class="syomei">足立</p>
-</div>
-<div id="reset" ><a href="./../../blog.html" style="color: black;" >前のページにもどる</a></div>
+        <div class="blog-text">
+            <span style="font-size: 40px;font-weight: bold;text-align: center;">最後に閉会後の先輩たちをのせておこうと思います</span>
+            <img src="./../blog-img/24-0711-kouryu.jpg" alt=""
+                style="width: 80%;height: auto;display:block;margin: 10%;">
+            <!-- <img src="../img/1721022797861.jpg" alt="" style="width: 200px;height: auto;"> -->
+            <p class="syomei">足立</p>
+        </div>
+        <div id="reset"><a href="./../../blog.html" style="color: black;">前のページにもどる</a></div>
+    </main>
 
-<!--main end-->
+    <!--main end-->
     <!-- Footer Start -->
     <footer>
         <div class="flex">
@@ -115,7 +90,7 @@
                     <a href="./../../product-top.html">サービス　</a>
                     <hr size="100%">
                 </li>
-                <li  style="text-align: center;">
+                <li style="text-align: center;">
                     <a href="./../../contact-us.html">お問い合わせ</a>
                     <hr size="100%">
                     <p class="gyou"></p>
@@ -132,11 +107,11 @@
             </ul>
         </div>
     </footer>
-<!-- Footer End -->
-<script src="https://code.jquery.com/jquery-3.4.1.min.js"
-    integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" 
-    crossorigin="anonymous"></script>
+    <!-- Footer End -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
     <script src="https://coco-factory.jp/ugokuweb/wp-content/themes/ugokuweb/data/6-1-2/js/6-1-2.js"></script>
-</body>             <!--本文の終了-->
+</body> <!--本文の終了-->
+
 </html> <!--HTMLの書き終わり。決まり文句-->
