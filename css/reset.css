@@ -44,8 +44,10 @@ i,
 dl,
 dt,
 dd,
-ol,
-ul,
+ul, ol {
+    margin-left: 0px;
+    padding-left: 0px;
+}
 li,
 fieldset,
 form,

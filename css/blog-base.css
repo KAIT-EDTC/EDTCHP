@@ -4,11 +4,6 @@ body {
     background-color: #e6e6e6;;
     /* background-color: 名前の通り背景色を指定 */
 }
-li {
-    width: 100%;
-    /* width: 横幅の大きさを指定％でもPXでも指定可能 */
-}
-
 
 .blog-area {
     display: flex;

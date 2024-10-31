@@ -246,6 +246,7 @@ footer .syasinn{
     display: flex; /*横並び*/
     background-color: #333;
     color:#fff;
+    padding-left: 0px;
 }
 .flex .image {
     width: 60px; /*画像サイズ指定*/
@@ -258,7 +259,10 @@ footer .syasinn{
     padding: 0;
     text-align: center;
 }
-
+.flex li{
+    margin:0;
+    padding-inline-start: 0;
+}
 /*団体訓の設定*/
 .about{
     background-color: rgb(233, 233, 233);
