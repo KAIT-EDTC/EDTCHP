@@ -82,4 +82,23 @@ figure h2 {
     width: 100%;
     height: auto;
 }
+.blog-text{
+    background-color: rgba(186, 225, 237, 0.996);
+    border-radius: 10px;
+    margin: 10px 10%;
+    color: #000;
+}
+#reset {
+    color:#000;
+    font-weight: bold;
+    font-size: 20px;
+    margin-right: 10%;
+    margin-left: 53%;
+    text-align: right;
+}
+.syomei2{
+    text-align: right;
+    font-weight: bold;
+    margin-right: 10px;
+}
 

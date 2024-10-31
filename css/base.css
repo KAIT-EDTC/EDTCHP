@@ -203,8 +203,7 @@ nav {
 }
 
 /* footerの設定 */
-.flex p{
-    margin: 0 auto; /*Added Programs*/
+.flex p{ /*Added Programs*/
     text-align: center;
 }
 .flex a{
@@ -227,6 +226,7 @@ footer .gyou-a{
 
 footer .gyou-b{
     margin-top: 3px;
+    margin-bottom: 15px;
 }
 
 footer .syasinn{
@@ -270,7 +270,7 @@ footer .syasinn{
     font-weight:700;
     -webkit-text-stroke:1px #a4a2a2;
 }
-.about span{
+.about .fmozi{
     font-size: 60px;
     font-weight: bold;
 }
@@ -287,7 +287,6 @@ footer .syasinn{
 }
 .about .manabu1{
     font-size: 20px;
-    font-weight: bold;
     padding: 30px;
     text-align: center;
 }
@@ -295,6 +294,7 @@ footer .syasinn{
     white-space: nowrap;
     font-size: 20px;
     padding-left: 30px;
+    font-weight: bold;
 }
 .news{
     background-color: rgb(248, 247, 243);
