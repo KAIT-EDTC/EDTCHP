@@ -3,7 +3,8 @@
     display: flex;
 }
 .asahi-flex .asahi-box {
-    width: 33%;
+    margin: 1%;
+    width: 31%;
 }
 @media screen and (max-width: 767px) {
     .asahi-flex {
