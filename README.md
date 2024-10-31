@@ -1,3 +1,16 @@
+## 環境構築
+### Gitの環境構築
+まずGitをダウンロードする [Gitダウンロードページ](https://git-scm.com/downloads/win)  
+インストール手順は全部nextを押せばOK  
+Gitをインストールしたら*Git Bash*を起動して、下記のコマンドを入力  
+`git config --global user.name "任意の名前を入力"`  
+`git config --global user.email "自分のメアド入力"`  
+**これでGitコマンドを使えるようになる。(以降はコマンドプロンプトでもGit使用可)**
+### ローカルリポジトリを作成(リモートからクローンする)
+リポジトリを作成したいディレクトリに移動して、下記のコマンドを入力  
+`git clone https://github.com/fami-gb/EDTCHP.git`  
+これでローカルのリポジトリ作成が完了したので後はvscodeで煮るなり焼くなりしよう。
+
 ## Gitコマンド
 ### ブランチ作成～リモートにプッシュするまで
 - ローカルでブランチ作成して移動 `git checkout -b ブランチ名`
