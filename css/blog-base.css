@@ -56,6 +56,12 @@ figure {
     width: 40%;
     
 }
+@media not all and (min-width: 568px){
+    figure {
+        display: inline-block;
+    width: 90%;
+    }
+    }
 
 figure h2 {
     font-size: 20px;

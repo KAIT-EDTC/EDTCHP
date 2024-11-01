@@ -297,6 +297,9 @@ footer .syasinn{
     padding: 30px;
     text-align: center;
 }
+.about .manabu1 span {
+    display: inline-block;
+}
 .about .EDTCcode{
     white-space: nowrap;
     font-size: 20px;
