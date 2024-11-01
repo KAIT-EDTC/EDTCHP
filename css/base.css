@@ -289,6 +289,9 @@ footer .syasinn{
     padding: 30px;
     text-align: center;
 }
+.about .manabu span {
+    white-space: nowrap;
+}
 .about .manabu1{
     font-size: 20px;
     padding: 30px;
