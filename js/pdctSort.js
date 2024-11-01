@@ -4,7 +4,7 @@ const arngmnt = document.getElementById("arrangement");
 // ここに商品を追加すればOK
 // idは今のところ使用予定なし
 const pdct_list = [
-    { id:1, name:"ブザー", src:"./products/img/buzzer.jpg", file:"product-buzzer_revised.html",  price:1000, maker:"足立遥大" },
+    { id:1, name:"ブザー", src:"./products/img/buzzer.jpg", file:"product-buzzer.html",  price:1000, maker:"足立遥大" },
     { id:2, name:"ArtoRo", src:"./products/img/ArtoRo.jpg", file:"product-ArtoRo.html", price:2000, maker:"番倉もえ" },
     { id:3, name:"お絵描きロボット", src:"./products/img/drawRobot.jpg", file:"product-DrawRobot.html",  price:6000, maker:"渡邉芯" },
     // { id:4, name:"テスト1", src:"./products/img/test1.png", file:"test1.html", price:3000, maker:"テスト1" },
