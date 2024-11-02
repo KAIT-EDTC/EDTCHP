@@ -6,15 +6,21 @@ main {
     background: #F8F7F3;
 }
 
+/* プルダウンリストとその説明文のdiv */
+.sortBox {
+    text-align: right;
+    font-family: YakuHanJP_Noto,"游ゴシック Medium","Yu Gothic Medium","游ゴシック体",YuGothic,sans-serif;
+}
+
 /* select(昇順・降順) */
-.pdct-arngmnt {
+.sortBox .pdct-arngmnt {
+    /* display: flex; */
+    vertical-align:baseline;
     padding: 0.3%;
+    width: fit-content;
     margin: 0 0 1% 0;
-    display: block;
     margin-right: 2%;
     margin-left: auto;
-    text-align: center;
-    width: fit-content;
 }
 
 /* ul */
