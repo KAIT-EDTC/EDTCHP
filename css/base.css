@@ -289,6 +289,9 @@ footer .syasinn{
     padding: 30px;
     text-align: center;
 }
+.about .manabu span {
+    white-space: nowrap;
+}
 .about .manabu1{
     font-size: 20px;
     padding: 30px;
@@ -325,4 +328,32 @@ footer .syasinn{
     font-weight: 300;
     margin: 10px;
 }
-
+.ikutokusai{
+    background-color: #22b5c5;
+    font-size: 20px;
+    display: block;
+}
+.ikutokusai .ikutokutitle{
+    text-align: center;
+    font-size: 40px;
+    color: #edb81a;
+    font-weight: bold;
+    padding: 10%;
+}
+.ikutokusai p{
+    text-align: left;
+    color: #edb81a;
+    padding: 10%;
+}
+.ikutokusai img{
+    width: 100%;
+    /*PCでは非表示*/
+}
+@media screen and (min-width:820px) {
+    .ikutokusai{
+        display: flex;
+    }
+    .ikutokusai img{
+        width: 50%;
+    }
+}
