@@ -59,7 +59,7 @@ figure {
 @media not all and (min-width: 568px){
     figure {
         display: inline-block;
-    width: 90%;
+    width: 80%;
     }
     }
 
