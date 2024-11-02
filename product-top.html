@@ -53,11 +53,14 @@
 
     <main>
         <div class="mar"></div>
-        <select id="arrangement" class="pdct-arngmnt">
-            <option></option>
-            <option value="acse">昇順</option>
-            <option value="decs">降順</option>
-        </select>
+        <div class="sortBox">
+            <span>値段順で並び替える:</span>
+            <select id="arrangement" class="pdct-arngmnt">
+                <option></option>
+                <option value="acse">昇順</option>
+                <option value="decs">降順</option>
+            </select>
+        </div>
         <ul id="ulsort" class="pdct-area">
             <script type="text/javascript" src="js/pdctSort.js"></script>
         </ul>
