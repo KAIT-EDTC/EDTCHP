@@ -328,4 +328,35 @@ footer .syasinn{
     font-weight: 300;
     margin: 10px;
 }
-
+.ikutokusai{
+    padding: 10%;
+    background-color: #22b5c5;
+    font-size: 20px;
+    display: block;
+}
+.ikutokusai .ikutokutitle{
+    text-align: center;
+    font-size: 40px;
+    color: #edb81a;
+    font-weight: bold;
+    padding: 10%;
+}
+.ikutokusai p{
+    text-align: center;
+    font-size: 40px;
+    color: #edb81a;
+    font-weight: bold;
+    padding: 10%;
+}
+.ikutokusai img{
+    width: 90%;
+    /*PCでは非表示*/
+}
+@media screen and (min-width:820px) {
+    .ikutokusai{
+        display: flex;
+    }
+    .ikutokusai img{
+        width: 50%;
+    }
+}
