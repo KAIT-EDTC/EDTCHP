@@ -24,7 +24,7 @@ const pdctLoad = () => {
 
         const AnkerElement = document.createElement("a");
         AnkerElement.className = "pdct-anker";
-        AnkerElement.href = "./../products/page/" + pdct.file;
+        AnkerElement.href = "./../products/page/comingsoon.html" /*+ pdct.file;*/
 
         const titleElement = document.createElement("p");
         titleElement.className = "pdct-name";
