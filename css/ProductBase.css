@@ -1,5 +1,4 @@
 main {
-    margin: 0;
     width: 100%;
     background: #F8F7F3;
     font-family: YakuHanJP_Noto,"游ゴシック Medium","Yu Gothic Medium","游ゴシック体",YuGothic,sans-serif;
@@ -7,7 +6,7 @@ main {
 .pdct-box {
     padding: 5%;
 }
-    /* ブザー概要 スタート */
+    /* 商品概要 スタート */
 
     .pdct-overview {
         text-align: center;
@@ -22,14 +21,14 @@ main {
         font-weight: bold;
     }
 
-    /* ブザー概要 エンド */
+    /* 商品概要 エンド */
 
     /* 水平棒 */
     .pdct-box hr {
         border-top: 1px solid #26211e;
     }
 
-    /* ブザーコスト　スタート */
+    /* 商品コスト スタート */
 
     .pdct-cost {
         text-align: center;
@@ -54,4 +53,4 @@ main {
         font-weight: initial;
     }
 
-    /* ブザーコスト　エンド */
+    /* 商品コスト　エンド */

@@ -5,11 +5,11 @@ const arngmnt = document.getElementById("arrangement");
 // idは今のところ使用予定なし
 const pdct_list = [
     { id:1, name:"ブザー", src:"./products/img/buzzer.jpg", file:"product-buzzer.html",  price:1000, maker:"足立遥大" },
-    { id:2, name:"ArtoRo", src:"./products/img/ArtoRo.jpg", file:"product-ArtoRo.html", price:2000, maker:"番倉もえ" },
+    { id:2, name:"ArtoRo", src:"./products/img/ArtoRo.jpg", file:"product-ArtoRo.html", price:1000, maker:"番倉もえ" },
     { id:3, name:"お絵描きロボット", src:"./products/img/drawRobot.jpg", file:"product-DrawRobot.html",  price:6000, maker:"渡邉芯" },
-    // { id:4, name:"テスト1", src:"./products/img/test1.png", file:"test1.html", price:3000, maker:"テスト1" },
-    // { id:5, name:"テスト2", src:"./products/img/test2.png", file:"test2.html", price:1500, maker:"テスト2" },
-    // { id:6, name:"テスト3", src:"./products/img/test3.png", file:"test3.html", price:100, maker:"テスト3" }
+    { id:4, name:"LogicLineTracerV2", src:"./products/img/", file:"product-LogicLineTracerV2.html", price:"未定", maker:"須藤陸" },
+    { id:5, name:"組み換えロボット", src:"./products/img/", file:"product-kumikaeRobot.html", price:"未定", maker:"二年" },
+    { id:6, name:"ぶるぶるくん", src:"./products/img/", file:"product-buruburu.html", price:500, maker:"鈴木一平" }
 ];
 
 // ul内に要素を追加する関数
@@ -24,7 +24,7 @@ const pdctLoad = () => {
 
         const AnkerElement = document.createElement("a");
         AnkerElement.className = "pdct-anker";
-        AnkerElement.href = "./../products/page/comingsoon.html" /*+ pdct.file;*/
+        AnkerElement.href = "./../products/page/" + pdct.file;
 
         const titleElement = document.createElement("p");
         titleElement.className = "pdct-name";
@@ -32,14 +32,15 @@ const pdctLoad = () => {
 
         const imgElement = document.createElement("img")
         imgElement.className = "pdct-img";
-        imgElement.src = pdct.src;
+        // imgElement.src = pdct.src;
+        imgElement.alt = "商品画像はまだありません。";
 
         const boxElementChild = document.createElement("div")
         boxElementChild.className = "pdct-desc";
 
         const paraElement = document.createElement("p");
         paraElement.className = "pdct-price";
-        paraElement.innerText = `値段：${pdct.price}円`;
+        paraElement.innerText = (Number.isInteger(pdct.price)) ? `値段：${pdct.price}円` : "値段：未定";
 
         const paraElement2 = document.createElement("p");
         paraElement2.className = "pdct-maker";
