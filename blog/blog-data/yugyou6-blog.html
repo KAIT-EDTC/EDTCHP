@@ -1,0 +1,107 @@
+<!DOCTYPE html> <!--HTMLを書き始めます。決まり文句-->
+<html lang="ja"> <!--言語設定。基本は英語になっている"en"→"jp"変更しないと翻訳しますか？が出てくる-->
+
+<head> 
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ブログ|神奈川工科大学EDTC</title>
+    <link rel="stylesheet" href="./../../css/reset.css">
+    <link rel="stylesheet" href="./../../css/base.css">
+    <link rel="stylesheet" href="./../../css/blog-base.css">
+    <link rel="stylesheet" href="./../../css/blog-a la carte.css">
+        <!-- icon link tag -->
+        <link rel="icon" href="../../favicon.ico">
+        <link rel="apple-touch-icon" sizes="180x180" href="./../../apple-touch-icon-180x180.png">
+</head><!--headの終わり-->
+
+<body><!--本文の開始-->
+    <!-- Header Start -->
+    <header><!--ヘッダーのコード　PCはそのままスマホはハンバーガーメニューにしているため住み分け -->
+        <a href="./../../base.html"><img src="./../../img/EDTC-icon.png" alt="EDTC"
+            style="display: block; height: 60px; width: auto;"></a>
+        <a href="./../../base.html" class="title">EDTC</a>
+        <!--==========モバイルのみ表示==========-->
+        <nav class="sp-only">
+            <div class="gnav-toggle">
+                <input id="gnav-input" type="checkbox" class="gnav-hidden">
+                <label id="gnav-open" for="gnav-input"><span></span></label>
+                <label class="gnav-unshown" id="gnav-close" for="gnav-input"></label>
+                <div id="gnav-content">
+                    <ul class="gnav-menu">
+                        <li class="gnav-item"><a href="./../../base.html">Home<br>ホーム</a></li>
+                        <li class="gnav-item"><a href="./../../blog.html">Blog<br>ブログ</a></li>
+                        <li class="gnav-item"><a href="./../../product-top.html">Services<br>プロダクト</a></li>
+                        <li class="gnav-item"><a href="./../../contact-us.html">Contact<br>お問い合わせ</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <!--==========PCのみ表示==========-->
+        <nav class="pc-only">
+            <ul>
+                <li><a href="./../../base.html">main</a></li>
+                <li><a href="./../../blog.html">blog</a></li>
+                <li><a href="./../../product-top.html">product</a></li>
+                <li><a href="./../../contact-us.html">contact</a></li>
+            </ul>
+        </nav>
+    </header>
+    <!-- Header End -->
+    <!--main strt-->
+    <div class="mar"></div><!-- ヘッダーが浮いてるのでその分のマージン -->
+    <div class="blog-text">
+        <!-- title -->
+        <span style="font-size: 40px;font-weight: bold;">第六回遊行塾に行ってきました！</span><br>
+        <!-- ここから中身 -->
+        <img src="./../blog-img/24-0928-yugyou6-class.jpg" alt="授業風景" align="left" style="width: 200px;height: auto; margin: 2%;"><br>
+        　後期初回となる第六回遊行塾を無事実施することが出来ました。<br>
+        授業内容としては前回授業を振り返りながらのIF文とwhile文についての説明を行いました。<br>
+        今回は私が初の先生役ということで臨んだ遊行塾となりました。そのため、授業を始めるまではどこかソワソワした非常に緊張している状態でいましたが、<br>
+        EDTCメンバー協力のもと事前に授業練習を行えたことで実際に授業を開始した際にはある程度自信を持った態度で先生役に取り組むことができたため良かったと思います。<br>
+        また、遊行塾前日に参加する講師陣全員に授業内容の共有を行うことができていたこともあり、生徒さん同士で授業進行度に大きなばらつきができなかった点も大変良かったように思います。<br>
+        しかし、私の授業ではペース配分がまだまだおぼつかないもので授業後半に至っては多少駆け足になってしまいました。それでも、授業自体は他の講師陣との連携によって生徒さん達に寄り添ったものを出来たように思います。<br>
+        これからの遊行塾もより良い授業を提供できるように精進していきます。
+        <!-- 署名 -->
+        <p class="syomei">根本</p>
+
+    </div>
+    <!-- 戻るボタン -->
+    <div id="reset"><a href="./../../blog.html" style="color: black;">前のページにもどる</a></div>
+
+    <!--main end-->
+    <!-- Footer Start -->
+    <footer>
+        <div class="flex">
+            <ul class="footer-list">
+                <li style="text-align: center;">
+                    <p class="gyou-a"></p>
+                    <a href="./../../base.html">ホーム　</a>
+                    <a href="./../../blog.html">ブログ　</a>
+                    <a href="./../../product-top.html">プロダクト</a>
+                    <hr size="100%">
+                </li>
+                <li  style="text-align: center;">
+                    <a href="./../../contact-us.html">お問い合わせ</a>
+                    <hr size="100%">
+                    <p class="gyou"></p>
+                    <b><img src="./../../img/EDTC-icon.png" alt="EDTCロゴ" height="50px" width="auto" class="syasinn">
+                        <font size="12">EDTC</font>
+                    </b>
+                    <p class="gyou"></p>
+                    <p>
+                        <font size="3">学校法人 幾徳学園　神奈川工科大学<br>mail :kait.edtc@gmail.com</font>
+                    </p>
+                    <p class="gyou-b"></p>
+                    <p>©　2024　KAIT　EDTC　All Rights Reserved</p>
+                </li>
+            </ul>
+        </div>
+    </footer>
+    <!-- Footer End -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+    <script src="https://coco-factory.jp/ugokuweb/wp-content/themes/ugokuweb/data/6-1-2/js/6-1-2.js"></script>
+</body> <!--本文の終了-->
+
+</html> <!--HTMLの書き終わり。決まり文句-->
