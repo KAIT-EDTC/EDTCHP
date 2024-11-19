@@ -13,13 +13,27 @@ li {
 .slide-wrapper {
     /* aspect-ratio:16/9; */
     width: 100%;
-    height: 40vh; /*丸島先輩に相談 */
+    height: 50%; /*丸島先輩に相談 */
     position: relative;
     overflow: hidden;
     z-index: 1px;
     /* はみ出したスライドを隠す */
 }
-
+.slide-wrapper p{
+    position: absolute;
+        top:50%;
+        left:50%;
+        font-size:5vh;
+        font-weight: bold;
+        color: white;
+        padding:0;
+        margin:0;
+        z-index: 5;
+        transform: translate(-50%,-50%);
+}
+.slide-wrapper p span {
+    white-space: nowrap;
+}
 /*  ↓ スライド（コンテンツ） */
 .slide {
     /*スライド全体 */
