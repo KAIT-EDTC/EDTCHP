@@ -125,7 +125,6 @@ header {
     background: rgba(0, 0, 0, 0.8);
     transition: 0.3s ease-in-out;
     transform: translateX(-105%);
-    z-index: 30px;
 }
 
 .gnav-menu {
@@ -135,7 +134,6 @@ header {
     padding-top: 50px;
     text-transform: uppercase;
     /*小文字、大文字の混在を大文字に統一*/
-    z-index: 30px;
 }
 
 .gnav-item {
@@ -150,7 +148,26 @@ header {
     width: 200px;
     text-align: center;
 }
-
+.gnav-sec{
+    box-sizing: none;
+}
+.gnav-sec span{
+    font-size: 17px;
+    font-weight: bold;
+}
+.gnav-sec a {
+    font-size: 12px;
+}
+.gnav-sec-con{
+    margin-left: 45px;
+}
+.gnav-sec-con span{
+    font-size: 19px;
+    font-weight: bold;
+}
+.gnav-sec-con a {
+    font-size: 12px;
+}
 /*疑似要素で1行目のスタイル指定*/
 .gnav-item a::first-line {
     font-size: 16px;
