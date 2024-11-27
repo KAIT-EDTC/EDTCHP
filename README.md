@@ -1,6 +1,6 @@
 ## 環境構築
 ### Gitの環境構築
-まずGitをダウンロードする [Gitダウンロードページ](https://git-scm.com/downloads/win)  
+まずGitを[ダウンロード](https://git-scm.com/downloads/win)する  
 インストール手順は全部nextを押せばOK  
 Gitをインストールしたら*Git Bash*を起動して、下記のコマンドを入力  
 ```bash
@@ -63,7 +63,7 @@ Bのコンフリクト解消のマニュアルを以下に書き記す。
 - リポジトリの状態を見る`git status`
 - コミット履歴を見る`git log`
 - ブランチ一覧`git branch`
-- ブランチ移動`git checkout 移動したいブランチ名`]
+- ブランチ移動`git checkout 移動したいブランチ名`
 - 差分確認`git diff`
 
 ## 作業ブランチから新たな作業ブランチを切るのはご法度！！！！
