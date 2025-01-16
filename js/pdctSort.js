@@ -7,7 +7,7 @@ const pdct_list = [
     { id:1, name:"ブザー", src:"./products/img/buzzer.jpg", file:"product-buzzer.html",  price:1000, maker:"足立遥大" },
     { id:2, name:"ArtoRo", src:"./products/img/ArtoRo.jpg", file:"product-ArtoRo.html", price:1000, maker:"番倉もえ" },
     { id:3, name:"お絵描きロボット", src:"./products/img/drawRobot.jpg", file:"product-DrawRobot.html",  price:6000, maker:"渡邉芯" },
-    { id:4, name:"LogicLineTracerV2", src:"./products/img/", file:"product-LogicLineTracerV2.html", price:"未定", maker:"須藤陸" },
+    { id:4, name:"ライントレース迷路ロボット", src:"./products/img/", file:"product-LogicLineTracerV2.html", price:"未定", maker:"須藤陸" },
     { id:5, name:"組み換えロボット", src:"./products/img/", file:"product-kumikaeRobot.html", price:"未定", maker:"二年" },
     { id:6, name:"ぶるぶるくん", src:"./products/img/", file:"product-buruburu.html", price:500, maker:"鈴木一平" }
 ];
