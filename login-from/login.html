@@ -1,0 +1,31 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>メンバー用ログインフォーム</title>
+</head>
+
+<body>
+    <h1>ログインフォーム</h1>
+
+    <form action="logincheck.php" method="post">
+        <table cellspacing="0" cellpadding="20" border="1">
+            <tr>
+                <th>学籍番号</th>
+                <td>
+                    <input type="text" name="ID"required>
+                </td>
+            </tr>
+            <tr>
+                <th>パスワード</th>
+                <td>
+                    <input type="text" name="pw"required>
+                </td>
+            </tr>
+        </table>
+        <p><input type="submit" value="ログイン"></p>
+    </form>
+</body>
+
+</html>
