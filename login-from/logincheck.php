@@ -11,18 +11,22 @@ $categories_string = implode(', ', array_map(function ($category) {
 try {
     $conn = new PDO(DSN, DB_USERNAME, DB_PASS);
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); 
-    $sql = "SELECT * FROM login-data";
-    $stmt = $conn->query($sql);
+    // テーブルのカラムの要素を知らないので仮にidとpassで書いてるよ。
+    // login-dataテーブルのカラムがどんな感じなのか教えてほしい。
+    $stmt = $conn->prepare('SELECT * FROM login-data WHERE id = :id AND pass = :pass');
+    // ここの書き方はSQLインジェクション防ぐ書き方だよ。
+    // 直接queryメソッドで実行してもいいけどセキュリティ的にこっちの方が安心。
+    $stmt->bindParam(':id', $id, PDO::PARAM_STR); // :idを$idに置き換えてる。
+    $stmt->bindParam(':pass', $pw, PDO::PARAM_STR);
+    $stmt->execute(); // ここでprepare内のクエリを実行。
 
-    $rows = $stmt->fetchAll(PDO::FETCH_ASSOC); 
-    $i = 0;
-    while($i < $sum){
-        if($id == $name[$i]){
-            if($pw == $pass[$i]){
-                header(Location:'https://kaitedtc.chew.jp/'+$id);//転送先
-            }
-        }
+    // fetchAllはDBに該当データがない場合は何も配列が返ってこないので0つまりfalseだから認証の有無が確認できる。
+    if ($stmt->fetchAll(PDO::FETCH_ASSOC)) {
+        header(Location:'https://kaitedtc.chew.jp/'+$id);//転送先
+    } else {
+        echo '認証失敗';
     }
+    
 
 } catch (PDOException $e) {
     $message = "エラー: " . $e->getMessage();
