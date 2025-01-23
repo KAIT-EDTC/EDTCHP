@@ -2,8 +2,8 @@
 define('DSN', 'mysql:host=mysql3105.db.sakura.ne.jp;dbname=kaitedtc_mamber-db');
 define('DB_USERNAME', 'kaitedtc_mamber-db');
 define('DB_PASS', 'GU8-2bPQKYWP9m-');
-$id = htmlspecialchars($_POST['ID']ENT_QUOTES, 'UTF-8');
-$pw = htmlspecialchars($_POST['pw']ENT_QUOTES, 'UTF-8');
+$id = htmlspecialchars($_POST['ID'], ENT_QUOTES, 'UTF-8');
+$pw = htmlspecialchars($_POST['pw'], ENT_QUOTES, 'UTF-8');
 $categories_string = implode(', ', array_map(function ($category) {
     return htmlspecialchars($category, ENT_QUOTES, 'UTF-8');
 }, $categories));
@@ -12,14 +12,14 @@ try {
     $conn = new PDO(DSN, DB_USERNAME, DB_PASS);
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); 
     $sql = "SELECT * FROM login-data";
-    $stmt = $conn->pquery($sql);
+    $stmt = $conn->query($sql);
 
     $rows = $stmt->fetchAll(PDO::FETCH_ASSOC); 
     $i = 0;
     while($i < $sum){
         if($id == $name[$i]){
             if($pw == $pass[$i]){
-                header(Location:'https://kaitedtc.chew.jp/'+$id)//転送先
+                header(Location:'https://kaitedtc.chew.jp/'+$id);//転送先
             }
         }
     }
