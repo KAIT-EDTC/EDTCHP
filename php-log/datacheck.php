@@ -36,9 +36,9 @@ if()
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>確認画面</title>
+    <title>登録画面</title>
 </head>
 <body>
-    <h1>確認中</h1>
+    <h1>登録画面</h1>
 </body>
 </html>
