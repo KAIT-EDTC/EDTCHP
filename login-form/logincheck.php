@@ -9,6 +9,7 @@ $categories_string = implode(', ', array_map(function ($category) {
 }, $categories));
 
 try {
+    session_start(); // セッション開始
     $conn = new PDO(DSN, DB_USERNAME, DB_PASS);
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); 
     // テーブルのカラムの要素を知らないので仮にidとpassで書いてるよ。
@@ -22,6 +23,7 @@ try {
 
     // fetchAllはDBに該当データがない場合は何も配列が返ってこないので0つまりfalseだから認証の有無が確認できる。
     if ($stmt->fetchAll(PDO::FETCH_ASSOC)) {
+        $_SESSION['userId'] = $id; // ユーザーIdはページ遷移後でも使いそうだからサーバー上で保存
         header(Location:'https://kaitedtc.chew.jp/'+$id);//転送先
     } else {
         echo '認証失敗';
