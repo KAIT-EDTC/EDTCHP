@@ -36,9 +36,6 @@ try {
 }
 $conn = null;
 ?>
-<?php
-if()
-?>
 <!DOCTYPE html>
 <html lang="ja">
 <head>
