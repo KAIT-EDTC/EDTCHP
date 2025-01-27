@@ -6,7 +6,7 @@ const img_path = "./../products/img/";
 // idは今のところ使用予定なし
 const pdct_list = [
     { id:1, name:"ブザー", src:"buzzer.jpg", file:"product-buzzer.html",  price:1000, maker:"足立遥大" },
-    { id:2, name:"ArtoRo", src:"ArtoRo.jpg", file:"product-ArtoRo.html", price:"未定", maker:"番倉もえ" },
+    { id:2, name:"ArtoRo", src:"ArtoRo.png", file:"product-ArtoRo.html", price:"未定", maker:"番倉もえ" },
     { id:3, name:"お絵描きロボット", src:"drawRobot.jpg", file:"product-DrawRobot.html",  price:"未定", maker:"渡邉芯" },
     { id:4, name:"LogicLineTracer", src:"LogicLineTracer.jpg", file:"product-LogicLineTracerV2.html", price:"未定", maker:"須藤陸" },
     { id:5, name:"組み換えロボット", src:"KumikaeRobot.jpg", file:"product-kumikaeRobot.html", price:"未定", maker:"二年" },
