@@ -54,3 +54,17 @@ main {
     }
 
     /* 商品コスト　エンド */
+
+    /* コンタクトボタン スタート */
+
+    .pdct-contact {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+    }
+
+    .pdct-contact input {
+        margin: 0 1%;
+    }
+
+    /* コンタクトボタン エンド */
