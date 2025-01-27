@@ -17,7 +17,7 @@ try {
     $stmt = $conn->prepare('SELECT * FROM login-data WHERE name = :id AND pass = :pass');
     // ここの書き方はSQLインジェクション防ぐ書き方だよ。
     // 直接queryメソッドで実行してもいいけどセキュリティ的にこっちの方が安心。
-    $stmt->bindParam(':id', $id, PDO::PARAM_STR); // :idを$idに置き換えてる。
+    $stmt->bindParam(':id', $id, PDO::PARAM_INT); // :idを$idに置き換えてる。
     $stmt->bindParam(':pass', $pw, PDO::PARAM_STR);
     $stmt->execute(); // ここでprepare内のクエリを実行。
 
