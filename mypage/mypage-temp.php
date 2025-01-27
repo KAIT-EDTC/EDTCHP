@@ -3,9 +3,29 @@ define('DSN', 'mysql:host=mysql3105.db.sakura.ne.jp;dbname=kaitedtc_mamber-db');
 define('DB_USERNAME', 'kaitedtc_mamber-db');
 define('DB_PASS', 'GU8-2bPQKYWP9m-');
 $id = $_SESSION['userId'];
-$user = $conn->prepare('SELECT * FROM login-data WHERE name = $id');//名前の引き出しに使用
-$form = $conn->prepare('SELECT * FROM form-data ');//グーグルフォーム等のリンクのデータベース
-$yotei = $conn->prepare('SELECT * FROM yotei-data');//行事や提出期限などのデータベース
+
+// $idがnullかどうか(null = ログインしないで不正にurlにアクセスしてる)
+if (!isset($id)) {
+    header('Location: https://kaitedtc.com/login-from/login.html');
+    exit;
+}
+
+$conn = new PDO(DSN, DB_USERNAME, DB_PASS);
+
+// login-dataに名前のカラムがあるの？
+// 学籍番号使うだけだったらこのクエリはいらないかも
+$user = $conn->prepare('SELECT login-data.名前のカラム名 FROM login-data WHERE name = :id');//名前の引き出しに使用
+$user->bindParam(':id', $id, PDO::PARAM_INT);
+$user->execute();
+// ユーザーの入力内容を使わないクエリは直接実行してもOK
+$form = $conn->query('SELECT * FROM form-data');//グーグルフォーム等のリンクのデータベース
+$yotei = $conn->query('SELECT * FROM yotei-data');//行事や提出期限などのデータベース
+
+// データ取得
+$user = $user->fetchAll(PDO::FETCH_ASSOC);
+$username = $user['名前のカラム名']; // 名前取得
+$form = $form->fetchAll(PDO::FETCH_ASSOC);
+$yotei = $yotei->fetchAll(PDO::FETCH_ASSOC);
 
 $conn = null;
 ?>
