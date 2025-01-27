@@ -1,15 +1,18 @@
 // selectタブ
 const arngmnt = document.getElementById("arrangement");
+const img_path = "./../products/img/";
 
 // ここに商品を追加すればOK
 // idは今のところ使用予定なし
 const pdct_list = [
-    { id:1, name:"ブザー", src:"./products/img/buzzer.jpg", file:"product-buzzer.html",  price:1000, maker:"足立遥大" },
-    { id:2, name:"ArtoRo", src:"./products/img/ArtoRo.jpg", file:"product-ArtoRo.html", price:1000, maker:"番倉もえ" },
-    { id:3, name:"お絵描きロボット", src:"./products/img/drawRobot.jpg", file:"product-DrawRobot.html",  price:6000, maker:"渡邉芯" },
-    { id:4, name:"ライントレース迷路ロボット", src:"./products/img/", file:"product-LogicLineTracerV2.html", price:"未定", maker:"須藤陸" },
-    { id:5, name:"組み換えロボット", src:"./products/img/", file:"product-kumikaeRobot.html", price:"未定", maker:"二年" },
-    { id:6, name:"ぶるぶるくん", src:"./products/img/", file:"product-buruburu.html", price:500, maker:"鈴木一平" }
+    { id:1, name:"ブザー", src:"buzzer.jpg", file:"product-buzzer.html",  price:1000, maker:"足立遥大" },
+    { id:2, name:"ArtoRo", src:"ArtoRo.png", file:"product-ArtoRo.html", price:"未定", maker:"番倉もえ" },
+    { id:3, name:"お絵描きロボット", src:"drawRobot.jpg", file:"product-DrawRobot.html",  price:"未定", maker:"渡邉芯" },
+    { id:4, name:"LogicLineTracer", src:"LogicLineTracer.jpg", file:"product-LogicLineTracerV2.html", price:"未定", maker:"須藤陸" },
+    { id:5, name:"組み換えロボット", src:"KumikaeRobot.jpg", file:"product-kumikaeRobot.html", price:"未定", maker:"二年" },
+    { id:6, name:"ぶるぶるくん", src:"BuruBuruKun.jpg", file:"product-buruburu.html", price:500, maker:"鈴木一平" },
+    { id:7, name:"相撲ロボット", src:"SumoRobot.jpg", file:"product-SumoRobot.html", price:"未定", maker:"上條慶" },
+    { id:8, name:"ライントレース迷路ロボット", src:"MazeLineTracer.jpg", file:"product-MazeLineTracer.html", price:"未定", maker:"二年" }
 ];
 
 // ul内に要素を追加する関数
@@ -24,7 +27,8 @@ const pdctLoad = () => {
 
         const AnkerElement = document.createElement("a");
         AnkerElement.className = "pdct-anker";
-        AnkerElement.href = "./../products/page/comingsoon.html"; /*+ pdct.file;*/
+        // AnkerElement.href = "./../products/page/" + pdct.file;
+        AnkerElement.href = "./../products/page/comingsoon.html";
 
         const titleElement = document.createElement("p");
         titleElement.className = "pdct-name";
@@ -32,7 +36,7 @@ const pdctLoad = () => {
 
         const imgElement = document.createElement("img")
         imgElement.className = "pdct-img";
-        // imgElement.src = pdct.src;
+        // imgElement.src = img_path + pdct.src;
         imgElement.alt = "商品画像はまだありません。";
 
         const boxElementChild = document.createElement("div")
@@ -124,4 +128,4 @@ arngmnt.addEventListener("change", (item) => {
 });
 
 // DOMが読み込まれてからpdctLoadを呼び出す
-document.addEventListener("DOMContentLoaded", pdctLoad());
+document.addEventListener("DOMContentLoaded", pdctLoad);
