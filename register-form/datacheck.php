@@ -36,9 +36,16 @@ try {
     $stmtyotei->execute();
 
     $message = "データが正常に登録されました。";
+    if (isset($_SERVER['HTTP_REFERER'])) {
+        header('Location: ' . $_SERVER['HTTP_REFERER']);
+        exit;
+    } 
 } catch (PDOException $e) {
     $message = "エラー: " . $e->getMessage();
-
+    if (isset($_SERVER['HTTP_REFERER'])) {
+        header('Location: ' . $_SERVER['HTTP_REFERER']);
+        exit;
+    } 
 }
 $conn = null;
 ?>
