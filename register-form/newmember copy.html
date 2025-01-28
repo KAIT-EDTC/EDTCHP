@@ -1,0 +1,37 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>予定登録フォーム</title>
+</head>
+
+<body>
+    <h1>登録フォーム</h1>
+
+    <form action="datacheck.php" method="post">
+        <table cellspacing="0" cellpadding="20" border="1">
+            <tr>
+                <th>イベント名</th>
+                <td>
+                    <input type="text" name="evid"required>
+                </td>
+            </tr>
+            <tr>
+                <th>日時</th>
+                <td>
+                    <input type="text" name="date"required>
+                </td>
+            </tr>
+            <tr>
+                <th>メンバー(学籍番号でお願いします)</th>
+                <td>
+                    <input type="text" name="member"required>
+                </td>
+            </tr>
+        </table>
+        <p><input type="submit" value="登録"></p>
+    </form>
+</body>
+
+</html>

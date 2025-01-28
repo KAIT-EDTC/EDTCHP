@@ -4,21 +4,36 @@ define('DB_USERNAME', 'kaitedtc_mamber-db');
 define('DB_PASS', 'GU8-2bPQKYWP9m-');
 $id = htmlspecialchars($_POST['ID'], ENT_QUOTES, 'UTF-8');
 $pw = htmlspecialchars($_POST['pw'], ENT_QUOTES, 'UTF-8');
+$link = htmlspecialchars($_POST['link'], ENT_QUOTES, 'UTF-8');
+$evname = htmlspecialchars($_POST['evid'], ENT_QUOTES, 'UTF-8');
+$date = htmlspecialchars($_POST['date'], ENT_QUOTES, 'UTF-8');
+$member = htmlspecialchars($_POST['member'], ENT_QUOTES, 'UTF-8');
 $categories_string = implode(', ', array_map(function ($category) {
     return htmlspecialchars($category, ENT_QUOTES, 'UTF-8');
 }, $categories));
+//このままだとリンクにも文字判定は行っちゃう？
 
 try {
     $conn = new PDO(DSN, DB_USERNAME, DB_PASS);
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); 
 
     $sql = "INSERT INTO login-data (SIDn, pass) VALUES (:id, :pw)";
-    $stmt = $conn->prepare($sql);
+    $stmtsql = $conn->prepare($sql);
+    $form = "INSERT INTO form-data (link) VALUES (:link)";
+    $stmtform = $conn->prepare($form);
+    $yotei = "INSERT INTO yotei-data (date,member,name) VALUES (:date,:member,:name)";
+    $stmtyotei = $conn->prepare($form);
 
-    $stmt->bindParam(':id', $id, PDO::PARAM_INT);
-    $stmt->bindParam(':pw', $pw, PDO::PARAM_STR);
+    $stmtsql->bindParam(':id', $id, PDO::PARAM_INT);
+    $stmtsql->bindParam(':pw', $pw, PDO::PARAM_STR);
+    $stmtform->bindParam(':link', $link, PDO::PARAM_STR);
+    $stmtyotei->bindParam(':date', $date, PDO::PARAM_DATE);
+    $stmtyotei->bindParam(':member', $member, PDO::PARAM_STR);
+    $stmtyotei->bindParam(':name', $evname, PDO::PARAM_STR);
 
-    $stmt->execute();
+    $stmtsql->execute();
+    $stmtform->execute();
+    $stmtyotei->execute();
 
     $message = "データが正常に登録されました。";
 } catch (PDOException $e) {
