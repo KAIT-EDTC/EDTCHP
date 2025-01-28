@@ -14,19 +14,30 @@ $conn = new PDO(DSN, DB_USERNAME, DB_PASS);
 
 // login-dataに名前のカラムがあるの？
 // 学籍番号使うだけだったらこのクエリはいらないかも
-$user = $conn->prepare('SELECT login-data.名前のカラム名 FROM login-data WHERE name = :id');//名前の引き出しに使用
+$user = $conn->prepare('SELECT login-data.name FROM login-data WHERE SIDn = :id');//名前の引き出しに使用
 $user->bindParam(':id', $id, PDO::PARAM_INT);
 $user->execute();
 // ユーザーの入力内容を使わないクエリは直接実行してもOK
 $form = $conn->query('SELECT * FROM form-data');//グーグルフォーム等のリンクのデータベース
-$yotei = $conn->query('SELECT * FROM yotei-data');//行事や提出期限などのデータベース
+$yotei = $conn->query('SELECT * FROM yotei-data WHERE member = :id OR NULL');//行事や提出期限などのデータベース
+//memberには学籍番号ベースで参加者登録を行うので自分が行く予定もしくは参加者未定の予定を取得
 
 // データ取得
 $user = $user->fetchAll(PDO::FETCH_ASSOC);
-$username = $user['名前のカラム名']; // 名前取得
+$username = $user['name']; // 名前取得
 $form = $form->fetchAll(PDO::FETCH_ASSOC);
 $yotei = $yotei->fetchAll(PDO::FETCH_ASSOC);
-
+$yoteilist = '';
+foreach () {
+    $yoteiname = htmlspecialchars($yotei['name'], ENT_QUOTES, 'UTF-8');
+    $yoteidate = htmlspecialchars($yotei['date'], ENT_QUOTES, 'UTF-8');
+    $yoteimember = htmlspecialchars($yotei['member'], ENT_QUOTES, 'UTF-8');
+    $yoteilist .= "<tr>
+                    <td>{$yoteiname}</td>
+                    <td>{$$yoteidate}</td>
+                    <td>{$yoteimember}</td>
+                </tr>";
+}
 $conn = null;
 ?>
 <!DOCTYPE html>
@@ -35,7 +46,6 @@ $conn = null;
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>マイページ</title>
-    <!-- phpからnameをとってつけてもいい -->
 </head>
 <body>
     <div class="sp-only"></div>
@@ -43,13 +53,22 @@ $conn = null;
     <!-- 完全すみわけ前提で機能を分けてもいいと思う -->
     <!-- <h1></h1>ここに$userから名前を拾いたいが直接中にPHPを書いていいのか？取得した文字列を何かに格納してすべてをjsで上書き？ -->
     <!-- とりまphpで直書きで良い気がする(不都合が生まれたら直そう笑) -->
-    <h1><?php echo $user; ?></h1>
+    <h1><?php echo $user; ?>さんこんにちは！</h1>
     <div class="panel">
-        <div class="calender"></div>
-        <div class="task-list"></div>
-        <div class="remind"></div>
-        <div class="form-link"></div>
-        <div class="houkokusyo"></div>
+        <div class="calender">
+
+        </div>
+        <div class="remind">
+            <p><?phpecho $user; ?>さんの予定</p>
+            <?phpecho $yoteilist; ?>
+        </div>
+        <div class="form-link">
+            <p>現在公開されているフォーム一覧</p>
+            <?php echo $form['link'];?>
+        </div>
+        <div class="houkokusyo">
+            <!-- グーグルドライブのリンクを予定 -->
+        </div>
     </div>
     
 </body>
