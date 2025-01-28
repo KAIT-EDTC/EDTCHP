@@ -54,7 +54,7 @@ $conn = null;
     <h1><?php echo $username; ?>さんこんにちは！</h1>
     <div class="panel">
         <div class="calender">
-
+            <!-- むずい -->
         </div>
         <div class="remind">
             <p><?php echo $username; ?>さんの予定</p>
