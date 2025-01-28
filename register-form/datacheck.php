@@ -12,7 +12,7 @@ try {
     $conn = new PDO(DSN, DB_USERNAME, DB_PASS);
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); 
 
-    $sql = "INSERT INTO login-data (name, pass) VALUES (:id, :pw)";
+    $sql = "INSERT INTO login-data (SIDn, pass) VALUES (:id, :pw)";
     $stmt = $conn->prepare($sql);
 
     $stmt->bindParam(':id', $id, PDO::PARAM_INT);
