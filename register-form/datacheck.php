@@ -8,26 +8,27 @@ $link = htmlspecialchars($_POST['link'], ENT_QUOTES, 'UTF-8');
 $evname = htmlspecialchars($_POST['evid'], ENT_QUOTES, 'UTF-8');
 $date = htmlspecialchars($_POST['date'], ENT_QUOTES, 'UTF-8');
 $member = htmlspecialchars($_POST['member'], ENT_QUOTES, 'UTF-8');
-$categories_string = implode(', ', array_map(function ($category) {
-    return htmlspecialchars($category, ENT_QUOTES, 'UTF-8');
-}, $categories));
+// 使ってないから一旦コメントアウト
+// $categories_string = implode(', ', array_map(function ($category) {
+//     return htmlspecialchars($category, ENT_QUOTES, 'UTF-8');
+// }, $categories));
 //このままだとリンクにも文字判定は行っちゃう？
 
 try {
     $conn = new PDO(DSN, DB_USERNAME, DB_PASS);
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); 
 
-    $sql = "INSERT INTO login-data (SIDn, pass) VALUES (:id, :pw)";
+    $sql = "INSERT INTO `login-data` (SIDn, pass) VALUES (:id, :pw)"; // DBのカラムの数に対して挿入するカラムが少ないからエラー出ると思うよ
     $stmtsql = $conn->prepare($sql);
-    $form = "INSERT INTO form-data (link) VALUES (:link)";
+    $form = "INSERT INTO `form-data` (link) VALUES (:link)";
     $stmtform = $conn->prepare($form);
-    $yotei = "INSERT INTO yotei-data (date,member,name) VALUES (:date,:member,:name)";
+    $yotei = "INSERT INTO `yotei-data` (date,member,name) VALUES (:date, :member, :name)";
     $stmtyotei = $conn->prepare($form);
 
     $stmtsql->bindParam(':id', $id, PDO::PARAM_INT);
     $stmtsql->bindParam(':pw', $pw, PDO::PARAM_STR);
     $stmtform->bindParam(':link', $link, PDO::PARAM_STR);
-    $stmtyotei->bindParam(':date', $date, PDO::PARAM_DATE);
+    $stmtyotei->bindParam(':date', $date, PDO::PARAM_STR); // DATE型ない
     $stmtyotei->bindParam(':member', $member, PDO::PARAM_STR);
     $stmtyotei->bindParam(':name', $evname, PDO::PARAM_STR);
 
@@ -48,9 +49,6 @@ try {
     } 
 }
 $conn = null;
-?>
-<?php
-if()
 ?>
 <!DOCTYPE html>
 <html lang="ja">
