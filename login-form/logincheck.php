@@ -1,7 +1,8 @@
 <?php
-define('DSN', 'mysql:host=mysql3105.db.sakura.ne.jp;dbname=kaitedtc_mamber-db');
-define('DB_USERNAME', 'kaitedtc_mamber-db');
-define('DB_PASS', 'GU8-2bPQKYWP9m-');
+define('DSN', 'mysql:host=localhost;dbname=kaitedtc_mamber-db');
+define('DB_USERNAME', 'root');
+define('DB_PASS', '');
+
 $id = htmlspecialchars($_POST['ID'], ENT_QUOTES, 'UTF-8');
 $pw = htmlspecialchars($_POST['pw'], ENT_QUOTES, 'UTF-8');
 // 使ってないから一旦コメントアウト
@@ -25,7 +26,7 @@ try {
     // fetchAllはDBに該当データがない場合は何も配列が返ってこないので0つまりfalseだから認証の有無が確認できる。
     if ($stmt->fetchAll(PDO::FETCH_ASSOC)) {
         $_SESSION['userId'] = $id; // ユーザーIdはページ遷移後でも使いそうだからサーバー上で保存
-        header('Location:');//転送先
+        header('Location:http://localhost/EDTCHP/mypage/mypage-temp.php');//転送先
     } else {
         echo '認証失敗';
     }

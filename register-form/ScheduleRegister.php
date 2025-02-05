@@ -1,7 +1,7 @@
 <?php
-define('DSN', 'mysql:host=mysql3105.db.sakura.ne.jp;dbname=kaitedtc_mamber-db');
-define('DB_USERNAME', 'kaitedtc_mamber-db');
-define('DB_PASS', 'GU8-2bPQKYWP9m-');
+define('DSN', 'mysql:host=localhost;dbname=kaitedtc_mamber-db');
+define('DB_USERNAME', 'root');
+define('DB_PASS', '');
 $evname = htmlspecialchars($_POST['evid'], ENT_QUOTES, 'UTF-8');
 $date = htmlspecialchars($_POST['date'], ENT_QUOTES, 'UTF-8');
 $member = htmlspecialchars($_POST['member'], ENT_QUOTES, 'UTF-8');
