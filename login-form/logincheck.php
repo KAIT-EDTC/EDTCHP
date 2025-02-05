@@ -25,7 +25,7 @@ try {
     // fetchAllはDBに該当データがない場合は何も配列が返ってこないので0つまりfalseだから認証の有無が確認できる。
     if ($stmt->fetchAll(PDO::FETCH_ASSOC)) {
         $_SESSION['userId'] = $id; // ユーザーIdはページ遷移後でも使いそうだからサーバー上で保存
-        header('Location:https://kaitedtc.chew.jp/'+$id);//転送先
+        header('Location:');//転送先
     } else {
         echo '認証失敗';
     }
