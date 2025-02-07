@@ -16,8 +16,12 @@ $conn = new PDO(DSN, DB_USERNAME, DB_PASS);
 $user = $conn->prepare('SELECT `login-data`.name FROM `login-data` WHERE SIDn = :id');//名前の引き出しに使用
 $user->bindParam(':id', $id, PDO::PARAM_INT);
 $user->execute();
+
 $form = $conn->query('SELECT * FROM `form-data`');//グーグルフォーム等のリンクのデータベース
-$yotei = $conn->query('SELECT * FROM `yotei-data` WHERE member = :id OR member IS NULL');//行事や提出期限などのデータベース
+
+$yotei = $conn->prepare('SELECT * FROM `yotei-data` WHERE member = :id OR member IS NULL');//行事や提出期限などのデータベース
+$yotei->bindParam(':id', $id, PDO::PARAM_INT);
+$yotei->execute();
 //memberには学籍番号ベースで参加者登録を行うので自分が行く予定もしくは参加者未定の予定を取得
 
 // データ取得
