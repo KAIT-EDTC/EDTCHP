@@ -2,13 +2,14 @@
 define('DSN', 'mysql:host=localhost;dbname=kaitedtc_mamber-db');
 define('DB_USERNAME', 'root');
 define('DB_PASS', '');
-$link = htmlspecialchars($_POST['link'], ENT_QUOTES, 'UTF-8');
 
 try {
     if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
         header('Location: https://kaitedtc.com/login-from/login.html');
         exit;
     }
+    $link = htmlspecialchars($_POST['link'], ENT_QUOTES, 'UTF-8');
+    
     $conn = new PDO(DSN, DB_USERNAME, DB_PASS);
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 

@@ -2,6 +2,7 @@
 define('DSN', 'mysql:host=localhost;dbname=kaitedtc_mamber-db');
 define('DB_USERNAME', 'root');
 define('DB_PASS', '');
+session_start();
 $id = $_SESSION['userId'];
 $yoteilist = '';
 
@@ -13,7 +14,7 @@ if (!isset($id)) {
 
 $conn = new PDO(DSN, DB_USERNAME, DB_PASS);
 
-$user = $conn->prepare('SELECT `login-data`.name FROM `login-data` WHERE SIDn = :id');//名前の引き出しに使用
+$user = $conn->prepare('SELECT name FROM `login-data` WHERE SIDn = :id');//名前の引き出しに使用
 $user->bindParam(':id', $id, PDO::PARAM_INT);
 $user->execute();
 

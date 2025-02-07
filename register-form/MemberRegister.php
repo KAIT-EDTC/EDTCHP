@@ -10,6 +10,7 @@ try {
     }
     $id = htmlspecialchars($_POST['ID'], ENT_QUOTES, 'UTF-8');
     $pw = htmlspecialchars($_POST['pw'], ENT_QUOTES, 'UTF-8');
+    
     $conn = new PDO(DSN, DB_USERNAME, DB_PASS);
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
