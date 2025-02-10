@@ -32,9 +32,9 @@ $form = $form->fetchAll(PDO::FETCH_ASSOC);
 
 // ユーザー1人分しか取らないからwhileでOK
 while ($yotei = $yotei->fetchAll(PDO::FETCH_ASSOC)) {
-    $yoteiname = htmlspecialchars($yotei['name'], ENT_QUOTES, 'UTF-8');
-    $yoteidate = htmlspecialchars($yotei['date'], ENT_QUOTES, 'UTF-8');
-    $yoteimember = htmlspecialchars($yotei['member'], ENT_QUOTES, 'UTF-8');
+    $yoteiname = $yotei['name'];
+    $yoteidate = $yotei['date'];
+    $yoteimember = $yotei['member'];
     $yoteilist .= "<tr>
                     <td>{$yoteiname}</td>
                     <td>{$$yoteidate}</td>
