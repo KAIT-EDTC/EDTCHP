@@ -21,9 +21,9 @@
 
     $form = $conn->query('SELECT * FROM `form-data`'); //グーグルフォーム等のリンクのデータベース
     
-    $schedule = $conn->prepare('SELECT * FROM `yotei-data` WHERE member = :id'); //行事や提出期限などのデータベース
-    $schedule->bindParam(':id', $id, PDO::PARAM_INT);
-    $schedule->execute();
+    $schedules = $conn->prepare('SELECT * FROM `yotei-data` WHERE member = :id'); //行事や提出期限などのデータベース
+    $schedules->bindParam(':id', $id, PDO::PARAM_INT);
+    $schedules->execute();
     //memberには学籍番号ベースで参加者登録を行うので自分が行く予定もしくは参加者未定の予定を取得
     
     // ユーザー情報取得
@@ -32,10 +32,11 @@
     }
 
     // フォーム情報取得
-    if ($form = $form->fetch(PDO::FETCH_ASSOC)) {
-        $formid = htmlspecialchars($form['id'], ENT_QUOTES, 'UTF-8');
-        $formname = htmlspecialchars($form['name'], ENT_QUOTES, 'UTF-8');
-        $formurl = htmlspecialchars($form['link'], ENT_QUOTES, 'UTF-8');
+    $form = $form->fetchAll(PDO::FETCH_ASSOC);
+    foreach ($form as $f) {
+        $formid = htmlspecialchars($f['id'], ENT_QUOTES, 'UTF-8');
+        $formname = htmlspecialchars($f['name'], ENT_QUOTES, 'UTF-8');
+        $formurl = htmlspecialchars($f['link'], ENT_QUOTES, 'UTF-8');
         $tableRows .= "<tr>
         <td>{$formid}</td>
         <td>{$formname}</td>
@@ -44,7 +45,8 @@
     }
 
     // 予定取得
-    if ($schedule = $schedule->fetch(PDO::FETCH_ASSOC)) {
+    $schedules = $schedules->fetchAll(PDO::FETCH_ASSOC);
+    foreach ($schedules as $schedule) {
         $yoteiname = htmlspecialchars($schedule['name'], ENT_QUOTES, 'UTF-8');
         $yoteidate = htmlspecialchars($schedule['date'], ENT_QUOTES, 'UTF-8');
         $yoteimember = htmlspecialchars($schedule['member'], ENT_QUOTES, 'UTF-8');
