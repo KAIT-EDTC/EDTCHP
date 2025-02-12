@@ -20,16 +20,20 @@
     $users->execute();
 
     $form = $conn->query('SELECT * FROM `form-data`'); //グーグルフォーム等のリンクのデータベース
-    $form = $form->fetchAll(PDO::FETCH_ASSOC);
-
+    
     $schedules = $conn->prepare('SELECT * FROM `yotei-data` WHERE member = :id'); //行事や提出期限などのデータベース
     $schedules->bindParam(':id', $id, PDO::PARAM_INT);
     $schedules->execute();
     //memberには学籍番号ベースで参加者登録を行うので自分が行く予定もしくは参加者未定の予定を取得
-
+    
     $users = $users->fetchAll(PDO::FETCH_ASSOC); // ユーザー情報取得
     $schedules = $schedules->fetchAll(PDO::FETCH_ASSOC); // 予定取得
+    $form = $form->fetchAll(PDO::FETCH_ASSOC); // フォーム情報取得
     
+    foreach ($users as $user) {
+        $username = htmlspecialchars($user['name'], ENT_QUOTES, 'UTF-8');
+    }
+
     foreach ($form as $row) {
         // 各カラムの値をエスケープ処理して安全にHTMLに出力
         $formid = htmlspecialchars($row['id'], ENT_QUOTES, 'UTF-8');
