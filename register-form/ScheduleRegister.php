@@ -1,7 +1,7 @@
 <?php
 define('DSN', 'mysql:host=localhost;dbname=kaitedtc_mamber-db');
-define('DB_USERNAME', 'root');
-define('DB_PASS', '');
+define('DB_USERNAME', 'test1');
+define('DB_PASS', 'test');
 
 try {
     if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
@@ -20,7 +20,19 @@ try {
     $stmt->bindParam(':member', $member, PDO::PARAM_STR);
     $stmt->bindParam(':name', $evname, PDO::PARAM_STR);
     $stmt->execute();
+    header('Location: http://localhost/EDTCHP/register-form/newmember%20copy.html');
 } catch (PDOException $e) {
     echo $e->getMessage();
 }
 ?>
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>登録画面</title>
+</head>
+<body>
+    <h1>登録画面</h1>
+</body>
+</html>

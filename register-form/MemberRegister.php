@@ -18,6 +18,7 @@ try {
     $stmt->bindParam(':id', $id, PDO::PARAM_INT);
     $stmt->bindParam(':pass', $pw, PDO::PARAM_STR);
     $stmt->execute();
+    header('Location: http://localhost/EDTCHP/register-form/newmember%20copy.html');
 } catch (PDOException $e) {
     echo $e->getMessage();
 }

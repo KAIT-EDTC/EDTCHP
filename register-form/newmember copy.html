@@ -8,8 +8,8 @@
 
 <body>
     <h1>登録フォーム</h1>
-
-    <form action="datacheck.php" method="post">
+        <h2>予定登録</h2>
+    <form action="ScheduleRegister.php" method="post">
         <table cellspacing="0" cellpadding="20" border="1">
             <tr>
                 <th>イベント名</th>
@@ -27,6 +27,39 @@
                 <th>メンバー(学籍番号でお願いします)</th>
                 <td>
                     <input type="text" name="member"required>
+                </td>
+            </tr>
+        </table>
+        <p><input type="submit" value="登録"></p>
+    </form>
+    <h2>フォーム登録</h2>
+    <form action="FormRegister.php" method="post">
+        <table cellspacing="0" cellpadding="20" border="1">
+            <tr>
+                <th>フォームのリンク</th>
+                <td>
+                    <input type="text" name="link"required>
+                </td> <th>フォームの名前</th>
+                <td>
+                    <input type="text" name="name"required>
+                </td>
+            </tr>
+        </table>
+        <p><input type="submit" value="登録"></p>
+    </form>
+    <h2>メンバー登録</h2>
+    <form action="MemberRegister.php" method="post">
+        <table cellspacing="0" cellpadding="20" border="1">
+            <tr>
+                <th>学籍番号</th>
+                <td>
+                    <input type="text" name="ID"required>
+                </td>
+            </tr>
+            <tr>
+                <th>パスワード</th>
+                <td>
+                    <input type="text" name="pw"required>
                 </td>
             </tr>
         </table>
