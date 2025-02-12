@@ -15,21 +15,20 @@
 
     $conn = new PDO(DSN, DB_USERNAME, DB_PASS);
 
-    $user = $conn->prepare('SELECT * FROM `login-data` WHERE SIDn = :id');//名前の引き出しに使用
-    $user->bindParam(':id', $id, PDO::PARAM_INT);
-    $user->execute();
+    $users = $conn->prepare('SELECT * FROM `login-data` WHERE SIDn = :id');//名前の引き出しに使用
+    $users->bindParam(':id', $id, PDO::PARAM_INT);
+    $users->execute();
 
     $form = $conn->query('SELECT * FROM `form-data`'); //グーグルフォーム等のリンクのデータベース
     $form = $form->fetchAll(PDO::FETCH_ASSOC);
 
-    $yotei = $conn->prepare('SELECT * FROM `yotei-data` WHERE member = :id'); //行事や提出期限などのデータベース
-    $yotei->bindParam(':id', $id, PDO::PARAM_INT);
-    $yotei->execute();
+    $schedules = $conn->prepare('SELECT * FROM `yotei-data` WHERE member = :id'); //行事や提出期限などのデータベース
+    $schedules->bindParam(':id', $id, PDO::PARAM_INT);
+    $schedules->execute();
     //memberには学籍番号ベースで参加者登録を行うので自分が行く予定もしくは参加者未定の予定を取得
 
-    // データ取得
-    $user = $user->fetchAll(PDO::FETCH_ASSOC);
-    $username = htmlspecialchars($user['name'], ENT_QUOTES, 'UTF-8'); // 名前取得
+    $users = $users->fetchAll(PDO::FETCH_ASSOC); // ユーザー情報取得
+    $schedules = $schedules->fetchAll(PDO::FETCH_ASSOC); // 予定取得
     
     foreach ($form as $row) {
         // 各カラムの値をエスケープ処理して安全にHTMLに出力
@@ -42,12 +41,12 @@
         <td>{$formname}</td>
         <td><a href='$formurl' target='_blank' rel='noopener noreferrer'>{$formurl}</a></td>
         </tr>";
-        }
-    // ユーザー1人分しか取らないからwhileでOK
-    while ($yotei = $yotei->fetchAll(PDO::FETCH_ASSOC)) {
-        $yoteiname = $yotei['name'];
-        $yoteidate = $yotei['date'];
-        $yoteimember = $yotei['member'];
+    }
+
+    foreach ($schedules as $schedule) {
+        $yoteiname = htmlspecialchars($schedule['name'], ENT_QUOTES, 'UTF-8');
+        $yoteidate = htmlspecialchars($schedule['date'], ENT_QUOTES, 'UTF-8');
+        $yoteimember = htmlspecialchars($schedule['member'], ENT_QUOTES, 'UTF-8');
         $yoteilist .= "<tr>
                         <td>{$yoteiname}</td>
                         <td>{$yoteidate}</td>
