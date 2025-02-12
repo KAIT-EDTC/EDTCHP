@@ -15,31 +15,27 @@
 
     $conn = new PDO(DSN, DB_USERNAME, DB_PASS);
 
-    $users = $conn->prepare('SELECT * FROM `login-data` WHERE SIDn = :id');//名前の引き出しに使用
-    $users->bindParam(':id', $id, PDO::PARAM_INT);
-    $users->execute();
+    $user = $conn->prepare('SELECT * FROM `login-data` WHERE SIDn = :id');//名前の引き出しに使用
+    $user->bindParam(':id', $id, PDO::PARAM_INT);
+    $user->execute();
 
     $form = $conn->query('SELECT * FROM `form-data`'); //グーグルフォーム等のリンクのデータベース
     
-    $schedules = $conn->prepare('SELECT * FROM `yotei-data` WHERE member = :id'); //行事や提出期限などのデータベース
-    $schedules->bindParam(':id', $id, PDO::PARAM_INT);
-    $schedules->execute();
+    $schedule = $conn->prepare('SELECT * FROM `yotei-data` WHERE member = :id'); //行事や提出期限などのデータベース
+    $schedule->bindParam(':id', $id, PDO::PARAM_INT);
+    $schedule->execute();
     //memberには学籍番号ベースで参加者登録を行うので自分が行く予定もしくは参加者未定の予定を取得
     
-    $users = $users->fetchAll(PDO::FETCH_ASSOC); // ユーザー情報取得
-    $schedules = $schedules->fetchAll(PDO::FETCH_ASSOC); // 予定取得
-    $form = $form->fetchAll(PDO::FETCH_ASSOC); // フォーム情報取得
-    
-    foreach ($users as $user) {
+    // ユーザー情報取得
+    if ($user = $user->fetch(PDO::FETCH_ASSOC)) {
         $username = htmlspecialchars($user['name'], ENT_QUOTES, 'UTF-8');
     }
 
-    foreach ($form as $row) {
-        // 各カラムの値をエスケープ処理して安全にHTMLに出力
-        $formid = htmlspecialchars($row['id'], ENT_QUOTES, 'UTF-8');
-        $formname = htmlspecialchars($row['name'], ENT_QUOTES, 'UTF-8');
-        $formurl = htmlspecialchars($row['link'], ENT_QUOTES, 'UTF-8');
-        // テーブル行を作成し、HTMLに組み込める形式で文字列を生成
+    // フォーム情報取得
+    if ($form = $form->fetch(PDO::FETCH_ASSOC)) {
+        $formid = htmlspecialchars($form['id'], ENT_QUOTES, 'UTF-8');
+        $formname = htmlspecialchars($form['name'], ENT_QUOTES, 'UTF-8');
+        $formurl = htmlspecialchars($form['link'], ENT_QUOTES, 'UTF-8');
         $tableRows .= "<tr>
         <td>{$formid}</td>
         <td>{$formname}</td>
@@ -47,7 +43,8 @@
         </tr>";
     }
 
-    foreach ($schedules as $schedule) {
+    // 予定取得
+    if ($schedule = $schedule->fetch(PDO::FETCH_ASSOC)) {
         $yoteiname = htmlspecialchars($schedule['name'], ENT_QUOTES, 'UTF-8');
         $yoteidate = htmlspecialchars($schedule['date'], ENT_QUOTES, 'UTF-8');
         $yoteimember = htmlspecialchars($schedule['member'], ENT_QUOTES, 'UTF-8');
@@ -57,6 +54,7 @@
                         <td>{$yoteimember}</td>
                     </tr>";
     }
+
     $conn = null;
 ?>
 <!DOCTYPE html>
@@ -77,7 +75,7 @@
         </div>
         <div class="remind">
             <p><?php echo $username; ?>さんの予定</p>
-            <?php echo $yoteilist; ?>
+            <?php if (!empty($yoteilist)) echo $yoteilist; ?>
         </div>
         <div class="form-link">
             <p>現在公開されているフォーム一覧</p>
@@ -90,7 +88,7 @@
                 </tr>
             </thead>
             <tbody>
-                <?php echo $tableRows; ?> <!-- PHPで生成したテーブル行を挿入 -->
+                <?php if (!empty($tableRows)) echo $tableRows; ?> <!-- PHPで生成したテーブル行を挿入 -->
             </tbody>
         </table>
             </div>
