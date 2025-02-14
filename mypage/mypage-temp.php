@@ -65,6 +65,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>マイページ</title>
+    <link rel="stylesheet" href="mypage.css">
 </head>
 <body>
     <div class="sp-only"></div>
@@ -77,16 +78,29 @@
         </div>
         <div class="remind">
             <p><?php echo $username; ?>さんの予定</p>
-            <?php if (!empty($yoteilist)) echo $yoteilist; ?>
-        </div>
-        <div class="form-link">
-            <p>現在公開されているフォーム一覧</p>
-            <table>
+            <table cellspacing="0" cellpadding="20" border="1">
             <thead>
                 <tr>
-                    <th>ID</th> <!-- ヘッダー: ID -->
-                    <th>リンク名</th> <!-- ヘッダー: 名前 -->
-                    <th>リンク</th> <!-- ヘッダー: 性別 -->
+                    <th>イベント名</th> <!-- ヘッダー: ID -->
+                    <th>日付</th> <!-- ヘッダー: 名前 -->
+                    <th>メンバー</th> <!-- ヘッダー: 性別 -->
+                </tr>
+            </thead>
+            <tbody>
+            <?php if (!empty($yoteilist)) echo $yoteilist; ?> <!-- PHPで生成したテーブル行を挿入 -->
+            </tbody>
+        </table>
+            
+        </div>
+        <div class="form-link">
+            <p style="font-size 15px"><p><h2>現在公開されているフォーム一覧</h2>
+
+            <table border="1" >
+            <thead>
+                <tr>
+                    <th class="linkid">ID</th> <!-- ヘッダー: ID -->
+                    <th class="linkname">リンク名</th> <!-- ヘッダー: 名前 -->
+                    <th class="link">リンク</th> <!-- ヘッダー: 性別 -->
                 </tr>
             </thead>
             <tbody>
