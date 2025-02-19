@@ -3,3 +3,4 @@ key/
 .env
 ../calendar-2-main/
 common.php
+node_modules/
