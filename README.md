@@ -54,15 +54,19 @@
    cd mypage/calendar
    ```
 
-   次にcomposerコマンドを使ってパッケージをインストールする。
+   次にcomposerコマンドを使ってパッケージをインストールする。  
+  composer.jsonがある場合は一個目のコマンドを実行すればOK.
 
-   ```bash
-   # Googleのapiのためのパッケージ
-   composer require google/apiclient:^2.0
-
-   # .envファイルを開くためのパッケージ
-   composer require vlucas/phpdotenv
-   ```
+   - ```bash
+     composer install
+      ```
+   - ```bash
+      # Googleのapiのためのパッケージ
+      composer require google/apiclient:^2.15.0
+      
+      # .envファイルを開くためのパッケージ
+      composer require vlucas/phpdotenv
+      ```
 
 ## Gitのあれこれ
 
