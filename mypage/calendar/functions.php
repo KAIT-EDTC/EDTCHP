@@ -1,6 +1,4 @@
 <?php
-// require_once __DIR__ . '/common.php';
-
 use Google\Client;
 use Google\Service\Calendar as Google_Service_Calendar;
 use Google\Service\Calendar\Event as Google_Service_Calendar_Event;
@@ -14,6 +12,12 @@ $calendarId = $_ENV['CALENDAR_ID'];
 $api_key = $_ENV['API_KEY'];
 $jsonPath = __DIR__.'/key/push-event-test-451408-0f871f466586.json';
 
+/**
+ * google calendarのインスタンスを取得する
+ * 
+ * @param boolean $isAdd イベントを追加するか、イベントを取得するか
+ * @return array google calendarの色んなデータ
+ */
 function getClient($isAdd) {
     global $jsonPath;
     $client = new Google_Client();
@@ -23,27 +27,111 @@ function getClient($isAdd) {
     return $client;
 }
 
-function addEvents() {
+/**
+ * イベントを追加する
+ * 
+ * @param string $title イベントのタイトル
+ * @param string $desc 参加者やイベントの詳細
+ * @param string $start 開始日時
+ * @param string $end 終了日時
+ */
+function addEvents($title, $desc, $start, $end) {
     global $calendarId;
-    $EVENT_START_DATE = '2025-02-18T10:00:00+09:00';
-    $EVENT_END_DATE = '2025-02-18T11:00:00+09:00';
 
     $client = getClient(true);
 
     $service = new \Google_Service_Calendar($client);
     $event = new \Google_Service_Calendar_Event(array(
-        'summary' => '遊行塾',
-        'description' => '2424013',
+        'summary' => $title,
+        'description' => $desc,
         'start' => array(
-            'dateTime' => $EVENT_START_DATE,
+            'dateTime' => ToRFC($start),
             'timeZone' => 'Asia/Tokyo',
         ),
         'end' => array(
-            'dateTime' => $EVENT_END_DATE,
+            'dateTime' => ToRFC($end),
             'timeZone' => 'Asia/Tokyo',
         ),
     ));
-    return $service->events->insert($calendarId, $event);
+    $service->events->insert($calendarId, $event);
+}
+
+/**
+ * 2025月1月1日から今までのイベントデータを指定された個数だけ抽出する
+ * 
+ * @param int $maxResults 取り出したい個数
+ * @return array フォーマットされたイベントデータが返される
+ */
+function getEvents($maxResults) { 
+    global $calendarId;
+    $events = [];
+    $optParams = array(
+        'maxResults' => $maxResults,
+        'orderBy' => 'startTime',
+        'singleEvents' => true,
+        'timeMin' => date('c', strtotime('2025-01-01'))
+    );
+    
+    $client = getClient(false);
+    $service = new Google_Service_Calendar($client);
+    $results = $service->events->listEvents($calendarId, $optParams);
+    $events = $results->getItems();
+    foreach ($events as $item) {
+        /*
+        * 基本的なキーワード
+        * created : 作成日
+        * summary : イベント名
+        * start : 開始日時
+            startの中のdateTimeというキーにデータが入ってるため、例えば開始時間を取り出したいときは
+            data['start']['dateTime']という風に取り出す(終了日時も同じ)
+        * end : 終了日時
+        * description : 詳細
+        */
+        // こんな感じで予定の取得が出来る
+        $formatted_events[] = array(
+            'summary' => $item['summary'],
+            'startTime' => $item['start']['dateTime'],
+            'endTime' => $item['end']['dateTime'],
+            'description' => $item['description']
+        );
+    }
+    return $formatted_events;
+}
+
+/**
+ * 特定の生徒番号からイベントデータを抽出する
+ * 
+ * @param array $data 大本のイベントデータ
+ * @param string $Id 生徒番号
+ */
+function getEventsById($data, $Id) {
+    $filtered_data = [];
+    foreach ($data as $d) {
+        if (strpos($d['description'], $Id) !== false) {
+            $filtered_data[] = $d;
+        }
+    }
+    return $filtered_data;
+}
+
+/**
+ * 文字列 -> yyyy-mm-ddThh:mm:ss+時差
+ * 
+ * @param string $date RFCにしたい文字列
+ */
+function ToRFC($date) {
+    return (new DateTime($date))->format(DateTime::RFC3339);
+}
+
+/**
+ * RFC形式から日本の年月月日に変換する  
+ * yyyy-mm-ddThh:mm:ss+時差 -> mm月dd日hh時mm分
+ * 
+ * @param string $rfc 変換したいRFC形式の文字列
+ */
+function RFC2Jap($rfc) {
+    $date = new DateTime($rfc);
+    return $date->format('m月d日H時i分');
 }
 
 // getClientしないやつ
@@ -68,48 +156,4 @@ function addEvents() {
 //     $results = file_get_contents($url);
 //     return  json_decode($results, true);
 // }
-
-function getEvents($maxResults, $orderBy, $isSingleEvents, $timeMin) { 
-    global $calendarId;
-    $events = [];
-    $optParams = array(
-                'maxResults' => $maxResults,
-                'orderBy' => $orderBy,
-                'singleEvents' => $isSingleEvents,
-                'timeMin' => date('c', strtotime($timeMin))
-    );
-
-    $client = getClient(false);
-    $service = new Google_Service_Calendar($client);
-    $results = $service->events->listEvents($calendarId, $optParams);
-    $events = $results->getItems();
-    foreach ($events as $item) {
-        /*
-        * 基本的なキーワード
-        * created : 作成日
-        * summary : イベント名
-        * start : 開始日時
-        * end : 終了日時
-        * description : 詳細
-        */
-        // こんな感じで予定の取得が出来る
-        $formatted_events[] = array(
-            'summary' => $item['summary'],
-            'startTime' => $item['start']['dateTime'],
-            'endTime' => $item['end']['dateTime'],
-            'description' => $item['description']
-        );
-    }
-    return $formatted_events;
-}
-
-function getEventsById($data, $Id) {
-    $filtered_data = [];
-    foreach ($data as $d) {
-        if (strpos($d['description'], $Id) !== false) {
-            $filtered_data[] = $d;
-        }
-    }
-    return $filtered_data;
-}
 ?>
