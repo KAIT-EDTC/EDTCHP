@@ -35,7 +35,7 @@ function getClient($isAdd) {
  * @param string $start 開始日時
  * @param string $end 終了日時
  */
-function addEvents($title, $desc, $start, $end) {
+function addEvents($title, $remark, $start, $end, $members) {
     global $calendarId;
 
     $client = getClient(true);
@@ -43,7 +43,7 @@ function addEvents($title, $desc, $start, $end) {
     $service = new \Google_Service_Calendar($client);
     $event = new \Google_Service_Calendar_Event(array(
         'summary' => $title,
-        'description' => $desc,
+        'description' => $remark,
         'start' => array(
             'dateTime' => ToRFC($start),
             'timeZone' => 'Asia/Tokyo',
@@ -51,6 +51,11 @@ function addEvents($title, $desc, $start, $end) {
         'end' => array(
             'dateTime' => ToRFC($end),
             'timeZone' => 'Asia/Tokyo',
+        ),
+        'extendedProperties' => array(
+            'private' => array(
+                'members' => $members,
+            ),
         ),
     ));
     $service->events->insert($calendarId, $event);
@@ -90,9 +95,10 @@ function getEvents($maxResults) {
         // こんな感じで予定の取得が出来る
         $formatted_events[] = array(
             'summary' => $item['summary'],
+            'remark' => $item['description'],
             'startTime' => $item['start']['dateTime'],
             'endTime' => $item['end']['dateTime'],
-            'description' => $item['description']
+            'members' => $item['extendedProperties']['private']['members'],
         );
     }
     return $formatted_events;
@@ -107,7 +113,7 @@ function getEvents($maxResults) {
 function getEventsById($data, $Id) {
     $filtered_data = [];
     foreach ($data as $d) {
-        if (strpos($d['description'], $Id) !== false) {
+        if (strpos($d['members'], $Id) !== false) {
             $filtered_data[] = $d;
         }
     }
