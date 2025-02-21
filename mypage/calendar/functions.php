@@ -35,7 +35,7 @@ function getClient($isAdd) {
  * @param string $start 開始日時
  * @param string $end 終了日時
  */
-function addEvents($title, $remark, $start, $end, $members) {
+function addEvents($title, $remark, $start, $end, $participants) {
     global $calendarId;
 
     $client = getClient(true);
@@ -54,7 +54,7 @@ function addEvents($title, $remark, $start, $end, $members) {
         ),
         'extendedProperties' => array(
             'private' => array(
-                'members' => $members,
+                'participants' => $participants,
             ),
         ),
     ));
@@ -98,7 +98,7 @@ function getEvents($maxResults) {
             'remark' => $item['description'],
             'startTime' => $item['start']['dateTime'],
             'endTime' => $item['end']['dateTime'],
-            'members' => $item['extendedProperties']['private']['members'],
+            'participants' => $item['extendedProperties']['private']['participants'],
         );
     }
     return $formatted_events;
@@ -113,7 +113,7 @@ function getEvents($maxResults) {
 function getEventsById($data, $Id) {
     $filtered_data = [];
     foreach ($data as $d) {
-        if (strpos($d['members'], $Id) !== false) {
+        if (strpos($d['participants'], $Id) !== false) {
             $filtered_data[] = $d;
         }
     }
