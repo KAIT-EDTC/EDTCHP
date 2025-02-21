@@ -80,37 +80,36 @@
             <?php if (!empty($yoteilist)): ?>
             <p><?php echo $username; ?>さんの予定</p>
             <table cellspacing="0" cellpadding="20" border="1">
-            <thead>
-                <tr>
-                    <th>イベント名</th> <!-- ヘッダー: ID -->
-                    <th>日付</th> <!-- ヘッダー: 名前 -->
-                    <th>メンバー</th> <!-- ヘッダー: 性別 -->
-                </tr>
-            </thead>
-            <tbody>
-            <?php echo $yoteilist; ?> <!-- PHPで生成したテーブル行を挿入 -->
-            </tbody>
-        </table>
-        <?php endif; ?>
+                <thead>
+                    <tr>
+                        <th>イベント名</th> <!-- ヘッダー: ID -->
+                        <th>日付</th> <!-- ヘッダー: 名前 -->
+                        <th>メンバー</th> <!-- ヘッダー: 性別 -->
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php echo $yoteilist; ?> <!-- PHPで生成したテーブル行を挿入 -->
+                </tbody>
+            </table>
+            <?php endif; ?>
         </div>
         <div class="form-link">
             <?php if (!empty($tableRows)): ?>
             <p style="font-size: 15px"><p><h2>現在公開されているフォーム一覧</h2>
-
             <table border="1" >
-            <thead>
-                <tr>
-                    <th class="linkid">ID</th> <!-- ヘッダー: ID -->
-                    <th class="linkname">リンク名</th> <!-- ヘッダー: 名前 -->
-                    <th class="link">リンク</th> <!-- ヘッダー: 性別 -->
-                </tr>
-            </thead>
-            <tbody>
-                <?php echo $tableRows; ?> <!-- PHPで生成したテーブル行を挿入 -->
-            </tbody>
-        </table>
-        <?php endif; ?>
-            </div>
+                <thead>
+                    <tr>
+                        <th class="linkid">ID</th> <!-- ヘッダー: ID -->
+                        <th class="linkname">リンク名</th> <!-- ヘッダー: 名前 -->
+                        <th class="link">リンク</th> <!-- ヘッダー: 性別 -->
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php echo $tableRows; ?> <!-- PHPで生成したテーブル行を挿入 -->
+                </tbody>
+            </table>
+            <?php endif; ?>
+        </div>
         <div class="houkokusyo">
             <!-- グーグルドライブのリンクを予定 -->
         </div>
