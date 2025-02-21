@@ -120,7 +120,7 @@ function getEventsById($data, $Id) {
  * @param string $date RFCにしたい文字列
  */
 function ToRFC($date) {
-    return (new DateTime($date))->format(DateTime::RFC3339);
+    return (new DateTime($date, new DateTimeZone('Asia/Tokyo')))->format(DateTime::RFC3339);
 }
 
 /**
