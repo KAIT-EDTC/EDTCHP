@@ -18,14 +18,17 @@ require_once __DIR__ . '/handlers/get_event.php';
         <label for="title">タイトル:</label>
         <input type="text" id="title" name="title" required><br><br>
         
-        <label for="description">参加する人:</label>
-        <textarea id="description" name="description" required></textarea><br><br>
+        <label for="remark">備考:</label>
+        <textarea id="remark" name="remark" required></textarea><br><br>
         
         <label for="start_time">開始日時:</label>
         <input type="datetime-local" id="start_time" name="start_time" required><br><br>
         
         <label for="end_time">終了日時:</label>
         <input type="datetime-local" id="end_time" name="end_time" required><br><br>
+
+        <label for="members">参加者:</label>
+        <input type="text" id="members" name="members" required><br><br>
         
         <input type="submit" value="追加">
     </form>
@@ -34,23 +37,26 @@ require_once __DIR__ . '/handlers/get_event.php';
         <!-- カンマ区切りで複数検索実装 -->
         <input type="text" id="studentId" name="studentId" require>
         <input type="submit" value="取得">
+        <?php session_start(); ?>
+        <?php if (!empty($_SESSION['eventTable'])): ?>
         <table cellspacing="0" cellpadding="20" border="1">
             <thead>
                 <tr>
                     <th>タイトル</th>
                     <th>開始日時</th>
                     <th>終了日時</th>
+                    <th>備考</th>
                     <th>参加者</th>
                 </tr>
             </thead>
             <tbody>
                 <?php
-                session_start();
                  if (!empty($_SESSION['eventTable'])) echo $_SESSION['eventTable'];
                 session_destroy();
                 ?>
             </tbody>
         </table>
+        <?php endif; ?>
     </form>
 </body>
 
