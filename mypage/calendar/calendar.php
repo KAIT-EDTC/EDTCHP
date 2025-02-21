@@ -27,14 +27,13 @@ require_once __DIR__ . '/handlers/get_event.php';
         <label for="end_time">終了日時:</label>
         <input type="datetime-local" id="end_time" name="end_time" required><br><br>
 
-        <label for="members">参加者:</label>
-        <input type="text" id="members" name="members" required><br><br>
+        <label for="participants">参加者:</label>
+        <input type="text" id="participants" name="participants" required><br><br>
         
         <input type="submit" value="追加">
     </form>
     <form action="./handlers/get_event.php" method="post">
         <label for="id">指定したいID</label>
-        <!-- カンマ区切りで複数検索実装 -->
         <input type="text" id="studentId" name="studentId" require>
         <input type="submit" value="取得">
         <?php session_start(); ?>
