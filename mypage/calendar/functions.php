@@ -1,5 +1,4 @@
 <?php
-use Google\Client;
 use Google\Service\Calendar as Google_Service_Calendar;
 use Google\Service\Calendar\Event as Google_Service_Calendar_Event;
 
@@ -15,14 +14,12 @@ $jsonPath = __DIR__.'/key/push-event-test-451408-0f871f466586.json';
 /**
  * google calendarのインスタンスを取得する
  * 
- * @param boolean $isAdd イベントを追加するか、イベントを取得するか
  * @return array google calendarの色んなデータ
  */
 function getClient($isAdd) {
     global $jsonPath;
     $client = new Google_Client();
-    if ($isAdd) $client->setScopes(\Google_Service_Calendar::CALENDAR_EVENTS);
-    else $client->setScopes(\Google_Service_Calendar::CALENDAR_READONLY);
+    $client->setScopes(Google_Service_Calendar::CALENDAR_EVENTS);
     $client->setAuthConfig($jsonPath);
     return $client;
 }
@@ -40,8 +37,8 @@ function addEvents($title, $remark, $start, $end, $participants) {
 
     $client = getClient(true);
 
-    $service = new \Google_Service_Calendar($client);
-    $event = new \Google_Service_Calendar_Event(array(
+    $service = new Google_Service_Calendar($client);
+    $event = new Google_Service_Calendar_Event(array(
         'summary' => $title,
         'description' => $remark,
         'start' => array(
@@ -83,14 +80,18 @@ function getEvents($maxResults) {
     $events = $results->getItems();
     foreach ($events as $item) {
         /*
-        * 基本的なキーワード
+        * 基本的なキー
         * created : 作成日
         * summary : イベント名
+        * description : 詳細
+        * extendedProperties : 自作のキーを格納できる
+            private : 当該のアカウントしか取得できない
+                participants : 自作のキー。参加者情報が入ってる
+            public : 全体に共有される
         * start : 開始日時
             startの中のdateTimeというキーにデータが入ってるため、例えば開始時間を取り出したいときは
             data['start']['dateTime']という風に取り出す(終了日時も同じ)
         * end : 終了日時
-        * description : 詳細
         */
         // こんな感じで予定の取得が出来る
         $formatted_events[] = array(
@@ -139,27 +140,4 @@ function RFC2Jap($rfc) {
     $date = new DateTime($rfc);
     return $date->format('m月d日H時i分');
 }
-
-// getClientしないやつ
-// function getJson($maxResults, $orderBy, $isSingleEvents, $timeMin) {
-//     global $calendarId, $api_key;
-
-//     // 取得時の詳細設定
-//     $optParams = array(
-//         'maxResults' => $maxResults,
-//         'orderBy' => $orderBy,
-//         'singleEvents' => $isSingleEvents,
-//         'timeMin' => date('c', strtotime($timeMin))
-//     );
-
-//     $queryParams = http_build_query($optParams);
-//     $API_URL = 'https://www.googleapis.com/calendar/v3/calendars/'.$calendarId.'/events?key='.$api_key;
-
-//     // 予定の取得クエリを合体
-//     $url = $API_URL.'&'.$queryParams;
-
-//     // urlからjsonを取得
-//     $results = file_get_contents($url);
-//     return  json_decode($results, true);
-// }
 ?>
