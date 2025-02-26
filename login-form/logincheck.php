@@ -25,7 +25,7 @@
 
         // fetchAllはDBに該当データがない場合は何も配列が返ってこないので0つまりfalseだから認証の有無が確認できる。
         if ($stmt->fetchAll(PDO::FETCH_ASSOC)) {
-            if ($id == admin) {
+            if ($id == 0) {
                 header('Location:https://kaitedtc.chew.jp/register-form/touroku.html'); //転送先
             } else{
                 $_SESSION['userId'] = $id;                                         // ユーザーIdはページ遷移後でも使いそうだからサーバー上で保存
