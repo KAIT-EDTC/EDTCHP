@@ -12,7 +12,7 @@ require_once __DIR__ . '/handlers/get_event.php';
 </head>
 <body>
     <h1>イベントカレンダー</h1>
-    <?php echo "<iframe src=\"{$_ENV['CALENDAR_URL']}\" style='border: 0;' height=800 width=800 frameborder='0' scrolling='no'></iframe>"; ?>
+    <?php echo "<iframe src='{$_ENV['CALENDAR_URL']}' style='border:solid 1px #777' width='1500' height='600' frameborder='0' scrolling='no'></iframe>"; ?>
     
     <form action="./handlers/add_event.php" method="post">
         <label for="title">タイトル:</label>
@@ -50,7 +50,7 @@ require_once __DIR__ . '/handlers/get_event.php';
             </thead>
             <tbody>
                 <?php
-                 if (!empty($_SESSION['eventTable'])) echo $_SESSION['eventTable'];
+                 echo $_SESSION['eventTable'];
                 session_destroy();
                 ?>
             </tbody>
