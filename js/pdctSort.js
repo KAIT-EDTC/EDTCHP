@@ -3,16 +3,16 @@ const arngmnt = document.getElementById("arrangement");
 const img_path = "./../products/img/";
 
 // ここに商品を追加すればOK
-// idは今のところ使用予定なし
+// tbd = to be decided
 const pdct_list = [
-    { id:1, name:"ブザー", src:"buzzer.jpg", file:"product-buzzer.html",  price:1000, maker:"足立遥大" },
-    { id:2, name:"ArtoRo(アトロ)", src:"ArtoRo.png", file:"product-ArtoRo.html", price:"tbd", maker:"番倉もえ" },
-    { id:3, name:"お絵描きロボット", src:"drawRobot.jpg", file:"product-DrawRobot.html",  price:"tbd", maker:"渡邉芯" },
-    { id:4, name:"LogicLineTracer(ロジックライントレーサー)", src:"LogicLineTracer.jpg", file:"product-LogicLineTracerV2.html", price:"tbd", maker:"須藤陸" },
-    { id:5, name:"組み換えロボット", src:"KumikaeRobot.jpg", file:"product-kumikaeRobot.html", price:"tbd", maker:"二年" },
-    { id:6, name:"ぶるぶるくん", src:"BuruBuruKun.jpg", file:"product-buruburu.html", price:500, maker:"鈴木一平" },
-    { id:7, name:"相撲ロボット", src:"SumoRobot.jpg", file:"product-SumoRobot.html", price:"tbd", maker:"上條慶" },
-    { id:8, name:"ライントレース迷路ロボット", src:"MazeLineTracer.jpg", file:"product-MazeLineTracer.html", price:"tbd", maker:"二年" }
+    { name:"ブザー", src:"buzzer.jpg", file:"product-buzzer.html",  price:1000, maker:"足立遥大" },
+    { name:"ArtoRo(アトロ)", src:"ArtoRo.png", file:"product-ArtoRo.html", price:"tbd", maker:"番倉もえ" },
+    // { name:"お絵描きロボット", src:"drawRobot.jpg", file:"product-DrawRobot.html",  price:"tbd", maker:"渡邉芯" },
+    { name:"LogicLineTracer(ロジックライントレーサー)", src:"NullPic.png", file:"product-LogicLineTracerV2.html", price:"tbd", maker:"須藤陸" },
+    { name:"組み換えロボット", src:"NullPic.png", file:"product-kumikaeRobot.html", price:"tbd", maker:"二年" },
+    { name:"ぶるぶるくん", src:"NullPic.png", file:"product-buruburu.html", price:500, maker:"鈴木一平" },
+    { name:"相撲ロボット", src:"SumoRobot.jpg", file:"product-SumoRobot.html", price:"tbd", maker:"上條慶" },
+    { name:"ライントレース迷路ロボット", src:"MazeLineTracer.jpg", file:"product-MazeLineTracer.html", price:"tbd", maker:"二年" }
 ];
 
 // ul内に要素を追加する関数
@@ -21,23 +21,25 @@ const pdctLoad = () => {
     const ulElement = document.getElementById("ulsort");
 
     pdct_list.forEach((pdct) => {
-        const boxElement = document.createElement("li");
-        boxElement.className = "pdct-box";
-        boxElement.setAttribute("id", pdct.price);
-
         const AnkerElement = document.createElement("a");
         AnkerElement.className = "pdct-anker";
-        // AnkerElement.href = "./../products/page/" + pdct.file;
-        AnkerElement.href = "./../products/page/comingsoon.html";
+        AnkerElement.href = "./../products/page/" + pdct.file;
+        // AnkerElement.href = "./../products/page/comingsoon.html";
 
+        const boxElement = document.createElement("div");
+        boxElement.className = "pdct-box";
+
+        const listElement = document.createElement("li");
+        listElement.setAttribute("id", pdct.price);
+        
         const titleElement = document.createElement("p");
         titleElement.className = "pdct-name";
         titleElement.innerText = pdct.name;
 
         const imgElement = document.createElement("img")
         imgElement.className = "pdct-img";
-        // imgElement.src = img_path + pdct.src;
-        imgElement.alt = "商品画像はまだありません。";
+        imgElement.src = img_path + pdct.src;
+        // imgElement.alt = "商品画像はまだありません。";
 
         const boxElementChild = document.createElement("div")
         boxElementChild.className = "pdct-desc";
@@ -60,46 +62,57 @@ const pdctLoad = () => {
         boxElementChild.appendChild(paraElement2);
 
         /*
-            <li id="pdct-?" class="pdct-box">
-                <a href="製品の詳細ページ"><p class="pdct-name"></p></a>
-                <img src="" class="pdct-img">
-                <div class="p\dct-desc">
-                    <p class="pdct-price"></p>
-                    <p class="pdct-maker"></p>
-                </div>
+            <li id="pdct-?">
+                <a href="製品の詳細ページ">
+                    <div class="pdct-box">
+                        <p class="pdct-name"></p>
+                        <img src="" class="pdct-img">
+                        <div class="p\dct-desc">
+                            <p class="pdct-price"></p>
+                            <p class="pdct-maker"></p>
+                        </div>
+                    </div>
+                </a>
             </li>
          */
-        
-
-        AnkerElement.appendChild(titleElement);
-        AnkerElement.appendChild(imgElement);
-        AnkerElement.appendChild(boxElementChild);
-        boxElement.appendChild(AnkerElement);
+        boxElement.appendChild(titleElement);
+        boxElement.appendChild(imgElement);
+        boxElement.appendChild(boxElementChild);
+        AnkerElement.appendChild(boxElement);
+        listElement.appendChild(AnkerElement);
 
         /* 
             <ul class="pdct-area">
-                <li id="pdct-?" class="pdct-box">
-                    <p>タイトル</p>
-                    <img src="" class="pdct-img">
-                    <div class="pdct-desc">
-                        <p class="pdct-price"></p>
-                        <p class="pdct-maker"></p>
-                    </div>
+                <li id="pdct-?">
+                    <a href="製品の詳細ページ">
+                        <div class="pdct-box">
+                            <p class="pdct-name"></p>
+                            <img src="" class="pdct-img">
+                            <div class="p\dct-desc">
+                                <p class="pdct-price"></p>
+                                <p class="pdct-maker"></p>
+                            </div>
+                        </div>
+                    </a>
                 </li>
             </ul>
         */
-        ulElement.appendChild(boxElement);
+        ulElement.appendChild(listElement);
         
         /*
             <main>
                 <ul class="pdct-area">
-                    <li id="pdct-?" class="pdct-box">
-                        <p>タイトル</p>
-                        <img src="" class="pdct-img">
-                        <div class="pdct-desc">
-                            <p class="pdct-price"></p>
-                            <p class="pdct-maker"></p>
-                        </div>
+                    <li id="pdct-?">
+                        <a href="製品の詳細ページ">
+                            <div class="pdct-box">
+                                <p class="pdct-name"></p>
+                                <img src="" class="pdct-img">
+                                <div class="p\dct-desc">
+                                    <p class="pdct-price"></p>
+                                    <p class="pdct-maker"></p>
+                                </div>
+                            </div>
+                        </a>
                     </li>
                 </ul>
             </main>
