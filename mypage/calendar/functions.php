@@ -16,7 +16,7 @@ $jsonPath = __DIR__.'/key/push-event-test-451408-0f871f466586.json';
  * 
  * @return array google calendarの色んなデータ
  */
-function getClient($isAdd) {
+function getClient() {
     global $jsonPath;
     $client = new Google_Client();
     $client->setScopes(Google_Service_Calendar::CALENDAR_EVENTS);
@@ -35,7 +35,7 @@ function getClient($isAdd) {
 function addEvents($title, $remark, $start, $end, $participants) {
     global $calendarId;
 
-    $client = getClient(true);
+    $client = getClient();
 
     $service = new Google_Service_Calendar($client);
     $event = new Google_Service_Calendar_Event(array(
@@ -74,7 +74,7 @@ function getEvents($maxResults) {
         'timeMin' => date('c', strtotime('2025-01-01'))
     );
     
-    $client = getClient(false);
+    $client = getClient();
     $service = new Google_Service_Calendar($client);
     $results = $service->events->listEvents($calendarId, $optParams);
     $events = $results->getItems();
@@ -93,7 +93,7 @@ function getEvents($maxResults) {
             data['start']['dateTime']という風に取り出す(終了日時も同じ)
         * end : 終了日時
         */
-        // こんな感じで予定の取得が出来る
+        // データを扱いやすいようにフォーマット
         $formatted_events[] = array(
             'summary' => $item['summary'],
             'remark' => $item['description'],
@@ -122,6 +122,7 @@ function getEventsById($data, $Id) {
 }
 
 /**
+ * 文字列をRFC3339形式に変換する
  * 文字列 -> yyyy-mm-ddThh:mm:ss+時差
  * 
  * @param string $date RFCにしたい文字列
@@ -131,7 +132,7 @@ function ToRFC($date) {
 }
 
 /**
- * RFC形式から日本の年月月日に変換する  
+ * RFC3339形式から日本の年月月日に変換する  
  * yyyy-mm-ddThh:mm:ss+時差 -> mm月dd日hh時mm分
  * 
  * @param string $rfc 変換したいRFC形式の文字列
