@@ -6,13 +6,13 @@ const img_path = "./../products/img/";
 // idは今のところ使用予定なし
 const pdct_list = [
     { id:1, name:"ブザー", src:"buzzer.jpg", file:"product-buzzer.html",  price:1000, maker:"足立遥大" },
-    { id:2, name:"ArtoRo", src:"ArtoRo.png", file:"product-ArtoRo.html", price:"未定", maker:"番倉もえ" },
-    { id:3, name:"お絵描きロボット", src:"drawRobot.jpg", file:"product-DrawRobot.html",  price:"未定", maker:"渡邉芯" },
-    { id:4, name:"LogicLineTracer", src:"LogicLineTracer.jpg", file:"product-LogicLineTracerV2.html", price:"未定", maker:"須藤陸" },
-    { id:5, name:"組み換えロボット", src:"KumikaeRobot.jpg", file:"product-kumikaeRobot.html", price:"未定", maker:"二年" },
+    { id:2, name:"ArtoRo(アトロ)", src:"ArtoRo.png", file:"product-ArtoRo.html", price:"tbd", maker:"番倉もえ" },
+    { id:3, name:"お絵描きロボット", src:"drawRobot.jpg", file:"product-DrawRobot.html",  price:"tbd", maker:"渡邉芯" },
+    { id:4, name:"LogicLineTracer(ロジックライントレーサー)", src:"LogicLineTracer.jpg", file:"product-LogicLineTracerV2.html", price:"tbd", maker:"須藤陸" },
+    { id:5, name:"組み換えロボット", src:"KumikaeRobot.jpg", file:"product-kumikaeRobot.html", price:"tbd", maker:"二年" },
     { id:6, name:"ぶるぶるくん", src:"BuruBuruKun.jpg", file:"product-buruburu.html", price:500, maker:"鈴木一平" },
-    { id:7, name:"相撲ロボット", src:"SumoRobot.jpg", file:"product-SumoRobot.html", price:"未定", maker:"上條慶" },
-    { id:8, name:"ライントレース迷路ロボット", src:"MazeLineTracer.jpg", file:"product-MazeLineTracer.html", price:"未定", maker:"二年" }
+    { id:7, name:"相撲ロボット", src:"SumoRobot.jpg", file:"product-SumoRobot.html", price:"tbd", maker:"上條慶" },
+    { id:8, name:"ライントレース迷路ロボット", src:"MazeLineTracer.jpg", file:"product-MazeLineTracer.html", price:"tbd", maker:"二年" }
 ];
 
 // ul内に要素を追加する関数
@@ -116,11 +116,15 @@ arngmnt.addEventListener("change", (item) => {
     const ul = document.getElementById("ulsort");
     // li内の要素をすべて取得する
     const liArray = Array.from(ul.getElementsByTagName("li"));
-    if (val == "acse") {
-        liArray.sort((a, b) => a.id - b.id); // a-b>0 -> [b,a] , a-b<0 -> [a,b]
-    } else if (val == "decs") {
-        liArray.sort((a, b) => b.id - a.id); // b-a>0 -> [b,a] , b-a<0 -> [a,b]
-    }
+    liArray.sort((a, b) => {
+        aId = parseInt(a.id);
+        bId = parseInt(b.id);
+
+        if (isNaN(aId) && isNaN(bId)) return 0;
+        else if (isNaN(aId)) return 1;
+        else if (isNaN(bId)) return -1;
+        else return val == 'asce' ? aId - bId : bId - aId;
+    });
     // ulの中の要素を空にする
     ul.innerHtml = "";
     // ソートしたliをulに追加
@@ -128,4 +132,4 @@ arngmnt.addEventListener("change", (item) => {
 });
 
 // DOMが読み込まれてからpdctLoadを呼び出す
-document.addEventListener("DOMContentLoaded", pdctLoad);
+document.addEventListener("DOMContentLoaded", pdctLoad());
