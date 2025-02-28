@@ -289,6 +289,7 @@ footer .syasinn{
 /*団体訓の設定*/
 .about{
     background-color: rgb(233, 233, 233);
+    margin-bottom: 15px;
 }
 .about h1{
     text-align: center;
@@ -299,40 +300,47 @@ footer .syasinn{
 }
 .about .fmozi{
     font-size: 60px;
-    font-weight: bold;
+    font-weight: bolder;
 }
 .about .EDTCs{
-    padding-left: 30px;
+    padding-left: 3%;
     font-size: 40px;
     display: block;
 }
-.about .manabu{
-    font-size: 40px;
-    font-weight: bold;
-    padding: 30px;
-    text-align: center;
-}
-.about .manabu span {
-    white-space: nowrap;
-}
 .about .manabu1{
     font-size: 20px;
-    padding: 30px;
-    text-align: center;
+    padding: 3%;
+    text-align: left;
 }
 .about .EDTCcode{
-    white-space: nowrap;
     font-size: 20px;
-    padding-left: 30px;
+    padding-left: 3%;
     font-weight: bold;
 }
-.about .EDTCcodepc{
-    white-space: nowrap;
+.EDTCcodepc{
     font-size: 20px;
-    padding-left: 30px;
+    padding-left: 3%;
+    display: block;
+    font-weight: 549;
 }
-.about .EDTCcodepc .codemain{
-    font-weight: bold;
+.EDTC-movie{
+    display: flex;
+        flex-direction: row-reverse;
+}
+.movie-str{
+    flex: 1;
+    margin-top: 2%;
+}
+.EDTCmovie{
+    width: 50%; 
+    height:"auto";
+    margin: 2% 0 0 3%;
+    flex: 1;
+}
+.movietitle{
+    font-size: 25px;
+    margin-bottom: 20px;
+    text-align: center;
 }
 /*====================================================================================
 ======================================================================================
@@ -358,10 +366,9 @@ footer .syasinn{
 }
 .itiran{
     text-align: right;
-    margin-right: 10%;
     font-size: 20px;
     font-weight: 300;
-    margin: 10px;
+    margin: 10px 4% 0px 0;
 }
 /*====================================================================================
 ======================================================================================
@@ -395,4 +402,47 @@ footer .syasinn{
     .ikutokusai img{
         width: 50%;
     }
+}
+.sns_button {
+    float: left;
+    box-shadow: inset 0 0 0 2px #fff;
+    border-radius: 100%;
+    -moz-transition: all 280ms ease;
+    -o-transition: all 280ms ease;
+    -webkit-transition: all 280ms ease;
+    transition: all 280ms ease;
+}
+
+.sns_button a {
+    display: table-cell;
+    width: 44px;
+    height: 44px;
+    color: #fff;
+    text-align: center;
+    vertical-align: middle;
+    -moz-transition: all 280ms ease;
+    -o-transition: all 280ms ease;
+    -webkit-transition: all 280ms ease;
+    transition: all 280ms ease;
+}
+
+.sns_button i {
+    font-size: 20px;
+    vertical-align: middle;
+}
+
+.sns_button:hover {
+    box-shadow: inset 0 0 0 22px #fff;
+}
+
+.sns_button+.sns_button {
+    margin: 0 0 0 12px;
+}
+
+.twitter:hover a {
+    color: #1B95E0;
+}
+
+.instagram:hover a {
+    color: #2b5c84;
 }
