@@ -81,7 +81,7 @@ const articleLoad = () => {
 };
 
 const articleSort = () => {
-    const ulElement = document.getElementsByClassName("blog-list")[0];
+    const ulElement = document.getElementsByClassName("blog-container")[0];
 
     const liArray = Array.from(ulElement.getElementsByTagName("li"));
     liArray.sort((a, b) => {
