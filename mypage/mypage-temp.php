@@ -1,7 +1,5 @@
 <?php
-    define('DSN', 'mysql:host=localhost;dbname=kaitedtc_mamber-db');
-    define('DB_USERNAME', 'test1');
-    define('DB_PASS', 'test');
+    require_once $_SERVER['DOCUMENT_ROOT'] . '/info.php';
     session_start();
     $id = $_SESSION['userId'];
     $yoteilist = '';
@@ -9,7 +7,7 @@
 
     // $idがnullかどうか(null = ログインしないで不正にurlにアクセスしてる)
     if (! isset($id)) {
-        header('Location: https://kaitedtc.com/login-from/login.html');
+        header('Location: ' . LOGIN_FORM);
         exit;
     }
 

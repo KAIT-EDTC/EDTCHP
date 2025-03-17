@@ -1,7 +1,5 @@
 <?php
-define('DSN', 'mysql:host=mysql3105.db.sakura.ne.jp;dbname=kaitedtc_mamber-db');
-define('DB_USERNAME', 'kaitedtc_mamber-db');
-define('DB_PASS', 'GU8-2bPQKYWP9m-');
+require_once $_SERVER['DOCUMENT_ROOT'] . '/info.php';
 $id = htmlspecialchars($_POST['ID'], ENT_QUOTES, 'UTF-8');
 $pw = htmlspecialchars($_POST['pw'], ENT_QUOTES, 'UTF-8');
 $link = htmlspecialchars($_POST['link'], ENT_QUOTES, 'UTF-8');
