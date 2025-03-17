@@ -50,6 +50,12 @@ body {
     overflow: hidden;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     margin: 2%;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.contents:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
 
 .blog-box {
