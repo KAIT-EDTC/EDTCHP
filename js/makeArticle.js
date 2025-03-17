@@ -43,7 +43,7 @@ const articleLoad = () => {
 
     content.forEach((article) => {
         const boxElement = document.createElement("li");
-        boxElement.className = "contents";
+        boxElement.className = "blog-contents";
         boxElement.setAttribute("id", article.date);
 
         const AnkerElement = document.createElement("a");
@@ -91,17 +91,17 @@ const articleLoad = () => {
         blogArea.appendChild(ulElement);
         /**
          * <ul class="blog-list">
-         *   <li class="blog-box">
+         *   <li class="blog-contents">
          *    <a>
-         *     <figure>
+         *     <div class="blog-box">
          *      <img class="blog-img">
-         *      <figcaption class="blog-img-caption">
+         *      <div class="blog-details">
          *          <p class="blog-date"></p>
          *          <h2 class="blog-subject">/h2>
          *          <p class="blog-caption"></p>
          *          <p class="blog-author"></p>
-         *      </figcaption>
-         *     </figure>
+         *      </div>
+         *     </div>
          *    </a>
          *   </li>
          * </ul>

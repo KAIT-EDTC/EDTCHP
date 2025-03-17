@@ -43,17 +43,15 @@ body {
     }
 }
 
-.contents {
-    text-align: center;
+.blog-contents {
     border-radius: 3%;
     border-top: none;
     overflow: hidden;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    margin: 2%;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.contents:hover {
+.blog-contents:hover {
     transform: translateY(-5px);
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
@@ -74,6 +72,7 @@ body {
 }
 
 .blog-details {
+    text-align: center;
     padding: 2%;
 }
 
