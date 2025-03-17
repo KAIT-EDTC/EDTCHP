@@ -21,7 +21,7 @@ const pdct_list = [
     },
     {
         name: "LogicLineTracer<br>(ロジックライントレーサー)",
-        src: "NullPic.png",
+        src: "LogicLineTracer.jpg",
         file: "product-LogicLineTracerV2.html",
         price: "tbd",
         maker: "須藤陸"
@@ -68,7 +68,6 @@ const pdctLoad = () => {
         listElement.setAttribute("id", pdct.price);
 
         const AnkerElement = document.createElement("a");
-        AnkerElement.className = "pdct-anker";
         AnkerElement.href = "./../products/page/" + pdct.file;
         // AnkerElement.href = "./../products/page/comingsoon.html";
 
@@ -79,28 +78,28 @@ const pdctLoad = () => {
         imgElement.className = "pdct-img";
         imgElement.src = img_path + pdct.src;
         // imgElement.alt = "商品画像はまだありません。";
+        
+        const boxChildElement = document.createElement("div")
+        boxChildElement.className = "pdct-details";
 
         const titleElement = document.createElement("h2");
         titleElement.className = "pdct-name";
         titleElement.innerHTML = pdct.name;
 
-        const boxElementChild = document.createElement("div")
-        boxElementChild.className = "pdct-desc";
-
         const paraElement = document.createElement("p");
         paraElement.className = "pdct-price";
-        paraElement.innerText = (Number.isInteger(pdct.price)) ? `値段：${pdct.price}円` : "値段：未定";
+        paraElement.innerText = (Number.isInteger(pdct.price)) ? `${pdct.price}円` : "未定";
 
         const paraElement2 = document.createElement("p");
         paraElement2.className = "pdct-maker";
-        paraElement2.innerText = `製作者：${pdct.maker}`;
+        paraElement2.innerText = pdct.maker;
 
-        boxElementChild.appendChild(paraElement);
-        boxElementChild.appendChild(paraElement2);
+        boxChildElement.appendChild(titleElement);
+        boxChildElement.appendChild(paraElement);
+        boxChildElement.appendChild(paraElement2);
 
         boxElement.appendChild(imgElement);
-        boxElement.appendChild(titleElement);
-        boxElement.appendChild(boxElementChild);
+        boxElement.appendChild(boxChildElement);
         AnkerElement.appendChild(boxElement);
         listElement.appendChild(AnkerElement);
 
@@ -109,18 +108,18 @@ const pdctLoad = () => {
         /**
          * <main>
          *  <ul class="pdct-list">
-         *      <li id="値段が入る" class="pdct-contents">
-         *          <a class="pdct-anker" href="製品の詳細ページ">
-         *              <div class="pdct-box">
-         *                  <img class="pdct-img">
-         *                  <h2 class-"pdct-name"></h2>
-         *                  <div class="pdct-desc">
-         *                      <p class="pdct-price"></p>
-         *                      <p class="pdct-maker"></p>
-         *                  </div>
-         *              </div>
-         *          </a>
-         *      </li>
+         *    <li id="値段が入る" class="pdct-contents">
+         *      <a class="pdct-anker" href="製品の詳細ページ">
+         *        <div class="pdct-box">
+         *        <img class="pdct-img">
+         *          <div class="pdct-desc">
+         *            <h2 class-"pdct-name"></h2>
+         *            <p class="pdct-price"></p>
+         *            <p class="pdct-maker"></p>
+         *          </div>
+         *        </div>
+         *      </a>
+         *    </li>
          *  </ul>
          * </main>
          */
