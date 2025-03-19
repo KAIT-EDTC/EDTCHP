@@ -3,10 +3,9 @@ require_once __DIR__ . '/../functions.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/info.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $conn = new PDO(DSN, DB_USERNAME, DB_PASS);
     session_start();
     $sId = htmlspecialchars($_POST['studentId'], ENT_QUOTES, 'UTF-8');
-    $data = getEventsById(getEvents(5), $sId);
+    $data = getEventsById(getEvents(50), $sId);
     foreach ($data as $d) {
         $name = getMemberName($d['participants']);
         $table .= "<tr>
@@ -23,7 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 
 function getMemberName($part) {
-    global $conn;
+    $conn = new PDO(DSN, DB_USERNAME, DB_PASS);
     $name = '';
     // 参加者欄ではカンマ区切りで入力されることを想定。
     $arr_member = explode(',', $part);

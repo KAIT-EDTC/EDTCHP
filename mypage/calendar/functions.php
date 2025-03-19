@@ -11,6 +11,16 @@ $calendarId = $_ENV['CALENDAR_ID'];
 $api_key = $_ENV['API_KEY'];
 $jsonPath = __DIR__.'/key/push-event-test-451408-0f871f466586.json';
 
+$days = [
+    'Sun' => '日曜日',
+    'Mon' => '月曜日',
+    'Tue' => '火曜日',
+    'Wed' => '水曜日',
+    'Thu' => '木曜日',
+    'Fri' => '金曜日',
+    'Sat' => '土曜日'
+];
+
 /**
  * google calendarのインスタンスを取得する
  * 
@@ -71,7 +81,7 @@ function getEvents($maxResults) {
         'maxResults' => $maxResults,
         'orderBy' => 'startTime',
         'singleEvents' => true,
-        'timeMin' => date('c', strtotime('2025-01-01'))
+        'timeMin' => date('c', strtotime('2025-01-01')) // TODO: ロードされた時の日時から取得するようにする
     );
     
     $client = getClient();
@@ -133,12 +143,16 @@ function ToRFC($date) {
 
 /**
  * RFC3339形式から日本の年月月日に変換する  
- * yyyy-mm-ddThh:mm:ss+時差 -> mm月dd日hh時mm分
+ * yyyy-mm-ddThh:mm:ss+時差 -> mm月dd日hh時mm分(D曜日)
  * 
  * @param string $rfc 変換したいRFC形式の文字列
  */
 function RFC2Jap($rfc) {
+    global $days;
     $date = new DateTime($rfc);
-    return $date->format('m月d日H時i分');
+    $day = '(' . $days[$date->format('D')] . ')';
+    return $date->format('m月d日H時i分') . $day;
+    // 途中にはさんでもOK
+    // return $date->format('m月d日' . $day . 'H時i分');
 }
 ?>
