@@ -2,6 +2,7 @@
     require_once $_SERVER['DOCUMENT_ROOT'] . '/info.php';
     require_once $_SERVER['DOCUMENT_ROOT'] . '/mypage/calendar/functions.php';
     require_once $_SERVER['DOCUMENT_ROOT'] . '/mypage/calendar/handlers/get_event.php';
+    require_once $_SERVER['DOCUMENT_ROOT'] . '/mypage/calendar/google-calendar-sync.php';
     session_start();
     $id = $_SESSION['userId'];
     $yoteilist = '';
@@ -33,7 +34,7 @@
     if ($user = $user->fetch(PDO::FETCH_ASSOC)) {
         $username = htmlspecialchars($user['name'], ENT_QUOTES, 'UTF-8');
     }
-
+    
     // フォーム情報取得
     $form = $form->fetchAll(PDO::FETCH_ASSOC);
     foreach ($form as $f) {
@@ -44,20 +45,26 @@
         <td><a href='$formurl' target='_blank' rel='noopener noreferrer'>{$formurl}</a></td>
         </tr>";
     }
-
+    
     // 予定取得
     // $schedules = $schedules->fetchAll(PDO::FETCH_ASSOC);
     // foreach ($schedules as $schedule) {
-    //     $yoteiname = htmlspecialchars($schedule['name'], ENT_QUOTES, 'UTF-8');
-    //     $yoteidate = htmlspecialchars($schedule['date'], ENT_QUOTES, 'UTF-8');
-    //     $yoteimember = htmlspecialchars($schedule['member'], ENT_QUOTES, 'UTF-8');
-    //     $yoteilist .= "<tr>
-    //                     <td>{$yoteiname}</td>
-    //                     <td>{$yoteidate}</td>
-    //                     <td>{$yoteimember}</td>
-    //                 </tr>";
-    // }
-
+        //     $yoteiname = htmlspecialchars($schedule['name'], ENT_QUOTES, 'UTF-8');
+        //     $yoteidate = htmlspecialchars($schedule['date'], ENT_QUOTES, 'UTF-8');
+        //     $yoteimember = htmlspecialchars($schedule['member'], ENT_QUOTES, 'UTF-8');
+        //     $yoteilist .= "<tr>
+        //                     <td>{$yoteiname}</td>
+        //                     <td>{$yoteidate}</td>
+        //                     <td>{$yoteimember}</td>
+        //                 </tr>";
+        // }
+        
+    // GoogleCalendarSyncクラスのインスタンス化
+    $calendarSync = new GoogleCalendarSync($conn);
+    
+    // DBからGoogle Calendarへの同期を実行
+    $calendarSync->performBidirectionalSync();
+    
     // idに該当するイベントを20件取得(この取得する個数などは仕様変更予定)
     $data = getEventsById(getEvents(20), $id);
     // 取得したデータからテーブルに表示するものを抽出

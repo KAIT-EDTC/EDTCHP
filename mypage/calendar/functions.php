@@ -7,9 +7,9 @@ require_once __DIR__ . '/vendor/google/apiclient-services/autoload.php';
 $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
 $dotenv->load();
 // envファイルで隠しとく
-$calendarId = $_ENV['CALENDAR_ID'];
-$api_key = $_ENV['API_KEY'];
-$jsonPath = __DIR__.'/key/push-event-test-451408-0f871f466586.json';
+define('API_KEY', $_ENV['API_KEY']);
+define('CALENDAR_ID', $_ENV['CALENDAR_ID']);
+define('JSON_PATH', __DIR__.'/key/push-event-test-451408-0f871f466586.json');
 
 $days = [
     'Sun' => '日曜日',
@@ -27,10 +27,9 @@ $days = [
  * @return array google calendarの色んなデータ
  */
 function getClient() {
-    global $jsonPath;
     $client = new Google_Client();
     $client->setScopes(Google_Service_Calendar::CALENDAR_EVENTS);
-    $client->setAuthConfig($jsonPath);
+    $client->setAuthConfig(JSON_PATH);
     return $client;
 }
 
@@ -43,8 +42,6 @@ function getClient() {
  * @param string $end 終了日時
  */
 function addEvents($title, $remark, $start, $end, $participants) {
-    global $calendarId;
-
     $client = getClient();
 
     $service = new Google_Service_Calendar($client);
@@ -65,7 +62,7 @@ function addEvents($title, $remark, $start, $end, $participants) {
             ),
         ),
     ));
-    $service->events->insert($calendarId, $event);
+    $service->events->insert(CALENDAR_ID, $event);
 }
 
 /**
@@ -75,7 +72,6 @@ function addEvents($title, $remark, $start, $end, $participants) {
  * @return array フォーマットされたイベントデータが返される
  */
 function getEvents($maxResults) { 
-    global $calendarId;
     $events = [];
     $optParams = array(
         'maxResults' => $maxResults,
@@ -86,7 +82,7 @@ function getEvents($maxResults) {
     
     $client = getClient();
     $service = new Google_Service_Calendar($client);
-    $results = $service->events->listEvents($calendarId, $optParams);
+    $results = $service->events->listEvents(CALENDAR_ID, $optParams);
     $events = $results->getItems();
     foreach ($events as $item) {
         /*
