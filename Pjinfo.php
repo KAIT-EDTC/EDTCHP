@@ -21,7 +21,7 @@ if ($env == "local") {
     define('CALENDAR_TOP', 'https://kaitedtc.chew.jp/mypage/calendar/calendar.php');
 }
 
-// このファイルをrequireすれば使える->require_once "function.php";
+// このファイルをrequireすれば使える->require_once "Pjinfo.php";
 // Dev Toolのコンソールに表示
 function DebugConsole($str) {
     echo "<script>";
