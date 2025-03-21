@@ -1,5 +1,4 @@
 <?php
-// 必要なライブラリをインポート
 require_once 'functions.php';
 use Google\Service\Calendar as Google_Service_Calendar;
 use Google\Service\Calendar\EventDateTime as Google_Service_Calendar_EventDateTime;
@@ -84,12 +83,12 @@ class GoogleCalendarSync {
 
     // 更新日時による比較で変更があるイベントを抽出
     public function compareEvents($dbEvents, $calendarEvents) {
-        $updates = []; // DB側の更新があったイベント
+        $DBUpdates = []; // DB側の更新があったイベント
         $calendarUpdates = []; // カレンダー側の更新があったイベント
         $missingInCalendar = []; // DBにはあるがカレンダーにはないイベント
         $missingInDb = []; // カレンダーにはあるがDBにないイベント
 
-        // DBイベントをキーとした配列を作成し、
+        // calendar_event_idをキーとする連想配列を作成
         $dbEventsById = [];
         foreach ($dbEvents as $dbEvent) {
             if (!empty($dbEvent['calendar_event_id'])) {
@@ -100,48 +99,55 @@ class GoogleCalendarSync {
             }
         }
 
-        // TODO: ネストがきもいので最適化をする
+        // DBにはあるがカレンダーにはないイベント
+        $calendarEventIds = array_column($calendarEvents, 'id'); // カレンダーイベントのID一覧を取得
+        foreach ($dbEventsById as $dbEvent) {
+        if (!in_array($dbEvent['calendar_event_id'], $calendarEventIds)) {
+                $missingInCalendar[] = $dbEvent; //削除されたイベントを追加
+            }
+        }
+
         foreach ($calendarEvents as $calendarEvent) {
             $calendarEventId = $calendarEvent['id'];
 
-            if (isset($dbEventsById[$calendarEventId])) {
-                $dbEvent = $dbEventsById[$calendarEventId];
-                // カレンダーイベントIDがある場合、DBに存在するか確認
-
-                // DB側とカレンダー側の更新日時を比較
-                $dbUpdated = new DateTime($dbEvent['updated_at']);
-                $calUpdated = new DateTime($calendarEvent['updated_at']);
-
-                // 内容が異なる場合
-                if ($dbEvent['title'] != $calendarEvent['title'] ||
-                    $dbEvent['description'] != $calendarEvent['description'] ||
-                    $dbEvent['start_time'] != $calendarEvent['start_time'] ||
-                    $dbEvent['end_time'] != $calendarEvent['end_time'] ||
-                    $dbEvent['participants'] != $calendarEvent['participants']) {
-
-                    // DB側の更新が新しい場合のみ更新対象とする
-                    if ($dbUpdated > $calUpdated) {
-                        $updates[] = [
-                            'db_event' => $dbEvent,
-                            'calendar_event' => $calendarEvent,
-                        ];
-                    } else {
-                        // カレンダー側の更新が新しい場合は、別のリストに追加
-                        // （後でカレンダー→DBの同期で使用）
-                        $calendarUpdates[] = [
-                            'db_event' => $dbEvent,
-                            'calendar_event' => $calendarEvent,
-                        ];
-                    }
-                }
-            } else {
-                // DBに存在しない場合
+            // DBにカレンダーのイベントが存在しない場合
+            if (empty($dbEventsById[$calendarEventId])) {
                 $missingInDb[] = $calendarEvent;
+                continue;
+            }
+
+            // DBにカレンダーのイベントが存在する
+            $dbEvent = $dbEventsById[$calendarEventId];
+            
+            // 内容が異なる場合
+            $contentChanged = $dbEvent['title'] !== $calendarEvent['title'] ||
+                              $dbEvent['description'] !== $calendarEvent['description'] ||
+                              ToRFC($dbEvent['start_time']) !== ToRFC($calendarEvent['start_time']) ||
+                              ToRFC($dbEvent['end_time']) !== ToRFC($calendarEvent['end_time']) ||
+                              $dbEvent['participants'] !== $calendarEvent['participants'];
+            
+            if (!$contentChanged) continue;
+
+            // DB側とカレンダー側の更新日時を比較
+            $dbUpdated = new DateTime($dbEvent['updated_at'], new DateTimeZone('Asia/Tokyo')); // DBはタイムゾーンを指定できないためここで指定
+            $calUpdated = new DateTime($calendarEvent['updated_at']);
+
+            // 更新日時が新しい方の変更を優先する
+            if ($dbUpdated > $calUpdated) { // DB側の更新を優先
+                $DBUpdates[] = [
+                    'db_event' => $dbEvent,
+                    'calendar_event' => $calendarEvent,
+                ];
+            } else { // カレンダー側の更新を優先
+                $calendarUpdates[] = [
+                    'db_event' => $dbEvent,
+                    'calendar_event' => $calendarEvent,
+                ];
             }
         }
 
         return [
-            'updates' => $updates,
+            'DB_updates' => $DBUpdates,
             'calendar_updates' => $calendarUpdates,
             'missing_in_calendar' => $missingInCalendar,
             'missing_in_db' => $missingInDb
@@ -157,7 +163,9 @@ class GoogleCalendarSync {
         $comparison = $this->compareEvents($dbEvents, $calendarEvents);
         
         // カレンダー側で更新があった場合
-        if (isset($comparison['calendar_updates'])) {
+        if (!empty($comparison['calendar_updates'])) {
+            DebugConsole("カレンダー側の更新");
+            DebugConsole($comparison['calendar_updates']);
             foreach ($comparison['calendar_updates'] as $update) {
                 $dbEvent = $update['db_event'];
                 $calEvent = $update['calendar_event'];
@@ -174,8 +182,8 @@ class GoogleCalendarSync {
                 ");
                 
                 // Google Calendarの日時形式をDBの形式に変換
-                $startTime = new DateTime($calEvent['start_time']);
-                $endTime = new DateTime($calEvent['end_time']);
+                $startTime = new DateTime($calEvent['start_time'], new DateTimeZone('Asia/Tokyo'));
+                $endTime = new DateTime($calEvent['end_time'], new DateTimeZone('Asia/Tokyo'));
                 
                 $stmt->execute([
                     $calEvent['title'],
@@ -189,10 +197,10 @@ class GoogleCalendarSync {
         }
         
         // カレンダーにあってDBにないイベントの場合
-        if (isset($comparison['missing_in_db'])) {
+        if (!empty($comparison['missing_in_db'])) {
+            DebugConsole("カレンダーにあってDBに無い");
+            DebugCOnsole($comparison['missing_in_db']);
             foreach ($comparison['missing_in_db'] as $missingInDb) {
-                // FIXME:こいつはparticipantsを持っていないため、NULLで許可してDB側で設定してあげる必要がある。
-
                 $stmt = $this->db->prepare("
                     INSERT INTO events (title, description, start_time, end_time, calendar_event_id, participants) 
                     VALUES (?, ?, ?, ?, ?, ?)
@@ -223,14 +231,18 @@ class GoogleCalendarSync {
         $comparison = $this->compareEvents($dbEvents, $calendarEvents);
         
         // DB側で更新があった場合
-        if (isset($comparison['updates'])) {
-            foreach ($comparison['updates'] as $update) {
+        if (!empty($comparison['DB_updates'])) {
+            DebugConsole("DB側で更新");
+            DebugConsole($comparison['DB_updates']);
+            foreach ($comparison['DB_updates'] as $update) {
                 $this->updateCalendarEvent($update['db_event']);
             }
         }
         
         // DBにあってカレンダーにないイベントの場合
-        if (isset($comparison['missing_in_calendar'])) {
+        if (!empty($comparison['missing_in_calendar'])) {
+            DebugConsole("DBにありカレンダーに無い");
+            DebugConsole($comparison['missing_in_calendar']);
             foreach ($comparison['missing_in_calendar'] as $missing) {
                 $this->createCalendarEvent($missing);
             }
