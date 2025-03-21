@@ -1,11 +1,9 @@
 <?php
-define('DSN', 'mysql:host=localhost;dbname=kaitedtc_mamber-db');
-define('DB_USERNAME', 'root');
-define('DB_PASS', '');
+require_once $_SERVER['DOCUMENT_ROOT'] . '/info.php';
 
 try {
     if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-        header('Location: https://kaitedtc.com/login-from/login.html');
+        header('Location: ' . LOGIN_FORM);
         exit;
     }
     $link = htmlspecialchars($_POST['link'], ENT_QUOTES, 'UTF-8');
@@ -17,7 +15,7 @@ try {
     $stmt->bindParam(':link', $link, PDO::PARAM_STR);
     $stmt->bindParam(':name', $name, PDO::PARAM_STR);
     $stmt->execute();
-    header('Location: http://localhost/EDTCHP/register-form/newmember%20copy.html');
+    header('Location: ' . REGISTER_FORM);
     exit;
 
 } catch (PDOException $e) {

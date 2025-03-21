@@ -1,7 +1,5 @@
 <?php
-    define('DSN', 'mysql:host=localhost;dbname=kaitedtc_mamber-db');
-    define('DB_USERNAME', 'test1');
-    define('DB_PASS', 'test');
+    require_once $_SERVER['DOCUMENT_ROOT'] . '/info.php';
 
     $id = htmlspecialchars($_POST['ID'], ENT_QUOTES, 'UTF-8');
     $pw = htmlspecialchars($_POST['pw'], ENT_QUOTES, 'UTF-8');
@@ -26,19 +24,19 @@
         // fetchAllはDBに該当データがない場合は何も配列が返ってこないので0つまりfalseだから認証の有無が確認できる。
         if ($stmt->fetchAll(PDO::FETCH_ASSOC)) {
             if ($id == 0) {
-                header('Location:https://kaitedtc.chew.jp/register-form/touroku.html'); //転送先
+                header('Location: ' . REGISTER_FORM); //転送先
             } else{
                 $_SESSION['userId'] = $id;                                         // ユーザーIdはページ遷移後でも使いそうだからサーバー上で保存
-                header('Location:https://kaitedtc.chew.jp/mypage/mypage-temp.php'); //転送先
+                header('Location: ' . MYPAGE); //転送先
             }
         } else {
             echo '認証失敗';
-            header('Location:https://kaitedtc.chew.jp/login-form/login.html');
+            header('Location: ' . LOGIN_FORM);
         }
 
     } catch (PDOException $e) {
         $message = "エラー: " . $e->getMessage();
-        header('Location:http://localhost/EDTCHP/login-form/login.html');
+        header('Location: ' . LOGIN_FORM);
     }
     $conn = null;
 ?>
