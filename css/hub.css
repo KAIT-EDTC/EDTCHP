@@ -79,11 +79,17 @@ body {
     text-align: center;
     font-size: 1.0em;
     background-color: #F8F7F3;
+    margin-bottom: 6%;
 }
 
 .pdct-name {
     font-size: 1.2em;
-    display: inline-block;
+    display: block;
+}
+
+.pdct-details .pdct-price {
+    display: block;
+    margin-bottom: 2%;
 }
 
 /* 商品名の下の疑似要素をホバー時に表示するやつ

@@ -36,27 +36,27 @@ require_once __DIR__ . '/handlers/get_event.php';
         <label for="id">指定したいID</label>
         <input type="text" id="studentId" name="studentId" require>
         <input type="submit" value="取得">
-        <?php session_start(); ?>
-        <?php if (!empty($_SESSION['eventTable'])): ?>
-        <table cellspacing="0" cellpadding="20" border="1">
-            <thead>
-                <tr>
-                    <th>タイトル</th>
-                    <th>開始日時</th>
-                    <th>終了日時</th>
-                    <th>備考</th>
-                    <th>参加者</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php
-                 echo $_SESSION['eventTable'];
-                session_destroy();
-                ?>
-            </tbody>
-        </table>
-        <?php endif; ?>
     </form>
+    <?php session_start(); ?>
+    <?php if (!empty($_SESSION['eventTable'])): ?>
+    <table cellspacing="0" cellpadding="20" border="1">
+        <thead>
+            <tr>
+                <th>タイトル</th>
+                <th>開始日時</th>
+                <th>終了日時</th>
+                <th>備考</th>
+                <th>参加者</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php
+                echo $_SESSION['eventTable'];
+            session_destroy();
+            ?>
+        </tbody>
+    </table>
+    <?php endif; ?>
 </body>
 
 </html>

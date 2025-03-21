@@ -1,5 +1,5 @@
 <?php
-require_once $_SERVER['DOCUMENT_ROOT'] . '/info.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/EDTCHP/Pjinfo.php';
 $id = htmlspecialchars($_POST['ID'], ENT_QUOTES, 'UTF-8');
 $pw = htmlspecialchars($_POST['pw'], ENT_QUOTES, 'UTF-8');
 $link = htmlspecialchars($_POST['link'], ENT_QUOTES, 'UTF-8');
@@ -40,6 +40,7 @@ try {
         exit;
     } 
 } catch (PDOException $e) {
+    $conn = null;
     $message = "エラー: " . $e->getMessage();
     if (isset($_SERVER['HTTP_REFERER'])) {
         header('Location: ' . $_SERVER['HTTP_REFERER']);

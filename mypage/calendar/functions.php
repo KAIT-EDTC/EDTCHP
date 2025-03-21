@@ -3,7 +3,6 @@ use Google\Service\Calendar as Google_Service_Calendar;
 use Google\Service\Calendar\Event as Google_Service_Calendar_Event;
 
 require_once __DIR__ . '/vendor/autoload.php';
-require_once __DIR__ . '/vendor/google/apiclient-services/autoload.php';
 $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
 $dotenv->load();
 // envファイルで隠しとく
