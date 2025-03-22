@@ -1,5 +1,5 @@
 <?php
-$env = "local";
+$env = "production";
 $sever_port = $_SERVER['SERVER_PORT'];
 $url = '';
 if ($env == "local") {
