@@ -1,5 +1,5 @@
 <?php
-    require_once $_SERVER['DOCUMENT_ROOT'] . '/info.php';
+    require_once $_SERVER['DOCUMENT_ROOT'] . '/Pjinfo.php';
     session_start();
     $id = $_SESSION['userId'];
     $yoteilist = '';
