@@ -1,5 +1,5 @@
 <?php
-require_once $_SERVER['DOCUMENT_ROOT'] . '/EDTCHP/Pjinfo.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/Pjinfo.php';
 
 try {
     if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
