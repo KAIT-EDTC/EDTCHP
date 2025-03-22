@@ -1,5 +1,5 @@
 <?php
-require_once $_SERVER['DOCUMENT_ROOT'] . '/EDTCHP/Pjinfo.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/Pjinfo.php';
 $id = htmlspecialchars($_POST['ID'], ENT_QUOTES, 'UTF-8');
 $pw = htmlspecialchars($_POST['pw'], ENT_QUOTES, 'UTF-8');
 $link = htmlspecialchars($_POST['link'], ENT_QUOTES, 'UTF-8');
