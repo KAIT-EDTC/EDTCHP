@@ -1,6 +1,6 @@
 <?php
 require_once __DIR__ . '/../functions.php';
-require_once $_SERVER['DOCUMENT_ROOT'] . '/info.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/EDTCHP/Pjinfo.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     session_start();

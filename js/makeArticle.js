@@ -61,7 +61,7 @@ const articleLoad = () => {
 
         const dateElement = document.createElement("span");
         dateElement.className = "blog-date";
-        dateElement.innerText = article.date;
+        dateElement.innerHTML = '<i class="fa-regular fa-clock"></i>' + article.date;
 
         const titleElement = document.createElement("h2");
         titleElement.className = "blog-subject";
@@ -96,10 +96,10 @@ const articleLoad = () => {
          *     <div class="blog-box">
          *      <img class="blog-img">
          *      <div class="blog-details">
-         *          <p class="blog-date"></p>
-         *          <h2 class="blog-subject">/h2>
-         *          <p class="blog-caption"></p>
-         *          <p class="blog-author"></p>
+         *        <span class="blog-date"></p>
+         *        <h2 class="blog-subject">/h2>
+         *        <span class="blog-caption"></p>
+         *        <span class="blog-author"></p>
          *      </div>
          *     </div>
          *    </a>

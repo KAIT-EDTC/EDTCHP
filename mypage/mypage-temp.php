@@ -1,5 +1,5 @@
 <?php
-    require_once $_SERVER['DOCUMENT_ROOT'] . '/info.php';
+    require_once $_SERVER['DOCUMENT_ROOT'] . '/Pjinfo.php';
     require_once $_SERVER['DOCUMENT_ROOT'] . '/mypage/calendar/functions.php';
     require_once $_SERVER['DOCUMENT_ROOT'] . '/mypage/calendar/handlers/get_event.php';
     require_once $_SERVER['DOCUMENT_ROOT'] . '/mypage/calendar/google-calendar-sync.php';

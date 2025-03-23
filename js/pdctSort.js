@@ -7,7 +7,7 @@ const img_path = "./../products/img/";
 const pdct_list = [
     {
         name: "ブザー",
-        src: "buzzer.jpg",
+        src: "notFound.png",
         file: "product-buzzer.html",
         price: 1000,
         maker: "足立遥大"
@@ -28,14 +28,14 @@ const pdct_list = [
     },
     {
         name: "組み換えロボット",
-        src: "NullPic.png",
+        src: "notFound.png",
         file: "product-kumikaeRobot.html",
         price: "tbd",
         maker: "2年"
     },
     {
         name: "ぶるぶるくん",
-        src: "NullPic.png",
+        src: "notFound.png",
         file: "product-buruburu.html",
         price: 500,
         maker: "鈴木一平"
@@ -86,11 +86,11 @@ const pdctLoad = () => {
         titleElement.className = "pdct-name";
         titleElement.innerHTML = pdct.name;
 
-        const paraElement = document.createElement("p");
+        const paraElement = document.createElement("span");
         paraElement.className = "pdct-price";
         paraElement.innerText = (Number.isInteger(pdct.price)) ? `${pdct.price}円` : "未定";
 
-        const paraElement2 = document.createElement("p");
+        const paraElement2 = document.createElement("span");
         paraElement2.className = "pdct-maker";
         paraElement2.innerText = pdct.maker;
 
@@ -112,10 +112,10 @@ const pdctLoad = () => {
          *      <a class="pdct-anker" href="製品の詳細ページ">
          *        <div class="pdct-box">
          *        <img class="pdct-img">
-         *          <div class="pdct-desc">
+         *          <div class="pdct-details">
          *            <h2 class-"pdct-name"></h2>
-         *            <p class="pdct-price"></p>
-         *            <p class="pdct-maker"></p>
+         *            <span class="pdct-price"></p>
+         *            <span class="pdct-maker"></p>
          *          </div>
          *        </div>
          *      </a>
