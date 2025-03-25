@@ -1,5 +1,10 @@
 <?php
-    require_once $_SERVER['DOCUMENT_ROOT'] . '/Pjinfo.php';
+    define('DSN', 'mysql:host=mysql3105.db.sakura.ne.jp;dbname=kaitedtc_mamber-db');
+    define('DB_USERNAME', 'kaitedtc_mamber-db');
+    define('DB_PASS', 'GU8-2bPQKYWP9m-');
+    define('LOGIN_FORM', 'https://kaitedtc.chew.jp/login-form/login.html');
+    define('REGISTER_FORM', 'https://kaitedtc.chew.jp/register-form/touroku.html');
+    define('MYPAGE', 'https://kaitedtc.chew.jp/mypage/mypage-temp.php');
     session_start();
     $id = $_SESSION['userId'];
     $yoteilist = '';
