@@ -31,14 +31,16 @@
     }
 }
 header {
-    padding: 5px 0 10px 4%;
+    padding: 5px 0 5px 4%;
     position: fixed;
     top: 0;
     width: 100%;
     background-color: #fff;
     display: flex;
     align-items: center;
-    z-index: 3;
+}
+body{
+    margin-top: 88px;
 }
 /*モバイルのみ表示*/
 
@@ -184,9 +186,6 @@ header {
 /* pcメニューの設定 */
 
 
-.mar{
-    padding: 38px;
-}
 .contact-area{
     display: block;
     text-align: center;    

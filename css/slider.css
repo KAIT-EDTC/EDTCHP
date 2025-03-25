@@ -1,5 +1,5 @@
-*,
-body,
+
+main,
 ul {
     margin: 0;
     padding: 0;
@@ -16,7 +16,6 @@ li {
     height: 50%; /*丸島先輩に相談 */
     position: relative;
     overflow: hidden;
-    z-index: 1;
     /* はみ出したスライドを隠す */
 }
 .slide-wrapper p{
@@ -28,7 +27,6 @@ li {
         color: white;
         padding:0;
         margin:0;
-        z-index: 2;
         transform: translate(-50%,-50%);
 }
 .slide-wrapper p span {

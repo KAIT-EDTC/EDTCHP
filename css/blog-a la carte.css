@@ -2,7 +2,7 @@
 .asahi-flex {
     display: flex;
 }
-.asahi-flex .asahi-box {
+.asahi-box {
     margin: 1%;
     width: 31%;
 }
