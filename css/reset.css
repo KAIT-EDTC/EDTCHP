@@ -44,10 +44,7 @@ i,
 dl,
 dt,
 dd,
-ul, ol {
-    margin-left: 0px;
-    padding-left: 0px;
-}
+ul, ol ,
 li,
 fieldset,
 form,
@@ -77,11 +74,19 @@ summary,
 time,
 mark,
 audio,
-video 
+video {
+    margin: 0px;
+    padding: 0px;
+    border:0;
+    outline:0;
+    font-size:100%;
+    vertical-align:baseline;
+    background:transparent;
+}
 
-/* body {
+body {
     line-height: 1;
-} */
+}
 
 article,
 aside,
