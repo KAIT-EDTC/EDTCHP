@@ -28,6 +28,7 @@ li {
         padding:0;
         margin:0;
         transform: translate(-50%,-50%);
+        z-index: 2;
 }
 .slide-wrapper p span {
     white-space: nowrap;
