@@ -38,9 +38,14 @@ header {
     background-color: #fff;
     display: flex;
     align-items: center;
+    z-index: 3;
 }
 body{
-    margin-top: 88px;
+    margin-top: 70px;
+}
+ul {
+    margin: 0;
+    padding: 0;
 }
 /*モバイルのみ表示*/
 
