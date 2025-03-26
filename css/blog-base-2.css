@@ -18,8 +18,10 @@ body {
     margin: 0;
 }
 
+
 .blog-mainimg {
-    width: 100%;
+    width: 60%;
+    margin-left: 20%;
     height: auto;
 }
 
