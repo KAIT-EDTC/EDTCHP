@@ -16,13 +16,15 @@ body {
     top: 50%;
     transform: translate(-50%, -50%);
     margin: 0;
+    z-index: 2;
 }
 
 
 .blog-mainimg {
-    width: 60%;
-    margin-left: 20%;
-    height: auto;
+    margin-left: 50%;
+    transform: translate(-50%);
+    width: auto;
+    height:50vh;
 }
 
 .blog-container {

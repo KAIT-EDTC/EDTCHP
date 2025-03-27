@@ -1,0 +1,48 @@
+
+/* 前提としてタグの書き方　.エリア名　.関数名{}とする */
+body {
+    background-color: #e6e6e6;;
+    /* background-color: 名前の通り背景色を指定 */
+}
+#reset {
+    color:#000;
+    font-weight: bold;
+    font-size: 20px;
+    margin-right: 10%;
+    margin-left: 53%;
+    text-align: right;
+}
+.syomei2{
+    text-align: right;
+    font-weight: bold;
+    margin-right: 10px;
+}
+.blog-body{
+    display: flex;
+}
+.blog-title{
+    margin-left: 20%;
+    margin-top: 5%;
+    font-size: calc(1.3rem + .6vw);
+}
+.blog-date{
+    margin-left: 20%;
+    font-size: 1rem;
+}
+.blog-main{
+    margin-left: 20%;
+    width: 60%;
+}
+.side-menu{
+    width: 100%;
+}
+.side-menu .Archives{
+    width: 100%;
+    text-align: center;
+}
+.side-menu .Archives ul{
+    display: block;
+}
+main .pc-only{
+    width: 20%;
+}
