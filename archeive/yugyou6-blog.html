@@ -1,18 +1,18 @@
 <!DOCTYPE html> <!--HTMLを書き始めます。決まり文句-->
 <html lang="ja"> <!--言語設定。基本は英語になっている"en"→"jp"変更しないと翻訳しますか？が出てくる-->
 
-<head> <!--headの始まり-->
+<head> 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ブログ|神奈川工科大学EDTC</title>
     <link rel="stylesheet" href="./../../css/reset.css">
-    <link rel="stylesheet" href="./../../css/headfoot.css">
-    <link rel="stylesheet" href="./../../css/blog-temp.css">
+    <link rel="stylesheet" href="./../../css/base.css">
+    <link rel="stylesheet" href="./../../css/blog-base.css">
     <link rel="stylesheet" href="./../../css/blog-a la carte.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
-    <!-- icon link tag -->
-    <link rel="icon" href="../../favicon.ico">
-    <link rel="apple-touch-icon" sizes="180x180" href="./../../apple-touch-icon-180x180.png">
+        <!-- icon link tag -->
+        <link rel="icon" href="../../favicon.ico">
+        <link rel="apple-touch-icon" sizes="180x180" href="./../../apple-touch-icon-180x180.png">
 </head><!--headの終わり-->
 
 <body><!--本文の開始-->
@@ -40,10 +40,10 @@
         <!--==========PCのみ表示==========-->
         <nav class="pc-only">
             <ul>
-                <li class="gnav-sec"><a href="./../../base.html"><span>Home</span><br>ホーム</a></li>
-                <li class="gnav-sec"><a href="./../../blog.html"><span>Blog</span><br>ブログ</a></li>
-                <li class="gnav-sec"><a href="./../../product-top.html"><span>Product</span><br>プロダクト</a></li>
-                <li class="gnav-sec"><a href="./../../contact-us.html"><span>Contact</span><br>お問い合わせ</a></li>
+                <li class="gnav-sec"><a href="./base.html"><span>Home</span><br>ホーム</a></li>
+                <li class="gnav-sec"><a href="./blog.html"><span>Blog</span><br>ブログ</a></li>
+                <li class="gnav-sec"><a href="./product-top.html"><span>Product</span><br>プロダクト</a></li>
+                <li class="gnav-sec"><a href="contact-us.html"><span>Contact</span><br>お問い合わせ</a></li>
                 <div class="sns_button twitter">
                     <a href="https://x.com/kait_edtc" title="Tweet"><i class="fa fa-twitter"></i></a>
                 </div>
@@ -56,41 +56,25 @@
     </header>
     <!-- Header End -->
     <!--main strt-->
-    <main>
-        <div class="blog-title">
-            第六回遊行塾に行ってきました！
-        </div>
-        <div class="blog-date"><!-- ここに日付 --></div>
-        <div class="blog-body">
-            <div class="blog-main">
-                <img src="./../blog-img/24-0928-yugyou6-class.jpg" alt="授業風景">
-                　後期初回となる第六回遊行塾を無事実施することが出来ました。<br>
+    <div class="mar"></div><!-- ヘッダーが浮いてるのでその分のマージン -->
+    <div class="blog-text">
+        <!-- title -->
+        <span style="font-size: 40px;font-weight: bold;">第六回遊行塾に行ってきました！</span><br>
+        <!-- ここから中身 -->
+        <img src="./../blog-img/24-0928-yugyou6-class.jpg" alt="授業風景" align="left" style="width: 200px;height: auto; margin: 2%;"><br>
+        　後期初回となる第六回遊行塾を無事実施することが出来ました。<br>
         授業内容としては前回授業を振り返りながらのIF文とwhile文についての説明を行いました。<br>
         今回は私が初の先生役ということで臨んだ遊行塾となりました。そのため、授業を始めるまではどこかソワソワした非常に緊張している状態でいましたが、<br>
         EDTCメンバー協力のもと事前に授業練習を行えたことで実際に授業を開始した際にはある程度自信を持った態度で先生役に取り組むことができたため良かったと思います。<br>
         また、遊行塾前日に参加する講師陣全員に授業内容の共有を行うことができていたこともあり、生徒さん同士で授業進行度に大きなばらつきができなかった点も大変良かったように思います。<br>
         しかし、私の授業ではペース配分がまだまだおぼつかないもので授業後半に至っては多少駆け足になってしまいました。それでも、授業自体は他の講師陣との連携によって生徒さん達に寄り添ったものを出来たように思います。<br>
         これからの遊行塾もより良い授業を提供できるように精進していきます。
+        <!-- 署名 -->
         <p class="syomei">根本</p>
-            </div>
-            <div class="pc-only">
-                <div class="side-menu">
-                    <div class="Archives">Archives
-                        <ul>
-                        <li>1</li>
-                        <li>2</li>
-                        <li>3</li>
-                        <li>4</li>
-                        <li>5</li>
-                        <li>6</li>
-                        </ul>
-                    </div>
-                    <div class=""></div>
-                </div>
-            </div>
-        </div>
-        <div id="reset"><a href="./../../blog.html" style="color: black;">前のページにもどる</a></div>
-    </main>
+
+    </div>
+    <!-- 戻るボタン -->
+    <div id="reset"><a href="./../../blog.html" style="color: black;">前のページにもどる</a></div>
 
     <!--main end-->
     <!-- Footer Start -->
@@ -104,7 +88,7 @@
                     <a href="./../../product-top.html">プロダクト</a>
                     <hr size="100%">
                 </li>
-                <li style="text-align: center;">
+                <li  style="text-align: center;">
                     <a href="./../../contact-us.html">お問い合わせ</a>
                     <hr size="100%">
                     <p class="gyou"></p>

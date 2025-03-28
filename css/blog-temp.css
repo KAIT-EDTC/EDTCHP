@@ -46,3 +46,12 @@ body {
 main .pc-only{
     width: 20%;
 }
+main img{
+    width: 100%;
+    height: auto;
+}
+.syomei{
+    text-align: right;
+    font-weight: bold;
+    margin-right: 10px;
+}

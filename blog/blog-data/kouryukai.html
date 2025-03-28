@@ -1,16 +1,19 @@
 <!DOCTYPE html> <!--HTMLを書き始めます。決まり文句-->
 <html lang="ja"> <!--言語設定。基本は英語になっている"en"→"jp"変更しないと翻訳しますか？が出てくる-->
-<!-- css link tag -->
-<link rel="stylesheet" href="./../../css/reset.css">
-<link rel="stylesheet" href="./../../css/base.css">
-<link rel="stylesheet" href="./../../css/blog-base.css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
-<!-- icon link tag -->
-<link rel="icon" href="./../../favicon.ico">
-<link rel="apple-touch-icon" sizes="180x180" href="./../../apple-touch-icon-180x180.png">
 
-<meta charset="UTF-8">
-<title>ブログ | EDTC (KAIT EDTC) 神奈川工科大学</title> <!--タブに表示される-->
+<head> <!--headの始まり-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ブログ|神奈川工科大学EDTC</title>
+    <link rel="stylesheet" href="./../../css/reset.css">
+    <link rel="stylesheet" href="./../../css/headfoot.css">
+    <link rel="stylesheet" href="./../../css/blog-temp.css">
+    <link rel="stylesheet" href="./../../css/blog-a la carte.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <!-- icon link tag -->
+    <link rel="icon" href="../../favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="./../../apple-touch-icon-180x180.png">
+</head><!--headの終わり-->
 
 <body><!--本文の開始-->
     <!-- Header Start -->
@@ -37,10 +40,10 @@
         <!--==========PCのみ表示==========-->
         <nav class="pc-only">
             <ul>
-                <li class="gnav-sec"><a href="./base.html"><span>Home</span><br>ホーム</a></li>
-                <li class="gnav-sec"><a href="./blog.html"><span>Blog</span><br>ブログ</a></li>
-                <li class="gnav-sec"><a href="./product-top.html"><span>Product</span><br>プロダクト</a></li>
-                <li class="gnav-sec"><a href="contact-us.html"><span>Contact</span><br>お問い合わせ</a></li>
+                <li class="gnav-sec"><a href="./../../base.html"><span>Home</span><br>ホーム</a></li>
+                <li class="gnav-sec"><a href="./../../blog.html"><span>Blog</span><br>ブログ</a></li>
+                <li class="gnav-sec"><a href="./../../product-top.html"><span>Product</span><br>プロダクト</a></li>
+                <li class="gnav-sec"><a href="./../../contact-us.html"><span>Contact</span><br>お問い合わせ</a></li>
                 <div class="sns_button twitter">
                     <a href="https://x.com/kait_edtc" title="Tweet"><i class="fa fa-twitter"></i></a>
                 </div>
@@ -54,26 +57,38 @@
     <!-- Header End -->
     <!--main strt-->
     <main>
-        <div class="mar"></div><!-- ヘッダーが浮いてるのでその分のマージン -->
-        <div class="blog-text">
-            <span style="font-size: 40px;font-weight: bold;text-align: center;">地域連携サークル交流会に参加しました</span><br>
-            <img src="./../blog-img/24-0711-kouryu2.jpg" alt="" 
-                style="width: 80%;height: auto;display:block;margin:0 10% 0 10%;">
-            <p style="margin:0 10% 0 10%;">今回の地域連携サークル交流会では、EDTCを含む４つのサークルと二つの研究室が参加しました。<br>
+        <div class="blog-title">
+            地域連携サークル交流会に参加しました
+        </div>
+        <div class="blog-date">2025-2-17</div>
+        <div class="blog-body">
+            <div class="blog-main">
+                <img src="./../blog-img/24-0711-kouryu2.jpg" alt="" >
+                今回の地域連携サークル交流会では、EDTCを含む４つのサークルと二つの研究室が参加しました。<br>
             各サークルや研究室が普段の活動について発表しました。<br>
             弊サークルからは１０人も参加させていただき、代表で三年の恩田先輩が発表してくださいました。<br>
             <br>
             地域に向けた活動や学校に向けた活動など様々な発表が行われました。他サークルの発表には感化されるものが多く、特に小中学生向けに活動しているサークルの発表から多くのヒントを得られたため、個人的にとても満足しています。<br>
-            </p>
-        </div>
 
-
-        <div class="blog-text">
-            <span style="font-size: 40px;font-weight: bold;text-align: center;">最後に閉会後の先輩たちをのせておこうと思います</span>
-            <img src="./../blog-img/24-0711-kouryu.jpg" alt=""
-                style="width: 80%;height: auto;display:block;margin: 10%;">
-            <!-- <img src="../img/1721022797861.jpg" alt="" style="width: 200px;height: auto;"> -->
+            最後に閉会後の先輩たちをのせておこうと思います
+            <img src="./../blog-img/24-0711-kouryu.jpg" alt="">
             <p class="syomei">足立</p>
+            </div>
+            <div class="pc-only">
+                <div class="side-menu">
+                    <div class="Archives">Archives
+                        <ul>
+                        <li>1</li>
+                        <li>2</li>
+                        <li>3</li>
+                        <li>4</li>
+                        <li>5</li>
+                        <li>6</li>
+                        </ul>
+                    </div>
+                    <div class=""></div>
+                </div>
+            </div>
         </div>
         <div id="reset"><a href="./../../blog.html" style="color: black;">前のページにもどる</a></div>
     </main>

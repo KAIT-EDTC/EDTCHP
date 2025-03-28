@@ -1,22 +1,19 @@
-<!DOCTYPE html> <!--HTMLを書き始めます。決まり文句-->
-<html lang="ja"> <!--言語設定。基本は英語になっている"en"→"jp"変更しないと翻訳しますか？が出てくる-->
-
-<head> <!--headの始まり-->
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ブログ|神奈川工科大学EDTC</title>
+<!DOCTYPE html>     <!--HTMLを書き始めます。決まり文句-->
+<html lang="ja">    <!--言語設定。基本は英語になっている"en"→"jp"変更しないと翻訳しますか？が出てくる-->
+<head>              <!--ページが読み込まれてもウェブブラウザーには表示されない部分です。-->
+    <!-- css link tag -->
     <link rel="stylesheet" href="./../../css/reset.css">
-    <link rel="stylesheet" href="./../../css/headfoot.css">
-    <link rel="stylesheet" href="./../../css/blog-temp.css">
-    <link rel="stylesheet" href="./../../css/blog-a la carte.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="./../../css/base.css">
+    <link rel="stylesheet" href="./../../css/blog-base.css">
     <!-- icon link tag -->
-    <link rel="icon" href="../../favicon.ico">
+    <link rel="icon" href="./../../favicon.ico">
     <link rel="apple-touch-icon" sizes="180x180" href="./../../apple-touch-icon-180x180.png">
-</head><!--headの終わり-->
-
-<body><!--本文の開始-->
-    <!-- Header Start -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    
+    <meta charset="UTF-8">
+    <title>ブログ | EDTC (KAIT EDTC) 神奈川工科大学</title> <!--タブに表示される-->
+</head>
+<body>
     <header>
         <a href="./../../base.html"><img src="./../../img/EDTC-icon.png" alt="EDTC"
                 style="display: block; height: 60px; width: auto;"></a>
@@ -40,10 +37,10 @@
         <!--==========PCのみ表示==========-->
         <nav class="pc-only">
             <ul>
-                <li class="gnav-sec"><a href="./../../base.html"><span>Home</span><br>ホーム</a></li>
-                <li class="gnav-sec"><a href="./../../blog.html"><span>Blog</span><br>ブログ</a></li>
-                <li class="gnav-sec"><a href="./../../product-top.html"><span>Product</span><br>プロダクト</a></li>
-                <li class="gnav-sec"><a href="./../../contact-us.html"><span>Contact</span><br>お問い合わせ</a></li>
+                <li class="gnav-sec"><a href="./base.html"><span>Home</span><br>ホーム</a></li>
+                <li class="gnav-sec"><a href="./blog.html"><span>Blog</span><br>ブログ</a></li>
+                <li class="gnav-sec"><a href="./product-top.html"><span>Product</span><br>プロダクト</a></li>
+                <li class="gnav-sec"><a href="contact-us.html"><span>Contact</span><br>お問い合わせ</a></li>
                 <div class="sns_button twitter">
                     <a href="https://x.com/kait_edtc" title="Tweet"><i class="fa fa-twitter"></i></a>
                 </div>
@@ -56,14 +53,10 @@
     </header>
     <!-- Header End -->
     <!--main strt-->
-    <main>
-        <div class="blog-title">
-            第五回遊行塾に行ってきました！
-        </div>
-        <div class="blog-date">2025-2-17</div>
-        <div class="blog-body">
-            <div class="blog-main">
-                <img src="./../../img/24-0622-yugyou1.jpg" alt="授業風景">　毎年行わせていただいてる遊行塾を今年も行わせていただいております。今週はプログラミングメインの授業をさせていただきました！<br>
+    <main><div class="mar"></div><!-- ヘッダーが浮いてるのでその分のマージン -->
+<div class="blog-text">
+<span style="font-size: 40px;font-weight: bold;text-align: center;">第五回遊行塾に行ってきました！</span><br>
+<img src="./../../img/24-0622-yugyou1.jpg" alt="授業風景" align="left" style="width: 385px;height: auto;">　毎年行わせていただいてる遊行塾を今年も行わせていただいております。今週はプログラミングメインの授業をさせていただきました！<br>
     前期最後の授業となった今回ですが、最後まで生徒の皆さんに楽しんでもらえたかなと思います。<br>
     今週はメンバーも少なく、今年度初参加のメンバーもいて不安な部分もありましたが、しっかりと予定していたところまで授業をすることができました。<br><br>
 
@@ -79,27 +72,13 @@
         改善点については毎週行われている会議にて内容を共有されすでに後期に向けての準備しています。後期の授業もより良いものになると信じて頑張りましょう！<br>
         私個人の感想としては「後期もいきます！」「後期も先生いますか？」と言ってもらえてうれしかったです！！後期も来てくれる生徒のためにもしっかり準備を進めていきたいと思います。
     後期授業には何人来てくれるのか楽しみです。</p>
-            </div>
-            <div class="pc-only">
-                <div class="side-menu">
-                    <div class="Archives">Archives
-                        <ul>
-                        <li>1</li>
-                        <li>2</li>
-                        <li>3</li>
-                        <li>4</li>
-                        <li>5</li>
-                        <li>6</li>
-                        </ul>
-                    </div>
-                    <div class=""></div>
-                </div>
-            </div>
-        </div>
-        <div id="reset"><a href="./../../blog.html" style="color: black;">前のページにもどる</a></div>
-    </main>
+    <p class="syomei2">足立</p>
+</div>
 
-    <!--main end-->
+<div id="reset" ><a href="./../../blog.html" style="color: black;" >前のページにもどる</a></div>
+</main>
+
+<!--main end-->
     <!-- Footer Start -->
     <footer>
         <div class="flex">
@@ -111,7 +90,7 @@
                     <a href="./../../product-top.html">プロダクト</a>
                     <hr size="100%">
                 </li>
-                <li style="text-align: center;">
+                <li  style="text-align: center;">
                     <a href="./../../contact-us.html">お問い合わせ</a>
                     <hr size="100%">
                     <p class="gyou"></p>
@@ -128,11 +107,11 @@
             </ul>
         </div>
     </footer>
-    <!-- Footer End -->
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
-        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<!-- Footer End -->
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"
+    integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" 
+    crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
     <script src="https://coco-factory.jp/ugokuweb/wp-content/themes/ugokuweb/data/6-1-2/js/6-1-2.js"></script>
-</body> <!--本文の終了-->
-
+</body>             <!--本文の終了-->
 </html> <!--HTMLの書き終わり。決まり文句-->
