@@ -9,7 +9,6 @@ body {
     font-weight: bold;
     font-size: 20px;
     margin-right: 10%;
-    margin-left: 53%;
     text-align: right;
 }
 .syomei2{
@@ -21,17 +20,34 @@ body {
     display: flex;
 }
 .blog-title{
-    margin-left: 20%;
+    margin:0 10% 0 10%;
     margin-top: 5%;
-    font-size: calc(1.3rem + .6vw);
+    font-size: 3vb;
+    font-weight: bold;
 }
 .blog-date{
-    margin-left: 20%;
+    margin-left: 10%;
     font-size: 1rem;
 }
 .blog-main{
-    margin-left: 20%;
-    width: 60%;
+    margin-left: 10%;
+    width: 80%;
+}
+@media screen and (min-width:820px) {
+    .blog-main{
+        margin-left: 20%;
+        width: 60%;
+    }
+    .blog-title{
+        margin:0 20% 0 20%;
+        margin-top: 5%;
+        font-size: 3vb;
+        font-weight: bold;
+    }
+    .blog-date{
+        margin-left: 20%;
+        font-size: 1rem;
+    }
 }
 .side-menu{
     width: 100%;

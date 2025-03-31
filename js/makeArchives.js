@@ -1,0 +1,84 @@
+const content = [
+    {
+        date: "2024-06-22",
+        title: "第五回遊行塾に行ってきました",
+        img: "blog/blog-img/24-0622-yugyou1.jpg",
+        caption: "前期最終回となる遊行塾でしたが、楽しく学べる授業を提供できたと思います。\
+                当サイト初のブログになりますので至らぬ点もあるかと思いますが読んでいただけたら幸いです。",
+        author: "山口",
+        link: "blog/blog-data/yugyou5-blog.html"
+    },
+    { 
+        date: "2024-06-29", 
+        title: "神奈川工科大学見学体験ツアーを行いました", 
+        img: "blog/blog-img/24-0629-asahi1.png", 
+        caption: "本年度二回目となるあさひ学苑さんとのイベントを行いました。\
+                今回も弊学に来ていただき学内を探索したり工房にて缶バッチ制作をしていただきました", 
+        author: "山口", 
+        link: "blog/blog-data/asahi.blog.html" 
+    },
+    { 
+        date: "2024-07-11", 
+        title: "地域連携サークル交流会に参加しました", 
+        img: "blog/blog-img/24-0711-kouryu.jpg", 
+        caption: "今回はKAIT内部のサークルの集い地域連携サークル交流会にご招待いただいたので参加してきました。", 
+        author: "山口", 
+        link: "blog/blog-data/kouryukai.html" 
+    },
+    { 
+        date: "2024-09-28", 
+        title: "第六回遊行塾に行ってきました", 
+        img: "blog/blog-img/24-0928-yugyou6.jpg", 
+        caption: "嶺学園藤沢中学校に第六回遊行塾を実施しました。後期始めにふさわしい快調なスタートを切ることが出来ました", 
+        author: "根本", 
+        link: "blog/blog-data/yugyou6-blog.html" 
+    },
+    // { date: "2024-10-28", title: "test", img: "blog/blog-img/24-0928-yugyou6.jpg", caption: "記事の概略", author: "根本", link: "blog/blog-data/yugyou6-blog.html" },
+];
+const articleLoad = () => {
+    const Archives = document.getElementsByClassName("Archives")[0];
+    const ulElement = document.createElement("ul");
+
+    content.forEach((article) => {
+        const boxElement = document.createElement("li");
+
+        const AnkerElement = document.createElement("a");
+        AnkerElement.href = article.link;
+
+        const titleElement = document.createElement("span");
+        titleElement.className = "archives-note";
+        titleElement.innerHTML = article.title;
+
+        AnkerElement.appendChild(titleElement);
+        boxElement.appendChild(AnkerElement);
+
+        ulElement.appendChild(boxElement);
+
+        Archives.appendChild(ulElement);
+        /**
+         * <ul>
+         *   <li>
+         *    <a>
+         *      <span class="archives-note"></p>
+         *    </a>
+         *   </li>
+         * </ul>
+         */
+    });
+    // articleSort();
+};
+
+// const articleSort = () => {
+//     const ulElement = document.getElementsByClassName("blog-container")[0];
+
+//     const liArray = Array.from(ulElement.getElementsByTagName("li"));
+//     liArray.sort((a, b) => {
+//         const dateA = a.getAttribute("id");
+//         const dateB = b.getAttribute("id");
+//         return dateA < dateB ? 1 : -1;
+//     });
+//     ulElement.innerHTML = "";
+//     liArray.forEach(li => ulElement.appendChild(li));
+// };
+
+document.addEventListener("DOMContentLoaded", articleLoad());
