@@ -22,7 +22,7 @@ const pdct_list = [
     {
         name: "LogicLineTracer<br>(ロジックライントレーサー)",
         src: "LogicLineTracer.jpg",
-        file: "product-LogicLineTracerV2.html",
+        file: "product-LogicLineTracer.html",
         price: "tbd",
         maker: "須藤陸"
     },
