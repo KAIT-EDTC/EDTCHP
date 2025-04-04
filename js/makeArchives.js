@@ -33,6 +33,15 @@ const content = [
         author: "根本", 
         link: "blog/blog-data/yugyou6-blog.html" 
     },
+    { 
+        date: "2024-12-21", 
+        title: "放課後等デイサービスあさひ学苑IT校様が、神奈川工科大学に遊びに来てくれました！", 
+        img: "blog/blog-img/IMG_8304.jpg", 
+        caption: "12月に放課後等デイサービスあさひ学苑IT校様が、神奈川工科大学に遊びに来てくれました！\
+                今年度第3回目となる今回は大学探検やKAIT工房での木工体験です。 ", 
+        author: "番倉", 
+        link: "blog/blog-data/asahi-IT.html" 
+    },
     // { date: "2024-10-28", title: "test", img: "blog/blog-img/24-0928-yugyou6.jpg", caption: "記事の概略", author: "根本", link: "blog/blog-data/yugyou6-blog.html" },
 ];
 const articleLoad = () => {

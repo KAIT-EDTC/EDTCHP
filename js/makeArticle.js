@@ -42,6 +42,32 @@ const content = [
         author: "番倉", 
         link: "blog/blog-data/asahi-IT.html" 
     },
+    // { 
+    //     date: "2024-12-08", 
+    //     title: "サイエンスウィンターに参加しました！", 
+    //     img: "products/img/notFound.png", 
+    //     caption: "12月8日サイエンスウィンターに参加しました。\
+    //         厚木市子ども科学館にて行われたサイエンスウィンターに参加しました。", 
+    //     author: "棚橋", 
+    //     link: "blog/blog-data/2024siencewinter.html" 
+    // },
+    // { 
+    //     date: "2025-02-07", 
+    //     title: "EDTCが富士市にお邪魔しました。", 
+    //     img: "products/img/notFound.png", 
+    //     caption: "12月8日サイエンスウィンターに参加しました。\
+    //         厚木市子ども科学館にて行われたサイエンスウィンターに参加しました。", 
+    //     author: "山口", 
+    //     link: "blog/blog-data/2024siencewinter.html" 
+    // },
+    // { 
+    //     date: "2025-02-01", 
+    //     title: "未来へつながる一歩功労賞を受賞しました！", 
+    //     img: "products/img/notFound.png", 
+    //     caption: "2月1日に厚木市にて開催された「厚木市政70周年記念式典」にてKAIT EDTCが「未来へつながる一歩功労賞」を受賞しました！", 
+    //     author: "佐々木", 
+    //     link: "blog/blog-data/2024siencewinter.html" 
+    // },
     // { date: "2024-10-28", title: "test", img: "blog/blog-img/24-0928-yugyou6.jpg", caption: "記事の概略", author: "根本", link: "blog/blog-data/yugyou6-blog.html" },
 ];
 
