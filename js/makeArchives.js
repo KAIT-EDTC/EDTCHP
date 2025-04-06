@@ -6,7 +6,7 @@ const content = [
         caption: "前期最終回となる遊行塾でしたが、楽しく学べる授業を提供できたと思います。\
                 当サイト初のブログになりますので至らぬ点もあるかと思いますが読んでいただけたら幸いです。",
         author: "山口",
-        link: "blog/blog-data/yugyou5-blog.html"
+        link: "yugyou5-blog.html"
     },
     { 
         date: "2024-06-29", 
@@ -15,7 +15,7 @@ const content = [
         caption: "本年度二回目となるあさひ学苑さんとのイベントを行いました。\
                 今回も弊学に来ていただき学内を探索したり工房にて缶バッチ制作をしていただきました", 
         author: "山口", 
-        link: "blog/blog-data/asahi.blog.html" 
+        link: "asahi.blog.html" 
     },
     { 
         date: "2024-07-11", 
@@ -23,7 +23,7 @@ const content = [
         img: "blog/blog-img/24-0711-kouryu.jpg", 
         caption: "今回はKAIT内部のサークルの集い地域連携サークル交流会にご招待いただいたので参加してきました。", 
         author: "山口", 
-        link: "blog/blog-data/kouryukai.html" 
+        link: "kouryukai.html" 
     },
     { 
         date: "2024-09-28", 
@@ -31,7 +31,7 @@ const content = [
         img: "blog/blog-img/24-0928-yugyou6.jpg", 
         caption: "嶺学園藤沢中学校に第六回遊行塾を実施しました。後期始めにふさわしい快調なスタートを切ることが出来ました", 
         author: "根本", 
-        link: "blog/blog-data/yugyou6-blog.html" 
+        link: "yugyou6-blog.html" 
     },
     { 
         date: "2024-12-21", 
@@ -40,7 +40,7 @@ const content = [
         caption: "12月に放課後等デイサービスあさひ学苑IT校様が、神奈川工科大学に遊びに来てくれました！\
                 今年度第3回目となる今回は大学探検やKAIT工房での木工体験です。 ", 
         author: "番倉", 
-        link: "blog/blog-data/asahi-IT.html" 
+        link: "asahi-IT.html" 
     },
     // { date: "2024-10-28", title: "test", img: "blog/blog-img/24-0928-yugyou6.jpg", caption: "記事の概略", author: "根本", link: "blog/blog-data/yugyou6-blog.html" },
 ];
