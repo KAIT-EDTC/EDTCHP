@@ -3,12 +3,12 @@ body {
 }
 
 /* プルダウンリストとその説明文のコンテナ */
-.sortBox {
+.sort-container {
     margin-top: 2%;
     text-align: right;
 }
 
-.sortBox .pdct-arngmnt {
+.sort-container .pdct-orderBy .pdct-ageBy {
     padding: 0.3%;
     width: fit-content;
     margin-right: 2%;
@@ -84,13 +84,12 @@ body {
 
 .pdct-name {
     font-size: 1.2em;
-    display: block;
 }
 
-.pdct-details .pdct-price {
+/* .pdct-details .pdct-price {
     display: block;
     margin-bottom: 2%;
-}
+} */
 
 /* 商品名の下の疑似要素をホバー時に表示するやつ
 .pdct-contents:hover .pdct-name::after {
@@ -103,3 +102,18 @@ body {
     transition: background-color 0.3s ease;
 } */
 
+.pdct-box .pdct-tags-container {
+    margin: 3%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    /* max-width: 100%; */
+}
+
+.pdct-box .pdct-tag {
+    display: block;
+    font-size: small;
+    padding: 2%;
+    border: 1px solid lightslategray;
+    border-radius: 15em;
+}
