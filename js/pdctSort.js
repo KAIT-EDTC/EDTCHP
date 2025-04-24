@@ -1,71 +1,22 @@
-// selectタブ
-const arngmnt = document.getElementById("arrangement");
-const img_path = "./../products/img/";
+// 商品データのインポート
+import { pdct_list } from "./pdctData.js";
 
-// ここに商品を追加すればOK
-// tbd = to be decided
-const pdct_list = [
-    {
-        name: "ブザー",
-        src: "notFound.png",
-        file: "product-buzzer.html",
-        price: 1000,
-        maker: "足立遥大"
-    },
-    {
-        name: "ArtoRo(アトロ)",
-        src: "ArtoRo.png",
-        file: "product-ArtoRo.html",
-        price: "tbd",
-        maker: "番倉もえ"
-    },
-    {
-        name: "LogicLineTracer<br>(ロジックライントレーサー)",
-        src: "LogicLineTracer.jpg",
-        file: "product-LogicLineTracer.html",
-        price: "tbd",
-        maker: "須藤陸"
-    },
-    {
-        name: "組み換えロボット",
-        src: "notFound.png",
-        file: "product-kumikaeRobot.html",
-        price: "tbd",
-        maker: "2年"
-    },
-    {
-        name: "ぶるぶるくん",
-        src: "notFound.png",
-        file: "product-buruburu.html",
-        price: 500,
-        maker: "鈴木一平"
-    },
-    {
-        name: "相撲ロボット",
-        src: "SumoRobot.jpg",
-        file: "product-SumoRobot.html",
-        price: "tbd",
-        maker: "上條慶"
-    },
-    {
-        name: "ライントレース迷路ロボット",
-        src: "MazeLineTracer.jpg",
-        file: "product-MazeLineTracer.html",
-        price: "tbd",
-        maker: "2年"
-    }
-];
+// selectタブ
+const orderByBox = document.getElementsByClassName("pdct-orderBy")[0];
+const ageByBox = document.getElementsByClassName("pdct-ageBy")[0];
+
+const img_path = "./../products/img/";
 
 // ul内に要素を追加する関数
 const pdctLoad = () => {
     const mainElement = document.getElementsByTagName("main")[0];
-    const ulElement = document.createElement("ul");
-    ulElement.className = "pdct-container";
+    const ulElement = document.getElementsByClassName("pdct-container")[0];
 
     pdct_list.forEach((pdct) => {
         const listElement = document.createElement("li");
         listElement.className = "pdct-contents";
-        listElement.setAttribute("id", pdct.price);
+        listElement.setAttribute("data-price", pdct.tags[0]);
+        listElement.setAttribute("data-age", pdct.tags[1]);
 
         const AnkerElement = document.createElement("a");
         AnkerElement.href = "./../products/page/" + pdct.file;
@@ -86,22 +37,33 @@ const pdctLoad = () => {
         titleElement.className = "pdct-name";
         titleElement.innerHTML = pdct.name;
 
-        const paraElement = document.createElement("span");
-        paraElement.className = "pdct-price";
-        paraElement.innerText = (Number.isInteger(pdct.price)) ? `${pdct.price}円` : "未定";
+        // const paraElement = document.createElement("span");
+        // paraElement.className = "pdct-price";
+        // paraElement.innerText = (Number.isInteger(pdct.price)) ? `${pdct.price}円` : "未定";
 
-        const paraElement2 = document.createElement("span");
+        const paraElement2 = document.createElement("p");
         paraElement2.className = "pdct-maker";
         paraElement2.innerText = pdct.maker;
 
+        const tagsContainerElement = document.createElement("ul");
+        tagsContainerElement.className = "pdct-tags-container";
+
+        pdct.tags.map((tag) => {
+            const tagsElement = document.createElement("li");
+            tagsElement.className = "pdct-tag";
+            tagsElement.innerText = tag;
+            tagsContainerElement.appendChild(tagsElement);
+        })
+
         boxChildElement.appendChild(titleElement);
-        boxChildElement.appendChild(paraElement);
+        // boxChildElement.appendChild(paraElement);
         boxChildElement.appendChild(paraElement2);
 
-        boxElement.appendChild(imgElement);
-        boxElement.appendChild(boxChildElement);
-        AnkerElement.appendChild(boxElement);
-        listElement.appendChild(AnkerElement);
+        AnkerElement.appendChild(imgElement);
+        AnkerElement.appendChild(boxChildElement);
+        boxElement.appendChild(AnkerElement);
+        boxElement.appendChild(tagsContainerElement);
+        listElement.appendChild(boxElement);
 
         ulElement.appendChild(listElement);
         
@@ -109,16 +71,20 @@ const pdctLoad = () => {
          * <main>
          *  <ul class="pdct-list">
          *    <li id="値段が入る" class="pdct-contents">
-         *      <a class="pdct-anker" href="製品の詳細ページ">
-         *        <div class="pdct-box">
-         *        <img class="pdct-img">
+         *      <div class="pdct-box">
+         *        <a class="pdct-anker" href="製品の詳細ページ">
+         *          <img class="pdct-img">
          *          <div class="pdct-details">
          *            <h2 class-"pdct-name"></h2>
          *            <span class="pdct-price"></p>
          *            <span class="pdct-maker"></p>
          *          </div>
-         *        </div>
-         *      </a>
+         *        </a>
+         *        <ul class="pdct-tags-container">
+         *          <li class="pdct-tag">price</li>
+         *          <li class="pdct-tag">age</li>
+         *        </ul>
+         *      </div>
          *    </li>
          *  </ul>
          * </main>
@@ -128,27 +94,47 @@ const pdctLoad = () => {
 };
 
 // プルダウンリストの選択項目が変更されたら呼び出す
-// その際にプルダウンリストの項目をitemという引数として受け取る
-arngmnt.addEventListener("change", (item) => {
+orderByBox.addEventListener("change", (item) => {
     // プルダウンリストの選ばれた項目を取得
     const val = item.target.value;
     const ul = document.getElementsByClassName("pdct-container")[0];
     // li内の要素をすべて取得する
-    const liArray = Array.from(ul.getElementsByTagName("li"));
+    const liArray = Array.from(ul.getElementsByClassName("pdct-contents"));
     liArray.sort((a, b) => {
-        aId = parseInt(a.id);
-        bId = parseInt(b.id);
+        const aValue = parseInt(a.getAttribute('data-price'));
+        const bValue = parseInt(b.getAttribute('data-price'));
 
-        if (isNaN(aId) && isNaN(bId)) return 0;
-        else if (isNaN(aId)) return 1;
-        else if (isNaN(bId)) return -1;
-        else return val == 'asce' ? aId - bId : bId - aId;
+        if (isNaN(aValue) && isNaN(bValue)) return 0;
+        else if (isNaN(aValue)) return 1;
+        else if (isNaN(bValue)) return -1;
+        else return val === 'asce' ? aValue - bValue : bValue - aValue;
     });
     // ulの中の要素を空にする
-    ul.innerHtml = "";
+    ul.innerHTML = "";
     // ソートしたliをulに追加
     liArray.forEach(li => ul.appendChild(li));
 });
 
+ageByBox.addEventListener("change", (item) => {
+    const val = item.target.value;
+    const ul = document.getElementsByClassName("pdct-container")[0];
+    const liArray = Array.from(ul.getElementsByClassName("pdct-contents"));
+    liArray.sort((a, b) => {
+        // カスタム属性であるdata-ageを取得する(data-ageがundefinedの場合は空文字を代入)
+        const aValue = a.getAttribute('data-age') || "";
+        const bValue = b.getAttribute('data-age') || "";
+
+        // data-ageにプルダウンの文字列が含まれているかどうかでソートする
+        if (aValue.includes(val) && bValue.includes(val)) return 0;
+        else if (aValue.includes(val)) return -1;
+        else if (bValue.includes(val)) return 1;
+        else return 0;
+    });
+    ul.innerHTML = "";
+    liArray.forEach(li => ul.appendChild(li));
+});
+
 // DOMが読み込まれてからpdctLoadを呼び出す
-document.addEventListener("DOMContentLoaded", pdctLoad());
+document.addEventListener("DOMContentLoaded", () => {
+    pdctLoad();
+});

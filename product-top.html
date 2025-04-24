@@ -53,14 +53,28 @@
     </header>
 
     <main>
-        <div class="sortBox">
-            <span>値段順で並び替える:</span>
-            <select id="arrangement" class="pdct-arngmnt">
+        <div class="sort-container">
+            <span>値段順で絞り込む:</span>
+            <select class="pdct-orderBy">
                 <option></option>
                 <option value="asce">昇順</option>
                 <option value="desc">降順</option>
             </select>
-            <!-- ここに製品が並ぶ -->
+
+            <span>年齢層で絞り込む:</span>
+            <select class="pdct-ageBy">
+                <option></option>
+                <option value="小学生">小学生</option>
+                <option value="中学生">中学生</option>
+                <option value="高校生">高校生</option>
+                <option value="大学生">大学生</option>
+                <option value="大人">大人</option>
+                <option value="シニア">シニア</option>
+                <option value="全年齢">全年齢</option>
+            </select>
+            <ul class="pdct-container">
+                <!-- pdctSort.jsで商品を並べる -->
+            </ul>
         </div>
     </main>
     
@@ -93,6 +107,6 @@
     </footer>
     
 </body>
-<script type="text/javascript" src="js/pdctSort.js"></script>
+<script type="module" src="js/pdctSort.js"></script>
 
 </html>
