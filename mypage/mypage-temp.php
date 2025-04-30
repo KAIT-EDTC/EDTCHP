@@ -1,8 +1,10 @@
 <?php
-    require_once $_SERVER['DOCUMENT_ROOT'] . '/Pjinfo.php';
-    require_once $_SERVER['DOCUMENT_ROOT'] . '/mypage/calendar/functions.php';
-    require_once $_SERVER['DOCUMENT_ROOT'] . '/mypage/calendar/handlers/get_event.php';
-    require_once $_SERVER['DOCUMENT_ROOT'] . '/mypage/calendar/google-calendar-sync.php';
+    define('DSN', 'mysql:host=mysql3105.db.sakura.ne.jp;dbname=kaitedtc_mamber-db');
+    define('DB_USERNAME', 'kaitedtc_mamber-db');
+    define('DB_PASS', 'GU8-2bPQKYWP9m-');
+    define('LOGIN_FORM', 'https://kaitedtc.chew.jp/login-form/login.html');
+    define('REGISTER_FORM', 'https://kaitedtc.chew.jp/register-form/touroku.html');
+    define('MYPAGE', 'https://kaitedtc.chew.jp/mypage/mypage-temp.php');
     session_start();
     $id = $_SESSION['userId'];
     $yoteilist = '';
@@ -21,62 +23,41 @@
     $user->execute();
 
     $form = $conn->query('SELECT * FROM `form-data`'); //グーグルフォーム等のリンクのデータベース
-
-    // mypage/calendar/handlers/get_event.phpのgetMembersName()でidに該当する名前を取得するため下記のコードは不要
-    // 予定自体はカレンダーからデータを取得しているためDBにアクセス不要。
-    // 一応予定追加時にmypage/calendar/handlers/add_event.phpでDBにデータを送信している。(用途はカレンダーからは見えない詳細を確認する用)
-    // $schedules = $conn->prepare('SELECT * FROM `yotei-data` WHERE part = :id'); //行事や提出期限などのデータベース
-    // $schedules->bindParam(':part', $id, PDO::PARAM_INT);
-    // $schedules->execute();
+    
+    $schedules = $conn->prepare('SELECT * FROM `yotei-data` WHERE member = :id'); //行事や提出期限などのデータベース
+    $schedules->bindParam(':id', $id, PDO::PARAM_INT);
+    $schedules->execute();
     //memberには学籍番号ベースで参加者登録を行うので自分が行く予定もしくは参加者未定の予定を取得
     
     // ユーザー情報取得
     if ($user = $user->fetch(PDO::FETCH_ASSOC)) {
         $username = htmlspecialchars($user['name'], ENT_QUOTES, 'UTF-8');
     }
-    
+
     // フォーム情報取得
     $form = $form->fetchAll(PDO::FETCH_ASSOC);
     foreach ($form as $f) {
+        $formid = htmlspecialchars($f['id'], ENT_QUOTES, 'UTF-8');
         $formname = htmlspecialchars($f['name'], ENT_QUOTES, 'UTF-8');
         $formurl = htmlspecialchars($f['link'], ENT_QUOTES, 'UTF-8');
         $tableRows .= "<tr>
+        <td>{$formid}</td>
         <td>{$formname}</td>
         <td><a href='$formurl' target='_blank' rel='noopener noreferrer'>{$formurl}</a></td>
         </tr>";
     }
-    
+
     // 予定取得
-    // $schedules = $schedules->fetchAll(PDO::FETCH_ASSOC);
-    // foreach ($schedules as $schedule) {
-        //     $yoteiname = htmlspecialchars($schedule['name'], ENT_QUOTES, 'UTF-8');
-        //     $yoteidate = htmlspecialchars($schedule['date'], ENT_QUOTES, 'UTF-8');
-        //     $yoteimember = htmlspecialchars($schedule['member'], ENT_QUOTES, 'UTF-8');
-        //     $yoteilist .= "<tr>
-        //                     <td>{$yoteiname}</td>
-        //                     <td>{$yoteidate}</td>
-        //                     <td>{$yoteimember}</td>
-        //                 </tr>";
-        // }
-        
-    // GoogleCalendarSyncクラスのインスタンス化
-    $calendarSync = new GoogleCalendarSync($conn);
-    
-    // DBからGoogle Calendarへの同期を実行
-    $calendarSync->performBidirectionalSync();
-    
-    // idに該当するイベントを20件取得(この取得する個数などは仕様変更予定)
-    $data = getEventsById(getEvents(20), $id);
-    // 取得したデータからテーブルに表示するものを抽出
-    foreach ($data as $d) {
-        $name = getMemberName($d['participants']);
+    $schedules = $schedules->fetchAll(PDO::FETCH_ASSOC);
+    foreach ($schedules as $schedule) {
+        $yoteiname = htmlspecialchars($schedule['name'], ENT_QUOTES, 'UTF-8');
+        $yoteidate = htmlspecialchars($schedule['date'], ENT_QUOTES, 'UTF-8');
+        $yoteimember = htmlspecialchars($schedule['member'], ENT_QUOTES, 'UTF-8');
         $yoteilist .= "<tr>
-        <td>{$d['summary']}</td>
-        <td>".RFC2Jap($d['startTime'])."</td>
-        <td>".RFC2Jap($d['endTime'])."</td>
-        <td>{$d['remark']}</td>
-        <td>{$name}</td>
-        </tr>";
+                        <td>{$yoteiname}</td>
+                        <td>{$yoteidate}</td>
+                        <td>{$yoteimember}</td>
+                    </tr>";
     }
 
     $conn = null;
@@ -107,9 +88,7 @@
                 <thead>
                     <tr>
                         <th>イベント名</th>
-                        <th>開始日時</th>
-                        <th>終了日時</th>
-                        <th>備考</th>
+                        <th>日付</th>
                         <th>メンバー</th>
                     </tr>
                 </thead>
