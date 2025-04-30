@@ -47,7 +47,7 @@ class GoogleCalendarSync {
             'maxResults' => 100,
             'orderBy' => 'startTime',
             'singleEvents' => true,
-            'timeMin' => date('c', strtotime('-2 month')), // 直近2ヶ月のイベントを取得
+            'timeMin' => date('c', strtotime('2025')),
         ];
         
         $results = $this->service->events->listEvents(CALENDAR_ID, $optParams);

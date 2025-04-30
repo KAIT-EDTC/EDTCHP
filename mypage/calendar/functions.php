@@ -76,7 +76,7 @@ function getEvents($maxResults) {
         'maxResults' => $maxResults,
         'orderBy' => 'startTime',
         'singleEvents' => true,
-        'timeMin' => date('c', strtotime('2025-01-01')) // TODO: ロードされた時の日時から取得するようにする
+        'timeMin' => date('c', strtotime(date('Y-m-d'))) // TODO: ロードされた時の日時から取得するようにする
     );
     
     $client = getClient();
