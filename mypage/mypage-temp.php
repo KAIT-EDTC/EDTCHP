@@ -77,40 +77,45 @@
     <h1><?php echo $username; ?>さんこんにちは！</h1>
     <div class="panel">
         <div class="calender">
+            <p><a href='calendar/calendar.php'>カレンダー</a></p>
+            <?php echo "<iframe src='{$_ENV['CALENDAR_URL']}' style='border:solid 1px #777' width='1500' height='600' frameborder='0' scrolling='no'></iframe>"; ?>
             <!-- むずい -->
         </div>
         <div class="remind">
+            <h2><?php echo $username; ?>さんの予定</h2>
             <?php if (!empty($yoteilist)): ?>
-            <p><?php echo $username; ?>さんの予定</p>
             <table cellspacing="0" cellpadding="20" border="1">
                 <thead>
                     <tr>
-                        <th>イベント名</th> <!-- ヘッダー: ID -->
-                        <th>日付</th> <!-- ヘッダー: 名前 -->
-                        <th>メンバー</th> <!-- ヘッダー: 性別 -->
+                        <th>イベント名</th>
+                        <th>日付</th>
+                        <th>メンバー</th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php echo $yoteilist; ?> <!-- PHPで生成したテーブル行を挿入 -->
                 </tbody>
             </table>
-            <?php endif; ?>
+            <?php else: ?>
+            <p>今は予定がありません。</p>
+            <?php endif ?>
         </div>
         <div class="form-link">
+            <h2>現在公開されているフォーム一覧</h2>
             <?php if (!empty($tableRows)): ?>
-            <p style="font-size: 15px"><p><h2>現在公開されているフォーム一覧</h2>
             <table border="1" >
                 <thead>
                     <tr>
-                        <th class="linkid">ID</th> <!-- ヘッダー: ID -->
-                        <th class="linkname">リンク名</th> <!-- ヘッダー: 名前 -->
-                        <th class="link">リンク</th> <!-- ヘッダー: 性別 -->
+                        <th class="linkname">リンク名</th>
+                        <th class="link">リンク</th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php echo $tableRows; ?> <!-- PHPで生成したテーブル行を挿入 -->
                 </tbody>
             </table>
+            <?php else: ?>
+            <p>公開されている予定はありません。</p>
             <?php endif; ?>
         </div>
         <div class="houkokusyo">
