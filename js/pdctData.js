@@ -1,5 +1,5 @@
-IMAGE_DIR_PATH = "./products/img/";
-ALTER_IMAGE_PATH = "./img/EDTC-icon.png";
+const IMAGE_DIR_PATH = "./products/img/";
+const ALTER_IMAGE_PATH = "./img/EDTC-icon.png";
 
 // ここに商品を追加すればOK
 // 未定 = to be decided
