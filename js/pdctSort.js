@@ -5,8 +5,6 @@ import { pdct_list } from "./pdctData.js";
 const orderByBox = document.getElementsByClassName("pdct-orderBy")[0];
 const ageByBox = document.getElementsByClassName("pdct-ageBy")[0];
 
-const img_path = "./../products/img/";
-
 // ul内に要素を追加する関数
 const pdctLoad = () => {
     const mainElement = document.getElementsByTagName("main")[0];
@@ -27,7 +25,9 @@ const pdctLoad = () => {
 
         const imgElement = document.createElement("img")
         imgElement.className = "pdct-img";
-        imgElement.src = img_path + pdct.src;
+        imgElement.src = pdct.src;
+        imgElement.alt = pdct.name;
+        imgElement.loading = "lazy";
         // imgElement.alt = "商品画像はまだありません。";
         
         const boxChildElement = document.createElement("div")
