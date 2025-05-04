@@ -139,6 +139,7 @@ body {
         width: 90%;
         padding: 20px;
         top: 50%;
+        background-color: rgba(232, 248, 245, 0.95);
     }
     
     .content-left h1 {
