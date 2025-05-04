@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>商品トップ|神奈川工科大学EDTC</title>
     <link rel="stylesheet" href="css/reset.css">
-    <link rel="stylesheet" href="css/hub.css">
+    <link rel="stylesheet" href="css/product-hub.css">
     <link rel="stylesheet" href="css/headfoot.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
@@ -53,29 +53,30 @@
     </header>
 
     <main>
-        <div class="sort-container">
-            <label for="orderBy">値段順で絞り込む:</label>
-            <select class="pdct-orderBy" id="orderBy">
-                <option></option>
-                <option value="asce">昇順</option>
-                <option value="desc">降順</option>
-            </select>
-
-            <label for="ageBy">年齢層で絞り込む:</label>
-            <select class="pdct-ageBy" id="ageBy">
-                <option></option>
-                <option value="小学生">小学生</option>
-                <option value="中学生">中学生</option>
-                <option value="高校生">高校生</option>
-                <option value="大学生">大学生</option>
-                <option value="大人">大人</option>
-                <option value="シニア">シニア</option>
-                <option value="全年齢">全年齢</option>
-            </select>
-            <ul class="pdct-container">
-                <!-- pdctSort.jsで商品を並べる -->
-            </ul>
+        <h1>商品一覧</h1>
+        <div class="filter-area">
+            <label for="filter-combox">絞り込み</label>
+            <div class="filter-combox" id="filter-combox">
+                <select class="pdct-orderBy" id="orderBy">
+                    <option>値段</option>
+                    <option value="asce">昇順</option>
+                    <option value="desc">降順</option>
+                </select>
+                <select class="pdct-ageBy" id="ageBy">
+                    <option>年齢層</option>
+                    <option value="小学生">小学生</option>
+                    <option value="中学生">中学生</option>
+                    <option value="高校生">高校生</option>
+                    <option value="大学生">大学生</option>
+                    <option value="大人">大人</option>
+                    <option value="シニア">シニア</option>
+                    <option value="全年齢">全年齢</option>
+                </select>
+            </div>
         </div>
+        <ul class="pdct-container">
+            <!-- pdctSort.jsで商品を並べる -->
+        </ul>
     </main>
     
     <footer>
