@@ -2,51 +2,34 @@ body {
     background: #F8F7F3;
 }
 
-/* プルダウンリストとその説明文のコンテナ */
-.sort-container {
-    margin-top: 2%;
-    text-align: right;
+h1 {
+    font-size: 2.5em;
+    margin-bottom: 20px;
+    text-align: center;
+    color: #333;
 }
 
-.sort-container .pdct-orderBy .pdct-ageBy {
-    padding: 0.3%;
-    width: fit-content;
-    margin-right: 2%;
+.filter-area {
+    margin-left: 5%;
 }
 
-/* .sort-container {
-    display: inline-flex;
-    align-items: center;
-    position: relative;
-}
-
-.sort-container::after {
-    position: absolute;
-    right: 15px;
-    width: 10px;
-    height: 7px;
-    background-color: #535353;
-    clip-path: polygon(0 0, 100% 0, 50% 100%);
-    content: '';
-    pointer-events: none;
-}
-
-.sort-container select {
-    appearance: none;
-    min-width: 230px;
-    height: 2.8em;
-    padding: .4em calc(.8em + 30px) .4em .8em;
-    border: none;
-    border-bottom: 2px solid #d0d0d0;
-    background-color: #fff;
-    color: #333333;
-    font-size: 1em;
+/* 絞り込み用セレクトボックスのスタイリング */
+select {
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    padding: 5px 25px 5px 10px;
+    font-family: 'Hiragino Kaku Gothic', 'Meiryo', sans-serif;
+    font-size: 14px;
+    background-color: #f9f9f9;
+    margin-left: 5px;
     cursor: pointer;
 }
 
-.sort-container select:focus {
+select:focus {
     outline: none;
-} */
+    border-color: #3498db;
+    box-shadow: 0 0 3px rgba(52, 152, 219, 0.5);
+}
 
 /* ul */
 .pdct-container {
@@ -56,6 +39,7 @@ body {
     grid-template-columns: repeat(5, 1fr);
     gap: 20px;
     margin: 0;
+    user-select: none;
 }
 
 @media (max-width: 1430px) {
@@ -78,7 +62,7 @@ body {
 
 /* li */
 .pdct-contents {
-    border-radius: 3%;
+    border-radius: 10px;
     border-top: none;
     overflow: hidden;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -103,21 +87,33 @@ body {
 /* img */
 .pdct-img {
     width: 100%;
-    height: 200px;
+    height: 140px;
     object-fit: cover;
     border-radius: 2% 2% 0 0;
 }
 
 /* pdct-name, pdct-price, pdct-makerを含むコンテナ */
 .pdct-details {
+    padding: 3%;
     text-align: center;
     font-size: 1.0em;
     background-color: #F8F7F3;
-    margin-bottom: 6%;
+    line-height: 1.6em;
+    margin-bottom: 0;
 }
 
 .pdct-name {
-    font-size: 1.2em;
+    font-size: 1.3em;
+    margin-bottom: 4%;
+}
+
+.pdct-headline {
+    font-size: 0.8em;
+    margin-bottom: 4%;
+}
+
+.pdct-maker {
+    text-align: right;
 }
 
 /* .pdct-details .pdct-price {
@@ -136,26 +132,30 @@ body {
     transition: background-color 0.3s ease;
 } */
 
-.pdct-box .pdct-tags-container {
+.pdct-tags-container {
     margin: 3%;
     display: flex;
     flex-wrap: wrap;
     gap: 5px;
-    /* max-width: 100%; */
+    margin-top: 0;
 }
 
-.pdct-box .pdct-tag {
+
+
+.pdct-tag {
     display: block;
-    font-size: small;
+    font-size: 0.8em;
     padding: 2%;
-    border: 1px solid lightslategray;
-    border-radius: 15em;
-    user-select: none;;
+    user-select: none;
+    margin-bottom: 3%;
 }
 
-.pdct-box .pdct-tag:hover {
+.pdct-tag::before {
+    content: "";
+    display: inline-block;
+    width: 5px;
+    height: 5px;
     background-color: #3498db;
-    color: white;
-    border: 1px solid #3498db;
-    cursor: pointer;
+    border-radius: 50%;
+    margin-right: 5px;
 }

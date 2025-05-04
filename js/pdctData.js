@@ -5,42 +5,48 @@ const ALTER_IMAGE_PATH = "./img/EDTC-icon.png";
 // 未定 = to be decided
 export const pdct_list = [
     {
-        name: "ブザー",
+        name: "防犯ブザー",
+        headline: "本格的な機械工作体験をしてみませんか？<br>作りながら防犯ブザーの仕組みを理解しよう！",
         src: ALTER_IMAGE_PATH,
         file: "product-buzzer.html",
-        tags: [1000, "全年齢"],
+        tags: ["1000円", "全年齢"],
         maker: "足立遥大"
     },
     {
         name: "ArtoRo(アトロ)",
+        headline: "まるで動物のようについてくるロボット！<br>仕組みから学ぶ、ロボット製作体験！",
         src: IMAGE_DIR_PATH + "ArtoRo.png",
         file: "product-ArtoRo.html",
         tags: ["未定", "中学生"],
         maker: "番倉もえ"
     },
     {
-        name: "LogicLineTracer<br>(ロジックライントレーサー)",
+        name: "LogicLineTracer",
+        headline: "安価に短時間で作れる！<br>ロジックICを使ったライントレーサー",
         src: IMAGE_DIR_PATH + "LogicLineTracer.jpg",
         file: "product-LogicLineTracer.html",
-        tags: ["未定", "高校生"],
+        tags: ["1000円～1500円", "高校生"],
         maker: "須藤陸"
     },
     {
         name: "組み換えロボット",
+        headline: "自由な発想で自分だけのロボットを作ろう！<br>組み替えて作るロボット",
         src: ALTER_IMAGE_PATH,
         file: "product-kumikaeRobot.html",
-        tags: ["未定", "小学生"],
+        tags: ["600円", "小学生"],
         maker: new Date().getFullYear() + 1 - 2023 + "年生"
     },
     {
         name: "ぶるぶるくん",
+        headline: "虫のように振動する！？<br>モーターを使った不思議なロボット",
         src: ALTER_IMAGE_PATH,
         file: "product-buruburu.html",
-        tags: [500, "小学生"],
+        tags: ["500円", "小学生"],
         maker: "鈴木一平"
     },
     {
         name: "相撲ロボット",
+        headline: "ロボットで相撲をしよう！<br>リンク機構を用いた相撲ロボット",
         src: IMAGE_DIR_PATH + "SumoRobot.jpg",
         file: "product-SumoRobot.html",
         tags: ["未定", "中学生"],
@@ -48,6 +54,7 @@ export const pdct_list = [
     },
     {
         name: "ライントレース迷路ロボット",
+        headline: "ライントレースで迷路を攻略しよう！<br>自分で作った迷路をロボットが走る！",
         src: IMAGE_DIR_PATH + "MazeLineTracer.jpg",
         file: "product-MazeLineTracer.html",
         tags: ["未定", "中学生"],

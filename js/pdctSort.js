@@ -37,13 +37,17 @@ const pdctLoad = () => {
         titleElement.className = "pdct-name";
         titleElement.innerHTML = pdct.name;
 
+        const headlineElement = document.createElement("p");
+        headlineElement.className = "pdct-headline";
+        headlineElement.innerHTML = pdct.headline || "製品の詳細はまだありません。";
+
         // const paraElement = document.createElement("span");
         // paraElement.className = "pdct-price";
         // paraElement.innerText = (Number.isInteger(pdct.price)) ? `${pdct.price}円` : "未定";
 
-        const paraElement2 = document.createElement("p");
-        paraElement2.className = "pdct-maker";
-        paraElement2.innerText = pdct.maker;
+        const makerElement = document.createElement("p");
+        makerElement.className = "pdct-maker";
+        makerElement.innerText = pdct.maker;
 
         const tagsContainerElement = document.createElement("ul");
         tagsContainerElement.className = "pdct-tags-container";
@@ -56,13 +60,14 @@ const pdctLoad = () => {
         })
 
         boxChildElement.appendChild(titleElement);
+        boxChildElement.appendChild(headlineElement);
         // boxChildElement.appendChild(paraElement);
-        boxChildElement.appendChild(paraElement2);
+        boxChildElement.appendChild(makerElement);
 
         AnkerElement.appendChild(imgElement);
         AnkerElement.appendChild(boxChildElement);
+        AnkerElement.appendChild(tagsContainerElement);
         boxElement.appendChild(AnkerElement);
-        boxElement.appendChild(tagsContainerElement);
         listElement.appendChild(boxElement);
 
         ulElement.appendChild(listElement);
@@ -76,14 +81,15 @@ const pdctLoad = () => {
          *          <img class="pdct-img">
          *          <div class="pdct-details">
          *            <h2 class-"pdct-name"></h2>
+         *            <p class="pdct-headline"></p>
          *            <span class="pdct-price"></p>
          *            <span class="pdct-maker"></p>
          *          </div>
+         *          <ul class="pdct-tags-container">
+         *            <li class="pdct-tag">price</li>
+         *            <li class="pdct-tag">age</li>
+         *          </ul>
          *        </a>
-         *        <ul class="pdct-tags-container">
-         *          <li class="pdct-tag">price</li>
-         *          <li class="pdct-tag">age</li>
-         *        </ul>
          *      </div>
          *    </li>
          *  </ul>
