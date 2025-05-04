@@ -107,13 +107,16 @@ orderByBox.addEventListener("change", (item) => {
     // li内の要素をすべて取得する
     const liArray = Array.from(ul.getElementsByClassName("pdct-contents"));
     liArray.sort((a, b) => {
-        const aValue = parseInt(a.getAttribute('data-price'));
-        const bValue = parseInt(b.getAttribute('data-price'));
+        const priceTextA = a.getAttribute('data-price');
+        const priceTextB = b.getAttribute('data-price');
+        // 「～」を含む場合は高い値段の方を取得する
+        const priceA = parseInt(priceTextA.match(/～\s*(\d+)円/)?.[1] || priceTextA.match(/\d+(?=円)/)?.[0]);
+        const priceB = parseInt(priceTextB.match(/～\s*(\d+)円/)?.[1] || priceTextB.match(/\d+(?=円)/)?.[0]);
 
-        if (isNaN(aValue) && isNaN(bValue)) return 0;
-        else if (isNaN(aValue)) return 1;
-        else if (isNaN(bValue)) return -1;
-        else return val === 'asce' ? aValue - bValue : bValue - aValue;
+        if (isNaN(priceA) && isNaN(priceB)) return 0;
+        else if (isNaN(priceA)) return 1;
+        else if (isNaN(priceB)) return -1;
+        else return val === 'asce' ? priceA - priceB : priceB - priceA;
     });
     // ulの中の要素を空にする
     ul.innerHTML = "";
