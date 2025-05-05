@@ -1,4 +1,5 @@
 const IMAGE_DIR_PATH = "./products/img/";
+// 商品画像が無い時はIMAGE_DIR_PATH + "写真の名前"をALTER_IMAGE_PATHに変更してください
 const ALTER_IMAGE_PATH = "./img/EDTC-icon.png";
 
 // ここに商品を追加すればOK
@@ -59,5 +60,13 @@ export const pdct_list = [
         file: "product-MazeLineTracer.html",
         tags: ["未定", "中学生"],
         maker: new Date().getFullYear() + 1 - 2023 + "年生"
-    }
+    },
+    // {
+    //     name: "商品名",
+    //     headline: "商品のキャッチコピー",
+    //     src: IMAGE_DIR_PATH + "写真の名前(products/img/に入ってる写真の名前)",
+    //     file: "詳細ページのファイル名(products/page/に入ってるファイル名)",
+    //     tags: ["価格", "年齢層"],
+    //     maker: "製作者名"
+    // }
 ];

@@ -17,7 +17,7 @@ const pdctLoad = () => {
         listElement.setAttribute("data-age", pdct.tags[1]);
 
         const AnkerElement = document.createElement("a");
-        AnkerElement.href = "./../products/page/" + pdct.file;
+        AnkerElement.href = "products/page/" + pdct.file;
         // AnkerElement.href = "./../products/page/comingsoon.html";
 
         const boxElement = document.createElement("div");
@@ -63,10 +63,11 @@ const pdctLoad = () => {
         boxChildElement.appendChild(headlineElement);
         // boxChildElement.appendChild(paraElement);
         boxChildElement.appendChild(makerElement);
+        boxChildElement.appendChild(tagsContainerElement);
 
         AnkerElement.appendChild(imgElement);
         AnkerElement.appendChild(boxChildElement);
-        AnkerElement.appendChild(tagsContainerElement);
+        // AnkerElement.appendChild(tagsContainerElement);
         boxElement.appendChild(AnkerElement);
         listElement.appendChild(boxElement);
 
