@@ -1,8 +1,19 @@
 
 /* 前提としてタグの書き方　.エリア名　.関数名{}とする */
 body {
-    background-color: #e6e6e6;;
+    background-color: #e6e6e6;
     /* background-color: 名前の通り背景色を指定 */
+}
+section {
+    margin: 3% 0;
+}
+section img {
+    width: 100%;
+    height: 500px;
+    object-fit: cover;
+    object-position: center;
+    border-top: 2px solid #000;
+    border-bottom: 2px solid #000;
 }
 #reset {
     color:#000;
@@ -11,7 +22,7 @@ body {
     margin-right: 10%;
     text-align: right;
 }
-.syomei2{
+.author{
     text-align: right;
     font-weight: bold;
     margin-right: 10px;
@@ -49,6 +60,19 @@ body {
         font-size: 1rem;
     }
 }
+
+@media screen and (max-width:480px) {
+    section {
+        margin: 9% 0;
+    }
+    section img {
+        object-fit: unset;
+        object-position: unset;
+        border: unset;
+        width: 100%;
+        height: auto;
+    }
+}
 .side-menu{
     width: 100%;
 }
@@ -61,13 +85,4 @@ body {
 }
 main .pc-only{
     width: 20%;
-}
-main img{
-    width: 100%;
-    height: auto;
-}
-.syomei{
-    text-align: right;
-    font-weight: bold;
-    margin-right: 10px;
 }
