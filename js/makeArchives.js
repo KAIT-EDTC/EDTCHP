@@ -1,10 +1,15 @@
-import { content } from "./articleData.js";
+import { content } from "./../data/articleData.js";
 
 const articleLoad = () => {
     const Archives = document.getElementsByClassName("Archives")[0];
     const ulElement = document.createElement("ul");
 
-    content.forEach((article) => {
+    // アーカイブが重複しないように、該当の記事を削除する
+    const filtered_content = content.filter((article) => 
+        !(document.getElementsByClassName("blog-title")[0].textContent == article.title)
+    );
+
+    filtered_content.forEach((article) => {
         const boxElement = document.createElement("li");
 
         const AnkerElement = document.createElement("a");
@@ -31,20 +36,6 @@ const articleLoad = () => {
          * </ul>
          */
     });
-    // articleSort();
 };
-
-// const articleSort = () => {
-//     const ulElement = document.getElementsByClassName("blog-container")[0];
-
-//     const liArray = Array.from(ulElement.getElementsByTagName("li"));
-//     liArray.sort((a, b) => {
-//         const dateA = a.getAttribute("id");
-//         const dateB = b.getAttribute("id");
-//         return dateA < dateB ? 1 : -1;
-//     });
-//     ulElement.innerHTML = "";
-//     liArray.forEach(li => ulElement.appendChild(li));
-// };
 
 document.addEventListener("DOMContentLoaded", () => articleLoad());
