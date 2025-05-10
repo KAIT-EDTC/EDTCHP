@@ -1,4 +1,4 @@
-import { content } from "./articleData.js";
+import { content } from "./../data/articleData.js";
 
 const articleLoad = () => {
     const blogArea = document.getElementsByClassName("blog-area")[0];

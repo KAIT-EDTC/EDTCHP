@@ -1,5 +1,5 @@
 // 商品データのインポート
-import { pdct_list } from "./pdctData.js";
+import { pdct_list } from "./../data/pdctData.js";
 
 // selectタブ
 const orderByBox = document.getElementsByClassName("pdct-orderBy")[0];
