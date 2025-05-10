@@ -1,0 +1,5 @@
+/* Noto Sans JPのインポート */
+@import url('https://fonts.googleapis.com/css2?family=M+PLUS+1p&family=Noto+Sans+JP:wght@100..900&family=Zen+Kaku+Gothic+New&display=swap');
+* {
+    font-family: "Noto Sans JP", sans-serif;
+}
