@@ -5,12 +5,13 @@ body {
 }
 
 /* パンくずリスト */
-main .breadcrumb {
+main .breadcrumbs {
     margin: 1% 0;
-    margin-left: 10%;
-    font-size: 1.2vb;
-    font-weight: lighter;
-    padding: 2%;
+    font-size: 1.8vb;
+    padding: 1%;
+}
+main .breadcrumbs a:hover {
+    background-color: #cfcecb;
 }
 main .breadcrumbs i {
     vertical-align: middle;
