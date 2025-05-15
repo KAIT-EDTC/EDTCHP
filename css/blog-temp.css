@@ -1,25 +1,26 @@
 /* 前提としてタグの書き方　.エリア名　.関数名{}とする */
 body {
-    background-color: #e6e6e6;
+    background-color: var(--bg-color);
     /* background-color: 名前の通り背景色を指定 */
 }
 
 /* パンくずリスト */
-/* main .breadcrumb {
+.breadcrumbs {
     margin: 1% 0;
-    margin-left: 10%;
-    font-size: 1.2vb;
-    font-weight: lighter;
-    padding: 2%;
+    font-size: 1.8vb;
+    padding: 1%;
 }
-main .breadcrumbs i {
+.breadcrumbs a:hover {
+    background-color: var(--breadcrumbs-hover-color);
+}
+.breadcrumbs i {
     vertical-align: middle;
     font-size: 1.3em;
     margin: 0 5px;
-} */
+}
 
 /* ブログタイトルスタイル */
-main .blog-title {
+.blog-title {
     margin: 1% 9%;
     margin-right: 9%;
     display: flex;
@@ -28,54 +29,90 @@ main .blog-title {
     width: fit-content;
     background-color: #cfcecb;
 }
-main .blog-title::before {
+.blog-title::before {
     content: "";
     display: inline-block;
     width: 3px;
-    background-color: #0a41d8;
+    background-color: #0a8cd8;
     margin-right: 4px;
     vertical-align: middle;
 }
 
 /* 日付スタイル */
-main .blog-date {
+.blog-date {
     margin: 7px 0;
     margin-left: 8%;
-    font-size: 1rem;
+    font-size: 1.7vb;
 }
 
-main .blog-body {
+.blog-body {
     display: flex;
 }
 
 /* ブログ内容スタイル */
-main .blog-body .blog-main {
+.blog-body .blog-main {
     margin-left: 7%;
     width: 86%;
-    background-color: #F8F7F3;
+    background-color: #f7f7f7;
     padding: 0 2% 2% 2%;
     border-radius: 10px;
 }
 
-/* セクションスタイル */
-main .blog-body .blog-main section {
+/* =======================horaizontal-layout======================= */
+
+/* 画像とsectionを横並びにする場合のクラス */
+.blog-main .horaizontal-layout section {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+}
+
+.horaizontal-layout section div {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.horaizontal-layout img {
+    margin: 1% 0;
+    width: 50%;
+    height: 450px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+/* ================================================================ */
+
+/* =========================vertical-layout========================= */
+
+/* 画像とsectionを縦並びにする場合のクラス */
+.vertical-layout img {
+    margin: 1% 0;
+    width: 100%;
+    height: 450px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+/* ================================================================= */
+
+section div {
+    font-size: 1.5vb;
     margin: 3% 0;
 }
 
-/* 画像スタイル */
-main .blog-body .blog-main section img {
-    margin: 1% 0;
-    width: 100%;
-    height: 500px;
-    object-fit: cover;
-}
-
 /* 著者スタイル */
-main .blog-body .blog-main .author {
-    font-size: 2vb;
+.blog-main .author-container {
     text-align: right;
-    font-weight: bold;
-    margin-right: 10px;
+}
+.author-container .author-caption {
+    border-top: 1px solid #ccc;
+    padding-top: 10px;
+    font-size: 0.9em;
+    color: #555;
+}
+.author-container .author {
+    font-size: 1.2em;
 }
 
 /* サイドメニュー */
@@ -106,23 +143,73 @@ main .pc-only {
     border-radius: 10px;
 }
 
-@media screen and (max-width:480px) {
-    main .blog-body .blog-main section {
+/* #prev i {
+    transition: all 0.3s ease-out;
+}
+#prev a:hover {
+    opacity: 0.4;
+    transition: 0.3s;
+    cursor: pointer;
+}
+#prev i:hover {
+    transform: translateX(-10px);
+    transition: 0.5s;
+} */
+
+#prev {
+    font-size: 1.0em;
+    border-radius: 25px;
+    padding: 0.5%;
+    margin: 1% 18% 1% auto;
+    background-color: #0a8cd8;
+    width: fit-content;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+#prev a {
+    color: #fff;
+}
+#prev i {
+    position: relative;
+    left: 0;
+    transition: left 0.3s ease;
+}
+#prev:hover i {
+    left: -5px;
+}
+
+@media (max-width: 480px) {
+    .blog-main section div {
         margin: 9% 0;
+        font-size: 2.0vb;
     }
-    main .blog-body .blog-main section img {
+    .horaizontal-layout {
+        flex-direction: column;
+    }
+    .horaizontal-layout section {
+        flex-direction: column;
+    }
+    .horaizontal-layout img {
+        margin: 5% 0;
+        width: 100%;
+        height: 450px;
+    }
+    .vertical-layout img {
         object-fit: unset;
         object-position: unset;
         border: unset;
         width: 100%;
         height: auto;
     }
-}
-
-#reset {
-    color:#000;
-    font-weight: bold;
-    font-size: 20px;
-    margin-right: 10%;
-    text-align: right;
+    .author-container .author-caption {
+        font-size: 0.7em;
+    }
+    .author-container .author {
+        font-size: 1.0em;
+    }
+    #prev {
+        font-size: 0.8em;
+        margin-right: 8%;
+        padding: 2%
+    }
 }
