@@ -7,7 +7,7 @@ body {
 /* パンくずリスト */
 .breadcrumbs {
     margin: 1% 0;
-    font-size: 1.8vb;
+    font-size: 1.2em;
     padding: 1%;
 }
 .breadcrumbs a:hover {
@@ -15,24 +15,23 @@ body {
 }
 .breadcrumbs i {
     vertical-align: middle;
-    font-size: 1.3em;
+    font-size: 1.4em;
     margin: 0 5px;
 }
 
 /* ブログタイトルスタイル */
 .blog-title {
-    margin: 1% 9%;
-    margin-right: 9%;
+    margin: 1% 7%;
     display: flex;
     align-items: stretch;
-    font-size: 2.4vb;
+    font-size: 1.5em;
     width: fit-content;
     background-color: #cfcecb;
 }
 .blog-title::before {
     content: "";
     display: inline-block;
-    width: 3px;
+    width: 4px;
     background-color: #0a8cd8;
     margin-right: 4px;
     vertical-align: middle;
@@ -40,9 +39,8 @@ body {
 
 /* 日付スタイル */
 .blog-date {
-    margin: 7px 0;
-    margin-left: 8%;
-    font-size: 1.7vb;
+    margin: 1% 7%;
+    font-size: 1.2em;
 }
 
 .blog-body {
@@ -91,7 +89,7 @@ body {
 /* ================================================================= */
 
 section div p {
-    font-size: 1.9vb;
+    font-size: 1.2em;
     margin: 3% 0;
 }
 
@@ -134,7 +132,7 @@ main .pc-only {
     padding: 3%;
     list-style: none;
     margin: 0;
-    font-size: 1.5vb;
+    font-size: 1.0em;
 }
 .side-menu .Archives ul li:hover {
     text-decoration: underline;
@@ -180,9 +178,26 @@ main .pc-only {
 }
 
 @media (max-width: 480px) {
-    .blog-main section div {
+    .breadcrumbs {
+        font-size: 0.9em;
+    }
+    .blog-title {
+        font-size: 1.1em;
+        margin: 1% auto;
+        margin-left: 1% 
+    }
+    .blog-date {
+        font-size: 0.9em;
+        margin: 5px 2px;
+    }
+    .blog-body .blog-main {
+        width: 100%;
+        margin: 0;
+        border-radius: unset;
+    }
+    .blog-main section div p {
         margin: 9% 0;
-        font-size: 2.0vb;
+        font-size: 1.0em;
     }
     .horaizontal-layout {
         flex-direction: column;
@@ -191,11 +206,13 @@ main .pc-only {
         flex-direction: column;
     }
     .horaizontal-layout img {
+        border-radius: unset;
         margin: 5% 0;
         width: 100%;
         height: 350px;
     }
     .vertical-layout img {
+        border-radius: unset;
         object-fit: unset;
         object-position: unset;
         border: unset;
@@ -210,7 +227,7 @@ main .pc-only {
     }
     #prev {
         font-size: 0.8em;
-        margin-right: 8%;
-        padding: 2%
+        margin-right: 2%;
+        padding: 2%;
     }
 }

@@ -78,7 +78,7 @@ body {
 }
 
 .blog-details {
-    font-size: 1.4vb;
+    font-size: 1.1em;
     text-align: center;
     padding: 2%;
 }
@@ -108,6 +108,9 @@ body {
     .blog-img {
         height: unset;
         height: 120px;
+    }
+    .blog-details {
+        font-size: 0.8em
     }
 }
 
