@@ -41,15 +41,15 @@ export const content = [
         author: "番倉", 
         link: "blog/blog-data/asahi-IT.html" 
     },
-    // { 
-    //     date: "2024-12-08", 
-    //     title: "サイエンスウィンターに参加しました！", 
-    //     img: "img/EDTC-icon.png", 
-    //     caption: "12月8日サイエンスウィンターに参加しました。\
-    //         厚木市子ども科学館にて行われたサイエンスウィンターに参加しました。", 
-    //     author: "棚橋", 
-    //     link: "blog/blog-data/2024siencewinter.html" 
-    // },
+    { 
+        date: "2024-12-08", 
+        title: "サイエンスウィンターに参加しました！", 
+        img: "blog/blog-img/science-winter-1208-3.jpg", 
+        caption: "12月8日サイエンスウィンターに参加しました。\
+            厚木市子ども科学館にて行われたサイエンスウィンターに参加しました。", 
+        author: "棚橋", 
+        link: "blog/blog-data/2024siencewinter.html" 
+    },
     // { 
     //     date: "2025-02-07", 
     //     title: "EDTCが富士市にお邪魔しました。", 
