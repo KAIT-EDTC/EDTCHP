@@ -5,14 +5,30 @@
     box-sizing: border-box;
 }
 
-body {
+main {
     color: #333;
+    background-color: var(--bg-color);
+}
+
+/* パンくずリスト */
+.breadcrumbs {
+    margin: 1% 0;
+    font-size: 1.8vb;
+    padding: 1%;
+    width: fit-content;
+}
+.breadcrumbs a:hover {
+    background-color: var(--breadcrumbs-hover-color);
+}
+.breadcrumbs i {
+    vertical-align: middle;
+    font-size: 1.3em;
+    margin: 0 5px;
 }
 
 /* メインビジュアル */
 .main-visual {
     position: relative;
-    height: 400px;
     overflow: hidden;
 }
 
@@ -26,6 +42,7 @@ body {
 .main-content {
     position: relative;
     width: 100%;
+    height: 100%; /* 高さを指定 */
     min-height: 500px;
     overflow: hidden;
 }
@@ -160,10 +177,4 @@ body {
     font-size: 16px;
     color: #666;
     margin-bottom: 10px;
-}
-
-.car-image {
-    max-width: 300px;
-    margin: 0 auto;
-    display: block;
 }

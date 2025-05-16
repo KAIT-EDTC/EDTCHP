@@ -67,12 +67,6 @@ body {
     gap: 20px;
 }
 
-.horaizontal-layout section div {
-    display: flex;
-    flex-direction: column;
-    gap: 30px;
-}
-
 .horaizontal-layout img {
     margin: 1% 0;
     width: 50%;
@@ -96,8 +90,8 @@ body {
 
 /* ================================================================= */
 
-section div {
-    font-size: 1.5vb;
+section div p {
+    font-size: 1.9vb;
     margin: 3% 0;
 }
 
@@ -118,6 +112,7 @@ section div {
 /* サイドメニュー */
 main .pc-only {
     width: 20%;
+    margin: 1%;
 }
 .side-menu {
     width: 100%;
@@ -126,13 +121,19 @@ main .pc-only {
     width: 100%;
     text-align: center;
 }
+.side-menu h3 {
+    padding: 2%;
+    color: #fff;
+    background-color: var(--blog-main-color);
+}
 .side-menu .Archives ul {
     display: block;
+    background-color: #dbe9ed;
 }
 .side-menu .Archives ul li {
-    text-align: center;
+    padding: 3%;
     list-style: none;
-    margin: 5% 2%;
+    margin: 0;
     font-size: 1.5vb;
 }
 .side-menu .Archives ul li:hover {
@@ -192,7 +193,7 @@ main .pc-only {
     .horaizontal-layout img {
         margin: 5% 0;
         width: 100%;
-        height: 450px;
+        height: 350px;
     }
     .vertical-layout img {
         object-fit: unset;

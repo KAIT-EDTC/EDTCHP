@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="./../../css/reset.css">
     <link rel="stylesheet" href="./../../css/headfoot.css">
     <link rel="stylesheet" href="./../../css/blog-temp.css">
+    <link rel="stylesheet" href="./../../css/global.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
     <!-- icon link tag -->
     <link rel="icon" href="../../favicon.ico">
@@ -56,26 +57,64 @@
     <!-- Header End -->
     <!--main strt-->
     <main>
-        <div class="blog-title">
-            <!-- ここにタイトル -->
+        <div class="breadcrumbs">
+            <a href="./../../blog.html">ブログ</a>
+            <i class="fa fa-angle-right"></i>
+            <a href=".">...<!-- ここにブログのタイトル --></a>
         </div>
+        <div class="blog-title"><!-- ここにタイトル --></div>
         <div class="blog-date"><!-- ここに日付 --></div>
         <div class="blog-body">
             <div class="blog-main">
                 <!-- ここに本文 -->
-                <!-- <section></section>を使い文章を分割する。(使い方は他のファイルを参考に。) -->
-                <p class="author"><!-- ここに著者 --></p>
+                <!-- 
+                    画像と感想を横並びにしたいなら最初のdivタグにhoraizontal-layoutを指定する 
+                    画像と感想を縦並びにしたいなら最初のdivタグにvertical-layoutを指定する
+                    <section>の中には画像1つ+感想などを入れる(感想はpタグで囲む。複数でも可) 
+                -->
+
+                <!-- 横並び -->
+                <div class="horaizontal-layout">
+                    <section>
+                        <img src="画像1" alt="">
+                        <div>
+                            <p>感想1</p>
+                            <!-- ここの間は余白が入る -->
+                            <p>感想2</p>
+                        </div>
+                    </section>
+                    <section>
+                        <img src="画像2" alt="">
+                        <div>
+                            <p>感想3</p>
+                        </div>
+                    </section>
+                </div>
+
+                <!-- 縦並び -->
+                <div class="vertical-layout">
+                    <section>
+                        <img src="画像3" alt="">
+                        <div>
+                            <p>感想4</p>
+                        </div>
+                    </section>
+                </div>
+                <div class="author-container">
+                    <p class="author-caption">ブログ著者</p>
+                    <p class="author"><!-- ここに著者 --></p>
+                </div>
             </div>
             <div class="pc-only">
                 <div class="side-menu">
-                    <div class="Archives">Archives
-                        <script type="module" src="./../../js/makeArchives.js"></script>
+                    <div class="Archives">
+                        <h3><i class="fa fa-list"></i> 他の記事もどうぞ！</h3>
+                        <script type="module" src="./../../js/archiveListRenderer.js"></script>
                     </div>
-                    <div class=""></div>
                 </div>
             </div>
         </div>
-        <div id="reset"><a href="./../../blog.html" style="color: black;">前のページにもどる</a></div>
+        <div id="prev"><a href="./../../blog.html"><i class="fa fa-arrow-left"></i> ブログトップへ戻る</a></div>
     </main>
 
     <!--main end-->

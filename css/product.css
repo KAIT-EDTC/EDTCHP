@@ -1,5 +1,5 @@
 body {
-    background: #F8F7F3;
+    background: var(--bg-color);
 }
 
 h1 {
@@ -32,7 +32,6 @@ select:focus {
 
 /* ul */
 .pdct-container {
-    /* border: 1px solid #55555555; */
     padding: 5%;
     display: grid;
     grid-template-columns: repeat(5, 1fr);
@@ -75,8 +74,6 @@ select:focus {
 
 .pdct-contents:hover {
     transform: translateY(-5px);
-    /* ボーダーを青くするやつ */
-    /* border: 2px solid rgb(52, 152, 219); */
     box-shadow: 0 4px 15px rgba(52, 152, 219, 0.5);
 }
 
@@ -86,6 +83,7 @@ select:focus {
     margin: 0;
     height: 100%;
     width: 100%;
+    background-color: #F8F7F3;
 }
 
 /* img */
@@ -101,48 +99,28 @@ select:focus {
 .pdct-details {
     padding: 3%;
     text-align: center;
-    font-size: 1.0em;
-    background-color: #F8F7F3;
+    font-size: 1.4vb;
     line-height: 1.6em;
     margin-bottom: 0;
 }
 
 .pdct-name {
-    font-size: 1.3em;
+    font-size: 1.8vb;
     margin-bottom: 4%;
 }
 
 .pdct-headline {
-    font-size: 0.8em;
     margin-bottom: 4%;
 }
 
 .pdct-maker {
-    font-size: small;
     text-align: right;
 }
-
-/* .pdct-details .pdct-price {
-    display: block;
-    margin-bottom: 2%;
-} */
-
-/* 商品名の下の疑似要素をホバー時に表示するやつ
-.pdct-contents:hover .pdct-name::after {
-    content: "";
-    display: block;
-    width: 100%;
-    height: 2px;
-    background-color: #3498db;
-    margin: 1% 0;
-    transition: background-color 0.3s ease;
-} */
 
 .pdct-tags-container {
     margin-left: 3%;
     display: flex;
     flex-wrap: wrap;
-    /* gap: 5px; */
 }
 
 .pdct-tag {
@@ -150,7 +128,6 @@ select:focus {
     font-size: 0.8em;
     padding: 2%;
     user-select: none;
-    /* margin-bottom: 3%; */
 }
 
 .pdct-tag::before {
