@@ -15,7 +15,7 @@ export const pdct_list = [
     },
     {
         name: "ArtoRo(アトロ)",
-        headline: "まるで動物のようについてくるロボット！<br>仕組みから学ぶ、ロボット製作体験！",
+        headline: "まるで動物のようについてくるロボット<br>仕組みから学ぶ、ロボット製作体験！",
         src: IMAGE_DIR_PATH + "ArtoRo-front.jpg",
         file: "product-ArtoRo.html",
         tags: ["未定", "中学生"],

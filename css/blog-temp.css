@@ -122,7 +122,7 @@ main .pc-only {
 .side-menu h3 {
     padding: 2%;
     color: #fff;
-    background-color: var(--blog-main-color);
+    background-color: var(--main-color);
 }
 .side-menu .Archives ul {
     display: block;
