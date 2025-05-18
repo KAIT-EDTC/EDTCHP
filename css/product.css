@@ -53,8 +53,12 @@ select:focus {
     }
 
     .pdct-box .pdct-name {
-        font-size: 1.5em;
+        font-size: 1.3em;
         font-weight: bold;
+    }
+
+    .pdct-box .pdct-headline {
+        font-size: 0.8em;
     }
 }
 
@@ -66,7 +70,7 @@ select:focus {
 
 /* li */
 .pdct-contents {
-    border-radius: 10px;
+    /* border-radius: 10px; */
     border-top: none;
     overflow: hidden;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -92,7 +96,7 @@ select:focus {
     width: 100%;
     height: 140px;
     object-fit: cover;
-    border-radius: 2% 2% 0 0;
+    /* border-radius: 2% 2% 0 0; */
     pointer-events: none;
 }
 
@@ -132,7 +136,8 @@ select:focus {
     user-select: none;
 }
 
-.pdct-tag::before {
+/* タグアイコンを追加したため一旦コメントアウト */
+/* .pdct-tag::before {
     content: "";
     display: inline-block;
     width: 5px;
@@ -140,4 +145,4 @@ select:focus {
     background-color: #3498db;
     border-radius: 50%;
     margin-right: 5px;
-}
+} */

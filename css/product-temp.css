@@ -134,7 +134,7 @@ main {
     width: 12px;
     height: 12px;
     /* fill: #30B4B4; */
-    fill: var(--main-color);
+    fill: rgb(76, 165, 216);
 }
 
 /* レスポンシブ対応 */

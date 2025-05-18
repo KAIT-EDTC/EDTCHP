@@ -46,7 +46,7 @@ const pdctLoad = () => {
         pdct.tags.map((tag) => {
             const tagsElement = document.createElement("li");
             tagsElement.className = "pdct-tag";
-            tagsElement.innerText = tag;
+            tagsElement.innerHTML = '<i class="fa fa-tag" aria-hidden="true"></i> ' + tag;
             tagsContainerElement.appendChild(tagsElement);
         })
 
