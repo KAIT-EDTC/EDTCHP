@@ -18,6 +18,7 @@ const articleLoad = () => {
 
         const titleElement = document.createElement("span");
         titleElement.className = "archives-note";
+        titleElement.title = article.title;
         titleElement.innerHTML = article.title;
 
         AnkerElement.appendChild(titleElement);
