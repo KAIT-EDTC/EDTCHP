@@ -5,7 +5,7 @@ export const content = [
         img: "blog/blog-img/24-0622-yugyou1.jpg",
         caption: "前期最終回となる遊行塾でしたが、楽しく学べる授業を提供できたと思います。<br>\
                 当サイト初のブログになりますので至らぬ点もあるかと思いますが読んでいただけたら幸いです。",
-        author: "山口",
+        author: "足立",
         link: "blog/blog-data/yugyou5-blog.html"
     },
     { 
@@ -14,7 +14,7 @@ export const content = [
         img: "blog/blog-img/24-0629-asahi1.png", 
         caption: "本年度二回目となるあさひ学苑さんとのイベントを行いました。<br>\
                 今回も弊学に来ていただき学内を探索したり工房にて缶バッチ制作をしていただきました", 
-        author: "山口", 
+        author: "番倉", 
         link: "blog/blog-data/asahi.blog.html" 
     },
     { 
