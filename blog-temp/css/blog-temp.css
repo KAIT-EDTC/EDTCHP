@@ -1,0 +1,252 @@
+/* 前提としてタグの書き方　.エリア名　.関数名{}とする */
+body {
+    background-color: var(--bg-color);
+    /* background-color: 名前の通り背景色を指定 */
+}
+
+/* パンくずリスト */
+.breadcrumbs {
+    margin: 1% 0;
+    font-size: 1.2em;
+    padding: 1%;
+}
+.breadcrumbs a:hover {
+    background-color: var(--breadcrumbs-hover-color);
+}
+.breadcrumbs i {
+    vertical-align: middle;
+    font-size: 1.4em;
+    margin: 0 5px;
+}
+
+/* ブログタイトルスタイル */
+.blog-title {
+    margin: 1% 7%;
+    display: flex;
+    align-items: stretch;
+    font-size: 1.5em;
+    width: fit-content;
+    background-color: #cfcecb;
+}
+.blog-title::before {
+    content: "";
+    display: inline-block;
+    width: 4px;
+    background-color: #0a8cd8;
+    margin-right: 4px;
+    vertical-align: middle;
+}
+
+/* 日付スタイル */
+.blog-date {
+    margin: 1% 7%;
+    font-size: 1.2em;
+}
+
+.blog-body {
+    display: flex;
+}
+
+/* ブログ内容スタイル */
+.blog-body .blog-main {
+    margin-left: 7%;
+    width: 86%;
+    background-color: #f7f7f7;
+    padding: 0 2% 2% 2%;
+    border-radius: 10px;
+}
+
+/* =======================horaizontal-layout======================= */
+
+/* 画像とsectionを横並びにする場合のクラス */
+.blog-main .horaizontal-layout section {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+}
+
+.horaizontal-layout img {
+    margin: 1% 0;
+    width: 50%;
+    height: 450px;
+    object-fit: cover;
+    /* border-radius: 10px; */
+}
+
+/* ================================================================ */
+
+/* =========================vertical-layout========================= */
+
+/* 画像とsectionを縦並びにする場合のクラス */
+.vertical-layout img {
+    margin: 1% 0;
+    width: 100%;
+    height: 450px;
+    object-fit: cover;
+    /* border-radius: 10px; */
+}
+
+/* ================================================================= */
+
+section div p {
+    font-size: 1.2em;
+    margin: 3% 0;
+}
+
+/* 著者スタイル */
+.blog-main .author-container {
+    text-align: right;
+}
+.author-container .author-caption {
+    border-top: 1px solid #ccc;
+    padding-top: 10px;
+    font-size: 0.9em;
+    color: #555;
+}
+.author-container .author {
+    font-size: 1.2em;
+}
+
+/* サイドメニュー */
+main .pc-only {
+    width: 20%;
+    margin: 1%;
+}
+.side-menu {
+    width: 100%;
+}
+.side-menu .Archives {
+    width: 100%;
+    text-align: center;
+}
+.side-menu h3 {
+    padding: 2%;
+    color: #fff;
+    background-color: var(--main-color);
+}
+.side-menu .Archives ul {
+    display: block;
+    background-color: #dbe9ed;
+}
+.side-menu .Archives ul li {
+    padding: 3%;
+    list-style: none;
+    margin: 0;
+    font-size: 1.0em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 273px;
+    margin: 0 auto;
+}
+.side-menu .Archives ul li:before {
+    content: "";
+    display: inline-block;
+    width: 5px;
+    height: 5px;
+    border: 2px solid var(--main-color);
+    border-radius: 50%;
+    margin-right: 5px;
+    background-color: transparent;
+}
+.side-menu .Archives ul li:hover {
+    text-decoration: underline;
+    text-decoration-color: rgb(109, 108, 108);
+    text-decoration-thickness: 2px;
+    text-underline-offset: 3px;
+    border-radius: 10px;
+}
+.side-menu .Archives ul li span {
+    color: #000;
+    text-align: left;
+}
+
+/* #prev i {
+    transition: all 0.3s ease-out;
+}
+#prev a:hover {
+    opacity: 0.4;
+    transition: 0.3s;
+    cursor: pointer;
+}
+#prev i:hover {
+    transform: translateX(-10px);
+    transition: 0.5s;
+} */
+
+#prev {
+    font-size: 1.0em;
+    margin: 1% 18% 1% auto;
+    width: fit-content;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+#prev a {
+    white-space: nowrap;
+    border-radius: 25px;
+    padding: 6%;
+    background-color: #0a8cd8;
+    color: #fff;
+}
+#prev i {
+    position: relative;
+    left: 0;
+    transition: left 0.3s ease;
+}
+#prev:hover i {
+    left: -5px;
+}
+
+@media (max-width: 819px) {
+    .breadcrumbs {
+        font-size: 0.9em;
+    }
+    .blog-title {
+        font-size: 1.1em;
+        margin: 1% 2%;
+    }
+    .blog-date {
+        font-size: 0.9em;
+        margin: 5px 2px;
+    }
+    .blog-body .blog-main {
+        width: 100%;
+        margin: 0;
+        border-radius: unset;
+    }
+    .blog-main section div p {
+        margin: 9% 0;
+        font-size: 1.0em;
+    }
+    .horaizontal-layout {
+        flex-direction: column;
+    }
+    .horaizontal-layout section {
+        flex-direction: column;
+    }
+    .horaizontal-layout img {
+        border-radius: unset;
+        margin: 5% 0;
+        width: 100%;
+        height: 350px;
+    }
+    .vertical-layout img {
+        border-radius: unset;
+        object-fit: unset;
+        object-position: unset;
+        border: unset;
+        width: 100%;
+        height: auto;
+    }
+    .author-container .author-caption {
+        font-size: 0.7em;
+    }
+    .author-container .author {
+        font-size: 1.0em;
+    }
+    #prev {
+        font-size: 0.8em;
+        margin-right: 2%;
+        padding: 2%;
+    }
+}

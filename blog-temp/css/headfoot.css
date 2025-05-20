@@ -1,0 +1,314 @@
+/*=========== header menuの設定 ==========*/
+/*PC用のスタイル 768-->820*/
+@media screen and (min-width:820px) {
+    .inner {
+        max-width: 1200px;
+    }
+}
+
+/*モバイルとPCで表示に関するスタイル*/
+.sp-only {
+    display: block;
+    /*モバイルでは表示*/
+}
+
+.pc-only {
+    display: none;
+    /*モバイルでは非表示*/
+}
+
+/*PC用のスタイル*/
+
+@media screen and (min-width:820px) {
+    .sp-only {
+        display: none;
+        /*PCでは非表示*/
+    }
+
+    .pc-only {
+        display: block;
+        /*PCでは表示*/
+    }
+}
+header {
+    padding: 5px 4% 5px 4%;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+    z-index: 3;
+}
+body{
+    margin-top: 70px;
+}
+/*モバイルのみ表示*/
+
+/*ハンバーガーメニューのスタイル*/
+/*ハンバーガーメニュー*/
+.gnav-toggle {
+    position: relative;
+    margin-top: 12px;
+}
+
+/*チェックボックスなどを非表示にする*/
+.gnav-hidden {
+    display: none;
+}
+
+/*アイコンのスペース*/
+#gnav-open {
+    display: inline-block;
+    width: 30px;
+    height: 22px;
+    vertical-align: middle;
+}
+
+/*ハンバーガーの三本線を表現*/
+#gnav-open span,
+#gnav-open span::before,
+#gnav-open span::after {
+    content: '';
+    position: absolute;
+    height: 3px;
+    /*線の太さ*/
+    width: 25px;
+    /*線の長さ*/
+    border-radius: 3px;
+    background: #555;
+    display: block;
+    cursor: pointer;
+}
+
+#gnav-open span::before {
+    bottom: -8px;
+}
+
+#gnav-open span::after {
+    bottom: -16px;
+}
+
+/*閉じる用の薄黒箇所*/
+#gnav-close {
+    display: none;
+    position: fixed;
+    z-index: 90;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #000;
+    opacity: 0;
+    transition: 0.3s ease-in-out;
+}
+
+/*チェックがついたら表示させる*/
+#gnav-input:checked~#gnav-close {
+    display: block;
+    opacity: 0.5;
+
+}
+
+#gnav-input:checked~#gnav-content {
+    transform: translateX(0%);
+    box-shadow: 6px 0 25px rgba(0, 0, 0, 0.15);
+}
+
+/*メニューの中身*/
+#gnav-content {
+    overflow: auto;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 300;
+    width: 70%;
+    max-width: 300px;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    transition: 0.3s ease-in-out;
+    transform: translateX(-105%);
+}
+
+.gnav-menu {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 50px;
+    text-transform: uppercase;
+    /*小文字、大文字の混在を大文字に統一*/
+}
+
+.gnav-item {
+    margin: 10px;
+    padding-bottom: 20px;
+}
+
+.gnav-item a {
+    color: #fff;
+    font-size: 12px;
+    display: block;
+    width: 200px;
+    text-align: center;
+}
+
+/* PCのメニュー */
+
+.gnav-sec{
+    box-sizing: none;
+}
+.gnav-sec span{
+    font-size: 17px;
+    font-weight: bold;
+}
+.gnav-sec a {
+    font-size: 12px;
+}
+/*疑似要素で1行目のスタイル指定*/
+.gnav-item a::first-line {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.gnav-item a:hover {
+    color: #85a7cc;
+}
+
+a {
+    text-decoration: none;
+    color: #4b4b4b;
+}
+
+ul {
+    list-style: none;
+    display: flex;
+}
+
+li {
+    margin: 0 15px 0 0;
+    font-size: 14px;
+}
+
+nav {
+    margin: 0 1% 0 auto;
+}
+
+body {
+    line-height:normal;
+}
+.title {
+    margin-top: 8px;
+    padding: 0;
+    font-size: 25px;
+    font-weight: bold;
+}
+/* snsボタン */
+.sns_button {
+    float: left;
+    box-shadow: inset 0 0 0 2px #333;
+    border-radius: 100%;
+    -moz-transition: all 280ms ease;
+    -o-transition: all 280ms ease;
+    -webkit-transition: all 280ms ease;
+    transition: all 280ms ease;
+}
+
+.sns_button a {
+    display: table-cell;
+    width: 44px;
+    height: 44px;
+    color: #555;
+    text-align: center;
+    vertical-align: middle;
+    -moz-transition: all 280ms ease;
+    -o-transition: all 280ms ease;
+    -webkit-transition: all 280ms ease;
+    transition: all 280ms ease;
+}
+
+.sns_button i {
+    font-size: 20px;
+    vertical-align: middle;
+}
+
+.sns_button:hover {
+    box-shadow: inset 0 0 0 22px #fff;
+}
+
+.sns_button+.sns_button {
+    margin: 0 0 0 12px;
+}
+
+.twitter:hover a {
+    color: #1B95E0;
+}
+
+.instagram:hover a {
+    color: #2b5c84;
+}
+
+
+/*====================================================================================
+======================================================================================
+======================================================================================*/
+/* footerの設定 */
+.flex p{ /*Added Programs*/
+    text-align: center;
+}
+.flex a{
+    margin: 0 auto; 
+    text-align: center;
+    color: antiquewhite;
+}
+footer .footer-list {
+    display: block;
+    margin: 0 auto;
+}
+
+footer .gyou{
+    margin-top: 5px;
+}
+
+footer .gyou-a{
+    margin-top: 15px;
+}
+
+footer .gyou-b{
+    margin-top: 3px;
+    margin-bottom: 15px;
+}
+
+footer .syasinn{
+    vertical-align: text-bottom;
+}
+.footer{
+    color: white;
+    background-color: #333;
+}
+.footer-area-copy {
+    color: #ccc;
+    font-size: 12px;
+    width: 100%;
+    background-color: #333;
+}
+.flex {
+    display: flex; /*横並び*/
+    background-color: #333;
+    color:#fff;
+    padding-left: 0px;
+}
+.flex .image {
+    width: 60px; /*画像サイズ指定*/
+    margin: 0;
+    padding: 0;
+    position: relative;
+}
+.flex .text {
+    margin: 0 0 0 20px;
+    padding: 0;
+    text-align: center;
+}
+.flex li{
+    margin:0;
+    padding-inline-start: 0;
+}
