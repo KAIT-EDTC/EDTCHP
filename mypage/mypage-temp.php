@@ -78,7 +78,8 @@
     <div class="panel">
         <div class="calender">
             <p><a href='calendar/calendar.php'>カレンダー</a></p>
-            <?php echo "<iframe src='{$_ENV['CALENDAR_URL']}' style='border:solid 1px #777' width='1500' height='600' frameborder='0' scrolling='no'></iframe>"; ?>
+            <?php echo "<iframe src='https://calendar.google.com/calendar/embed?height=600&wkst=1&ctz=Asia%2FTokyo&showPrint=0&showTitle=0&showCalendars=0&showTz=0&src=YWQ4YmZjOGU4ZjIxN2E2ZjNlMjM2NzkxOTg0YTU5MWUyMzM3OTA1ZTY4Njk1MmQ1YTVkZDg4NTcwMTU2ZDY2YUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=YWRkcmVzc2Jvb2sjY29udGFjdHNAZ3JvdXAudi5jYWxlbmRhci5nb29nbGUuY29t&color=%23A79B8E&color=%2333B679' 
+            style='border:solid 1px #777' width='1500' height='600' frameborder='0' scrolling='no'></iframe>"; ?>
             <!-- むずい -->
         </div>
         <div class="remind">
