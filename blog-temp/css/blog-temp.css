@@ -59,13 +59,13 @@ body {
 /* =======================horaizontal-layout======================= */
 
 /* 画像とsectionを横並びにする場合のクラス */
-.blog-main .horaizontal-layout section {
+.blog-main .horizontal-layout section {
     display: flex;
     align-items: flex-start;
     gap: 20px;
 }
 
-.horaizontal-layout img {
+.horizontal-layout img {
     margin: 1% 0;
     width: 50%;
     height: 450px;
@@ -218,13 +218,13 @@ main .pc-only {
         margin: 9% 0;
         font-size: 1.0em;
     }
-    .horaizontal-layout {
+    .horizontal-layout {
         flex-direction: column;
     }
-    .horaizontal-layout section {
+    .horizontal-layout section {
         flex-direction: column;
     }
-    .horaizontal-layout img {
+    .horizontal-layout img {
         border-radius: unset;
         margin: 5% 0;
         width: 100%;

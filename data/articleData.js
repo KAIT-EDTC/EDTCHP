@@ -5,8 +5,13 @@ export const content = [
         img: "blog/blog-img/24-0622-yugyou1.jpg",
         caption: "前期最終回となる遊行塾でしたが、楽しく学べる授業を提供できたと思います。<br>\
                 当サイト初のブログになりますので至らぬ点もあるかと思いますが読んでいただけたら幸いです。",
+<<<<<<< HEAD
         author: "山口",
         link: "blog/blog-data/24-06-22yugyou5-blog.html"
+=======
+        author: "足立",
+        link: "blog/blog-data/yugyou5-blog.html"
+>>>>>>> 84c49fd9d6724024b53cfdc494ad4aa2c2f7b4ab
     },
     { 
         date: "2024-06-29", 
@@ -14,8 +19,13 @@ export const content = [
         img: "blog/blog-img/24-0629-asahi1.png", 
         caption: "本年度二回目となるあさひ学苑さんとのイベントを行いました。<br>\
                 今回も弊学に来ていただき学内を探索したり工房にて缶バッチ制作をしていただきました", 
+<<<<<<< HEAD
         author: "山口", 
         link: "blog/blog-data/24-06-29asahi.blog.html" 
+=======
+        author: "番倉", 
+        link: "blog/blog-data/asahi.blog.html" 
+>>>>>>> 84c49fd9d6724024b53cfdc494ad4aa2c2f7b4ab
     },
     { 
         date: "2024-07-11", 
