@@ -18,8 +18,8 @@ require_once __DIR__ . '/handlers/get_event.php';
         <label for="title">タイトル:</label>
         <input type="text" id="title" name="title" required><br><br>
         
-        <label for="remark">備考:</label>
-        <textarea id="remark" name="remark" required></textarea><br><br>
+        <label for="description">備考:</label>
+        <textarea id="description" name="description" required></textarea><br><br>
         
         <label for="start_time">開始日時:</label>
         <input type="datetime-local" id="start_time" name="start_time" required><br><br>

@@ -1,5 +1,4 @@
 <?php
-require_once 'functions.php';
 use Google\Service\Calendar as Google_Service_Calendar;
 use Google\Service\Calendar\EventDateTime as Google_Service_Calendar_EventDateTime;
 use Google\Service\Calendar\Event as Google_Service_Calendar_Event;
@@ -47,7 +46,8 @@ class GoogleCalendarSync {
             'maxResults' => 100,
             'orderBy' => 'startTime',
             'singleEvents' => true,
-            'timeMin' => date('c', strtotime('2025')),
+            'timeMin' => date('c'),
+            'timeZone' => 'Asia/Tokyo'
         ];
         
         $results = $this->service->events->listEvents(CALENDAR_ID, $optParams);
@@ -164,8 +164,6 @@ class GoogleCalendarSync {
         
         // カレンダー側で更新があった場合
         if (!empty($comparison['calendar_updates'])) {
-            DebugConsole("カレンダー側の更新");
-            DebugConsole($comparison['calendar_updates']);
             foreach ($comparison['calendar_updates'] as $update) {
                 $dbEvent = $update['db_event'];
                 $calEvent = $update['calendar_event'];
@@ -198,8 +196,6 @@ class GoogleCalendarSync {
         
         // カレンダーにあってDBにないイベントの場合
         if (!empty($comparison['missing_in_db'])) {
-            DebugConsole("カレンダーにあってDBに無い");
-            DebugCOnsole($comparison['missing_in_db']);
             foreach ($comparison['missing_in_db'] as $missingInDb) {
                 $stmt = $this->db->prepare("
                     INSERT INTO events (title, description, start_time, end_time, calendar_event_id, participants) 
@@ -232,8 +228,6 @@ class GoogleCalendarSync {
         
         // DB側で更新があった場合
         if (!empty($comparison['DB_updates'])) {
-            DebugConsole("DB側で更新");
-            DebugConsole($comparison['DB_updates']);
             foreach ($comparison['DB_updates'] as $update) {
                 $this->updateCalendarEvent($update['db_event']);
             }
@@ -241,8 +235,6 @@ class GoogleCalendarSync {
         
         // DBにあってカレンダーにないイベントの場合
         if (!empty($comparison['missing_in_calendar'])) {
-            DebugConsole("DBにありカレンダーに無い");
-            DebugConsole($comparison['missing_in_calendar']);
             foreach ($comparison['missing_in_calendar'] as $missing) {
                 $this->createCalendarEvent($missing);
             }
