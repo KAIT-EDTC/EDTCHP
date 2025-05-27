@@ -1,11 +1,7 @@
 <?php
-    define('DSN', 'mysql:host=mysql3105.db.sakura.ne.jp;dbname=kaitedtc_mamber-db');
-    define('DB_USERNAME', 'kaitedtc_mamber-db');
-    define('DB_PASS', 'GU8-2bPQKYWP9m-');
-    define('LOGIN_FORM', 'https://kaitedtc.chew.jp/login-form/login.html');
-    define('REGISTER_FORM', 'https://kaitedtc.chew.jp/register-form/touroku.html');
-    define('MYPAGE', 'https://kaitedtc.chew.jp/mypage/mypage-temp.php');
+    require_once $_SERVER['DOCUMENT_ROOT'] . '/EDTCHP/meta.php';
 
+    $errors = []; // エラーメッセージを格納する
     $id = htmlspecialchars($_POST['ID'], ENT_QUOTES, 'UTF-8');
     $pw = htmlspecialchars($_POST['pw'], ENT_QUOTES, 'UTF-8');
     // 使ってないから一旦コメントアウト
@@ -14,11 +10,9 @@
     // }, $categories));
 
     try {
-        session_start(); // セッション開始
+        session_start();
         $conn = new PDO(DSN, DB_USERNAME, DB_PASS);
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        // テーブルのカラムの要素を知らないので仮にidとpassで書いてるよ。
-        // login-dataテーブルのカラムがどんな感じなのか教えてほしい。
         $stmt = $conn->prepare('SELECT * FROM `login-data` WHERE SIDn = :id AND pass = :pass');
                                                       // ここの書き方はSQLインジェクション防ぐ書き方だよ。
                                                       // 直接queryメソッドで実行してもいいけどセキュリティ的にこっちの方が安心。
@@ -31,16 +25,29 @@
             if ($id == 0) {
                 header('Location: ' . REGISTER_FORM); //転送先
             } else{
-                $_SESSION['userId'] = $id;                                         // ユーザーIdはページ遷移後でも使いそうだからサーバー上で保存
+                $_SESSION['userId'] = $id; // ユーザーIdはページ遷移後でも使いそうだからサーバー上で保存
                 header('Location: ' . MYPAGE); //転送先
             }
         } else {
-            echo '認証失敗';
+            $errors['nameOrpass'] = "学籍番号またはパスワードが正しくありません。";
+            $_SESSION['errors'] = $errors;
             header('Location: ' . LOGIN_FORM);
         }
 
     } catch (PDOException $e) {
-        $message = "エラー: " . $e->getMessage();
+        $errorCode = $e->getCode();
+        switch ($errorCode) {
+            case '1045':
+            $errors['db_notFound'] = "データベースが見つかりません。DB設定が不適切です。";
+            break;
+            case '2002':
+            $errors['db_connect'] = "データベースサーバーに接続できません。<br>サーバーが切断された可能性があります。";
+            break;
+            default:
+            $errors['unknown'] = "例外処理がスローされました。<br>" . $e->getMessage();
+            break;
+        }
+        $_SESSION['errors'] = $errors;
         header('Location: ' . LOGIN_FORM);
     }
     $conn = null;

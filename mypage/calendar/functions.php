@@ -3,6 +3,7 @@ use Google\Service\Calendar as Google_Service_Calendar;
 use Google\Service\Calendar\Event as Google_Service_Calendar_Event;
 
 require_once __DIR__ . '/vendor/autoload.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/EDTCHP/meta.php';
 $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
 $dotenv->load();
 // envファイルで隠しとく
@@ -70,10 +71,10 @@ function addEvents($title, $remark, $start, $end, $participants) {
  * @param int $maxResults 取り出したい個数
  * @return array フォーマットされたイベントデータが返される
  */
-function getEvents($maxResults) { 
+function getEvents() { 
     $events = [];
     $optParams = array(
-        'maxResults' => $maxResults,
+        'maxResults' => 100,
         'orderBy' => 'startTime',
         'singleEvents' => true,
         'timeMin' => date('c', strtotime(date('Y-m-d'))) // TODO: ロードされた時の日時から取得するようにする
@@ -149,5 +150,32 @@ function RFC2Jap($rfc) {
     return $date->format('m月d日H時i分') . $day;
     // 途中にはさんでもOK
     // return $date->format('m月d日' . $day . 'H時i分');
+}
+
+/**
+ * 学籍番号に紐づけられている名前を抽出する。
+ * 学生番号はカンマで区切られていても問題ない
+ * 
+ * @param string $part 学籍番号
+ * @param var $conn PDOインスタンス
+ * 
+ * @return string 名前
+ */
+function getMemberName($conn, $part) {
+    $name = '';
+    // 参加者欄ではカンマ区切りで入力されることを想定。
+    $arr_member = explode(',', $part);
+    // 参加者分のプレースホルダを作成
+    $placeholders = rtrim(str_repeat('?,', count($arr_member)), ',');
+    // 参加者の名前を取得
+    $stmt = $conn->prepare('SELECT name FROM `login-data` WHERE SIDn IN ('.$placeholders.')');
+    $stmt->execute($arr_member);
+    $stmt = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    // カンマ区切りで参加者の名前を表示させる
+    foreach ($stmt as $s) {
+        $name .= $s['name'].', ';
+    }
+    // ラストのカンマは要らないので削除
+    return rtrim($name, ', ');
 }
 ?>

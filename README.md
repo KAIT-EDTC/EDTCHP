@@ -68,6 +68,27 @@
       composer require vlucas/phpdotenv
       ```
 
+  上記のコマンド実行後に下記のエラーが出てしまう方
+  ```bash
+  Your lock file does not contain a compatible set of packages. Please run composer update.
+
+  Problem 1
+    - monolog/monolog is locked to version 3.8.1 and an update of this package was not requested.
+    - monolog/monolog 3.8.1 requires php >=8.1 -> your php version (8.0.30) does not satisfy that requirement.
+  Problem 2
+    - symfony/deprecation-contracts is locked to version v3.5.1 and an update of this package was not requested.
+    - symfony/deprecation-contracts v3.5.1 requires php >=8.1 -> your php version (8.0.30) does not satisfy that requirement.
+  Problem 3
+    - google/apiclient is locked to version v2.15.0 and an update of this package was not requested.
+    - google/apiclient v2.15.0 requires monolog/monolog ^2.9||^3.0 -> satisfiable by monolog/monolog[3.8.1].
+    - monolog/monolog 3.8.1 requires php >=8.1 -> your php version (8.0.30) does not satisfy that requirement.
+   ```
+
+   その場合は、下記のコマンドを実行し再度`composer install`してください。
+   ```bash
+   composer update
+   ```
+
 ## Gitのあれこれ
 
 ### ブランチ作成～リモートにプッシュするまで

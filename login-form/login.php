@@ -9,6 +9,7 @@
 </head>
 
 <body>
+    <?php session_start() ?>
     <main>
         <div class="front-contents">
             <img src="./../img/EDTC-icon.png" alt="" width="100" height="100">
@@ -27,11 +28,27 @@
                 </div>
                 <div class="form-group">
                     <input type="submit" value="ログイン" class="btn-login">
+                    <?php if (isset($_SESSION['errors']['nameOrpass'])): ?>
+                        <p class="error-log"><?php echo $_SESSION['errors']['nameOrpass']; ?></p>
+                    <?php endif; ?>
+                    <?php if (isset($_SESSION['errors']['db_auth'])): ?>
+                        <p class="error-log"><?php echo $_SESSION['errors']['db_auth']; ?></p>
+                    <?php endif; ?>
+                    <?php if (isset($_SESSION['errors']['db_notFound'])): ?>
+                        <p class="error-log"><?php echo $_SESSION['errors']['db_notFound']; ?></p>
+                    <?php endif; ?>
+                    <?php if (isset($_SESSION['errors']['db_connect'])): ?>
+                        <p class="error-log"><?php echo $_SESSION['errors']['db_connect']; ?></p>
+                    <?php endif; ?>
+                    <?php if (isset($_SESSION['errors']['unknown'])): ?>
+                        <p class="error-log"><?php echo $_SESSION['errors']['unknown']; ?></p>
+                    <?php endif; ?>
                 </div>
             </form>
             <a href="https://kaitedtc.chew.jp/">HPトップに戻る</a>
         </div>
     </main>
+    <?php session_destroy() ?>
 </body>
 
 </html>
