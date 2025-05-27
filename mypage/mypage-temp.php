@@ -32,6 +32,7 @@
     // ユーザー情報取得
     if ($user = $user->fetch(PDO::FETCH_ASSOC)) {
         $username = htmlspecialchars($user['name'], ENT_QUOTES, 'UTF-8');
+        $adc = htmlspecialchars($user['adomin'], ENT_QUOTES, 'UTF-8');
     }
 
     // フォーム情報取得
@@ -121,6 +122,16 @@
         </div>
         <div class="houkokusyo">
             <!-- グーグルドライブのリンクを予定 -->
+        </div>
+        
+        <div>
+            <?php if(($adc) == 1)?>
+            <a href="./../register-form/touroku.html">登録ページ</a>
+            <?php else: ?>
+        </div>
+
+        <div>
+            <a href="./../base.html">ホームに戻る</a>
         </div>
         
     </div>
