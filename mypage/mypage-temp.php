@@ -138,9 +138,9 @@
         </div>
         
         <div>
-            <?php if(($adc) == 1)?>
+            <?php if(($adc) == 1): ?>
             <a href="./../register-form/touroku.html">登録ページ</a>
-            <?php else: ?>
+            <?php endif; ?>
         </div>
 
         <div>
