@@ -50,6 +50,14 @@ export const content = [
         author: "棚橋", 
         link: "blog/blog-data/24-12-08siencewinter.html" 
     },
+    {
+        date: "2025-05-10", 
+        title: "第一回遊行塾に行ってきました！", 
+        img: "blog/blog-img/2025-0510-02.jpg", 
+        caption: "嶺学園藤沢中学校に第一回遊行塾を実施しました。<br>新年度最初の遊行塾でしたが、楽しく学べる授業を提供できたと思います。",
+        author: "番倉",
+        link: "blog/blog-data/25-05-10yugyou1-blog.html"
+    },
     // { 
     //     date: "2025-02-07", 
     //     title: "EDTCが富士市にお邪魔しました。", 
