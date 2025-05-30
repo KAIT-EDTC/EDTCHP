@@ -61,6 +61,14 @@ export const pdct_list = [
         tags: ["未定", "中学生"],
         maker: new Date().getFullYear() + 1 - 2023 + "年生"
     },
+    {
+        name: "ライントレーサー",
+        headline: "ライントレースの基本を学ぼう！<br>基盤からプログラミングまで体験できる！",
+        src: IMAGE_DIR_PATH + "LineTracer.jpg",
+        file: "product-LineTracer.html",
+        tags: ["5500円", "中学生"],
+        maker: "須藤陸"
+    },
     // {
     //     name: "商品名",
     //     headline: "商品のキャッチコピー",
