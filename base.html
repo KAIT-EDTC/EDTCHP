@@ -129,11 +129,16 @@
             </h2>
             <!-- BLOGページができ次第リンク -->
             <ul>
-                <li><a href="blog/blog-data/24-12-21asahi-IT.html">2024.12.21 放課後等デイサービスあさひ学苑IT校様が、神奈川工科大学に遊びに来てくれました！</a></li>
-                <li><a href="blog/blog-data/24-09-28yugyou6-blog.html">2024.9.28第六回遊行塾に行ってきました</a></li>
-                <li><a href="blog/blog-data/24-07-11kouryukai.html">2024.7.11 地域連携サークル交流会に参加しました</a></li>
-                <li><a href="blog/blog-data/24-06-22yugyou5-blog.html">2024.6.22 第五回遊行塾に行ってきました</a></li>
-                <li><a href="blog/blog-data/24-06-29asahi.blog.html">2024.6.29 神奈川工科大学見学体験ツアーを行いました</a></li>
+                <script type="module">
+                    import { content } from './data/articleData.js';
+                    content.sort((a, b) => new Date(b.date) - new Date(a.date));
+                    content.forEach((article, index) => {
+                        if (index >= 5) return;
+                        const li = document.createElement('li');
+                        li.innerHTML = `<a href="${article.link}">${article.date}${article.title}</a>`;
+                        document.querySelector('.news ul').appendChild(li);
+                    });
+                </script>
             </ul>
             <div class="itiran">
                 <a href="./blog.html">blog一覧へ</a>
