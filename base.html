@@ -131,13 +131,19 @@
             <ul>
                 <script type="module">
                     import { content } from './data/articleData.js';
+
                     content.sort((a, b) => new Date(b.date) - new Date(a.date));
-                    content.forEach((article, index) => {
-                        if (index >= 5) return;
+                    const newsList = document.querySelector('.news ul');
+                    const fragment = document.createDocumentFragment();
+                    content.slice(0, 5).forEach(article => {
                         const li = document.createElement('li');
-                        li.innerHTML = `<a href="${article.link}">${article.date}${article.title}</a>`;
-                        document.querySelector('.news ul').appendChild(li);
+                        const a = document.createElement('a');
+                        a.href = article.link;
+                        a.textContent = `${article.date} ${article.title}`;
+                        li.appendChild(a);
+                        fragment.appendChild(li);
                     });
+                    newsList.appendChild(fragment);
                 </script>
             </ul>
             <div class="itiran">
