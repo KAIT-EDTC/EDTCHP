@@ -39,6 +39,11 @@ html, body {
     height: 40px;
 }
 
+.form-container input:focus {
+    border: 2px solid var(--main-color);
+    outline: none;
+}
+
 .form-group label {
     display: block;
     text-align: left;
