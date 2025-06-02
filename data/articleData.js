@@ -64,7 +64,7 @@ export const content = [
         img: "blog/blog-img/2025.interview.jpg", 
         caption: "今回はKAIT広報誌さんからの取材を受けました。少し緊張していましたが、当日は取材担当の方々が、にこやかに寄り添って下さり、安心して臨むことができました。",
         author: "根本",
-        link: "blog/blog-data/blog-temp.html"
+        link: "blog/blog-data/25-05-13interview.html"
     },
     // { 
     //     date: "2025-02-07", 
