@@ -58,6 +58,14 @@ export const content = [
         author: "番倉",
         link: "blog/blog-data/25-05-10yugyou1-blog.html"
     },
+    {
+        date: "2025-05-13", 
+        title: "KAIT広報誌取材の件について", 
+        img: "blog/blog-img/2025.interview.jpg", 
+        caption: "今回はKAIT広報誌さんからの取材を受けました。少し緊張していましたが、当日は取材担当の方々が、にこやかに寄り添って下さり、安心して臨むことができました。",
+        author: "根本",
+        link: "blog/blog-data/blog-temp.html"
+    },
     // { 
     //     date: "2025-02-07", 
     //     title: "EDTCが富士市にお邪魔しました。", 
