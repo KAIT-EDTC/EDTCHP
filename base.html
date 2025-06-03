@@ -129,23 +129,24 @@
             </h2>
             <!-- BLOGページができ次第リンク -->
             <ul>
-                <script type="module">
-                    import { content } from './data/articleData.js';
+            
+            </ul>
+            <script type="module">
+                import { content } from './data/articleData.js';
 
-                    content.sort((a, b) => new Date(b.date) - new Date(a.date));
-                    const newsList = document.querySelector('.news ul');
-                    const fragment = document.createDocumentFragment();
+                content.sort((a, b) => new Date(b.date) - new Date(a.date));
+                const newsList = document.querySelector('.news ul');
+                if (newsList) {
                     content.slice(0, 5).forEach(article => {
                         const li = document.createElement('li');
                         const a = document.createElement('a');
                         a.href = article.link;
                         a.textContent = `${article.date} ${article.title}`;
                         li.appendChild(a);
-                        fragment.appendChild(li);
+                        newsList.appendChild(li);
                     });
-                    newsList.appendChild(fragment);
-                </script>
-            </ul>
+                }
+            </script>
             <div class="itiran">
                 <a href="./blog.html">blog一覧へ</a>
             </div>
