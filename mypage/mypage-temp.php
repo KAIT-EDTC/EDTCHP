@@ -1,5 +1,5 @@
 <?php
-    require_once $_SERVER['DOCUMENT_ROOT'] . '/EDTCHP/meta.php';
+    require_once $_SERVER['DOCUMENT_ROOT'] . '/meta.php';
     // require_once __DIR__ . '/calendar/functions.php';
     // require_once __DIR__ . '/calendar/google-calendar-sync.php';
     session_start();
@@ -32,7 +32,7 @@
     // ユーザー情報取得
     if ($user = $user->fetch(PDO::FETCH_ASSOC)) {
         $username = htmlspecialchars($user['name'], ENT_QUOTES, 'UTF-8');
-        $adc = htmlspecialchars($user['adomin'], ENT_QUOTES, 'UTF-8');
+        $adc = htmlspecialchars($user['admin'], ENT_QUOTES, 'UTF-8');
     }
 
     // フォーム情報取得
