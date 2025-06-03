@@ -5,8 +5,6 @@ const articleLoad = () => {
     const ulElement = document.createElement("ul");
     const fragment = document.createDocumentFragment();
 
-    console.log(content);
-
     // アーカイブが重複しないように、該当の記事を削除する
     const filtered_content = content.filter((article) => 
         !(document.getElementsByClassName("blog-title")[0].textContent == article.title)
@@ -16,7 +14,6 @@ const articleLoad = () => {
     const sliced_content = filtered_content.slice(0, 5);
 
     sliced_content.forEach((article) => {
-        console.log(article);
         const boxElement = document.createElement("li");
 
         const AnkerElement = document.createElement("a");
