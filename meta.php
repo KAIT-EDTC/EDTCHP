@@ -15,9 +15,9 @@ if ($env == "local") {
     define('DB_USERNAME', 'kaitedtc_mamber-db');
     define('DB_PASS', 'GU8-2bPQKYWP9m-');
     // define('LOGIN_FORM', 'https://kaitedtc.chew.jp/login-form/login.html'); // エラーログのためにhtml -> phpにした。
-    define('LOGIN_FORM', 'https://kaitedtc.chew.jp/login-form/login.php');
-    define('REGISTER_FORM', 'https://kaitedtc.chew.jp/register-form/touroku.html');
-    define('MYPAGE', 'https://kaitedtc.chew.jp/mypage/mypage-temp.php');
+    define('LOGIN_FORM', 'https://kaitedtc.jp/login-form/login.php');
+    define('REGISTER_FORM', 'https://kaitedtc.jp/register-form/touroku.html');
+    define('MYPAGE', 'https://kaitedtc.jp/mypage/mypage-temp.php');
 }
 
 // このファイルをrequireすれば使える->require_once $_SERVER['DOCUMENT_ROOT'] . "/meta.php";
