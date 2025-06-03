@@ -3,13 +3,20 @@ import { content } from "./../data/articleData.js";
 const articleLoad = () => {
     const Archives = document.getElementsByClassName("Archives")[0];
     const ulElement = document.createElement("ul");
+    const fragment = document.createDocumentFragment();
+
+    console.log(content);
 
     // アーカイブが重複しないように、該当の記事を削除する
     const filtered_content = content.filter((article) => 
         !(document.getElementsByClassName("blog-title")[0].textContent == article.title)
     );
 
-    filtered_content.forEach((article) => {
+    filtered_content.sort((a, b) => new Date(b.date) - new Date(a.date));
+    const sliced_content = filtered_content.slice(0, 5);
+
+    sliced_content.forEach((article) => {
+        console.log(article);
         const boxElement = document.createElement("li");
 
         const AnkerElement = document.createElement("a");
@@ -24,9 +31,8 @@ const articleLoad = () => {
         AnkerElement.appendChild(titleElement);
         boxElement.appendChild(AnkerElement);
 
-        ulElement.appendChild(boxElement);
+        fragment.appendChild(boxElement);
 
-        Archives.appendChild(ulElement);
         /**
          * <ul>
          *   <li>
@@ -35,8 +41,10 @@ const articleLoad = () => {
          *    </a>
          *   </li>
          * </ul>
-         */
+        */
     });
+    ulElement.appendChild(fragment);
+    Archives.appendChild(ulElement);
 };
 
 document.addEventListener("DOMContentLoaded", () => articleLoad());
