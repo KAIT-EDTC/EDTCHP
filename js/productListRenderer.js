@@ -5,6 +5,7 @@ import { pdct_list } from "./../data/pdctData.js";
 const pdctLoad = () => {
     const mainElement = document.getElementsByTagName("main")[0];
     const ulElement = document.getElementsByClassName("pdct-container")[0];
+    const fragment = document.createDocumentFragment();
 
     pdct_list.forEach((pdct) => {
         const listElement = document.createElement("li");
@@ -18,23 +19,22 @@ const pdctLoad = () => {
         const boxElement = document.createElement("div");
         boxElement.className = "pdct-box";
 
-        const imgElement = document.createElement("img")
+        const imgElement = document.createElement("img");
         imgElement.className = "pdct-img";
-        imgElement.alt = "商品サムネイル";
-        imgElement.src = pdct.src;
         imgElement.alt = pdct.name;
+        imgElement.src = pdct.src;
         imgElement.loading = "lazy";
-        
-        const boxChildElement = document.createElement("div")
+
+        const boxChildElement = document.createElement("div");
         boxChildElement.className = "pdct-details";
 
         const titleElement = document.createElement("h2");
         titleElement.className = "pdct-name";
-        titleElement.innerHTML = pdct.name;
+        titleElement.textContent = pdct.name;
 
         const headlineElement = document.createElement("p");
         headlineElement.className = "pdct-headline";
-        headlineElement.innerHTML = pdct.headline || "製品の詳細はまだありません。";
+        headlineElement.textContent = pdct.headline || "製品の詳細はまだありません。";
 
         const makerElement = document.createElement("p");
         makerElement.className = "pdct-maker";
@@ -43,12 +43,12 @@ const pdctLoad = () => {
         const tagsContainerElement = document.createElement("ul");
         tagsContainerElement.className = "pdct-tags-container";
 
-        pdct.tags.map((tag) => {
+        pdct.tags.forEach((tag) => {
             const tagsElement = document.createElement("li");
             tagsElement.className = "pdct-tag";
-            tagsElement.innerHTML = '<i class="fa fa-tag" aria-hidden="true"></i> ' + tag;
+            tagsElement.textContent = tag;
             tagsContainerElement.appendChild(tagsElement);
-        })
+        });
 
         boxChildElement.appendChild(titleElement);
         boxChildElement.appendChild(headlineElement);
@@ -60,34 +60,35 @@ const pdctLoad = () => {
         boxElement.appendChild(AnkerElement);
         listElement.appendChild(boxElement);
 
-        ulElement.appendChild(listElement);
-        mainElement.appendChild(ulElement);
-        
-        /**
-         * <main>
-         *  <ul class="pdct-list">
-         *    <li class="pdct-contents" data-price="price" data-age="age">
-         *      <div class="pdct-box">
-         *        <a class="pdct-anker" href="製品の詳細ページ">
-         *          <img class="pdct-img">
-         *          <div class="pdct-details">
-         *            <h2 class-"pdct-name"></h2>
-         *            <p class="pdct-headline"></p>
-         *            <span class="pdct-price"></p>
-         *            <span class="pdct-maker"></p>
-         *          </div>
-         *          <ul class="pdct-tags-container">
-         *            <li class="pdct-tag">price</li>
-         *            <li class="pdct-tag">age</li>
-         *          </ul>
-         *        </a>
-         *      </div>
-         *    </li>
-         *  </ul>
-         * </main>
-         */
+        fragment.appendChild(listElement);
     });
+
+    ulElement.appendChild(fragment);
+    mainElement.appendChild(ulElement);
 };
 
-// DOMが読み込まれてからpdctLoadを呼び出す
+/**
+ * <main>
+ *  <ul class="pdct-list">
+ *    <li class="pdct-contents" data-price="price" data-age="age">
+ *      <div class="pdct-box">
+ *        <a class="pdct-anker" href="製品の詳細ページ">
+ *          <img class="pdct-img">
+ *          <div class="pdct-details">
+ *            <h2 class-"pdct-name"></h2>
+ *            <p class="pdct-headline"></p>
+ *            <span class="pdct-price"></p>
+ *            <span class="pdct-maker"></p>
+ *          </div>
+ *          <ul class="pdct-tags-container">
+ *            <li class="pdct-tag">price</li>
+ *            <li class="pdct-tag">age</li>
+ *          </ul>
+ *        </a>
+ *      </div>
+ *    </li>
+ *  </ul>
+ * </main>
+ */
+
 document.addEventListener("DOMContentLoaded", () => pdctLoad());
