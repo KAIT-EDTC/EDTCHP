@@ -1,7 +1,7 @@
 <?php
     require_once $_SERVER['DOCUMENT_ROOT'] . '/EDTCHP/meta.php';
-    require_once __DIR__ . '/calendar/functions.php';
-    require_once __DIR__ . '/calendar/google-calendar-sync.php';
+    // require_once __DIR__ . '/calendar/functions.php';
+    // require_once __DIR__ . '/calendar/google-calendar-sync.php';
     session_start();
     $id = $_SESSION['userId'];
     $yoteilist = '';
@@ -15,8 +15,8 @@
     
     $conn = new PDO(DSN, DB_USERNAME, DB_PASS);
     
-    $gcs = new GoogleCalendarSync($conn);
-    $gcs->performBidirectionalSync();
+    // $gcs = new GoogleCalendarSync($conn);
+    // $gcs->performBidirectionalSync();
 
     $user = $conn->prepare('SELECT * FROM `login-data` WHERE SIDn = :id');//名前の引き出しに使用
     $user->bindParam(':id', $id, PDO::PARAM_INT);
@@ -24,9 +24,8 @@
 
     $form = $conn->query('SELECT * FROM `form-data`'); //グーグルフォーム等のリンクのデータベース
 
-    $searchPattern = "(^|,)$id(,|$)"; // カンマ区切りの正規表現
-    $schedules = $conn->prepare("SELECT * FROM `events` WHERE participants REGEXP :pattern OR participants = '0'"); // 行事や提出期限などのデータベース
-    $schedules->bindParam(':pattern', $searchPattern, PDO::PARAM_STR);
+    $schedules = $conn->prepare('SELECT * FROM `yotei-data` WHERE member = :id'); //行事や提出期限などのデータベース
+    $schedules->bindParam(':id', $id, PDO::PARAM_INT);
     $schedules->execute();
     //memberには学籍番号ベースで参加者登録を行うので自分が行く予定もしくは参加者未定の予定を取得
     
@@ -52,15 +51,12 @@
     // 予定取得
     $schedules = $schedules->fetchAll(PDO::FETCH_ASSOC);
     foreach ($schedules as $schedule) {
-        $yoteiname = htmlspecialchars($schedule['title'], ENT_QUOTES, 'UTF-8');
-        $yoteistart = htmlspecialchars(RFC2Jap($schedule['start_time']), ENT_QUOTES, 'UTF-8');
-        $yoteiend = htmlspecialchars(RFC2Jap($schedule['end_time']), ENT_QUOTES, 'UTF-8');
-        $yoteiremark = htmlspecialchars($schedule['description'], ENT_QUOTES, 'UTF-8');
-        $yoteimember = htmlspecialchars(getMemberName($conn, $schedule['participants']), ENT_QUOTES, 'UTF-8');
+        $yoteiname = htmlspecialchars($schedule['name'], ENT_QUOTES, 'UTF-8');
+        $yoteidate = htmlspecialchars($schedule['date'], ENT_QUOTES, 'UTF-8');
+        $yoteimember = htmlspecialchars($schedule['member'], ENT_QUOTES, 'UTF-8');
         $yoteilist .= "<tr>
                         <td>{$yoteiname}</td>
-                        <td>{$yoteistart}　～　{$yoteiend}</td>
-                        <td>{$yoteiremark}</td>
+                        <td>{$yoteidate}</td>
                         <td>{$yoteimember}</td>
                     </tr>";
     }
@@ -96,9 +92,8 @@
                 <thead>
                     <tr>
                         <th>イベント名</th>
-                        <th>日時</th>
-                        <th>備考</th>
-                        <th>参加者</th>
+                        <th>日付</th>
+                        <th>メンバー</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -134,7 +129,7 @@
                 <?php endif; ?>
             </div>
         <div class="houkokusyo">
-            <!-- グーグルドライブのリンクを予定 -->
+            
         </div>
         
         <div>

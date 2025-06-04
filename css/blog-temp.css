@@ -138,6 +138,7 @@ main .pc-only {
     text-overflow: ellipsis;
     max-width: 273px;
     margin: 0 auto;
+    text-align: left;
 }
 .side-menu .Archives ul li:before {
     content: "";
