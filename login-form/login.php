@@ -12,7 +12,7 @@
     <?php session_start() ?>
     <main>
         <div class="front-contents">
-            <img src="./../img/EDTC-icon.png" alt="" width="100" height="100">
+            <img src="./../img/EDTC-icon.webp" alt="" width="100" height="100">
             <h1>ログイン</h1>
         </div>
     
