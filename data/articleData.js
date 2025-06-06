@@ -1,5 +1,14 @@
 export const content = [
-        {
+    {
+        date: "2024-05-25",
+        title: "第二回遊行塾に行きました！",
+        img: "blog/blog-img/2024-05-25yugyou-01.JPG",
+        caption: "第二回遊行塾に行きました。<br>\
+        今回はライントレーサーの機体のはんだ付けです。",
+        author: "番倉",
+        link: "blog/blog-data/2024-05-25yugyou.html"
+    },
+    {
         date: "2024-10-19",
         title: "第七回遊行塾に行ってきました！",
         img: "blog/blog-img/24-10-19yugyou.JPG",
@@ -8,7 +17,7 @@ export const content = [
         author: "高橋",
         link: "blog/blog-data/24-10-19yugyou7.html"
     },
-        {
+    {
         date: "2024-05-18",
         title: "第一回遊行塾に行ってきました！",
         img: "blog/blog-img/24-05-18yugyo1-01.JPG",
