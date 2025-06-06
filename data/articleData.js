@@ -1,5 +1,14 @@
 export const content = [
         {
+        date: "2024-10-19",
+        title: "第七回遊行塾に行ってきました！",
+        img: "blog/blog-img/24-10-19yugyou.JPG",
+        caption: "藤嶺学園藤沢中学校に第七回遊行塾を実施しました。<br>\
+        今回からライントレース部分のプログラミングに入っていきます。",
+        author: "高橋",
+        link: "blog/blog-data/24-10-19yugyou7.html"
+    },
+        {
         date: "2024-05-18",
         title: "第一回遊行塾に行ってきました！",
         img: "blog/blog-img/24-05-18yugyo1-01.JPG",
