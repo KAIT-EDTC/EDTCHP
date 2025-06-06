@@ -19,7 +19,7 @@ export const pdct_list = [
         src: IMAGE_DIR_PATH + "ArtoRo-front.webp",
         file: "product-ArtoRo.html",
         tags: ["未定", "中学生"],
-        maker: "番倉もえ"
+        maker: "番倉萌"
     },
     {
         name: "LogicLineTracerV2",
