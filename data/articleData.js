@@ -1,4 +1,12 @@
 export const content = [
+        {
+        date: "2024-05-18",
+        title: "第一回遊行塾に行ってきました！",
+        img: "blog/blog-img/24-05-18yugyo1-01.JPG",
+        caption: "今年度初回の遊行塾です。ギアボックスとタイヤを組み立てました！",
+        author: "安藤",
+        link: "blog/blog-data/24-05-18yugyo1.html"
+    },
     {
         date: "2024-06-22",
         title: "第五回遊行塾に行ってきました！",
