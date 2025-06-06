@@ -1,5 +1,23 @@
 export const content = [
-        {
+    {
+        date: "2024-05-25",
+        title: "第二回遊行塾に行きました！",
+        img: "blog/blog-img/2024-05-25yugyou-01.JPG",
+        caption: "第二回遊行塾に行きました。<br>\
+        今回はライントレーサーの機体のはんだ付けです。",
+        author: "番倉",
+        link: "blog/blog-data/2024-05-25yugyou.html"
+    },
+    {
+        date: "2024-10-19",
+        title: "第七回遊行塾に行ってきました！",
+        img: "blog/blog-img/24-10-19yugyou.JPG",
+        caption: "藤嶺学園藤沢中学校に第七回遊行塾を実施しました。<br>\
+        今回からライントレース部分のプログラミングに入っていきます。",
+        author: "高橋",
+        link: "blog/blog-data/24-10-19yugyou7.html"
+    },
+    {
         date: "2024-05-18",
         title: "第一回遊行塾に行ってきました！",
         img: "blog/blog-img/24-05-18yugyo1-01.JPG",
@@ -37,7 +55,7 @@ export const content = [
         date: "2024-09-28", 
         title: "第六回遊行塾に行ってきました！", 
         img: "blog/blog-img/24-0928-yugyou6.webp", 
-        caption: "嶺学園藤沢中学校に第六回遊行塾を実施しました。<br>後期始めにふさわしい快調なスタートを切ることが出来ました", 
+        caption: "藤嶺学園藤沢中学校に第六回遊行塾を実施しました。<br>後期始めにふさわしい快調なスタートを切ることが出来ました", 
         author: "根本", 
         link: "blog/blog-data/24-09-28yugyou6-blog.html" 
     },
@@ -62,7 +80,7 @@ export const content = [
         date: "2025-05-10", 
         title: "第一回遊行塾に行ってきました！", 
         img: "blog/blog-img/2025-0510-01.webp", 
-        caption: "嶺学園藤沢中学校に第一回遊行塾を実施しました。<br>新年度最初の遊行塾でしたが、楽しく学べる授業を提供できたと思います。",
+        caption: "藤嶺学園藤沢中学校に第一回遊行塾を実施しました。<br>新年度最初の遊行塾でしたが、楽しく学べる授業を提供できたと思います。",
         author: "番倉",
         link: "blog/blog-data/25-05-10yugyou1-blog.html"
     },
