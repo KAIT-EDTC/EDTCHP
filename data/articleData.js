@@ -1,5 +1,13 @@
 export const content = [
     {
+        date: "2024-12-14",
+        title: "第十回遊行塾に行ってきました！",
+        img: "blog/blog-img/24-12-14-yugyou10-02.jpg",
+        caption: "今年度最後となる第十回遊行塾を実施しました！<br>今回はタイムアタックを行いました。",
+        author: "渡邉",
+        link: "blog/blog-data/24-12-14yugyou10.html"
+    },
+    {
         date: "2024-06-22",
         title: "第五回遊行塾に行ってきました！",
         img: "blog/blog-img/24-0622-yugyou1.jpg",
