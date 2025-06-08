@@ -1,5 +1,5 @@
 <?php
-    require_once $_SERVER['DOCUMENT_ROOT'] . '/EDTCHP/meta.php';
+    require_once $_SERVER['DOCUMENT_ROOT'] . '/meta.php';
 
     $errors = []; // エラーメッセージを格納する
     $id = htmlspecialchars($_POST['ID'], ENT_QUOTES, 'UTF-8');

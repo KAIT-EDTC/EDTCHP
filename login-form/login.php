@@ -45,7 +45,7 @@
                     <?php endif; ?>
                 </div>
             </form>
-            <a href="https://kaitedtc.chew.jp/">HPトップに戻る</a>
+            <a href="https://kaitedtc.com/">HPトップに戻る</a>
         </div>
     </main>
     <?php session_destroy() ?>
