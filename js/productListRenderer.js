@@ -34,7 +34,7 @@ const pdctLoad = () => {
 
         const headlineElement = document.createElement("p");
         headlineElement.className = "pdct-headline";
-        headlineElement.textContent = pdct.headline || "製品の詳細はまだありません。";
+        headlineElement.innerHTML = pdct.headline || "製品の詳細はまだありません。";
 
         const makerElement = document.createElement("p");
         makerElement.className = "pdct-maker";
