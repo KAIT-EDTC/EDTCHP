@@ -1,5 +1,14 @@
 export const content = [
     {
+        date: "2025-02-07",
+        title: "ものづくり交流フェアに参加しました！",
+        img: "blog/blog-img/25-02-07-FujiFair-03.jpg",
+        caption: "EDTCが富士市で行われたものづくり交流フェアにお邪魔しました！<br>\
+                企業の方々から貴重な話を聞くことが出来ました。",
+        author: "渡邉, 山口",
+        link: "blog/blog-data/25-02-07FujiFair.html"
+    },
+    {
         date: "2024-12-14",
         title: "第十回遊行塾に行ってきました！",
         img: "blog/blog-img/24-12-14-yugyou10-02.jpg",
