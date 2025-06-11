@@ -134,7 +134,7 @@
         
         <div>
             <?php if(($admincheck) == 1): ?>
-            <a href="./../register-form/touroku.html">登録ページ</a>
+            <a href=<?php echo REGISTER_FORM ?>>登録ページ</a>
             <?php endif; ?>
         </div>
 
