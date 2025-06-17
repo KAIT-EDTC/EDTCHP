@@ -44,9 +44,3 @@ tr:hover {
     background-color: #ddd;
     transition: 0.3s;
 }
-
-.calendar {
-    margin: 2% 10%;
-    border: 1px solid var(--main-color);
-    border-radius: 15px;
-}
