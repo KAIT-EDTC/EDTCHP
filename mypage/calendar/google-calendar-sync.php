@@ -1,8 +1,15 @@
 <?php
+require_once __DIR__ . '/functions.php';
+require_once __DIR__ . '/vendor/autoload.php';
 use Google\Service\Calendar as Google_Service_Calendar;
 use Google\Service\Calendar\EventDateTime as Google_Service_Calendar_EventDateTime;
 use Google\Service\Calendar\Event as Google_Service_Calendar_Event;
 use Google\Service\Calendar\EventExtendedProperties as Google_Service_Calendar_EventExtendedProperties;
+
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
+$dotenv->load();
+define('CALENDAR_ID', $_ENV['CALENDAR_ID']);
+define('JSON_PATH', __DIR__.'/key/push-event-test-451408-0f871f466586.json');
 
 class GoogleCalendarSync {
     private $client;
@@ -99,6 +106,11 @@ class GoogleCalendarSync {
             }
         }
 
+        // created_atが現在の日時より前のイベントを削除
+        $now = (new DateTime('now', new DateTimeZone('Asia/Tokyo')))->format('Y-m-d H:i:s');
+        $stmt = $this->db->prepare("DELETE FROM events WHERE end_time < ?");
+        $stmt->execute([$now]);
+
         // DBにはあるがカレンダーにはないイベント
         $calendarEventIds = array_column($calendarEvents, 'id'); // カレンダーイベントのID一覧を取得
         foreach ($dbEventsById as $dbEvent) {
@@ -120,13 +132,13 @@ class GoogleCalendarSync {
             $dbEvent = $dbEventsById[$calendarEventId];
             
             // 内容が異なる場合
-            $contentChanged = $dbEvent['title'] !== $calendarEvent['title'] ||
+            $isEventUpdated = $dbEvent['title'] !== $calendarEvent['title'] ||
                               $dbEvent['description'] !== $calendarEvent['description'] ||
                               ToRFC($dbEvent['start_time']) !== ToRFC($calendarEvent['start_time']) ||
                               ToRFC($dbEvent['end_time']) !== ToRFC($calendarEvent['end_time']) ||
                               $dbEvent['participants'] !== $calendarEvent['participants'];
             
-            if (!$contentChanged) continue;
+            if (!$isEventUpdated) continue;
 
             // DB側とカレンダー側の更新日時を比較
             $dbUpdated = new DateTime($dbEvent['updated_at'], new DateTimeZone('Asia/Tokyo')); // DBはタイムゾーンを指定できないためここで指定
@@ -289,6 +301,25 @@ class GoogleCalendarSync {
         // DBで追加したイベントはイベントId(calendar_event_id)がNullであるため、カレンダーに追加した際に生成されるイベントIdを付与する。
         $stmt = $this->db->prepare("UPDATE events SET calendar_event_id = ? WHERE event_id = ?");
         $stmt->execute([$createdEvent->getId(), $dbEvent['event_id']]);
+    }
+
+    public function deleteEvent($calendar_event_id)
+    {
+        try {
+            // カレンダーから削除
+            $this->service->events->delete(CALENDAR_ID, $calendar_event_id);
+        } catch (Exception $e) {
+            // カレンダー側で既に削除済みなどのケースもあるので、エラーは握りつぶす
+            ErrorAlert($e->getMessage());
+        }
+        
+        try {
+            // DBから削除
+            $stmt = $this->db->prepare("DELETE FROM events WHERE calendar_event_id = ?");
+            $stmt->execute([$calendar_event_id]);
+        } catch (Exception $e) {
+            ErrorAlert($e->getMessage());
+        }
     }
 }
 ?>
