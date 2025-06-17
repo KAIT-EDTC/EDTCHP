@@ -1,5 +1,6 @@
 <?php
 require_once $_SERVER['DOCUMENT_ROOT'] . '/meta.php';
+session_start();
 
 try {
     if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
@@ -11,26 +12,13 @@ try {
     $conn = new PDO(DSN, DB_USERNAME, DB_PASS);
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-    $stmt = $conn->prepare('INSERT INTO `form-data` (link,name) VALUES (:link,:name)');
-    $stmt->bindParam(':link', $link, PDO::PARAM_STR);
-    $stmt->bindParam(':name', $name, PDO::PARAM_STR);
-    $stmt->execute();
-    header('Location: ' . REGISTER_FORM);
-    exit;
-
-} catch (PDOException $e) {
+    $stmt = $conn->prepare('INSERT INTO `form-data` (link, name) VALUES (?, ?)');
+    $stmt->execute([$link, $name]);
+    $_SESSION['result'] = "フォームの登録が完了しました。";
+} catch (Exception $e) {
+    $_SESSION['result'] = $e->getMessage();
+} finally {
     $conn = null;
-    echo $e->getMessage();
+    header('Location: ' . REGISTER_FORM);
 }
 ?>
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>登録画面</title>
-</head>
-<body>
-    <h1>登録画面</h1>
-</body>
-</html>

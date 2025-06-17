@@ -1,69 +1,54 @@
-const checkboxes = document.querySelectorAll("#checkboxList input[type='checkbox']");
 const inputbox = document.getElementById("memberbox");
+const dropdown = document.getElementById("dropdownMenu");
 const filterInput = document.getElementById("filterInput");
-const labels = document.querySelectorAll("#checkboxList label");
 const checkboxList = document.getElementById("checkboxList");
+const button = document.querySelector(".dropdown-button");
+const labels = Array.from(checkboxList.querySelectorAll("label"));
 let memberList = [];
+const ALL_MEMBER_NUM = "0";
 
 // プルダウンの開閉
-function toggleDropdown() {
-    const dropdown = document.getElementById("dropdownMenu");
-    dropdown.style.display = (dropdown.style.display === "block") ? "none" : "block";
-}
+button.addEventListener("click", e => {
+    e.stopPropagation(); // この要素の親以上のイベントは無視される。
+    dropdown.style.display = dropdown.style.display === "block" ? "none" : "block";
+});
 
-// 検索ボックスにフォーカスがあるときでもプルダウンを開いたままにする
-function keepDropdownOpen() {
-    document.getElementById("dropdownMenu").style.display = "block";
-}
-
-// クリックイベントハンドラ(このスクリプトの場合はプルダウンの開閉)
-document.addEventListener("click", function(event) {
-    const dropdown = document.getElementById("dropdownMenu");
-    const button = document.querySelector(".dropdown-button");
-    const inputField = document.getElementById("filterInput");
-
-    // プルダウン以外の場所をクリックしたときにプルダウンを閉じる。
-    if (!dropdown.contains(event.target) && !button.contains(event.target) && event.target !== inputField) {
-        dropdown.style.display = "none";
-    }
+// プルダウン以外クリックで閉じる
+document.addEventListener("click", e => {
+    if (!dropdown.contains(e.target)) dropdown.style.display = "none";
 });
 
 // フィルターハンドラ
-filterInput.addEventListener("input", function() {
+// labelのテキストで曖昧検索->labelのidとcheckboxのvalueで完全一致検索をする->アペンド
+filterInput.addEventListener("input", () => {
     const filter = this.value;
+    checkboxList.innerHTML = "";
     labels.forEach(label => {
-        const text = label.textContent;
-        label.style.display = text.includes(filter) ? "inline" : "none";
+        if (label.textContent.includes(filter)) {
+            checkboxList.appendChild(label);
+            checkboxList.appendChild(document.createElement("br"));
+        }
     });
 });
 
-checkboxes.forEach(checkbox => {    
-    checkbox.addEventListener("change", () => addMember(checkbox));
-});
-
-// 
-function addMember(checkbox) {
-    // 0(全員)が選択された時は、それ以外のチェックボックスを全て無効化する。
-    if (checkbox.value == "0") {
-        checkboxes.forEach(checkbox => {
-            if (checkbox.value != "0") {
-                memberList = [];
-                checkbox.checked = false;
-                checkbox.disabled = checkbox.checked;
+// チェックボックスのイベント委譲
+checkboxList.addEventListener("change", e => {
+    if (e.target.type !== "checkbox") return;
+    const checkbox = e.target;
+    if (checkbox.value === ALL_MEMBER_NUM) {
+        memberList = [];
+        Array.from(checkboxList.querySelectorAll("input[type='checkbox']")).forEach(c => {
+            if (c.value !== ALL_MEMBER_NUM) {
+                c.checked = false;
+                c.disabled = checkbox.checked;
             }
         });
     }
-
-    // 選択されたチェックボックスをリストに追加する(チェックが外れたらリストから削除する)。
+    const SID = checkbox.value;
     if (checkbox.checked) {
-        const SID = checkbox.value;
-        if (!memberList.includes(SID)) {
-            memberList.push(SID);
-        }
+        if (!memberList.includes(SID)) memberList.push(SID);
     } else {
-        const SID = checkbox.value;
         memberList = memberList.filter(member => member !== SID);
     }
-
     inputbox.value = memberList.join(",");
-}
+});

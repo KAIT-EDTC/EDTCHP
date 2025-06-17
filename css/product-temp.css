@@ -7,7 +7,7 @@
 
 main {
     color: #333;
-    background-color: var(--bg-color);
+    background-color: var(--bg-color-2);
 }
 
 /* パンくずリスト */
@@ -57,6 +57,16 @@ main {
     z-index: 1;
 }
 
+.content-right:after {
+    position: absolute;
+    content: '';
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    box-shadow: inset 0 0 15px 15px var(--bg-color-2);
+}
+
 .content-right img {
     width: 100%;
     height: 100%;
@@ -73,14 +83,14 @@ main {
     width: 45%;
     padding: 30px;
     border-radius: 0 10px 10px 0;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
     z-index: 2; /* 画像より前面に */
 }
 
 .content-left {
     width: 50%;
     padding: 40px;
-    background-color: rgba(232, 248, 245, 0.8);
+    background-color: rgba(225, 247, 243, 0.7);
 }
 
 .content-left h1 {
@@ -171,7 +181,7 @@ main {
 
 .info-section {
     padding: 20px;
-    background-color: var(--bg-color);
+    background-color: var(--bg-color-2);
     text-align: center;
 }
 
