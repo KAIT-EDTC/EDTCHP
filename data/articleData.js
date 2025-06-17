@@ -1,5 +1,30 @@
 export const content = [
     {
+        date: "2024-11-30",
+        title: "第九回遊行塾に行ってきました！",
+        img: "blog/blog-img/24-11-30yugyou9.jpg",
+        caption: "第九回遊行塾を実施しました。<br>これまでの総復習です！",
+        author: "山口",
+        link: "blog/blog-data/24-11-30yugyou9.html"
+    },
+    {
+        date: "2025-05-17",
+        title: "藤嶺学園藤沢中学校第2回遊行塾教養講座を行いました！",
+        img: "blog/blog-img/25-05-17yugyou2.JPG",
+        caption: "第2回遊行塾行われました！今回から基板のはんだ付けに取り掛かります。",
+        author: "棚橋",
+        link: "blog/blog-data/25-05-17yugyou2.html"
+    },
+    {
+        date: "2025-06-07",
+        title: "第三回遊行塾を行いました!",
+        img: "blog/blog-img/25-06-07yugyou03-02.JPG",
+        caption: "第三回遊行塾を実施しました。<br>機体の組み立ては最後になります。<br>\
+                当ブログは一年生で初めての執筆となります^^",
+        author: "大島",
+        link: "blog/blog-data/25-06-07yugyou3.html"
+    },
+    {
         date: "2025-02-07",
         title: "ものづくり交流フェアに参加しました！",
         img: "blog/blog-img/25-02-07-FujiFair-03.jpg",

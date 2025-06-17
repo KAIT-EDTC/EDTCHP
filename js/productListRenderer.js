@@ -23,7 +23,6 @@ const pdctLoad = () => {
         imgElement.className = "pdct-img";
         imgElement.alt = pdct.name;
         imgElement.src = pdct.src;
-        imgElement.loading = "lazy";
 
         const boxChildElement = document.createElement("div");
         boxChildElement.className = "pdct-details";
