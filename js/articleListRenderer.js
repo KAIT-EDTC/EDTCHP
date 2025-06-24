@@ -1,14 +1,21 @@
 import { content } from "./../data/articleData.js";
+const PAGE_SIZE = 6;
+let offset = 0;
+let currentPage = 1;
+const endPage = Math.ceil(content.length / PAGE_SIZE);
 
 const articleLoad = () => {
+    offset = (currentPage - 1) * PAGE_SIZE;
     const blogArea = document.getElementsByClassName("blog-area")[0];
     const ulElement = document.createElement("ul");
+    blogArea.innerHTML = "";
+    const fragment = document.createDocumentFragment();
     ulElement.className = "blog-container";
+    const sorted_content = content.sort((a, b) => new Date(b.date) - new Date(a.date));
 
-    content.forEach((article) => {
+    sorted_content.slice(offset, PAGE_SIZE + offset).forEach((article) => {
         const boxElement = document.createElement("li");
-        boxElement.className = "blog-contents";
-        boxElement.setAttribute("id", article.date);
+        boxElement.className = "blog-contents anim-fadein";
 
         const AnkerElement = document.createElement("a");
         AnkerElement.href = article.link;
@@ -50,9 +57,7 @@ const articleLoad = () => {
 
         boxElement.appendChild(AnkerElement);
 
-        ulElement.appendChild(boxElement);
-
-        blogArea.appendChild(ulElement);
+        fragment.appendChild(boxElement);
         /**
          * <ul class="blog-list">
          *   <li class="blog-contents">
@@ -69,22 +74,50 @@ const articleLoad = () => {
          *    </a>
          *   </li>
          * </ul>
-         */
+        */
     });
-    articleSort();
+    ulElement.appendChild(fragment);
+    blogArea.appendChild(ulElement);
 };
 
-const articleSort = () => {
-    const ulElement = document.getElementsByClassName("blog-container")[0];
+const paginationArea = document.getElementsByClassName("pagination-area")[0];
+const prevBtn = document.createElement("button");
+const PageLabel = document.createElement("p");
+const nextBtn = document.createElement("button");
+prevBtn.innerHTML = '<i class="fa fa-chevron-left" aria-hidden="true"></i>';
+nextBtn.innerHTML = '<i class="fa fa-chevron-right" aria-hidden="true"></i>';
+paginationArea.appendChild(prevBtn);
+paginationArea.appendChild(PageLabel);
+paginationArea.appendChild(nextBtn);
 
-    const liArray = Array.from(ulElement.getElementsByTagName("li"));
-    liArray.sort((a, b) => {
-        const dateA = a.getAttribute("id");
-        const dateB = b.getAttribute("id");
-        return dateA < dateB ? 1 : -1;
-    });
-    ulElement.innerHTML = "";
-    liArray.forEach(li => ulElement.appendChild(li));
+const Pagination = () => {
+    // endPageが1のとき
+    if (endPage == 1) {
+        PageLabel.textContent = "1";
+    }
+
+    // endPageが2以上のとき
+    if (endPage > 1) {        
+        PageLabel.textContent = currentPage + "/" + endPage;
+
+    }
 };
 
-document.addEventListener("DOMContentLoaded", () => articleLoad());
+prevBtn.addEventListener("click", () => {
+    if (currentPage - 1 <= 0) return;
+    currentPage--;
+    Pagination();
+    articleLoad();
+})
+
+nextBtn.addEventListener("click", () => {
+    if (currentPage == endPage) return;
+    currentPage++;
+    Pagination();
+    articleLoad();
+})
+
+document.addEventListener("DOMContentLoaded", () => {
+    articleLoad();
+    Pagination();
+});
