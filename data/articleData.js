@@ -1,4 +1,58 @@
+// テンプレ
+// { 
+//      date: "202xx-xx-xx", 
+//      title: "htmlと同じタイトル(blog-title)", 
+//      img: "blog/blog-img/サムネ", 
+//      caption: "記事の概略", 
+//      author: "著者名", 
+//      link: "blog/blog-data/該当するhtmlファイル名.html" 
+// },　←コンマ忘れずに！！！
+
 export const content = [
+    {
+        date: "2024-06-08",
+        title: "第三回遊行塾を実施しました!",
+        img: "blog/blog-img/24-06-08yugyou03.JPG",
+        caption: "モータの取り付けを終え、いよいよ次回はロボットを動かす段階へ。",
+        author: "鈴木",
+        link: "blog/blog-data/24-06-08yugyou03.html"
+    },
+    {
+        date: "2025-02-01",
+        title: "厚木市制70周年記念式典にて表彰されました!",
+        img: "blog/blog-img/25-02-01-70th_anniversary_ceremony.jpg",
+        caption: "厚木市制70周年という記念すべき節目を祝う式典にて、\
+                「未来へつながる一歩功労」という賞を受賞することができました。",
+        author: "根本",
+        link: "blog/blog-data/25-02-01sikiten.html"
+    },
+    {
+        date: "2024-06-15",
+        title: "第四回遊行塾に行ってきました！",
+        img: "blog/blog-img/24-06-15yugyou04.JPG",
+        caption: "今回の第4回ではライントレースロボットのプログラミングの前段階として、\
+                導入となる基礎的なプログラミングの指導を実施しました。",
+        author: "根本",
+        link: "blog/blog-data/24-06-15yugyou04.html"
+    },
+    // {
+    //     date: "2025-05-05",
+    //     title: "子ども科学館まつり",
+    //     img: "blog/blog-img/.jpg",
+    //     caption: "5月5日はこどもの日。ということで本厚木駅前にある、厚木市子ども科学館さんで開催された「子ども科学館まつり」にて<br>\
+    //             我々EDTCのロボットの展示会をさせていただきました。",
+    //     author: "吉田",
+    //     link: "blog/blog-data/25-05-05kodomokagakukan.html"
+    // },
+    {
+        date: "2025-06-14",
+        title: "第四回遊行塾に行ってきました！",
+        img: "blog/blog-img/25-06-14yugyou04.jpg",
+        caption: "第四回遊行塾を実施しました。<br>\
+                パソコンを使ったプログラミングの練習がスタートしました！",
+        author: "魚谷",
+        link: "blog/blog-data/25-06-14yugyou04.html"
+    },
     {
         date: "2024-11-30",
         title: "第九回遊行塾に行ってきました！",
@@ -134,22 +188,4 @@ export const content = [
         author: "根本",
         link: "blog/blog-data/25-05-13interview.html"
     },
-    // { 
-    //     date: "2025-02-07", 
-    //     title: "EDTCが富士市にお邪魔しました。", 
-    //     img: "img/EDTC-icon.webp", 
-    //     caption: "12月8日サイエンスウィンターに参加しました。\
-    //         厚木市子ども科学館にて行われたサイエンスウィンターに参加しました。", 
-    //     author: "山口", 
-    //     link: "blog/blog-data/2024siencewinter.html" 
-    // },
-    // { 
-    //     date: "2025-02-01", 
-    //     title: "未来へつながる一歩功労賞を受賞しました！", 
-    //     img: "img/EDTC-icon.webp", 
-    //     caption: "2月1日に厚木市にて開催された「厚木市政70周年記念式典」にてKAIT EDTCが「未来へつながる一歩功労賞」を受賞しました！", 
-    //     author: "佐々木", 
-    //     link: "blog/blog-data/2024siencewinter.html" 
-    // },
-    // { date: "2024-10-28", title: "test", img: "blog/blog-img/24-0928-yugyou6.webp", caption: "記事の概略", author: "根本", link: "blog/blog-data/yugyou6-blog.html" },
 ];
