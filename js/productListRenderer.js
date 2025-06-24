@@ -9,7 +9,7 @@ const pdctLoad = () => {
 
     pdct_list.forEach((pdct) => {
         const listElement = document.createElement("li");
-        listElement.className = "pdct-contents";
+        listElement.className = "pdct-contents anim-fadein";
         listElement.setAttribute("data-price", pdct.tags[0]);
         listElement.setAttribute("data-age", pdct.tags[1]);
 
