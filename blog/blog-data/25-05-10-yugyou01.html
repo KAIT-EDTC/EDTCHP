@@ -1,18 +1,22 @@
-<!DOCTYPE html>
-<html lang="ja">
+<!DOCTYPE html> <!--HTMLを書き始めます。決まり文句-->
+<html lang="ja"> <!--言語設定。基本は英語になっている"en"→"jp"変更しないと翻訳しますか？が出てくる-->
 
-<head>
-    <meta charset="utf-8">
+<head> <!--headの始まり-->
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>防犯ブザー</title>
+    <title>ブログ|神奈川工科大学EDTC</title>
     <link rel="stylesheet" href="./../../css/reset.css">
     <link rel="stylesheet" href="./../../css/headfoot.css">
-    <link rel="stylesheet" href="./../../css/product-temp.css">
+    <link rel="stylesheet" href="./../../css/blog-temp.css">
     <link rel="stylesheet" href="./../../css/global.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
-</head>
+    <!-- icon link tag -->
+    <link rel="icon" href="../../favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="./../../apple-touch-icon-180x180.webp">
+</head><!--headの終わり-->
 
-<body>
+<body><!--本文の開始-->
+    <!-- Header Start -->
     <header>
         <a href="./../../base.html"><img src="./../../img/EDTC-icon.webp" alt="EDTC"
                 style="display: block; height: 60px; width: auto;"></a>
@@ -50,43 +54,58 @@
         </nav>
         </div>
     </header>
-
+    <!-- Header End -->
+    <!--main strt-->
     <main>
         <div class="breadcrumbs">
-            <a href="./../../product-top.html">商品一覧</a>
+            <a href="./../../blog.html">ブログ</a>
             <i class="fa fa-angle-right"></i>
-            <a href="">防犯ブザー</a>
+            <a href="">第一回遊行塾に行ってきました！</a>
         </div>
-        <div class="main-content">
-            <div class="content-left">
-                <h1>あなたの身を守る、実際に使える防犯ブザー<br>はんだごてなどを用いた本格的な機械工作体験</h1>
-                <p>ランドセルや習い事のカバンにつけて護身用にできます。</p>
-                <p>自作をし、その仕組みを知ることでいざというときにしっかり使えます。</p>
-                <p>値段：1000円</p>
-                <p>対応人数：5～10人ほど</p>
-                <p>授業時間（1コマ）：1時間ほど</p>
-                <a href="./../../contact-us.html" class="cta-button">
-                    気軽にご相談ください！
-                    <span class="icon">
-                        <!-- font awesomeのメールアイコン -->
-                        <!-- https://fontawesome.com/icons/envelope?s=solid -->
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-                            <path d="M48 64C21.5 64 0 85.5 0 112c0 15.1 7.1 29.3 19.2 38.4L236.8 313.6c11.4 8.5 27 8.5 38.4 0L492.8 150.4c12.1-9.1 19.2-23.3 19.2-38.4c0-26.5-21.5-48-48-48L48 64zM0 176L0 384c0 35.3 28.7 64 64 64l384 0c35.3 0 64-28.7 64-64l0-208L294.4 339.2c-22.8 17.1-54 17.1-76.8 0L0 176z"/>
-                        </svg>
-                    </span>
-                </a>
+        <div class="blog-title">第一回遊行塾に行ってきました！</div>
+        <div class="blog-date"><i class="fa fa-clock-o"></i>2025-05-10</div>
+        <div class="blog-body">
+            <div class="blog-main">
+                <div class="vertical-layout">
+                    <section>
+                        <div>
+                            <p> 
+                                全十回ある遊行塾の第一回目が5月10日に行われました。<br>
+                                今年は15名の生徒さんが受講してくれました。<br>
+                                参加してくださった生徒さんありがとうございます。
+                            </p>
+                        </div>
+                        <img src="./../blog-img/25-05-10-yugyou01-01.webp" alt="手元">
+                        <div>
+                            <p> 
+                                第一回目の授業のメインテーマは「ギアボックスの組み立て」でした。<br>
+                                作ったことのある生徒さんも、そうでない生徒さんもそれぞれ説明書を確認しながらスタッフと一緒に作業を進めていきました。<br>
+                                なかでも一番の難所だったのは、ギアとシャフトの組み合わせ方です。<br>
+                                ギアボックスは左右でシャフトの向きが違うため、戸惑っている生徒が多くいました。<br>
+                                それでも、授業が終わるころには全員がギアボックスを完成させることができていました！
+                            </p>
+                        </div>
+                    </section>
+                </div>
+                <div class="author-container">
+                    <p class="author-caption">ブログ著者</p>
+                    <p class="author">番倉</p>
+                </div>
             </div>
-            <div class="content-right">
-                 <img src="./../img/buzzer.webp" alt="防犯ブザーの画像">
+            <div class="pc-only">
+                <div class="side-menu">
+                    <div class="Archives">
+                        <h3><i class="fa fa-list"></i> 他の記事もどうぞ！</h3>
+                        <script type="module" src="./../../js/archiveListRenderer.js"></script>
+                    </div>
+                </div>
             </div>
         </div>
-
-        <div class="info-section">
-            <h3>Maker</h3>
-            <p>足立遥大</p>
-        </div>
+        <div id="prev"><a href="./../../blog.html"><i class="fa fa-arrow-left"></i> ブログトップへ戻る</a></div>
     </main>
 
+    <!--main end-->
+    <!-- Footer Start -->
     <footer>
         <div class="flex">
             <ul class="footer-list">
@@ -94,10 +113,10 @@
                     <p class="gyou-a"></p>
                     <a href="./../../base.html">ホーム　</a>
                     <a href="./../../blog.html">ブログ　</a>
-                    <a href="./../../product-top.html">プロダクト　</a>
+                    <a href="./../../product-top.html">プロダクト</a>
                     <hr size="100%">
                 </li>
-                <li  style="text-align: center;">
+                <li style="text-align: center;">
                     <a href="./../../contact-us.html">お問い合わせ</a>
                     <hr size="100%">
                     <p class="gyou"></p>
@@ -114,6 +133,7 @@
             </ul>
         </div>
     </footer>
-</body>
+    <!-- Footer End -->
+</body> <!--本文の終了-->
 
-</html>
+</html> <!--HTMLの書き終わり。決まり文句-->

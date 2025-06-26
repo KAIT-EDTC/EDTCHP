@@ -8,7 +8,7 @@ export const pdct_list = [
     {
         name: "防犯ブザー",
         headline: "本格的な機械工作体験をしてみませんか？<br>作りながら防犯ブザーの仕組みを理解しよう！",
-        src: IMAGE_DIR_PATH + "buzzer.jpg",
+        src: IMAGE_DIR_PATH + "buzzer.webp",
         file: "product-buzzer.html",
         tags: ["1000円", "全年齢"],
         maker: "足立遥大"
@@ -24,7 +24,7 @@ export const pdct_list = [
     {
         name: "LogicLineTracerV2",
         headline: "安価に短時間で作れる！<br>ロジックICを使ったライントレーサー",
-        src: IMAGE_DIR_PATH + "LogicLineTracerV2.jpg",
+        src: IMAGE_DIR_PATH + "LogicLineTracerV2.webp",
         file: "product-LogicLineTracer.html",
         tags: ["1000円～1500円", "高校生"],
         maker: "須藤陸"
