@@ -35,9 +35,9 @@ const pdctLoad = () => {
         headlineElement.className = "pdct-headline";
         headlineElement.innerHTML = pdct.headline || "製品の詳細はまだありません。";
 
-        const makerElement = document.createElement("p");
-        makerElement.className = "pdct-maker";
-        makerElement.innerText = pdct.maker;
+        const viewmoreElement = document.createElement("p");
+        viewmoreElement.className = "viewmore";
+        viewmoreElement.textContent = "View More ";
 
         const tagsContainerElement = document.createElement("ul");
         tagsContainerElement.className = "pdct-tags-container";
@@ -49,10 +49,10 @@ const pdctLoad = () => {
             tagsContainerElement.appendChild(tagsElement);
         });
 
+        boxChildElement.appendChild(tagsContainerElement);
         boxChildElement.appendChild(titleElement);
         boxChildElement.appendChild(headlineElement);
-        boxChildElement.appendChild(makerElement);
-        boxChildElement.appendChild(tagsContainerElement);
+        boxChildElement.appendChild(viewmoreElement);
 
         AnkerElement.appendChild(imgElement);
         AnkerElement.appendChild(boxChildElement);
