@@ -91,15 +91,22 @@ paginationArea.appendChild(PageLabel);
 paginationArea.appendChild(nextBtn);
 
 const Pagination = () => {
-    // endPageが1のとき
     if (endPage == 1) {
         PageLabel.textContent = "1";
-    }
-
-    // endPageが2以上のとき
-    if (endPage > 1) {        
+        prevBtn.style.display = "none";
+        nextBtn.style.display = "none";
+    } else {        
         PageLabel.textContent = currentPage + "/" + endPage;
 
+    }
+
+    if (currentPage == 1) {
+        prevBtn.style.display = "none";
+    } else if (currentPage == endPage) {
+        nextBtn.style.display = "none";
+    } else {
+        prevBtn.style.display = "inline-block";
+        nextBtn.style.display = "inline-block";
     }
 };
 

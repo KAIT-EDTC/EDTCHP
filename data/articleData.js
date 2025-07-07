@@ -63,7 +63,7 @@ export const content = [
     },
     {
         date: "2025-05-17",
-        title: "藤嶺学園藤沢中学校第2回遊行塾教養講座を行いました！",
+        title: "第二回遊行塾に行ってきました！",
         img: "blog/blog-img/25-05-17-yugyou02.webp",
         caption: "第2回遊行塾行われました！今回から基板のはんだ付けに取り掛かります。",
         author: "棚橋",
