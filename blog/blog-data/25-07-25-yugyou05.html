@@ -1,0 +1,180 @@
+<!DOCTYPE html> <!--HTMLを書き始めます。決まり文句-->
+<html lang="ja"> <!--言語設定。基本は英語になっている"en"→"jp"変更しないと翻訳しますか？が出てくる-->
+
+<head> <!--headの始まり-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ブログ|神奈川工科大学EDTC</title>
+    <link rel="stylesheet" href="./../../css/reset.css">
+    <link rel="stylesheet" href="./../../css/headfoot.css">
+    <link rel="stylesheet" href="./../../css/blog-temp.css">
+    <link rel="stylesheet" href="./../../css/global.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <!-- icon link tag -->
+    <link rel="icon" href="../../favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="./../../apple-touch-icon-180x180.webp">
+    <style>
+        /* h1タグのスタイル */
+        section div h1 {
+            font-size: 2.0em;
+            font-weight: bold;
+            margin: 3% 0 2% 0;
+            color: #333;
+        }
+    </style>
+</head><!--headの終わり-->
+
+<body><!--本文の開始-->
+    <!-- Header Start -->
+    <header>
+        <a href="./../../base.html"><img src="./../../img/EDTC-icon.webp" alt="EDTC"
+                style="display: block; height: 60px; width: auto;"></a>
+        <a href="./../../base.html" class="title">EDTC</a>
+        <!--==========モバイルのみ表示==========-->
+        <nav class="sp-only">
+            <div class="gnav-toggle">
+                <input id="gnav-input" type="checkbox" class="gnav-hidden">
+                <label id="gnav-open" for="gnav-input"><span></span></label>
+                <label class="gnav-unshown" id="gnav-close" for="gnav-input"></label>
+                <div id="gnav-content">
+                    <ul class="gnav-menu">
+                        <li class="gnav-item"><a href="./../../base.html">Home<br>ホーム</a></li>
+                        <li class="gnav-item"><a href="./../../blog.html">Blog<br>ブログ</a></li>
+                        <li class="gnav-item"><a href="./../../product-top.html">product<br>プロダクト</a></li>
+                        <li class="gnav-item"><a href="./../../contact-us.html">Contact<br>お問い合わせ</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <!--==========PCのみ表示==========-->
+        <nav class="pc-only">
+            <ul>
+                <li class="gnav-sec"><a href="./../../base.html"><span>Home</span><br>ホーム</a></li>
+                <li class="gnav-sec"><a href="./../../blog.html"><span>Blog</span><br>ブログ</a></li>
+                <li class="gnav-sec"><a href="./../../product-top.html"><span>Product</span><br>プロダクト</a></li>
+                <li class="gnav-sec"><a href="./../../contact-us.html"><span>Contact</span><br>お問い合わせ</a></li>
+                <div class="sns_button twitter">
+                    <a href="https://x.com/kait_edtc" title="Tweet"><i class="fa fa-twitter"></i></a>
+                </div>
+                <div class="sns_button instagram">
+                    <a href="https://www.instagram.com/kait.edtc/" title="instagram"><i class="fa fa-instagram"></i></a>
+                </div>
+            </ul>
+        </nav>
+        </div>
+    </header>
+    <!-- Header End -->
+    <!--main strt-->
+    <main>
+        <caption>
+        <!-- ここに小見出し -->
+        </caption>
+        <div class="breadcrumbs">
+            <a href="./../../blog.html">ブログ</a>
+            <i class="fa fa-angle-right"></i>
+            <a href=".">Arduino授業レポート：プルアップ機能とPWM制御の実習</a>
+        </div>
+        <div class="blog-title">Arduino授業レポート：プルアップ機能とPWM制御の実習</div>
+        <div class="blog-date"><i class="fa fa-clock-o"></i>2025年7月25日</div>
+        <div class="blog-body">
+            <div class="blog-main">
+                <!-- 授業内容の概要 -->
+                <div class="vertical-layout">
+                    <section>
+                        <div>
+                            <h1>授業概要</h1>
+                            <p>
+                                今回の授業では、Arduinoのプルアップ機能を利用したピン設定、PWMを用いたLED制御、tone関数によるビープスピーカー制御などを扱いました。
+                                授業全体はおおむね順調に進み、予定していた内容をすべて終えることができました。
+                            </p>
+                        </div>
+                         <img src="./../blog-img/P6210128.JPG" alt="LED制御の様子">
+                    </section>
+                </div>
+
+                <!-- LED制御に関する詳細 -->
+                <div class="horizontal-layout">
+                    <section>
+                        <div>
+                            <h1>LED制御の実習</h1>
+                            <p>
+                                LED制御では、アナログ出力の値を生徒自身に考えさせ試行錯誤してもらうことで、デジタル出力との違いを理解させることを意識しました。
+                            </p>
+                            <p>
+                                PWMを使ったアナログ出力の概念は最初戸惑う生徒もいましたが、実際に値を変更して明るさが変わる様子を見ることで理解が深まったようです。
+                            </p>
+                        </div>
+                        <img src="./../blog-img/P6210125.JPG" alt="LED制御の様子">
+                    </section>
+                </div>
+
+                <!-- 応用的な活動 -->
+                <div class="vertical-layout">
+                    <section>
+                        <div>
+                            <h1>応用活動：tone関数によるメロディ演奏</h1>
+                            <p>
+                                ピン設定やLED制御を早めに終えた生徒には、tone関数を用いた周波数や音の長さの調整方法を指導し、
+                                各自が工夫して自作のメロディをビープスピーカーで演奏するなど、応用的な活動にも取り組ませました。
+                            </p>
+                            <p>
+                                生徒たちは創意工夫を凝らし、童謡からオリジナルのメロディまで様々な音楽をプログラミングしていました。
+                                この活動を通じて、プログラミングの楽しさを実感してもらえたと思います。
+                            </p>
+                        </div>
+                        <img src="./../blog-img/kitai.png" alt="LED制御の様子">
+                    </section>
+                </div>
+
+
+
+                <div class="author-container">
+                    <p class="author-caption">ブログ著者</p>
+                    <p class="author">青沼</p>
+                </div>
+            </div>
+            <div class="pc-only">
+                <div class="side-menu">
+                    <div class="Archives">
+                        <h3><i class="fa fa-list"></i> 他の記事もどうぞ！</h3>
+                        <script type="module" src="./../../js/archiveListRenderer.js"></script>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="prev"><a href="./../../blog.html"><i class="fa fa-arrow-left"></i> ブログトップへ戻る</a></div>
+    </main>
+
+    <!--main end-->
+    <!-- Footer Start -->
+    <footer>
+        <div class="flex">
+            <ul class="footer-list">
+                <li style="text-align: center;">
+                    <p class="gyou-a"></p>
+                    <a href="./../../base.html">ホーム　</a>
+                    <a href="./../../blog.html">ブログ　</a>
+                    <a href="./../../product-top.html">プロダクト</a>
+                    <hr size="100%">
+                </li>
+                <li style="text-align: center;">
+                    <a href="./../../contact-us.html">お問い合わせ</a>
+                    <hr size="100%">
+                    <p class="gyou"></p>
+                    <b><img src="./../../img/EDTC-icon.webp" alt="EDTCロゴ" height="50px" width="auto" class="syasinn">
+                        <font size="12">EDTC</font>
+                    </b>
+                    <p class="gyou"></p>
+                    <p>
+                        <font size="3">学校法人 幾徳学園　神奈川工科大学<br>mail :kait.edtc@gmail.com</font>
+                    </p>
+                    <p class="gyou-b"></p>
+                    <p>©　2024　KAIT　EDTC　All Rights Reserved</p>
+                </li>
+            </ul>
+        </div>
+    </footer>
+    <!-- Footer End -->
+</body> <!--本文の終了-->
+
+</html> <!--HTMLの書き終わり。決まり文句-->
