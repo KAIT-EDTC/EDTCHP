@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>学祭 予約状況確認</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header>
+      <h1>学祭 予約状況確認</h1>
+      <p>このページは空き状況の確認専用です。予約は対面で受け付けます。</p>
+    </header>
+
+    <main>
+      <section id="user-view">
+        <h2>空き枠一覧（ユーザー向け）</h2>
+        <div id="slots-container">
+          <!-- テーブルはscript.jsで生成 -->
+        </div>
+      </section>
+
+      <section id="admin-view">
+        <h2>予約一覧（管理者向け）</h2>
+        <label><input type="checkbox" id="show-full" /> 満席を表示</label>
+        <div id="admin-container">
+          <!-- 管理者用テーブル -->
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <small>データはJSONファイルから読み込まれます（静的サイト向け）</small>
+    </footer>
+
+    <script src="script.js" defer></script>
+  </body>
+</html>
