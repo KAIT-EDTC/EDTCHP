@@ -15,6 +15,22 @@
     <main>
       <section id="user-view">
         <h2>空き枠一覧（ユーザー向け）</h2>
+        <div id="plan-select-user" class="plan-select">
+          <label>表示形式:
+            <select id="user-view-mode">
+              <option value="all">全プラン表示</option>
+              <option value="single">プラン別表示</option>
+            </select>
+          </label>
+          <label id="user-plan-selector" style="display: none; margin-left: 10px;">
+            プラン選択:
+            <select id="user-plan-select">
+              <option value="1800">1800円プラン</option>
+              <option value="600">600円プラン</option>
+              <option value="free">無料プラン</option>
+            </select>
+          </label>
+        </div>
         <div id="slots-container">
           <!-- テーブルはscript.jsで生成 -->
         </div>
@@ -22,10 +38,53 @@
 
       <section id="admin-view">
         <h2>予約一覧（管理者向け）</h2>
+        <div id="plan-select-admin" class="plan-select">
+          <label>表示形式:
+            <select id="admin-view-mode">
+              <option value="all">全プラン表示</option>
+              <option value="single">プラン別表示</option>
+            </select>
+          </label>
+          <label id="admin-plan-selector" style="display: none; margin-left: 10px;">
+            プラン選択:
+            <select id="admin-plan-select">
+              <option value="1800">1800円プラン</option>
+              <option value="600">600円プラン</option>
+              <option value="free">無料プラン</option>
+            </select>
+          </label>
+        </div>
         <label><input type="checkbox" id="show-full" /> 満席を表示</label>
+        <button id="edit-json-btn">JSON編集モード</button>
         <div id="admin-container">
           <!-- 管理者用テーブル -->
         </div>
+      </section>
+
+      <section id="json-editor" style="display: none;">
+        <h2>JSON編集</h2>
+        <div id="plan-select-editor" class="plan-select">
+          <label>プラン選択:
+            <select id="editor-plan-select">
+              <option value="1800">1800円プラン</option>
+              <option value="600">600円プラン</option>
+              <option value="free">無料プラン</option>
+            </select>
+          </label>
+        </div>
+        <div id="editor-controls">
+          <button id="add-slot-btn">新しい枠を追加</button>
+          <button id="save-json-btn">保存</button>
+          <button id="cancel-edit-btn">キャンセル</button>
+        </div>
+        <div id="editor-container">
+          <!-- 編集フォームが表示される -->
+        </div>
+        <div id="raw-json-view">
+          <h3>JSON プレビュー</h3>
+          <textarea id="json-preview" readonly></textarea>
+        </div>
+        <div id="save-message"></div>
       </section>
     </main>
 
