@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>管理者ページ - 学祭予約管理</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header>
+      <h1>🔧 管理者ページ</h1>
+      <p class="subtitle">予約状況の確認と編集ができます</p>
+    </header>
+
+    <main class="admin-page">
+      <nav class="admin-nav">
+        <button id="view-reservations-btn" class="nav-btn active">予約一覧</button>
+        <button id="edit-json-btn" class="nav-btn">JSON編集</button>
+        <a href="user.html" class="nav-btn">ユーザーページへ</a>
+      </nav>
+
+      <section id="admin-view" class="admin-section">
+        <h2>予約一覧</h2>
+        <div class="controls">
+          <div class="date-select">
+            <label>日付:
+              <select id="admin-date-select">
+                <option value="day1">1日目</option>
+                <option value="day2">2日目</option>
+              </select>
+            </label>
+          </div>
+          <div class="plan-select">
+            <label>表示形式:
+              <select id="admin-view-mode">
+                <option value="all">全プラン表示</option>
+                <option value="single">プラン別表示</option>
+              </select>
+            </label>
+            <label id="admin-plan-selector" style="display: none; margin-left: 10px;">
+              プラン選択:
+              <select id="admin-plan-select">
+                <option value="1800">相撲ロボット (1800円)</option>
+                <option value="600">ぶるぶるロボット (600円)</option>
+                <option value="free">ライントレーサー (無料)</option>
+              </select>
+            </label>
+          </div>
+          <label class="checkbox-label">
+            <input type="checkbox" id="show-full" />
+            満席を表示
+          </label>
+          <button id="refresh-btn" class="btn-secondary">🔄 更新</button>
+        </div>
+        <div id="admin-container">
+          <!-- 管理者用テーブル -->
+        </div>
+      </section>
+
+      <section id="json-editor" class="admin-section" style="display: none;">
+        <h2>JSON編集</h2>
+        <div class="plan-select">
+          <label>プラン選択:
+            <select id="editor-plan-select">
+              <option value="1800">相撲ロボット (1800円)</option>
+              <option value="600">ぶるぶるロボット (600円)</option>
+              <option value="free">ライントレーサー (無料)</option>
+            </select>
+          </label>
+        </div>
+        <div id="editor-controls">
+          <button id="add-slot-btn" class="btn-primary">➕ 新しい枠を追加</button>
+          <button id="save-json-btn" class="btn-success">💾 保存</button>
+          <button id="cancel-edit-btn" class="btn-secondary">❌ キャンセル</button>
+        </div>
+        <div id="editor-container">
+          <!-- 編集フォームが表示される -->
+        </div>
+        <div id="raw-json-view">
+          <h3>JSON プレビュー</h3>
+          <textarea id="json-preview" readonly></textarea>
+        </div>
+        <div id="save-message"></div>
+      </section>
+    </main>
+
+
+
+    <script src="admin.js" defer></script>
+  </body>
+</html>

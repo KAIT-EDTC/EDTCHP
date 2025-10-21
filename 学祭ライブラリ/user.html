@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>学祭 予約状況確認</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header>
+      <h1>🎪 学祭 予約状況確認</h1>
+      <p class="subtitle">このページは空き状況の確認専用です。予約は対面で受け付けます。</p>
+    </header>
+
+    <main class="user-page">
+      <section id="user-view">
+        <h2>空き枠一覧</h2>
+        <div class="date-select">
+          <label>日付:
+            <select id="user-date-select">
+              <option value="day1">1日目</option>
+              <option value="day2">2日目</option>
+            </select>
+          </label>
+        </div>
+        <div class="plan-select">
+          <label>表示形式:
+            <select id="user-view-mode">
+              <option value="all">全プラン表示</option>
+              <option value="single">プラン別表示</option>
+            </select>
+          </label>
+          <label id="user-plan-selector" style="display: none; margin-left: 10px;">
+            プラン選択:
+            <select id="user-plan-select">
+              <option value="1800">相撲ロボット (1800円)</option>
+              <option value="600">ぶるぶるロボット (600円)</option>
+              <option value="free">ライントレーサー (無料)</option>
+            </select>
+          </label>
+        </div>
+        <div id="slots-container">
+          <!-- テーブルはscript.jsで生成 -->
+        </div>
+      </section>
+
+      <section class="info-box">
+        <h3>📌 ご利用案内</h3>
+        <ul>
+          <li>空き状況は<strong>リアルタイム</strong>で更新されます</li>
+          <li>予約は<strong>対面受付</strong>のみとなります</li>
+          <li>定員に達している時間帯は予約できません</li>
+          <li>ご不明な点はスタッフまでお尋ねください</li>
+        </ul>
+      </section>
+    </main>
+
+    <footer>
+      <div class="footer-links">
+        <a href="admin.html" class="admin-link">管理者ページ</a>
+      </div>
+      <small>©　2024　KAIT　EDTC　All Rights Reserved</small>
+    </footer>
+
+    <script src="user.js" defer></script>
+  </body>
+</html>

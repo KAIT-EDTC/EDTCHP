@@ -1,0 +1,26 @@
+[
+  { "id": "600-1", "plan": "600", "time": "10:00～10:30", "capacity": 20, "reserved": 0 },
+  { "id": "600-2", "plan": "600", "time": "10:30～11:00", "capacity": 20, "reserved": 0 },
+  { "id": "600-3", "plan": "600", "time": "11:00～11:30", "capacity": 20, "reserved": 0 },
+  { "id": "600-4", "plan": "600", "time": "11:30～12:00", "capacity": 20, "reserved": 0 },
+  { "id": "600-5", "plan": "600", "time": "12:00～12:30", "capacity": 20, "reserved": 0 },
+  { "id": "600-6", "plan": "600", "time": "12:30～13:00", "capacity": 20, "reserved": 0 },
+  { "id": "600-7", "plan": "600", "time": "14:00～14:30", "capacity": 20, "reserved": 0 },
+  { "id": "600-8", "plan": "600", "time": "14:30～15:00", "capacity": 20, "reserved": 0 },
+  { "id": "600-9", "plan": "600", "time": "15:00～15:30", "capacity": 20, "reserved": 0 },
+  { "id": "600-10", "plan": "600", "time": "15:30～16:00", "capacity": 20, "reserved": 0 },
+
+  { "id": "1800-1", "plan": "1800", "time": "10:30～11:00", "capacity": 10, "reserved": 0 },
+  { "id": "1800-2", "plan": "1800", "time": "11:00～11:30", "capacity": 10, "reserved": 0 },
+  { "id": "1800-3", "plan": "1800", "time": "11:30～12:00", "capacity": 10, "reserved": 0 },
+  { "id": "1800-4", "plan": "1800", "time": "12:30～13:00", "capacity": 10, "reserved": 0 },
+  { "id": "1800-5", "plan": "1800", "time": "14:30～15:00", "capacity": 10, "reserved": 0 },
+  { "id": "1800-6", "plan": "1800", "time": "15:30～16:00", "capacity": 10, "reserved": 0 },
+
+  { "id": "free-1", "plan": "free", "time": "10:30～11:00", "capacity": 20, "reserved": 0 },
+  { "id": "free-2", "plan": "free", "time": "11:00～11:30", "capacity": 20, "reserved": 0 },
+  { "id": "free-3", "plan": "free", "time": "11:30～12:00", "capacity": 20, "reserved": 0 },
+  { "id": "free-4", "plan": "free", "time": "12:30～13:00", "capacity": 20, "reserved": 0 },
+  { "id": "free-5", "plan": "free", "time": "14:30～15:00", "capacity": 20, "reserved": 0 },
+  { "id": "free-6", "plan": "free", "time": "15:30～16:00", "capacity": 20, "reserved": 0 }
+]

@@ -1,0 +1,18 @@
+[
+  { "id": "600-1", "plan": "600", "time": "10:00～10:30", "capacity": 12, "reserved": 0 },
+  { "id": "600-2", "plan": "600", "time": "10:30～11:00", "capacity": 12, "reserved": 0 },
+  { "id": "600-3", "plan": "600", "time": "11:00～11:30", "capacity": 12, "reserved": 0 },
+  { "id": "600-4", "plan": "600", "time": "11:30～12:00", "capacity": 12, "reserved": 0 },
+  { "id": "600-5", "plan": "600", "time": "12:00～12:30", "capacity": 12, "reserved": 0 },
+  { "id": "600-6", "plan": "600", "time": "12:30～13:00", "capacity": 12, "reserved": 0 },
+
+  { "id": "1800-1", "plan": "1800", "time": "10:30～11:00", "capacity": 6, "reserved": 0 },
+  { "id": "1800-2", "plan": "1800", "time": "11:00～11:30", "capacity": 6, "reserved": 0 },
+  { "id": "1800-3", "plan": "1800", "time": "11:30～12:00", "capacity": 6, "reserved": 0 },
+  { "id": "1800-4", "plan": "1800", "time": "12:30～13:00", "capacity": 6, "reserved": 0 },
+
+  { "id": "free-1", "plan": "free", "time": "10:30～11:00", "capacity": 12, "reserved": 0 },
+  { "id": "free-2", "plan": "free", "time": "11:00～11:30", "capacity": 12, "reserved": 0 },
+  { "id": "free-3", "plan": "free", "time": "11:30～12:00", "capacity": 12, "reserved": 0 },
+  { "id": "free-4", "plan": "free", "time": "12:30～13:00", "capacity": 12, "reserved": 0 }
+]
