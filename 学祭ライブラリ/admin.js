@@ -233,14 +233,21 @@ async function saveJson() {
   messageDiv.style.display = 'block';
   messageDiv.textContent = '保存中...';
   messageDiv.className = '';
-  
+
+  // 日付選択UIから現在のdate値を取得
+  const dateSelect = document.getElementById('date-select');
+  const date = dateSelect ? dateSelect.value : (DATA_PATH.includes('day2') ? 'day2' : 'day1');
+
   try {
     const response = await fetch('save-reservations.php', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(currentData)
+      body: JSON.stringify({
+        date: date,
+        data: currentData
+      })
     });
 
     const result = await response.json();
@@ -249,8 +256,6 @@ async function saveJson() {
       messageDiv.textContent = '✓ 保存に成功しました！';
       messageDiv.className = 'success';
       originalData = JSON.parse(JSON.stringify(currentData));
-      
-      // 1秒後にメッセージを消す
       setTimeout(() => {
         messageDiv.style.display = 'none';
       }, 3000);
@@ -313,7 +318,7 @@ async function init() {
   setDataPathByDate(adminDate);
 
   // 管理者向け表示モード切替
-  const adminDateSelect = document.getElementById('admin-date-select');
+  const adminDateSelect = document.getElementById('date-select');
   const adminViewModeSelect = document.getElementById('admin-view-mode');
   const adminPlanSelector = document.getElementById('admin-plan-selector');
   const adminPlanSelect = document.getElementById('admin-plan-select');
