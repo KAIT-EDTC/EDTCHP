@@ -51,11 +51,12 @@ try {
     }
 
     // バックアップを作成
+    // バックアップファイル生成を停止（必要なら有効化）
     $backupFile = null;
-    if (file_exists($filename)) {
-        $backupFile = $filename . '_backup_' . date('YmdHis') . '.json';
-        @copy($filename, $backupFile);
-    }
+    // if (file_exists($filename)) {
+    //     $backupFile = $filename . '_backup_' . date('YmdHis') . '.json';
+    //     @copy($filename, $backupFile);
+    // }
 
     // JSONファイルに保存
     $jsonString = json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
