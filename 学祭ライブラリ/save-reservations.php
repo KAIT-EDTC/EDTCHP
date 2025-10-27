@@ -33,7 +33,10 @@ try {
         throw new Exception('Data must be an array');
     }
 
-    $filename = $date === 'day1' ? 'reservations-day1.json' : 'reservations-day2.json';
+    // スクリプト配置ディレクトリ配下に確実に保存する
+    $filename = __DIR__ . DIRECTORY_SEPARATOR . (
+        $date === 'day1' ? 'reservations-day1.json' : 'reservations-day2.json'
+    );
 
     foreach ($data as $slot) {
         if (!isset($slot['id']) || !isset($slot['time']) || !isset($slot['capacity']) || !isset($slot['reserved'])) {
@@ -48,9 +51,10 @@ try {
     }
 
     // バックアップを作成
-    $backupFile = $filename . '_backup_' . date('YmdHis') . '.json';
+    $backupFile = null;
     if (file_exists($filename)) {
-        copy($filename, $backupFile);
+        $backupFile = $filename . '_backup_' . date('YmdHis') . '.json';
+        @copy($filename, $backupFile);
     }
 
     // JSONファイルに保存
@@ -66,7 +70,8 @@ try {
     echo json_encode([
         'success' => true,
         'message' => 'Data saved successfully',
-        'backup' => $backupFile
+        'file' => basename($filename),
+        'backup' => $backupFile ? basename($backupFile) : null
     ]);
 
 } catch (Exception $e) {

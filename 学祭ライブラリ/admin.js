@@ -250,12 +250,25 @@ async function saveJson() {
       })
     });
 
-    const result = await response.json();
+    if (!response.ok) {
+      const text = await response.text().catch(() => '');
+      throw new Error(`HTTP ${response.status} ${response.statusText} ${text}`);
+    }
+    let result;
+    try {
+      result = await response.json();
+    } catch (e) {
+      const text = await response.text().catch(() => '');
+      throw new Error(`サーバーからの応答をJSONとして解析できませんでした。${text}`);
+    }
 
     if (result.success) {
-      messageDiv.textContent = '✓ 保存に成功しました！';
+      const targetFile = result.file ? ` (${result.file})` : '';
+      messageDiv.textContent = `✓ 保存に成功しました！${targetFile}`;
       messageDiv.className = 'success';
       originalData = JSON.parse(JSON.stringify(currentData));
+      // 保存直後に再読み込みして正しく保存された内容を反映
+      await refreshData();
       setTimeout(() => {
         messageDiv.style.display = 'none';
       }, 3000);

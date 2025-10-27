@@ -1,15 +1,5 @@
-// ユーザー向けページ - 予約状況確認専用
-let DATA_PATH = './reservations-day1.json';
-
-function setDataPathByDate(date) {
-  if (date === 'day1') {
-    DATA_PATH = './reservations-day1.json';
-  } else {
-    DATA_PATH = './reservations-day2.json';
-  }
-}
-
-let currentData = [];
+// ユーザー向けページ - 予約状況確認専用（両日表示）
+let currentData = { day1: [], day2: [] };
 
 const PLAN_NAMES = {
   '1800': '相撲ロボット (1800円)',
@@ -17,14 +7,20 @@ const PLAN_NAMES = {
   'free': 'ライントレーサー (無料)'
 };
 
-async function loadData() {
+async function loadBothData() {
   try {
-    const res = await fetch(DATA_PATH, {cache: 'no-store'});
-    if (!res.ok) throw new Error(`HTTP ${res.status}`);
-    return await res.json();
+    const [r1, r2] = await Promise.all([
+      fetch('./reservations-day1.json', { cache: 'no-store' }),
+      fetch('./reservations-day2.json', { cache: 'no-store' })
+    ]);
+    const [d1, d2] = await Promise.all([
+      r1.ok ? r1.json() : Promise.resolve([]),
+      r2.ok ? r2.json() : Promise.resolve([])
+    ]);
+    return { day1: d1, day2: d2 };
   } catch (err) {
     console.error('Failed to load data', err);
-    return [];
+    return { day1: [], day2: [] };
   }
 }
 
@@ -32,12 +28,12 @@ function filterByPlan(slots, plan) {
   return slots.filter(s => s.plan === plan);
 }
 
-function renderUserTable(slots, mode = 'all', plan = null) {
-  const container = document.getElementById('slots-container');
+function renderUserTableInto(containerId, slots, mode = 'all', plan = null) {
+  const container = document.getElementById(containerId);
+  if (!container) return;
   container.innerHTML = '';
 
   if (mode === 'single' && plan) {
-    // 単一プラン表示
     const filtered = filterByPlan(slots, plan);
     if (filtered.length === 0) {
       container.innerHTML = '<div class="muted">このプランの枠はありません</div>';
@@ -46,22 +42,21 @@ function renderUserTable(slots, mode = 'all', plan = null) {
     const table = createUserTable(filtered, plan);
     container.appendChild(table);
   } else {
-    // 全プラン表示
     ['1800', '600', 'free'].forEach(planKey => {
       const filtered = filterByPlan(slots, planKey);
       if (filtered.length === 0) return;
-      
+
       const planSection = document.createElement('div');
       planSection.className = 'plan-section';
-      
+
       const planTitle = document.createElement('h3');
       planTitle.textContent = PLAN_NAMES[planKey];
       planTitle.className = 'plan-title';
       planSection.appendChild(planTitle);
-      
+
       const table = createUserTable(filtered, planKey);
       planSection.appendChild(table);
-      
+
       container.appendChild(planSection);
     });
   }
@@ -99,29 +94,22 @@ function createUserTable(slots, planKey) {
 async function init() {
   let viewMode = 'all';
   let selectedPlan = '1800';
-  let userDate = 'day1';
-  setDataPathByDate(userDate);
 
-  const dateSelect = document.getElementById('user-date-select');
   const viewModeSelect = document.getElementById('user-view-mode');
   const planSelector = document.getElementById('user-plan-selector');
   const planSelect = document.getElementById('user-plan-select');
 
-  async function renderFilteredTable() {
-    setDataPathByDate(userDate);
-    const data = await loadData();
+  async function renderBoth() {
+    const data = await loadBothData();
     currentData = data;
     if (viewMode === 'single') {
-      renderUserTable(currentData, 'single', selectedPlan);
+      renderUserTableInto('day1-slots', currentData.day1, 'single', selectedPlan);
+      renderUserTableInto('day2-slots', currentData.day2, 'single', selectedPlan);
     } else {
-      renderUserTable(currentData, 'all');
+      renderUserTableInto('day1-slots', currentData.day1, 'all');
+      renderUserTableInto('day2-slots', currentData.day2, 'all');
     }
   }
-
-  dateSelect.addEventListener('change', (e) => {
-    userDate = e.target.value;
-    renderFilteredTable();
-  });
 
   viewModeSelect.addEventListener('change', (e) => {
     viewMode = e.target.value;
@@ -130,21 +118,21 @@ async function init() {
     } else {
       planSelector.style.display = 'none';
     }
-    renderFilteredTable();
+    renderBoth();
   });
 
   planSelect.addEventListener('change', (e) => {
     selectedPlan = e.target.value;
     if (viewMode === 'single') {
-      renderFilteredTable();
+      renderBoth();
     }
   });
 
   // 初期表示
-  renderFilteredTable();
+  renderBoth();
 
   // 自動更新（30秒ごと）
-  setInterval(renderFilteredTable, 30000);
+  setInterval(renderBoth, 30000);
 }
 
 document.addEventListener('DOMContentLoaded', init);

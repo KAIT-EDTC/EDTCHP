@@ -6,6 +6,10 @@
   --card:#ffffff;
   --primary:#667eea;
   --primary-dark:#5568d3;
+  --day1:#4e73df; /* 青系 */
+  --day1-b:#1cc88a; /* 緑系 */
+  --day2:#e67e22; /* オレンジ系 */
+  --day2-b:#e74c3c; /* 赤系 */
 }
 
 *{box-sizing:border-box}
@@ -38,7 +42,7 @@ h1{
 
 /* ユーザーページ */
 main.user-page{
-  max-width:900px;
+  max-width:1200px;
   margin:0 auto;
 }
 
@@ -397,6 +401,53 @@ footer{
 
 .admin-link:hover{
   text-decoration:underline;
+}
+
+/* 両日表示のパネル */
+.day-panels{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:16px;
+}
+
+@media (min-width: 900px){
+  .day-panels{
+    grid-template-columns:1fr 1fr;
+  }
+}
+
+.day-panel{
+  background: var(--card);
+  border:1px solid #eee;
+  border-radius:8px;
+  padding:12px;
+}
+
+.day-title{
+  margin:0 0 12px;
+  font-size:1.1rem;
+  font-weight:700;
+  color:#333;
+}
+
+/* 日別の強調スタイル */
+.day-panel.day1{
+  border-left:6px solid var(--day1);
+}
+.day-panel.day2{
+  border-left:6px solid var(--day2);
+}
+.day-panel.day1 .day-title{
+  background:linear-gradient(135deg, var(--day1) 0%, var(--day1-b) 100%);
+  color:white;
+  padding:8px 12px;
+  border-radius:6px;
+}
+.day-panel.day2 .day-title{
+  background:linear-gradient(135deg, var(--day2) 0%, var(--day2-b) 100%);
+  color:white;
+  padding:8px 12px;
+  border-radius:6px;
 }
 
 /* レスポンシブ */

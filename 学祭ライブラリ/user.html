@@ -15,14 +15,6 @@
     <main class="user-page">
       <section id="user-view">
         <h2>空き枠一覧</h2>
-        <div class="date-select">
-          <label>日付:
-            <select id="user-date-select">
-              <option value="day1">1日目</option>
-              <option value="day2">2日目</option>
-            </select>
-          </label>
-        </div>
         <div class="plan-select">
           <label>表示形式:
             <select id="user-view-mode">
@@ -39,8 +31,15 @@
             </select>
           </label>
         </div>
-        <div id="slots-container">
-          <!-- テーブルはscript.jsで生成 -->
+        <div class="day-panels">
+          <div class="day-panel day1">
+            <h3 class="day-title">1日目</h3>
+            <div id="day1-slots"><!-- 1日目のテーブル --></div>
+          </div>
+          <div class="day-panel day2">
+            <h3 class="day-title">2日目</h3>
+            <div id="day2-slots"><!-- 2日目のテーブル --></div>
+          </div>
         </div>
       </section>
 
@@ -59,7 +58,7 @@
       <div class="footer-links">
         <a href="admin.html" class="admin-link">管理者ページ</a>
       </div>
-      <small>©　2024　KAIT　EDTC　All Rights Reserved</small>
+      <small>©　2025　KAIT　EDTC　All Rights Reserved</small>
     </footer>
 
     <script src="user.js" defer></script>
