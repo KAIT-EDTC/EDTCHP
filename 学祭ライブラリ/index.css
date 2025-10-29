@@ -113,20 +113,10 @@ body {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
-.btn-primary:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
-}
-
 .btn-outline {
   background: transparent;
   color: white;
   border-color: white;
-}
-
-.btn-outline:hover {
-  background: white;
-  color: var(--primary);
 }
 
 .btn-large {
@@ -180,12 +170,6 @@ section {
   padding: 32px;
   border-radius: 12px;
   text-align: center;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.info-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 8px 24px var(--shadow);
 }
 
 .info-icon {
@@ -228,14 +212,8 @@ section {
   padding: 32px;
   border-radius: 16px;
   box-shadow: 0 4px 12px var(--shadow);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
   position: relative;
   border: 2px solid transparent;
-}
-
-.program-card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 12px 32px var(--shadow-hover);
 }
 
 .program-card.featured {
@@ -324,11 +302,6 @@ section {
   padding: 24px;
   background: var(--bg);
   border-radius: 12px;
-  transition: transform 0.3s ease;
-}
-
-.step:hover {
-  transform: scale(1.05);
 }
 
 .step-number {
@@ -418,11 +391,6 @@ section {
   padding: 24px;
   border-radius: 12px;
   box-shadow: 0 4px 12px var(--shadow);
-  transition: transform 0.3s ease;
-}
-
-.feature:hover {
-  transform: translateY(-4px);
 }
 
 .feature-icon {
@@ -487,11 +455,6 @@ footer {
   color: white;
   text-decoration: none;
   font-weight: 500;
-  transition: color 0.3s ease;
-}
-
-.footer-links a:hover {
-  color: var(--accent);
 }
 
 .copyright {
