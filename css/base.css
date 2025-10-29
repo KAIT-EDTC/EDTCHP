@@ -86,7 +86,7 @@ h1{
     font-size: 40px;
     color: #edb81a;
     font-weight: bold;
-    padding: 10%;
+    padding: 5%;
 }
 .ikutokusai p{
     text-align: left;
@@ -95,13 +95,12 @@ h1{
 }
 .ikutokusai img{
     width: 100%;
-    /*PCでは非表示*/
 }
 @media screen and (min-width:820px) {
     .ikutokusai{
         display: flex;
     }
-    .ikutokusai img{
-        width: 50%;
+    .ikutokusai p{
+        padding: 5%;
     }
 }
