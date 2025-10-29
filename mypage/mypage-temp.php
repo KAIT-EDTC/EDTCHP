@@ -138,6 +138,7 @@
         <div>
             <?php if(($admincheck) == 1): ?>
                 <a href=<?php echo REGISTER_FORM ?>>登録ページ</a>
+                <a href="https://kaitedtc.flop.jp/admin.html">学祭管理ページ</a>
             <?php endif; ?>
         </div>
 

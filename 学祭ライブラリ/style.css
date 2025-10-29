@@ -4,12 +4,13 @@
   --partial:#f1c40f;
   --bg:#f7f7f9;
   --card:#ffffff;
-  --primary:#667eea;
-  --primary-dark:#5568d3;
-  --day1:#4e73df; /* 青系 */
-  --day1-b:#1cc88a; /* 緑系 */
-  --day2:#e67e22; /* オレンジ系 */
-  --day2-b:#e74c3c; /* 赤系 */
+  --primary:#29b6f6;       /* 水色 */
+  --primary-dark:#0288d1;  /* 濃い水色 */
+  --accent:#ffb300;        /* オレンジ寄り黄 */
+  --day1:#29b6f6;          /* 水色系 */
+  --day1-b:#0288d1;        /* 水色系(濃) */
+  --day2:#ffb300;          /* オレンジ系 */
+  --day2-b:#f57c00;        /* オレンジ系(濃) */
 }
 
 *{box-sizing:border-box}
@@ -117,7 +118,7 @@ th{
 
 /* 案内ボックス */
 .info-box{
-  background:linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background:linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
   color:white;
   border:none;
 }
@@ -147,7 +148,7 @@ th{
   color: #333;
   margin: 0 0 12px;
   padding: 8px 12px;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
   color: white;
   border-radius: 6px;
 }
@@ -216,7 +217,7 @@ th{
 }
 
 .btn-primary{
-  background:#3498db;
+  background:var(--primary);
   color:white;
   padding:10px 20px;
   border:none;
@@ -227,7 +228,7 @@ th{
 }
 
 .btn-primary:hover{
-  background:#2980b9;
+  background:var(--primary-dark);
 }
 
 .btn-secondary{
@@ -393,7 +394,7 @@ footer{
 }
 
 .admin-link{
-  color:#667eea;
+  color:var(--primary);
   text-decoration:none;
   font-weight:600;
   font-size:0.9rem;
