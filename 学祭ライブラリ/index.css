@@ -214,6 +214,8 @@ section {
   box-shadow: 0 4px 12px var(--shadow);
   position: relative;
   border: 2px solid transparent;
+  display: flex;
+  flex-direction: column;
 }
 
 .program-card.featured {
@@ -270,6 +272,7 @@ section {
 .program-features {
   list-style: none;
   padding: 0;
+  margin-top: auto;
 }
 
 .program-features li {
