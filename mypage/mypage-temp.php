@@ -14,9 +14,6 @@
     }
     
     $conn = new PDO(DSN, DB_USERNAME, DB_PASS);
-    
-    $gcs = new GoogleCalendarSync($conn);
-    $gcs->performBidirectionalSync();
 
     $user = $conn->prepare('SELECT * FROM `login-data` WHERE SIDn = ?');//名前の引き出しに使用
     $user->execute([$id]);

@@ -10,6 +10,47 @@
 
 export const content = [
     {
+        date: "2025-06-05",
+        title: "EDTC親睦会！vol.1",
+        img: "blog/blog-img/25-06-05-sinboku01.jpg",
+        caption: "EDTCメンバーの親睦を深めるため、親睦会を開催しました！",
+        author: "米川",
+        link: "blog/blog-data/25-06-05-sinboku.html"
+    },
+    {
+        date: "2025-07-03",
+        title: "レクを楽しみました！",
+        img: "blog/blog-img/25-07-03-reku-02.jpg",
+        caption: "EDTCメンバーでレクリエーションを楽しみました！",
+        author: "山口",
+        link: "blog/blog-data/25-07-03-reku.html"
+    },
+    {
+        date: "2025-07-25",
+        title: "第五回遊行塾に行ってきました！",
+        img: "blog/blog-img/25-07-25-yugyou05-01.JPG",
+        caption: "藤嶺学園藤沢中学校に第五回遊行塾を実施しました。\
+                今回はLED制御のプログラミングを行いました！",
+        author: "青沼",
+        link: "blog/blog-data/25-07-25-yugyou05.html"
+    },
+    {
+        date: "2025-08-03",
+        title: "あゆまつりのお手伝いに行ってきました!",
+        img: "blog/blog-img/25-08-03-tourouage.jpg",
+        caption: "厚木JCが開催する「あつぎ鮎まつり DREAMフェスタ2025」のお手伝いに行ってきました！",
+        author: "及川",
+        link: "blog/blog-data/25-08-03-ayumatsuri.html"
+    },
+    {
+        date: "2025-08-08",
+        title: "サイエンスサマーで展示を行いました！",
+        img: "blog/blog-img/25-08-08-sciencesummer-02.jpg",
+        caption: "神奈川工科大学で開催されたサイエンスサマーに参加し、ロボットの展示を行いました！",
+        author: "大谷",
+        link: "blog/blog-data/25-08-08-sciencesummer.html"
+    },
+    {
         date: "2024-06-08",
         title: "第三回遊行塾を実施しました!",
         img: "blog/blog-img/24-06-08-yugyou03.webp",
