@@ -13,7 +13,8 @@ export const content = [
         date: "2025-06-05",
         title: "EDTC親睦会！vol.1",
         img: "blog/blog-img/25-06-05-sinboku01.jpg",
-        caption: "EDTCメンバーの親睦を深めるため、親睦会を開催しました！",
+        caption: "第2回KAITEDCT親睦会を開催しました！ \
+            今回は初めての運動を行うレクリエーションということでみんなで体を動かし親睦を深めました",
         author: "米川",
         link: "blog/blog-data/25-06-05-sinboku01.html"
     },
