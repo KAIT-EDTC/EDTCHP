@@ -15,7 +15,7 @@ export const content = [
         img: "blog/blog-img/25-06-05-sinboku01.jpg",
         caption: "EDTCメンバーの親睦を深めるため、親睦会を開催しました！",
         author: "米川",
-        link: "blog/blog-data/25-06-05-sinboku.html"
+        link: "blog/blog-data/25-06-05-sinboku01.html"
     },
     {
         date: "2025-07-03",
