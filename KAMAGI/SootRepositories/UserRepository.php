@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace KAMAGI\SootRepositories;
 
@@ -10,10 +10,12 @@ use PDO;
  * 
  * ユーザーに関するDB操作を担当
  */
-class UserRepository {
+class UserRepository
+{
     private PDO $db;
 
-    public function __construct(PDO $dbConnection) {
+    public function __construct(PDO $dbConnection)
+    {
         $this->db = $dbConnection;
     }
 
@@ -23,7 +25,8 @@ class UserRepository {
      * @param string $userId
      * @return User|null
      */
-    public function findByUserId(string $userId): ?User {
+    public function findByUserId(string $userId): ?User
+    {
         $stmt = $this->db->prepare('SELECT * FROM users WHERE user_id = ?');
         $stmt->execute([$userId]);
         $data = $stmt->fetch();
@@ -34,24 +37,19 @@ class UserRepository {
     /**
      * 新規ユーザーを作成
      * 
-     * @param string $userId
-     * @param string $name
-     * @param string $password
+     * @param array $data ユーザーデータ
      * @return bool 成功したらtrue
      */
-    public function create(
-        string $userId,
-        string $name,
-        string $password,
-    ) : bool {
-        $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+    public function create(array $data): bool
+    {
+        $hashedPassword = password_hash($data['password'], PASSWORD_DEFAULT);
         $stmt = $this->db->prepare(
-            'INSERT INTO users (user_id, password, name) VALUES (?, ?, ?)'
+            'INSERT INTO users (user_id, pass, name) VALUES (?, ?, ?)'
         );
         return $stmt->execute([
-            $userId,
+            $data['user_id'],
             $hashedPassword,
-            $name,
+            $data['name'],
         ]);
     }
 }

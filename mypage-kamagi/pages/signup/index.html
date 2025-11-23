@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>サインアップ</title>
+    <link rel="stylesheet" href="./signup.css">
+</head>
+
+<body style="display: none;">
+    <h1>新規登録</h1>
+
+    <form id="signup-form">
+        <table cellspacing="0" cellpadding="20" border="1">
+            <tr>
+                <th>学籍番号</th>
+                <td>
+                    <input type="text" id="user-id" name="user_id" required>
+                </td>
+            </tr>
+            <tr>
+                <th>パスワード</th>
+                <td>
+                    <input type="password" id="password" name="password" required>
+                </td>
+            </tr>
+            <tr>
+                <th>名前</th>
+                <td>
+                    <input type="text" id="name" name="name" required>
+                </td>
+            </tr>
+        </table>
+        <button type="submit">サインアップ</button>
+    </form>
+
+    <!-- メッセージ表示エリア -->
+    <div id="success-message" class="success-message" style="display: none;"></div>
+    <div id="error-message" class="error-message" style="display: none;"></div>
+
+    <!-- API Client と Auth Service を先に読み込む -->
+    <script src="../../lib/api-client.js"></script>
+    <script src="../../lib/services/auth-service.js"></script>
+    <script src="./signup.js"></script>
+</body>
+
+</html>
