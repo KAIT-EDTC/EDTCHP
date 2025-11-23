@@ -25,4 +25,4 @@ $loginUseCase = new LoginUseCase($userRepo);
 $logoutUseCase = new LogoutUseCase();
 $authController = new AuthController($loginUseCase, $logoutUseCase);
 
-$authController->login();
+$authController->logout();

@@ -1,27 +1,28 @@
-<?php 
+<?php
 
 namespace KAMAGI\SootControllers;
 
 use KAMAGI\SootUseCases\LoginUseCase;
+use KAMAGI\SootUseCases\LogoutUseCase;
+use KAMAGI\Response;
 
-
-// TODO: LogoutUseCaseの実装が完了したら下記のコメントアウト部分を解除
-
+// TODO: まったくDRYではないので、エラーハンドリングの共通化を検討する
 /**
  * 認証コントローラー
  * 
  * HTTPリクエストを受け取り、UseCaseを実行してレスポンスを返す
  */
-class AuthController {
+class AuthController
+{
     private LoginUseCase $loginUseCase;
-    // private LogoutUseCase $logoutUseCase;
+    private LogoutUseCase $logoutUseCase;
 
     public function __construct(
         LoginUseCase $loginUseCase,
-        // LogoutUseCase $logoutUseCase
+        LogoutUseCase $logoutUseCase
     ) {
         $this->loginUseCase = $loginUseCase;
-        // $this->logoutUseCase = $logoutUseCase;
+        $this->logoutUseCase = $logoutUseCase;
     }
 
     /**
@@ -29,9 +30,10 @@ class AuthController {
      * 
      * @return void
      */
-    public function login(): void {
-        if ($_SERVER['REQEST_METHOD'] !== 'POST') {
-            $this->sendResponse(405, [
+    public function login(): void
+    {
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+            Response::json(405, [
                 'success' => false,
                 'message' => 'Method Not Allowed',
             ]);
@@ -47,7 +49,7 @@ class AuthController {
         $result = $this->loginUseCase->execute($userId, $password);
 
         $statusCode = $result['success'] ? 200 : 401;
-        $this->sendResponse($statusCode, $result);
+        Response::json($statusCode, $result);
     }
 
     /**
@@ -55,18 +57,19 @@ class AuthController {
      * 
      * @return void
      */
-    public function logout(): void {
-        if ($_SERVER['REQEST_METHOD'] !== 'POST') {
-            $this->sendResponse(405, [
+    public function logout(): void
+    {
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+            Response::json(405, [
                 'success' => false,
                 'message' => 'Method Not Allowed',
             ]);
             return;
         }
 
-        // $result = $this->logoutUseCase->execute();
+        $result = $this->logoutUseCase->execute();
 
-        // $this->sendResponse(200, $result);
+        Response::json(200, $result);
     }
 
     /**
@@ -74,18 +77,28 @@ class AuthController {
      * 
      * @return void
      */
-    public function check(): void {
+    public function check(): void
+    {
+        if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
+            Response::json(405, [
+                'success' => false,
+                'message' => 'Method Not Allowed',
+            ]);
+            return;
+        }
+
         if (isset($_SESSION['userId'])) {
-            $this->sendResponse(200, [
+            Response::json(200, [
                 'success' => true,
                 'isLoggedIn' => true,
                 'user' => [
                     'id' => $_SESSION['userId'],
                     'name' => $_SESSION['name'],
+                    'role' => $_SESSION['role'],
                 ]
             ]);
         } else {
-            $this->sendResponse(200, [
+            Response::json(200, [
                 'success' => true,
                 'isLoggedIn' => false,
             ]);

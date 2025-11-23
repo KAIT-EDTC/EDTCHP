@@ -6,7 +6,6 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/EDTCHP/meta.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/EDTCHP/KAMAGI/database.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/EDTCHP/KAMAGI/Response.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/EDTCHP/KAMAGI/ErrorHandler.php';
-require_once $_SERVER['DOCUMENT_ROOT'] . '/EDTCHP/KAMAGI/SootEntities/User.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/EDTCHP/KAMAGI/SootRepositories/UserRepository.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/EDTCHP/KAMAGI/SootUseCases/LoginUseCase.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/EDTCHP/KAMAGI/SootUseCases/LogoutUseCase.php';
@@ -19,10 +18,12 @@ use KAMAGI\SootUseCases\LogoutUseCase;
 use KAMAGI\SootRepositories\UserRepository;
 
 ErrorHandler::register();
+// DI（check()はRepositoryを使わないけど、コンストラクタで必要）
 $db = Database::getInstance()->getConnection();
 $userRepo = new UserRepository($db);
 $loginUseCase = new LoginUseCase($userRepo);
 $logoutUseCase = new LogoutUseCase();
 $authController = new AuthController($loginUseCase, $logoutUseCase);
 
-$authController->login();
+// ログイン状態確認
+$authController->check();
