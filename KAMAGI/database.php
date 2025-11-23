@@ -1,11 +1,13 @@
 <?php
 require_once $_SERVER['DOCUMENT_ROOT'] . '/EDTCHP/meta.php';
 
-class Database {
+class Database
+{
     private static $instance = null;
     private $connection;
 
-    private function __construct() {
+    private function __construct()
+    {
         try {
             $this->connection = new PDO(DSN, DB_USERNAME, DB_PASS, [
                 PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
@@ -13,20 +15,25 @@ class Database {
                 PDO::ATTR_EMULATE_PREPARES => false,
             ]);
         } catch (PDOException $e) {
-            error_log('DB Connection Error:' . $e->getMessage());
-            header('Location: ' . LOGIN_FORM . '?error=db_connection_failed');
-            exit;
+            error_log('DB Connection Error: ' . $e->getMessage());
+            // 例外を再スローして、呼び出し元（Controller）でキャッチできるようにする
+            // エンドポイント層の時点でDIしてるから、そこでハンドリングしないとだめかも
+            // すべてコントローラ(もしくはDTO)でレスポンス処理をしたい 
+            // FYI. Responsableインターフェース
+            throw $e;
         }
     }
 
-    public static function getInstance() {
+    public static function getInstance()
+    {
         if (self::$instance === null) {
             self::$instance = new Database();
         }
         return self::$instance;
     }
 
-    public function getConnection() {
+    public function getConnection()
+    {
         return $this->connection;
     }
 }
