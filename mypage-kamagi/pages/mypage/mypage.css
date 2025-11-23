@@ -1,0 +1,46 @@
+.breadcrumbs {
+    font-size: 1.2em;
+    /* padding: 1%; */
+}
+.breadcrumbs a:hover {
+    background-color: var(--breadcrumbs-hover-color);
+}
+.breadcrumbs i {
+    vertical-align: middle;
+    font-size: 1.4em;
+    margin: 0 5px;
+}
+
+.panel {
+    margin: 3% 0;
+    text-align: center;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: center;
+    font-family: sans-serif;
+}
+
+th {
+    /* background-color: #4CAF50; */
+    background-color: var(--main-color);
+    color: white;
+    padding: 10px;
+    font-weight: bold;
+}
+
+td {
+    border: 1px solid #ddd;
+    padding: 10px;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+tr:hover {
+    background-color: #ddd;
+    transition: 0.3s;
+}
