@@ -23,14 +23,14 @@ class LoginUseCase
      * 
      * @param string $userId
      * @param string $password
-     * @return array{success: bool, message: string, user?: array}
+     * @return array{success: bool, message: string}
      */
     public function execute(string $userId, string $password): array
     {
         if (empty($userId) || empty($password)) {
             return [
                 'success' => false,
-                'message' => '学籍番号とパスワードを入力してください。' . $userId
+                'message' => '学籍番号とパスワードを入力してください。'
             ];
         }
 
