@@ -4,15 +4,14 @@ namespace KAMAGI\SootControllers;
 
 use KAMAGI\SootUseCases\LoginUseCase;
 use KAMAGI\SootUseCases\LogoutUseCase;
-use KAMAGI\Response;
+use KAMAGI\SootResources\Response;
 
-// TODO: まったくDRYではないので、エラーハンドリングの共通化を検討する
 /**
  * 認証コントローラー
  * 
  * HTTPリクエストを受け取り、UseCaseを実行してレスポンスを返す
  */
-class AuthController
+class AuthController extends BaseController
 {
     private LoginUseCase $loginUseCase;
     private LogoutUseCase $logoutUseCase;
@@ -32,17 +31,10 @@ class AuthController
      */
     public function login(): void
     {
-        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-            Response::json(405, [
-                'success' => false,
-                'message' => 'Method Not Allowed',
-            ]);
-            return;
-        }
+        $this->validateMethod('POST');
 
-        $input = json_decode(file_get_contents('php://input'), true);
+        $input = $this->getRequestInput();
 
-        // laravelで言うリクエスト
         $userId = htmlspecialchars($input['user_id'] ?? '', ENT_QUOTES, 'UTF-8');
         $password = htmlspecialchars($input['password'] ?? '', ENT_QUOTES, 'UTF-8');
 
@@ -59,13 +51,7 @@ class AuthController
      */
     public function logout(): void
     {
-        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-            Response::json(405, [
-                'success' => false,
-                'message' => 'Method Not Allowed',
-            ]);
-            return;
-        }
+        $this->validateMethod('POST');
 
         $result = $this->logoutUseCase->execute();
 
@@ -79,13 +65,7 @@ class AuthController
      */
     public function check(): void
     {
-        if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
-            Response::json(405, [
-                'success' => false,
-                'message' => 'Method Not Allowed',
-            ]);
-            return;
-        }
+        $this->validateMethod('GET');
 
         if (isset($_SESSION['userId'])) {
             Response::json(Response::HTTP_OK, [
