@@ -1,5 +1,4 @@
 <?php
-require_once __DIR__ . '/vendor/autoload.php';
 $env = "local";
 $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
 $dotenv->load();
@@ -14,7 +13,7 @@ if ($env == "local") {
     define('REGISTER_FORM', $url . '/mypage-kamagi/signUp.html');
     define('MYPAGE', $url . '/mypage-kamagi/mypage.html');
     define('CALENDAR_ID', $_ENV['CALENDAR_ID']);
-    define('JSON_PATH', $url . '/key/test-edtc-event_credentials.json');
+    define('JSON_PATH', __DIR__ . '/key/test-edtc-event_credentials.json');
 } else {
     define('DSN', 'mysql:host=mysql3105.db.sakura.ne.jp;dbname=kaitedtc_mamber-db');
     define('DB_USERNAME', 'kaitedtc_mamber-db');

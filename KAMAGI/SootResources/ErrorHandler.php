@@ -1,8 +1,8 @@
 <?php
 
-namespace KAMAGI;
+namespace KAMAGI\SootResources;
 
-use KAMAGI\Response;
+use KAMAGI\SootResources\Response;
 
 class ErrorHandler
 {
@@ -33,7 +33,7 @@ class ErrorHandler
             ));
 
             // 認証エラーなどもセキュリティ的にユーザー側にあまり悟らせたくないので500エラーとして扱いたい
-            $statusCode = 500;
+            $statusCode = Response::HTTP_INTERNAL_SERVER_ERROR;
             $message = 'サーバーエラーが発生しました。';
 
             if ($e instanceof \PDOException) {
@@ -43,6 +43,8 @@ class ErrorHandler
             Response::json($statusCode, [
                 'success' => false,
                 'message' => $message,
+                'debug_message' => sprintf("%s in %s:%d", $e->getMessage(), $e->getFile(), $e->getLine()),
+                'trace' => $e->getTraceAsString(),
             ]);
         });
     }

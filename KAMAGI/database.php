@@ -1,5 +1,10 @@
 <?php
-require_once $_SERVER['DOCUMENT_ROOT'] . '/EDTCHP/meta.php';
+
+namespace KAMAGI;
+use PDO;
+use PDOException;
+
+require_once $_SERVER['DOCUMENT_ROOT'] . '/EDTCHP/KAMAGI/meta.php';
 
 class Database
 {
@@ -17,8 +22,6 @@ class Database
         } catch (PDOException $e) {
             error_log('DB Connection Error: ' . $e->getMessage());
             // 例外を再スローして、呼び出し元（Controller）でキャッチできるようにする
-            // エンドポイント層の時点でDIしてるから、そこでハンドリングしないとだめかも
-            // すべてコントローラ(もしくはDTO)でレスポンス処理をしたい 
             // FYI. Responsableインターフェース
             throw $e;
         }
