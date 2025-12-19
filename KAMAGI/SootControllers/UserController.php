@@ -34,7 +34,7 @@ class UserController
 
         $result = $this->signUpUseCase->execute($userId, $name, $password);
 
-        $statusCode = $result['success'] ? 200 : 400;
+        $statusCode = $result['success'] ? Response::HTTP_OK : Response::HTTP_BAD_REQUEST;
         Response::json($statusCode, $result);
     }
 }

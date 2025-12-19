@@ -48,7 +48,7 @@ class AuthController
 
         $result = $this->loginUseCase->execute($userId, $password);
 
-        $statusCode = $result['success'] ? 200 : 401;
+        $statusCode = $result['success'] ? Response::HTTP_OK : Response::HTTP_UNAUTHORIZED;
         Response::json($statusCode, $result);
     }
 
@@ -69,7 +69,7 @@ class AuthController
 
         $result = $this->logoutUseCase->execute();
 
-        Response::json(200, $result);
+        Response::json(Response::HTTP_OK, $result);
     }
 
     /**
@@ -88,7 +88,7 @@ class AuthController
         }
 
         if (isset($_SESSION['userId'])) {
-            Response::json(200, [
+            Response::json(Response::HTTP_OK, [
                 'success' => true,
                 'isLoggedIn' => true,
                 'user' => [
@@ -98,7 +98,7 @@ class AuthController
                 ]
             ]);
         } else {
-            Response::json(200, [
+            Response::json(Response::HTTP_OK, [
                 'success' => true,
                 'isLoggedIn' => false,
             ]);
