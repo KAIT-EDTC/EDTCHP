@@ -27,3 +27,38 @@
     transform: translateY(0);
   }
 }
+
+/* トースト通知のスタイル (共通) */
+.toast {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%) translateY(-20px);
+    background-color: #333;
+    color: #fff;
+    padding: 12px 24px;
+    border-radius: 4px;
+    z-index: 100000;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    font-size: 14px;
+    pointer-events: none; /* クリックを透過させる */
+}
+
+.toast.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+}
+
+.toast.success {
+    background-color: #4CAF50; /* 緑 */
+}
+
+.toast.error {
+    background-color: #f44336; /* 赤 */
+}
+
+.toast.info {
+    background-color: #2196F3; /* 青 */
+}
