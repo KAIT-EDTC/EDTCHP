@@ -1,5 +1,5 @@
 /**
- * マイページのクライアント側ロジック（Service Layer使用）
+ * マイページの認証とコンテンツ表示
  */
 
 // ページ読み込み時にログイン状態をチェック
@@ -14,7 +14,6 @@ document.addEventListener('DOMContentLoaded', async () => {
 async function checkLoginStatus() {
     const loadingDiv = document.getElementById('loading');
     const notLoggedInDiv = document.getElementById('not-logged-in');
-    const loggedInDiv = document.getElementById('logged-in-content');
     
     try {
         const data = await authService.checkStatus();
@@ -40,19 +39,28 @@ async function checkLoginStatus() {
 /**
  * ログイン済みコンテンツを表示
  * 
- * @param {Object} user - ユーザー情報
- * @param {string} user.id - ユーザーID
- * @param {string} user.name - ユーザー名
+ * @param {Object} user ユーザー情報
+ * @param {string} user.id ユーザーID
+ * @param {string} user.name ユーザー名
+ * @param {string} user.role ユーザー権限
  */
-function displayLoggedInContent(user) {
+async function displayLoggedInContent(user) {
     const loggedInDiv = document.getElementById('logged-in-content');
     const userNameSpan = document.getElementById('user-name');
+
+    if (user.role == '0') {
+        document.getElementById('admin-menu').style.display = 'block';
+    }
     
     // ユーザー名を表示
     userNameSpan.textContent = user.name;
     
     // コンテンツを表示
     loggedInDiv.style.display = 'block';
+
+    // イベント一覧表示
+    const events = await fetchEvents(user.id);
+    diplayEvents(events);
 }
 
 /**
@@ -69,12 +77,12 @@ function setupLogoutButton() {
         try {
             await authService.logout();
             
-            alert('ログアウトしました');
+            showToast('ログアウトしました', 'success');
             window.location.href = '/EDTCHP/mypage-kamagi/pages/login/';
             
         } catch (error) {
             console.error('ログアウトエラー:', error);
-            alert('ログアウト中にエラーが発生しました');
+            showToast('ログアウト中にエラーが発生しました', 'error');
         }
     });
 }

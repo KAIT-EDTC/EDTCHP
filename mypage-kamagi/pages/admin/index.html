@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>サインアップ</title>
     <link rel="stylesheet" href="./signup.css">
+    <link rel="stylesheet" href="./../../../css/global.css">
 </head>
 
 <body style="display: none;">
@@ -16,7 +17,13 @@
             <tr>
                 <th>学籍番号</th>
                 <td>
-                    <input type="text" id="user-id" name="user_id" required>
+                    <!-- 数値のみに制限する -->
+                     <!-- 一応UseCaseでもバリデート済み -->
+                    <input type="text" id="user-id" name="user_id" 
+                    pattern="\d{7}" 
+                    minlength="7" 
+                    maxlength="7" 
+                    required>
                 </td>
             </tr>
             <tr>
@@ -35,13 +42,10 @@
         <button type="submit">サインアップ</button>
     </form>
 
-    <!-- メッセージ表示エリア -->
-    <div id="success-message" class="success-message" style="display: none;"></div>
-    <div id="error-message" class="error-message" style="display: none;"></div>
-
     <!-- API Client と Auth Service を先に読み込む -->
     <script src="../../lib/api-client.js"></script>
     <script src="../../lib/services/auth-service.js"></script>
+    <script src="../../lib/utils.js"></script>
     <script src="./signup.js"></script>
 </body>
 

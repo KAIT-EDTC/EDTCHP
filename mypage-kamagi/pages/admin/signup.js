@@ -1,25 +1,16 @@
 /**
- * サインアップフォームのクライアント側ロジック（Service Layer使用）
+ * サインアップフォーム
  */
 
 document.addEventListener('DOMContentLoaded', () => {
     const signupForm = document.getElementById('signup-form');
-    const successMessageDiv = document.getElementById('success-message');
-    const errorMessageDiv = document.getElementById('error-message');
 
-    checkAdminUser(errorMessageDiv);
+    checkAdminUser();
 
     signupForm.addEventListener('submit', async (e) => {
-        // フォームのデフォルト動作を止める
+        // 画面遷移をキャンセル
         e.preventDefault();
 
-        // メッセージをクリア
-        successMessageDiv.style.display = 'none';
-        successMessageDiv.textContent = '';
-        errorMessageDiv.style.display = 'none';
-        errorMessageDiv.textContent = '';
-
-        // フォームデータを取得
         const userId = document.getElementById('user-id').value;
         const password = document.getElementById('password').value;
         const name = document.getElementById('name').value;
@@ -27,8 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
         try {
             const data = await authService.signUp(userId, password, name);
 
-            successMessageDiv.textContent = data.message;
-            successMessageDiv.style.display = 'block';
+            showToast(data.message + '3秒後にログインページにリダイレクトします。', 'success');
 
             // フォームをクリア
             signupForm.reset();
@@ -41,13 +31,13 @@ document.addEventListener('DOMContentLoaded', () => {
         } catch (error) {
             // サインアップ失敗
             console.error('サインアップエラー:', error);
-            errorMessageDiv.textContent = error.message || '通信エラーが発生しました。もう一度お試しください。';
-            errorMessageDiv.style.display = 'block';
+            const errorMessage = error.message || '通信エラーが発生しました。';
+            showToast(errorMessage, 'error');
         }
     });
 });
 
-async function checkAdminUser(dom) {
+async function checkAdminUser() {
     try {
         const data = await authService.checkStatus();
         // ログインしていない、もしくは管理者でなければ、ログインページにリダイレクト
@@ -58,7 +48,7 @@ async function checkAdminUser(dom) {
             document.body.style.display = 'block';
         }
     } catch (error) {
-        dom.textContent = error.message || '通信エラーが発生しました。もう一度お試しください。';
-        dom.style.display = 'block';
+        const errorMessage = error.message || '通信エラーが発生しました。';
+        showToast(errorMessage, 'error');
     }
 }

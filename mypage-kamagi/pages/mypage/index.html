@@ -32,21 +32,51 @@
     <div id="logged-in-content" style="display: none;">
         <h1><span id="user-name"></span>さんこんにちは！</h1>
 
-        <div id="admin-menu" style="display: none;">
-            <a href="/EDTCHP/register-form/touroku.php">登録ページ</a>
-            <a href="https://kaitedtc.flop.jp/admin.html">学祭管理ページ</a>
+        <div id="event-list-container">
+            <h2>イベント一覧</h2>
+            <p id="no-events" style="display: none;">表示できるイベントがありません。</p>
+            <table id="event-list-table" style="display: none;">
+                <thead>
+                    <tr>
+                        <th>イベント名</th>
+                        <th>日時</th>
+                        <th>詳細</th>
+                        <th>参加者</th>
+                    </tr>
+                </thead>
+                <tbody id="event-list">
+                    <!-- イベントデータが表示されます -->
+                </tbody>
+            </table>
         </div>
 
+        <div id="calender">
+            <h2>カレンダー</h2>
+            <iframe 
+                src="https://calendar.google.com/calendar/embed?src=a23bec7bb1a50a07c46df692888fee89c66547fedf575d44f1a333f8804848c1%40group.calendar.google.com&ctz=Asia%2FTokyo" 
+                style="border-width: 0" 
+                width="100%" 
+                height="600" 
+                frameborder="0" 
+                scrolling="no"
+            ></iframe>
+        </div>
         <div>
             <a href="./../../../base.html">ホームに戻る</a>
             <button id="logout-btn">ログアウト</button>
         </div>
+
+        <div id="admin-menu" style="display: none;">
+            <a href="./../admin/">管理者メニュー</a>
+        </div>
     </div>
 
-    <!-- API Client と Auth Service を先に読み込む -->
     <script src="../../lib/api-client.js"></script>
     <script src="../../lib/services/auth-service.js"></script>
-    <script src="./mypage.js"></script>
+    <script src="../../lib/services/event-service.js"></script>
+    <script src="./../../lib/utils.js"></script>
+    <script src="./auth.js"></script>
+    <script src="./fetch-event.js"></script>
 </body>
 
 </html>
