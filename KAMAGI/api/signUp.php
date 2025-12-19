@@ -2,16 +2,10 @@
 
 session_start();
 
-require_once $_SERVER['DOCUMENT_ROOT'] . '/EDTCHP/meta.php';
-require_once $_SERVER['DOCUMENT_ROOT'] . '/EDTCHP/KAMAGI/database.php';
-require_once $_SERVER['DOCUMENT_ROOT'] . '/EDTCHP/KAMAGI/Response.php';
-require_once $_SERVER['DOCUMENT_ROOT'] . '/EDTCHP/KAMAGI/ErrorHandler.php';
-require_once $_SERVER['DOCUMENT_ROOT'] . '/EDTCHP/KAMAGI/SootEntities/User.php';
-require_once $_SERVER['DOCUMENT_ROOT'] . '/EDTCHP/KAMAGI/SootRepositories/UserRepository.php';
-require_once $_SERVER['DOCUMENT_ROOT'] . '/EDTCHP/KAMAGI/SootUseCases/signUpUseCase.php';
-require_once $_SERVER['DOCUMENT_ROOT'] . '/EDTCHP/KAMAGI/SootControllers/UserController.php';
+require_once __DIR__ . '/../vendor/autoload.php';
 
-use KAMAGI\ErrorHandler;
+use KAMAGI\Database;
+use KAMAGI\SootResources\ErrorHandler;
 use KAMAGI\SootControllers\UserController;
 use KAMAGI\SootUseCases\signUpUseCase;
 use KAMAGI\SootRepositories\UserRepository;

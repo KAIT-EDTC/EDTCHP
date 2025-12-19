@@ -2,17 +2,10 @@
 
 session_start();
 
-require_once $_SERVER['DOCUMENT_ROOT'] . '/EDTCHP/meta.php';
-require_once $_SERVER['DOCUMENT_ROOT'] . '/EDTCHP/KAMAGI/database.php';
-require_once $_SERVER['DOCUMENT_ROOT'] . '/EDTCHP/KAMAGI/Response.php';
-require_once $_SERVER['DOCUMENT_ROOT'] . '/EDTCHP/KAMAGI/ErrorHandler.php';
-require_once $_SERVER['DOCUMENT_ROOT'] . '/EDTCHP/KAMAGI/SootEntities/User.php';
-require_once $_SERVER['DOCUMENT_ROOT'] . '/EDTCHP/KAMAGI/SootRepositories/UserRepository.php';
-require_once $_SERVER['DOCUMENT_ROOT'] . '/EDTCHP/KAMAGI/SootUseCases/LoginUseCase.php';
-require_once $_SERVER['DOCUMENT_ROOT'] . '/EDTCHP/KAMAGI/SootUseCases/LogoutUseCase.php';
-require_once $_SERVER['DOCUMENT_ROOT'] . '/EDTCHP/KAMAGI/SootControllers/AuthController.php';
+require_once __DIR__ . '/../vendor/autoload.php';
 
-use KAMAGI\ErrorHandler;
+use KAMAGI\Database;
+use KAMAGI\SootResources\ErrorHandler;
 use KAMAGI\SootControllers\AuthController;
 use KAMAGI\SootUseCases\LoginUseCase;
 use KAMAGI\SootUseCases\LogoutUseCase;
