@@ -32,6 +32,13 @@ class signUpUseCase {
             ];
         }
 
+        if (strlen($userId) != 7 || !ctype_digit($userId)) {
+            return [
+                'success' => false,
+                'message' => '入力形式が正しくありません。'
+            ];
+        }
+
         if ($this->userRepository->findByUserId($userId)) {
             return [
                 'success' => false,
