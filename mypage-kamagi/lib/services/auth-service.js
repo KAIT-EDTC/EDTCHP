@@ -14,10 +14,9 @@ class AuthService {
     /**
      * ログイン処理
      * 
-     * @param {string} userId ユーザーID（学籍番号）
+     * @param {string} userId 学籍番号
      * @param {string} password パスワード
      * @returns {Promise<Object>} { success: boolean, message: string }
-     * @throws {Error} ログイン失敗時
      * 
      * @example
      * const result = await authService.login('2424xxx', 'password123');
@@ -38,7 +37,6 @@ class AuthService {
      * @param {string} password パスワード
      * @param {string} name ユーザー名
      * @returns {Promise<Object>} { success: boolean, message: string }
-     * @throws {Error} サインアップ失敗時
      */
     async signUp(userId, password, name) {
         return this.api.post('/signUp.php', {
@@ -52,7 +50,6 @@ class AuthService {
      * ログイン状態チェック
      * 
      * @returns {Promise<Object>} { success: boolean, isLoggedIn: boolean, user?: Object }
-     * @throws {Error} チェック失敗時
      */
     async checkStatus() {
         return this.api.get('/check.php');
@@ -62,12 +59,12 @@ class AuthService {
      * ログアウト処理
      * 
      * @returns {Promise<Object>} { success: boolean, message: string }
-     * @throws {Error} ログアウト失敗時
      */
     async logout() {
         return this.api.post('/logout.php');
     }
 }
 
-// グローバルインスタンスをエクスポート
+// インスタンス化しなくても使えるようにする
+// ex. authService.method(...);
 const authService = new AuthService(apiClient);

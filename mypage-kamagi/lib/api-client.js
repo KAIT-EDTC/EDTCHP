@@ -46,7 +46,8 @@ class ApiClient {
             const response = await fetch(url, config);
             const data = await response.json();
 
-            // API側のsuccessをチェック（デフォルトでエラーを投げる）
+            // 既知のエラーでもview側でエラーを捕捉できるようにThrowする。
+            // optionで無効に可能。
             if (!data.success && options.throwOnError !== false) {
                 throw new Error(data.message || 'リクエストに失敗しました');
             }
@@ -54,8 +55,7 @@ class ApiClient {
             return data;
 
         } catch (error) {
-            // ネットワークエラーやJSONパースエラーもキャッチ
-            console.error(`API Error [${endpoint}]:`, error);
+            console.error(`API Error [${endpoint}]:`, error.message);
             throw error;
         }
     }
