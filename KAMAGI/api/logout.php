@@ -1,7 +1,6 @@
 <?php
 
-session_start();
-
+require_once __DIR__ . '/../session_start.php';
 require_once __DIR__ . '/../vendor/autoload.php';
 
 use KAMAGI\Database;

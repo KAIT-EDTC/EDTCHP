@@ -1,7 +1,6 @@
 <?php
 
-session_start();
-
+require_once __DIR__ . '/../session_start.php';
 require_once __DIR__ . '/../vendor/autoload.php';
 
 use KAMAGI\Database;
@@ -12,7 +11,6 @@ use KAMAGI\SootUseCases\LogoutUseCase;
 use KAMAGI\SootRepositories\UserRepository;
 
 ErrorHandler::register();
-// DI（check()はRepositoryを使わないけど、コンストラクタで必要）
 $db = Database::getInstance()->getConnection();
 $userRepo = new UserRepository($db);
 $loginUseCase = new LoginUseCase($userRepo);
