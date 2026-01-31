@@ -36,10 +36,8 @@ function diplayEvents(events) {
 async function fetchEvents(userId) {
     try {
         const response = await eventService.getEventsByUserId(userId);
-        if (response.events) {
-            return response.events;
-        }
-        return null;
+        if (!response.events) return null;
+        return response.events;
     } catch (error) {
         console.error('Error fetching events:', error);
         return null;

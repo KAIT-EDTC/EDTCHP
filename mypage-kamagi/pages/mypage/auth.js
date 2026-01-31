@@ -14,6 +14,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 async function checkLoginStatus() {
     const loadingDiv = document.getElementById('loading');
     const notLoggedInDiv = document.getElementById('not-logged-in');
+    const breadcrumbsDiv = document.getElementById('breadcrumbs');
     
     try {
         const data = await authService.checkStatus();
@@ -26,12 +27,14 @@ async function checkLoginStatus() {
             displayLoggedInContent(data.user);
         } else {
             // 未ログイン
+            breadcrumbsDiv.style.display = 'none';
             notLoggedInDiv.style.display = 'block';
         }
         
     } catch (error) {
         console.error('ログイン状態の確認に失敗:', error);
         loadingDiv.style.display = 'none';
+        breadcrumbsDiv.style.display = 'none';
         notLoggedInDiv.style.display = 'block';
     }
 }
@@ -78,7 +81,7 @@ function setupLogoutButton() {
             await authService.logout();
             
             showToast('ログアウトしました', 'success');
-            window.location.href = '/EDTCHP/mypage-kamagi/pages/login/';
+            window.location.href = `/mypage-kamagi/pages/login/`;
             
         } catch (error) {
             console.error('ログアウトエラー:', error);

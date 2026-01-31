@@ -7,8 +7,12 @@ class ApiClient {
     /**
      * @param {string} baseUrl APIのベースURL
      */
-    constructor(baseUrl = '/EDTCHP/KAMAGI/api') {
-        this.baseUrl = baseUrl;
+    constructor(baseUrl) {
+        if (baseUrl) {
+            this.baseUrl = baseUrl;
+        } else {
+            this.baseUrl = `/KAMAGI/api`;
+        }
     }
 
     /**
