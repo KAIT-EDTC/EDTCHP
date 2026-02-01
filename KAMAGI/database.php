@@ -4,7 +4,7 @@ namespace KAMAGI;
 use PDO;
 use PDOException;
 
-require_once $_SERVER['DOCUMENT_ROOT'] . '/EDTCHP/KAMAGI/meta.php';
+require_once __DIR__ . '/meta.php';
 
 class Database
 {
@@ -27,7 +27,7 @@ class Database
         }
     }
 
-    public static function getInstance()
+    public static function getInstance(): self
     {
         if (self::$instance === null) {
             self::$instance = new Database();
@@ -35,7 +35,7 @@ class Database
         return self::$instance;
     }
 
-    public function getConnection()
+    public function getConnection(): PDO
     {
         return $this->connection;
     }

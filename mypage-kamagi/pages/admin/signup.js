@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     });
 });
 
-async function checkIsAdmin() {
+const checkIsAdmin = async () => {
     try {
         const data = await authService.checkStatus();
         return (data.isLoggedIn && data.user.role == 0);
@@ -50,4 +50,4 @@ async function checkIsAdmin() {
         showToast(errorMessage, 'error');
         return false;
     }
-}
+};

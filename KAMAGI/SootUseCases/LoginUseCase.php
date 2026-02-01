@@ -27,6 +27,7 @@ class LoginUseCase
      */
     public function execute(string $userId, string $password): array
     {
+        // FEでも弾くが、念のためチェック
         if (empty($userId) || empty($password)) {
             return [
                 'success' => false,
