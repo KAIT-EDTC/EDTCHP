@@ -4,39 +4,50 @@
 
 // ページ読み込み時にログイン状態をチェック
 document.addEventListener('DOMContentLoaded', async () => {
-    await checkLoginStatus();
+    await initializePage();
     setupLogoutButton();
 });
 
 /**
- * ログイン状態をAPIで確認
+ * ページの初期化処理
  */
-async function checkLoginStatus() {
+async function initializePage() {
     const loadingDiv = document.getElementById('loading');
-    const notLoggedInDiv = document.getElementById('not-logged-in');
-    const breadcrumbsDiv = document.getElementById('breadcrumbs');
     
     try {
-        const data = await authService.checkStatus();
-        
-        // ローディング非表示
+        const authData = await checkLoginStatus();
         loadingDiv.style.display = 'none';
         
-        if (data.isLoggedIn) {
-            // ログイン済み
-            displayLoggedInContent(data.user);
+        if (authData.isLoggedIn) {
+            displayLoggedInContent(authData.user);
         } else {
-            // 未ログイン
-            breadcrumbsDiv.style.display = 'none';
-            notLoggedInDiv.style.display = 'block';
+            displayNotLoggedInContent();
         }
-        
     } catch (error) {
         console.error('ログイン状態の確認に失敗:', error);
         loadingDiv.style.display = 'none';
-        breadcrumbsDiv.style.display = 'none';
-        notLoggedInDiv.style.display = 'block';
+        displayNotLoggedInContent();
     }
+}
+
+/**
+ * ログイン状態をAPIで確認
+ * 
+ * @returns {Promise<{isLoggedIn: boolean, user?: Object}>} 認証状態
+ */
+async function checkLoginStatus() {
+    return await authService.checkStatus();
+}
+
+/**
+ * 未ログイン状態のUIを表示
+ */
+function displayNotLoggedInContent() {
+    const notLoggedInDiv = document.getElementById('not-logged-in');
+    const breadcrumbsDiv = document.getElementById('breadcrumbs');
+    
+    breadcrumbsDiv.style.display = 'none';
+    notLoggedInDiv.style.display = 'block';
 }
 
 /**
@@ -73,15 +84,15 @@ function setupLogoutButton() {
     const logoutBtn = document.getElementById('logout-btn');
     
     logoutBtn.addEventListener('click', async () => {
-        if (!confirm('ログアウトしますか？')) {
-            return;
-        }
+        if (!confirm('ログアウトしますか？')) return;
         
         try {
             await authService.logout();
             
-            showToast('ログアウトしました', 'success');
-            window.location.href = `/mypage-kamagi/pages/login/`;
+            showToast('ログアウトしました。', 'success');
+            setTimeout(() => {
+                window.location.href = `/mypage-kamagi/pages/login/`;
+            }, 1500);
             
         } catch (error) {
             console.error('ログアウトエラー:', error);
