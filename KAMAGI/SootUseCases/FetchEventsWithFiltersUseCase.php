@@ -5,60 +5,55 @@ namespace KAMAGI\SootUseCases;
 use KAMAGI\SootRepositories\EventRepository;
 
 /**
- * イベントユースケース
+ * フィルター付きイベント取得ユースケース
  * 
- * イベントに関するビジネスロジックを担当
+ * フィルター条件に基づいてイベントを取得
  */
-class FetchEventsByUserIdUseCase
+class FetchEventsWithFiltersUseCase
 {
-    private EventRepository $showEventRepository;
+    private EventRepository $eventRepository;
 
-    public function __construct(EventRepository $showEventRepository)
+    public function __construct(EventRepository $eventRepository)
     {
-        $this->showEventRepository = $showEventRepository;
+        $this->eventRepository = $eventRepository;
     }
 
     /**
-     * ユーザーIDからDBのイベントを取得
+     * フィルター条件付きでイベントを取得
      * 
-     * @param string $userId
+     * @param array $filters フィルター条件
      * @return array{success: bool, message?: string, events?: array}
      */
-    public function execute(string $userId): array
+    public function execute(array $filters): array
     {
-        if (empty($userId)) {
-            return [
-                'success' => false,
-                'message' => 'Invalid User ID',
-            ];
-        }
-
-        $results = $this->showEventRepository->findByUserId($userId);
+        // フィルターがない場合は全イベントを取得
+        $results = $this->eventRepository->findWithFilters($filters);
 
         if (!$results) {
             return [
-                'success' => false,
-                'message' => 'No events found for user ID: ' . $userId,
+                'success' => true,
+                'message' => 'No events found with the specified filters',
+                'events' => [],
             ];
         }
 
+        // 結果を整形（参加者をグループ化）
         $events = [];
         foreach ($results as $row) {
-            $eid = $row['event_id'];
+            $eid = $row['google_event_id'];
             
-            // 初期化
             if (!isset($events[$eid])) {
                 $events[$eid] = [
-                    'id' => $row['event_id'],
+                    'id' => $row['google_event_id'],
                     'title' => $row['title'],
                     'start' => $row['start_time'],
                     'end' => $row['end_time'],
                     'description' => $row['description'],
-                    'participants' => [] // Null => emptyに変更 
+                    'visibility' => $row['visibility'],
+                    'participants' => []
                 ];
             }
             
-            // よく見てくれこれはparticipant_idだよ
             if ($row['participant_id']) {
                 $events[$eid]['participants'][] = [
                     'id' => $row['participant_id'],
