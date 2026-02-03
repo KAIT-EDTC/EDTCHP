@@ -40,12 +40,21 @@ class ErrorHandler
                 $message = 'データベース接続または操作に失敗しました。';
             }
 
-            Response::json($statusCode, [
-                'success' => false,
-                'message' => $message,
-                'debug_message' => sprintf("%s in %s:%d", $e->getMessage(), $e->getFile(), $e->getLine()),
-                'trace' => $e->getTraceAsString(),
-            ]);
+            if (CURRENT_ENV === 'dev') {
+                Response::json($statusCode, [
+                    'success' => false,
+                    'message' => $message,
+                    'debug_line' => $e->getLine(),
+                    'debug_file' => $e->getFile(),
+                    'debug_message' => $e->getMessage(),
+                    'trace' => $e->getTraceAsString(),
+                ]);
+            } else {
+                Response::json($statusCode, [
+                    'success' => false,
+                    'message' => $message,
+                ]);
+            }
         });
     }
 }
