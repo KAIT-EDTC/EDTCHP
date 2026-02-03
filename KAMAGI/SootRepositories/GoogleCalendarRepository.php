@@ -18,7 +18,17 @@ class GoogleCalendarRepository {
 
     public function __construct() {
         $this->client = new \Google_Client();
-        $this->client->setAuthConfig(JSON_PATH);
+        
+        if (empty(GOOGLE_CREDENTIALS_JSON)) {
+            throw new \Exception('GOOGLE_CREDENTIALS_JSON environment variable is not set');
+        }
+        
+        $credentials = json_decode(GOOGLE_CREDENTIALS_JSON, true);
+        if ($credentials === null) {
+            throw new \Exception('Invalid Google credentials JSON format');
+        }
+        
+        $this->client->setAuthConfig($credentials);
         $this->client->addScope(GSCalendar::CALENDAR);
         $this->service = new GSCalendar($this->client);
     }

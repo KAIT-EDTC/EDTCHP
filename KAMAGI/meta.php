@@ -33,4 +33,4 @@ define('DB_USERNAME', kamagi_env('DB_USERNAME'));
 define('DB_PASS', kamagi_env('DB_PASSWORD'));
 define('CALENDAR_ID', kamagi_env('CALENDAR_ID', ''));
 define('CALENDAR_URL', kamagi_env('CALENDAR_URL', ''));
-define('JSON_PATH', kamagi_env('JSON_CREDENTIALS_PATH'));
+define('GOOGLE_CREDENTIALS_JSON', kamagi_env('GOOGLE_CREDENTIALS_JSON'));
