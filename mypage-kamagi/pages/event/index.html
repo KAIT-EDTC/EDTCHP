@@ -5,9 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>イベント管理 | EDTCHP</title>
     <link rel="stylesheet" href="../../../css/global.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="./style.css">
 </head>
-<body class="anim-fadein">
+<body class="anim-fadein" style="display:none;">
     <main>
         <header>
             <h1>イベント管理</h1>
@@ -50,6 +51,14 @@
                             <option value="public">公開（全員参加可能）</option>
                             <option value="private">非公開（招待のみ）</option>
                         </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="create-participants">参加者（Ctrl/Cmdキーで複数選択）</label>
+                        <select id="create-participants" name="participant_ids" multiple size="5">
+                            <!-- JSで動的に追加 -->
+                        </select>
+                        <small class="form-hint">任意：参加者を選択するとカレンダーにも表示されます</small>
                     </div>
 
                     <button type="submit" class="btn btn-primary">イベントを作成</button>
@@ -101,6 +110,14 @@
                         </select>
                     </div>
 
+                    <div class="form-group">
+                        <label for="update-participants">参加者（Ctrl/Cmdキーで複数選択）</label>
+                        <select id="update-participants" name="participant_ids" multiple size="5">
+                            <!-- JSで動的に追加 -->
+                        </select>
+                        <small class="form-hint">任意：参加者を選択するとカレンダーにも表示されます</small>
+                    </div>
+
                     <button type="submit" class="btn btn-primary">変更を保存</button>
                 </form>
             </section>
@@ -135,5 +152,8 @@
     
     <!-- Page Logic -->
     <script src="./event.js"></script>
+    <script src="./event-create.js"></script>
+    <script src="./event-update.js"></script>
+    <script src="./event-delete.js"></script>
 </body>
 </html>

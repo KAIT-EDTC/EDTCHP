@@ -139,3 +139,32 @@ h1 {
     margin-bottom: 20px;
     border-left: 4px solid var(--main-color);
 }
+
+/* Form hint text */
+.form-hint {
+    display: block;
+    margin-top: 5px;
+    font-size: 0.85rem;
+    color: #666;
+}
+
+/* Multiple select styling */
+.form-group select[multiple] {
+    height: auto;
+    min-height: 120px;
+}
+
+.form-group select[multiple] option {
+    padding: 8px 10px;
+}
+
+.form-group select[multiple] option:checked {
+    background: linear-gradient(0deg, var(--main-color) 0%, var(--main-color) 100%);
+    color: white;
+}
+
+/* Loading state */
+.btn:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
