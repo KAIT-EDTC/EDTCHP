@@ -62,8 +62,10 @@ async function displayLoggedInContent(user) {
     const loggedInDiv = document.getElementById('logged-in-content');
     const userNameSpan = document.getElementById('user-name');
 
+    // 管理者権限の場合、管理者メニューとイベント管理を表示
     if (user.role == '0') {
-        document.getElementById('admin-menu').style.display = 'block';
+        document.getElementById('admin-link').style.display = 'block';
+        document.getElementById('event-manage-link').style.display = 'block';
     }
     
     // ユーザー名を表示

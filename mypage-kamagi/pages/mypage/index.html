@@ -30,6 +30,21 @@
 
     <!-- ログイン後の表示（ログイン済み時） -->
     <div id="logged-in-content" style="display: none;">
+        <!-- ハンバーガーメニュー -->
+        <div class="hamburger-menu">
+            <input type="checkbox" id="menu-toggle">
+            <label for="menu-toggle" class="menu-icon">
+                <span></span>
+                <span></span>
+                <span></span>
+            </label>
+            <nav class="menu-content">
+                <a href="./../signup/" id="admin-link" style="display: none;"><i class="fa fa-cog"></i> 管理者メニュー</a>
+                <a href="./../event/" id="event-manage-link" style="display: none;"><i class="fa fa-calendar"></i> イベント管理</a>
+                <a href="#" id="logout-btn"><i class="fa fa-sign-out"></i> ログアウト</a>
+            </nav>
+        </div>
+
         <h1><span id="user-name"></span>さんこんにちは！</h1>
 
         <div id="event-list-container">
@@ -61,13 +76,8 @@
                 scrolling="no"
             ></iframe>
         </div>
-        <div>
+        <div class="footer-links">
             <a href="./../../../base.html">ホームに戻る</a>
-            <button id="logout-btn">ログアウト</button>
-        </div>
-
-        <div id="admin-menu" style="display: none;">
-            <a href="./../admin/">管理者メニュー</a>
         </div>
     </div>
 
