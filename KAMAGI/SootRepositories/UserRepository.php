@@ -52,4 +52,23 @@ class UserRepository
             $data['name'],
         ]);
     }
+
+    /**
+     * 全メンバー一覧を取得（パスワード除く）
+     * 
+     * @return array メンバー一覧
+     */
+    public function findAll(): array
+    {
+        $stmt = $this->db->query('SELECT user_id, name, role_id FROM users ORDER BY user_id');
+        $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        
+        return array_map(function($row) {
+            return [
+                'id' => $row['user_id'],
+                'name' => $row['name'],
+                'role' => (int)$row['role_id']
+            ];
+        }, $results);
+    }
 }
