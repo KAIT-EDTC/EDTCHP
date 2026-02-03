@@ -14,7 +14,6 @@
 
 .anim-fadein {
   animation: fade-in 1s;
-  animation-fill-mode: forwards;
 }
 
 @keyframes fade-in {
