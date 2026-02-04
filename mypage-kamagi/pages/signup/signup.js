@@ -7,13 +7,11 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     const isAdmin = await checkIsAdmin();
 
-    if (isAdmin) {
-        // 管理者の場合のみ画面を表示
-        document.body.style.display = 'block';
-    } else {
-        // ログインしていない、もしくは管理者でなければ、ログインページにリダイレクト
-        window.location.href = '/mypage-kamagi/pages/login/'; 
-    }
+    // 管理者の場合のみ画面を表示
+    if (isAdmin) document.body.style.display = 'block';
+    // ログインしていない、もしくは管理者でなければ、ログインページにリダイレクト
+    else window.location.href = '/mypage-kamagi/pages/login/';
+
 
     signupForm.addEventListener('submit', async (e) => {
         // 画面遷移をキャンセル
