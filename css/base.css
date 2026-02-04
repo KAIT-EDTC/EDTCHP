@@ -2,46 +2,215 @@
 ======================================================================================
 ======================================================================================*/
 /*団体訓の設定*/
-.about{
-    background-color: rgb(233, 233, 233);
+.about {
+    background: linear-gradient(135deg, #f5f7fa 0%, #e4e8ec 100%);
+    padding: 60px 20px;
     margin-bottom: 15px;
 }
-h1{
+
+h1 {
     text-align: center;
     font-size: 55px;
-    color:rgb(71, 71, 71);
-    font-weight:700;
+    color: rgb(71, 71, 71);
+    font-weight: 700;
+    margin-bottom: 20px;
 }
-.about .fmozi{
+
+/* EDTC Logo */
+.edtc-logo {
+    font-weight: 700;
+    color: rgb(71, 71, 71);
+}
+
+.about-intro {
+    text-align: center;
+    font-size: 18px;
+    color: #555;
+    margin-bottom: 50px;
+    line-height: 1.8;
+}
+
+/* EDTC Cards Container */
+.edtc-cards {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+/* Card Base Style */
+.edtc-card {
+    display: flex;
+    flex-direction: column;
+    background: white;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.edtc-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+}
+
+/* Card Content */
+.edtc-card__content {
+    flex: 1;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.edtc-card__letter {
+    font-size: 100px;
+    font-weight: 900;
+    line-height: 1;
+    margin-bottom: -10px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.edtc-card__title {
+    font-size: 36px;
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 20px;
+    margin-left: 5px;
+}
+
+.edtc-card__description {
+    font-size: 18px;
+    color: #444;
+    line-height: 1.8;
+    margin-bottom: 15px;
+}
+
+.edtc-card__description .highlight {
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.edtc-card__sub {
+    font-size: 15px;
+    color: #666;
+    line-height: 1.7;
+    padding-left: 10px;
+    border-left: 3px solid #ddd;
+}
+
+/* Card Image */
+.edtc-card__image {
+    flex: 1;
+    min-height: 250px;
+    overflow: hidden;
+}
+
+.edtc-card__image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.edtc-card:hover .edtc-card__image img {
+    transform: scale(1.05);
+}
+
+/* Back Home Button */
+.back-home-btn {
+    display: inline-block;
+    margin: 50px auto 0;
+    padding: 15px 40px;
+    background: rgb(100, 100, 100);
+    color: white;
+    text-decoration: none;
+    border-radius: 50px;
+    font-size: 16px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.back-home-btn:hover {
+    background: rgb(80, 80, 80);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+.about > .back-home-btn {
+    display: block;
+    text-align: center;
+    width: fit-content;
+}
+
+/* Desktop Layout */
+@media screen and (min-width: 768px) {
+    .edtc-card {
+        flex-direction: row;
+    }
+    
+    /* 奇数番目のカード（1, 3）: 画像が左、テキストが右 */
+    .edtc-card:nth-child(odd) {
+        flex-direction: row;
+    }
+    
+    /* 偶数番目のカード（2, 4）: テキストが左、画像が右 */
+    .edtc-card:nth-child(even) {
+        flex-direction: row-reverse;
+    }
+    
+    .edtc-card__content {
+        flex: 1;
+        padding: 50px;
+    }
+    
+    .edtc-card__image {
+        flex: 1;
+        min-height: 350px;
+    }
+    
+    .edtc-card__letter {
+        font-size: 120px;
+    }
+}
+
+/* Legacy styles - kept for compatibility */
+.about .fmozi {
     font-size: 60px;
     font-weight: bolder;
 }
-.about .EDTCs{
+
+.about .EDTCs {
     padding-left: 3%;
     font-size: 40px;
     display: block;
 }
-.about .manabu1{
+
+.about .manabu1 {
     font-size: 20px;
     padding: 3%;
     text-align: left;
 }
-.about .EDTCcode{
+
+.about .EDTCcode {
     font-size: 20px;
     padding-left: 3%;
     font-weight: bold;
 }
-.EDTCcodepc{
+
+.EDTCcodepc {
     font-size: 20px;
     padding-left: 3%;
     display: block;
     font-weight: 549;
 }
 
-.EDTCmovie{
-    width: 90%; 
-    height:"auto";
-    margin:0 5% 2% 5%;
+.EDTCmovie {
+    width: 90%;
+    height: auto;
+    margin: 0 5% 2% 5%;
 }
 
 /*====================================================================================

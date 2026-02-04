@@ -16,50 +16,134 @@
         <a href="base.html"><img src="img/EDTC-icon.webp" alt="EDTC"
                 style="display: block; height: 60px; width: auto;"></a>
         <a href="" class="title">EDTC</a>
-            <nav>
-                <ul>
-                    <li class="gnav-sec"><a href="./base.html"><span>Home</span><br>ホーム</a></li>
-                    <li class="gnav-sec"><a href="./blog.html"><span>Blog</span><br>ブログ</a></li>
-                    <li class="gnav-sec"><a href="./product-top.html"><span>Product</span><br>プロダクト</a></li>
-                    <li class="gnav-sec"><a href="contact-us.html"><span>Contact</span><br>お問い合わせ</a></li>
-                    <li>
-                        <div class="sns_button twitter">
-                            <a href="https://x.com/kait_edtc" title="Tweet"><i class="fa fa-twitter"></i></a>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="sns_button instagram">
-                            <a href="https://www.instagram.com/kait.edtc/" title="instagram"><i
-                                    class="fa fa-instagram"></i></a>
-                        </div>
-                    </li>
-                </ul>
-            </nav>
+        <!--==========モバイルのみ表示==========-->
+        <nav class="sp-only">
+            <div class="gnav-toggle">
+                <input id="gnav-input" type="checkbox" class="gnav-hidden">
+                <label id="gnav-open" for="gnav-input"><span></span></label>
+                <label class="gnav-unshown" id="gnav-close" for="gnav-input"></label>
+                <div id="gnav-content">
+                    <ul class="gnav-menu">
+                        <li class="gnav-item"><a href="./base.html">Home<br>ホーム</a></li>
+                        <li class="gnav-item"><a href="./blog.html">Blog<br>ブログ</a></li>
+                        <li class="gnav-item"><a href="./product-top.html">Product<br>プロダクト</a></li>
+                        <li class="gnav-item"><a href="./contact-us.html">Contact<br>お問い合わせ</a></li>
+                        <li class="gnav-item"><a href="./login-form/login.html"><span>Login</span><br>ログイン</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <!--==========PCのみ表示==========-->
+        <nav class="pc-only">
+            <ul>
+                <li class="gnav-sec"><a href="./base.html"><span>Home</span><br>ホーム</a></li>
+                <li class="gnav-sec"><a href="./blog.html"><span>Blog</span><br>ブログ</a></li>
+                <li class="gnav-sec"><a href="./product-top.html"><span>Product</span><br>プロダクト</a></li>
+                <li class="gnav-sec"><a href="contact-us.html"><span>Contact</span><br>お問い合わせ</a></li>
+                <li class="gnav-sec"><a href="./mypage-kamagi/"><span>Login</span><br>ログイン</a></li>
+                <li>
+                    <div class="sns_button twitter">
+                        <a href="https://x.com/kait_edtc" title="Tweet"><i class="fa fa-twitter"></i></a>
+                    </div>
+                </li>
+                <li>
+                    <div class="sns_button instagram">
+                        <a href="https://www.instagram.com/kait.edtc/" title="instagram"><i
+                                class="fa fa-instagram"></i></a>
+                    </div>
+                </li>
+            </ul>
+        </nav>
         </div>
     </header>
     <main>
-            <div class="about">
-                <h1>About <span>EDTC</span></h1>
-                <!-- 各文字の先頭に対して色付け -->
-                <ul style="display: block;">
-                    <li class="EDTCs"><span class="fmozi" style="color:crimson;">E</span>ngineering<br>
-                        <span class="EDTCcodepc"> 神奈川工科大学（KAIT）に属しており、「<span
-                                style="color: crimson;font-size: 20px;">工学</span>」の知識が豊富な学生団体です。</span>
-                    </li>
-                    <li class="EDTCs"><span class="fmozi" style="color: dodgerblue;">D</span>ispatch<br>
-                        <span class="EDTCcodepc">学生ならではの「<span
-                                style="color:dodgerblue; font-size: 20px;">迅速な派遣</span>」により、より早く需要にこたえた授業展開イベント参加を目指します。</span>
-                    </li>
-                    <li class="EDTCs"><span class="fmozi" style="color: limegreen;">T</span>eacher<br>
-                        <span class="EDTCcodepc">学生の作った教材を使った「<span
-                                style="color:limegreen; font-size: 20px;">教える</span>」活動を行っています。</span>
-                    </li>
-                    <li class="EDTCs"><span class="fmozi" style="color: orange;">C</span>ompany<br>
-                        <span class="EDTCcodepc">EDTC内部は企画・総務・広報・人事・営業の5つの部署に分かれています。「<span
-                                style="color:orange; font-size: 20px;">企業</span>」のような活動体制により、各部署で役割分担をしより進化する団体運営を心掛けています。</span>
-                    </li>
-                </ul>
-                <a href="base.html">ホームに戻る</a>
+        <div class="about">
+            <h1>About <span class="edtc-logo"><span class="e">E</span><span class="d">D</span><span class="t">T</span><span class="c">C</span></span></h1>
+            <p class="about-intro">EDTCは神奈川工科大学に属する学生団体です。<br>4つの理念に基づいて活動しています。</p>
+            
+            <!-- EDTC Cards Container -->
+            <div class="edtc-cards">
+                
+                <!-- E - Engineering -->
+                <div class="edtc-card">
+                    <div class="edtc-card__image">
+                        <img src="img/EDTC-teaching-machine.webp" alt="Engineering - 工学教育の様子">
+                    </div>
+                    <div class="edtc-card__content">
+                        <div class="edtc-card__letter" style="color: crimson;">E</div>
+                        <h2 class="edtc-card__title">ngineering</h2>
+                        <p class="edtc-card__description">
+                            神奈川工科大学（KAIT）に属しており、<br>
+                            「<span class="highlight" style="color: crimson;">工学</span>」の知識が豊富な学生団体です。
+                        </p>
+                        <p class="edtc-card__sub">
+                            情報系・機械系・電気系など多様な専攻を持つメンバーが集まり、
+                            それぞれの専門知識を活かした教育活動を展開しています。
+                        </p>
+                    </div>
+                </div>
+
+                <!-- D - Dispatch -->
+                <div class="edtc-card">
+                    <div class="edtc-card__image">
+                        <img src="img/EDTC-yugyou-huukei.webp" alt="Dispatch - 出張授業の様子">
+                    </div>
+                    <div class="edtc-card__content">
+                        <div class="edtc-card__letter" style="color: dodgerblue;">D</div>
+                        <h2 class="edtc-card__title">ispatch</h2>
+                        <p class="edtc-card__description">
+                            学生ならではの「<span class="highlight" style="color: dodgerblue;">迅速な派遣</span>」により、<br>
+                            より早く需要にこたえた授業展開・イベント参加を目指します。
+                        </p>
+                        <p class="edtc-card__sub">
+                            学校や地域からのご依頼に柔軟に対応し、
+                            子どもたちに科学の楽しさを届けています。
+                        </p>
+                    </div>
+                </div>
+
+                <!-- T - Teacher -->
+                <div class="edtc-card">
+                    <div class="edtc-card__image">
+                        <img src="img/EDTC-teaching-sasaki.webp" alt="Teacher - 教える活動の様子">
+                    </div>
+                    <div class="edtc-card__content">
+                        <div class="edtc-card__letter" style="color: limegreen;">T</div>
+                        <h2 class="edtc-card__title">eacher</h2>
+                        <p class="edtc-card__description">
+                            学生の作った教材を使った<br>
+                            「<span class="highlight" style="color: limegreen;">教える</span>」活動を行っています。
+                        </p>
+                        <p class="edtc-card__sub">
+                            プログラミング・ロボット・電子工作など、
+                            様々なテーマで子どもたちの興味を引き出す授業を実施しています。
+                        </p>
+                    </div>
+                </div>
+
+                <!-- C - Company -->
+                <div class="edtc-card">
+                    <div class="edtc-card__image">
+                        <img src="img/EDTC-GroupPhoto.webp" alt="Company - チーム体制">
+                    </div>
+                    <div class="edtc-card__content">
+                        <div class="edtc-card__letter" style="color: orange;">C</div>
+                        <h2 class="edtc-card__title">ompany</h2>
+                        <p class="edtc-card__description">
+                            EDTC内部は企画・総務・広報・人事・営業の<br>
+                            5つの部署に分かれています。
+                        </p>
+                        <p class="edtc-card__sub">
+                            「<span class="highlight" style="color: orange;">企業</span>」のような活動体制により、
+                            各部署で役割分担をし、より進化する団体運営を心掛けています。
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+            
+            <a href="base.html" class="back-home-btn">ホームに戻る</a>
+        </div>
     </main>
     <footer>
         <div class="flex">
