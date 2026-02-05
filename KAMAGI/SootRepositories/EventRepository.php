@@ -86,32 +86,6 @@ class EventRepository
     }
 
     /**
-     * 学籍番号のリストから名前を取得
-     * 
-     * @param array $userIds 学籍番号の配列
-     * @return array<string, string> 学籍番号 => 名前 のマッピング
-     */
-    public function getNamesByIds(array $userIds): array
-    {
-        if (empty($userIds)) {
-            return [];
-        }
-        
-        $placeholders = implode(',', array_fill(0, count($userIds), '?'));
-        $stmt = $this->db->prepare(
-            "SELECT user_id, name FROM users WHERE user_id IN ({$placeholders})"
-        );
-        $stmt->execute($userIds);
-        $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        
-        $nameMap = [];
-        foreach ($results as $row) {
-            $nameMap[$row['user_id']] = $row['name'];
-        }
-        return $nameMap;
-    }
-
-    /**
      * DBのイベント情報を更新
      * 
      * @param string $googleEventId 更新対象のGoogleイベントID

@@ -8,6 +8,7 @@ use KAMAGI\SootResources\Response;
 use KAMAGI\SootControllers\EventController;
 use KAMAGI\SootRepositories\EventRepository;
 use KAMAGI\SootRepositories\GoogleCalendarRepository;
+use KAMAGI\SootRepositories\UserRepository;
 use KAMAGI\SootUseCases\FetchEventsWithFiltersUseCase;
 use KAMAGI\SootServices\EventService;
 
@@ -15,9 +16,10 @@ ErrorHandler::register();
 
 $db = Database::getInstance()->getConnection();
 $eventRepo = new EventRepository($db);
+$userRepo = new UserRepository($db);
 $gcRepo = new GoogleCalendarRepository();
 $fetchEventsWithFiltersUseCase = new FetchEventsWithFiltersUseCase($eventRepo);
-$userEventService = new EventService($gcRepo, $eventRepo);
+$userEventService = new EventService($gcRepo, $eventRepo, $userRepo);
 $eventController = new EventController($fetchEventsWithFiltersUseCase, $userEventService);
 
 $method = $_SERVER['REQUEST_METHOD'];

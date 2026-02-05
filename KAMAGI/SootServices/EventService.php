@@ -4,14 +4,17 @@ namespace KAMAGI\SootServices;
 
 use KAMAGI\SootRepositories\GoogleCalendarRepository;
 use KAMAGI\SootRepositories\EventRepository;
+use KAMAGI\SootRepositories\UserRepository;
 
 class EventService {
     private GoogleCalendarRepository $GCRepository;
     private EventRepository $eventRepository;
+    private UserRepository $userRepository;
     
-    public function __construct(GoogleCalendarRepository $GCRepository, EventRepository $eventRepository) {
+    public function __construct(GoogleCalendarRepository $GCRepository, EventRepository $eventRepository, UserRepository $userRepository) {
         $this->GCRepository = $GCRepository;
         $this->eventRepository = $eventRepository;
+        $this->userRepository = $userRepository;
     }
 
     /**
@@ -23,7 +26,7 @@ class EventService {
      */
     public function createEvent(array $data, array $participantIds = []): array {
         // 1. DBから参加者の名前を取得
-        $nameMap = $this->eventRepository->getNamesByIds($participantIds);
+        $nameMap = $this->userRepository->getNamesByIds($participantIds);
         $participantNames = [];
         foreach ($participantIds as $userId) {
             $participantNames[] = $nameMap[$userId] ?? "不明なメンバー ({$userId})";
@@ -63,7 +66,7 @@ class EventService {
      */
     public function updateEvent(string $googleEventId, array $data, array $participantIds = []): array {
         // 1. DBから参加者の名前を取得
-        $nameMap = $this->eventRepository->getNamesByIds($participantIds);
+        $nameMap = $this->userRepository->getNamesByIds($participantIds);
         $participantNames = [];
         foreach ($participantIds as $userId) {
             $participantNames[] = $nameMap[$userId] ?? "不明なメンバー ({$userId})";
