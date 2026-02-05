@@ -20,43 +20,6 @@ class EventRepository
     }
 
     /**
-     * ユーザーIDからDBのイベントを取得
-     * 
-     * @param string $userId
-     * @return array
-     */
-    public function findByUserId(string $userId): array
-    {
-        // sqlの意図を書く 
-        $sql = "
-                SELECT 
-                    e.google_event_id,
-                    e.title,
-                    e.start_time,
-                    e.end_time,
-                    e.description,
-                    ue.user_id as participant_id,
-                    u.name as participant_name
-                FROM events e
-                LEFT JOIN user_events ue ON e.google_event_id = ue.google_event_id
-                LEFT JOIN users u ON ue.user_id = u.user_id
-                WHERE e.google_event_id IN (
-                    SELECT google_event_id 
-                    FROM user_events 
-                    WHERE user_id = ?
-                ) 
-                OR e.visibility = 'public'
-                ORDER BY e.google_event_id, u.name
-            ";
-
-        $stmt = $this->db->prepare($sql);
-        $stmt->execute([$userId]);
-        $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-        return $results;
-    }
-
-    /**
      * DBで新規イベントを作成
      * 
      * @param string $googleEventId GoogleカレンダーのイベントID
