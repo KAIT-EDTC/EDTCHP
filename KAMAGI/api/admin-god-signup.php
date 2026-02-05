@@ -15,4 +15,4 @@ $userRepo = new UserRepository($db);
 $signUpUseCase = new signUpUseCase($userRepo);
 $userController = new UserController($signUpUseCase, $userRepo);
 
-$userController->store();
+$userController->storeWithoutAuth();

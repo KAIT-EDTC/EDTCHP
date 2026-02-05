@@ -24,7 +24,7 @@ class signUpUseCase {
      * @param string $password
      * @return array{success: bool, message: string}
      */
-    public function execute(string $userId, string $name, string $password): array {
+    public function execute(string $userId, string $name, string $password, int $roleId = 1): array {
         if (empty($userId) || empty($name) || empty($password)) {
             return [
                 'success' => false,
@@ -50,6 +50,7 @@ class signUpUseCase {
             'user_id' => $userId,
             'name' => $name,
             'password' => $password,
+            'role_id' => $roleId,
         ];
 
         $created = $this->userRepository->create($data);

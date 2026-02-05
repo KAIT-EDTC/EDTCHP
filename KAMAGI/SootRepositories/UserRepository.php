@@ -44,12 +44,13 @@ class UserRepository
     {
         $hashedPassword = password_hash($data['password'], PASSWORD_DEFAULT);
         $stmt = $this->db->prepare(
-            'INSERT INTO users (user_id, pass, name) VALUES (?, ?, ?)'
+            'INSERT INTO users (user_id, pass, name, role_id) VALUES (?, ?, ?, ?)'
         );
         return $stmt->execute([
             $data['user_id'],
             $hashedPassword,
             $data['name'],
+            $data['role_id'] ?? 1,
         ]);
     }
 

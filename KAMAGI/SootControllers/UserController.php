@@ -2,6 +2,7 @@
 
 namespace KAMAGI\SootControllers;
 
+use KAMAGI\SootRepositories\UserRepository;
 use KAMAGI\SootUseCases\signUpUseCase;
 use KAMAGI\SootResources\Response;
 
@@ -13,10 +14,11 @@ use KAMAGI\SootResources\Response;
 class UserController extends BaseController
 {
     private signUpUseCase $signUpUseCase;
-
-    public function __construct(signUpUseCase $signUpUseCase)
+    private UserRepository $userRepo;
+    public function __construct(signUpUseCase $signUpUseCase, UserRepository $userRepo)
     {
         $this->signUpUseCase = $signUpUseCase;
+        $this->userRepo = $userRepo;
     }
 
     /**
@@ -47,5 +49,44 @@ class UserController extends BaseController
 
         $statusCode = $result['success'] ? Response::HTTP_OK : Response::HTTP_BAD_REQUEST;
         Response::json($statusCode, $result);
+    }
+
+    public function storeWithoutAuth(): void
+    {
+        $this->validateMethod('POST');
+        $input = $this->getRequestInput();
+
+        $userId = $input['user_id'];
+        $name = $input['name'];
+        $password = $input['password'];
+        $roleId = $input['role_id'] ?? 1;
+
+        $result = $this->signUpUseCase->execute($userId, $name, $password, $roleId);
+
+        $statusCode = $result['success'] ? Response::HTTP_OK : Response::HTTP_BAD_REQUEST;
+        Response::json($statusCode, $result);
+    }
+
+    /**
+     * メンバー一覧を取得
+     */
+    public function index(): void
+    {
+        $this->validateMethod('GET');
+
+        if (!isset($_SESSION['userId']) && !isset($_SESSION['name'])) {
+            Response::json(Response::HTTP_UNAUTHORIZED, [
+                'success' => false,
+                'message' => 'Unauthorized access.'
+            ]);
+            return;
+        }
+
+        $members = $this->userRepo->findAll();
+
+        Response::json(Response::HTTP_OK, [
+            'success' => true,
+            'members' => $members
+        ]);
     }
 }
