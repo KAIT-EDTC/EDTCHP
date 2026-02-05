@@ -2,7 +2,6 @@
 
 namespace KAMAGI\SootControllers;
 
-use KAMAGI\SootUseCases\FetchEventsByUserIdUseCase;
 use KAMAGI\SootUseCases\FetchEventsWithFiltersUseCase;
 use KAMAGI\SootServices\EventService;
 use KAMAGI\SootResources\Response;
