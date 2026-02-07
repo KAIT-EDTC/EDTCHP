@@ -16,7 +16,7 @@
    > [!TIP]
    > Githubのアカウントがある場合は、同じものを使うと良いです。
 
-   ```bash
+   ```powershell
    git config --global user.name "任意の名前を入力"  
    git config --global user.email "自分のメアド入力"  
    ```  
@@ -27,20 +27,34 @@
 
    リポジトリを作成したいディレクトリに移動して、下記のコマンドを入力してください。  
 
-   ```bash
+   ```powershell
    git clone https://github.com/fami-gb/EDTCHP.git  
    ```  
 
    これで、EDTCHPというディレクトリが生成されるはずです。
+
+### 環境変数の設定
+
+   > [!NOTE]
+   > 機密情報を裸の状態のままgitで管理してしまうと、第三者にDBの情報やGoogleのCredentialを開示することになってしまいます。また本番環境と開発環境でDB等の設定を変更するのはとても面倒です。  
+   > そうしたことを防ぐために`.env`で機密情報を環境変数として管理します。`.env`を`.gitignore`に追加することでgitの追跡対象外とすることが出来るので、gitにプッシュしてしまうのを防げます。  
+
+   `.env.example`は`.env`の変数名だけを取り出したファイルです。  
+   環境変数を設定するためにまず、`.env.example`をコピーして`.env`にリネームしてください。  
+   今の`.env`は変数名しかないので、値をそれぞれ設定する必要があります。  
+   この値については、現在@fami-gbが保持しているので、お手数ですが都度DMにてやり取りをします。
 
 ### Dockerを使って環境構築
 
    Dockerを使うためには、まず`Docker Desktop`をインストールする必要があります。  
    [ここ](https://desktop.docker.com/win/main/amd64/Docker%20Desktop%20Installer.exe?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-win-amd64&_gl=1*1bie0kg*_gcl_au*MTc5NTcyMzc0OS4xNzcwMTQ2NDk2*_ga*MjQ2NTkzNDAuMTc3MDE0NjQ5Ng..*_ga_XJWPQMJYHQ*czE3NzAxNDY0OTYkbzEkZzEkdDE3NzAxNDY1MDYkajUwJGwwJGgw)からダウンロードし、インストールをしてください(サインインなどは一切する必要はありません。)
 
+   > [!NOTE]
+   > Docker Desktopは起動した状態にしておいてください。
+
    VSCodeでEDTCHPを開いたら、`Ctrl+J`でターミナルを起動し下記のコマンドを実行します。
 
-   ```bash
+   ```powershell
    docker-compose up -d --build
    ```
 
@@ -49,7 +63,7 @@
 
    DBのスキーマを変更した際はボリュームごと削除してください。
 
-   ```bash
+   ```powershell
    # ボリュームごと削除
    docker-compose down -v
    
@@ -59,7 +73,7 @@
 
    特定のサービス(プロセス)を終了させたい場合は、下記のようにします。
 
-   ```bash
+   ```powershell
    docker-compose stop サービス名
    ```
 
