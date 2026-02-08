@@ -4,6 +4,7 @@ namespace KAMAGI\SootControllers;
 
 use KAMAGI\SootRepositories\UserRepository;
 use KAMAGI\SootUseCases\signUpUseCase;
+use KAMAGI\SootUseCases\updateUserInfoUseCase;
 use KAMAGI\SootResources\Response;
 
 /**
@@ -14,11 +15,13 @@ use KAMAGI\SootResources\Response;
 class UserController extends BaseController
 {
     private signUpUseCase $signUpUseCase;
+    private updateUserInfoUseCase $updateUserInfoUseCase;
     private UserRepository $userRepo;
-    public function __construct(signUpUseCase $signUpUseCase, UserRepository $userRepo)
+    public function __construct(signUpUseCase $signUpUseCase, UserRepository $userRepo, UpdateUserInfoUseCase $updateUserInfoUseCase)
     {
         $this->signUpUseCase = $signUpUseCase;
         $this->userRepo = $userRepo;
+        $this->updateUserInfoUseCase = $updateUserInfoUseCase;
     }
 
     /**
@@ -88,5 +91,30 @@ class UserController extends BaseController
             'success' => true,
             'members' => $members
         ]);
+    }
+
+    /**
+     * メンバー情報更新
+     */
+    public function update(): void
+    {
+        $this->validateMethod('POST');
+        $input = $this->getRequestInput();
+
+        // ログイン認可チェック
+
+        $userId = htmlspecialchars($input['user_id'], ENT_QUOTES, 'UTF-8');
+        $name = htmlspecialchars($input['name'], ENT_QUOTES, 'UTF-8');
+        $password = htmlspecialchars($input['password'], ENT_QUOTES, 'UTF-8');
+        $roleId = htmlspecialchars($input['role_id'], ENT_QUOTES, 'UTF-8');
+
+        $user = [
+            'user_id' => $userId,
+            'name' => $name,
+            'password' => $password,
+            'role_id' => $roleId,
+        ];
+
+        $result = $this->updateUserInfoUseCase->execute($user);
     }
 }

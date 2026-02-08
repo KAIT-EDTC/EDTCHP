@@ -24,6 +24,10 @@ switch ($method) {
         // メンバー一覧を取得
         $userController->index();
         break;
+    case 'POST':
+        // メンバー情報更新
+        $userController->update();
+        break;
     
     default:
         Response::json(Response::HTTP_METHOD_NOT_ALLOWED, [
