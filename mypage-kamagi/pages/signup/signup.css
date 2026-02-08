@@ -1,0 +1,122 @@
+html, body {
+    background-color: #f0f0f0;
+    min-height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    padding: 40px 20px;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.signup-card {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.signup-card h1 {
+    color: var(--main-color);
+    font-size: 1.4em;
+    margin-top: 0;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid var(--main-color);
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    color: #333;
+    font-weight: 600;
+    margin-bottom: 8px;
+    font-size: 0.95em;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 1em;
+    box-sizing: border-box;
+    transition: border-color 0.2s;
+}
+
+.form-group input:focus {
+    border-color: var(--main-color);
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.1);
+}
+
+.btn-signup {
+    width: 100%;
+    padding: 14px;
+    border: 2px solid var(--main-color);
+    color: #fff;
+    background-color: var(--main-color);
+    border-radius: 6px;
+    font-size: 1em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.btn-signup:hover {
+    background-color: #fff;
+    color: var(--main-color);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+#error-message {
+    color: #d32f2f;
+    font-size: 0.9em;
+    padding: 10px;
+    background-color: #ffebee;
+    border-radius: 4px;
+    margin-top: 10px;
+}
+
+.footer-link {
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid #eee;
+    text-align: center;
+}
+
+.footer-link a {
+    color: var(--main-color);
+    text-decoration: none;
+    padding: 8px 16px;
+    border: 1px solid var(--main-color);
+    border-radius: 6px;
+    display: inline-block;
+    transition: all 0.2s;
+    font-size: 0.9em;
+}
+
+.footer-link a:hover {
+    background-color: var(--main-color);
+    color: #fff;
+}
+
+/* レスポンシブ対応 */
+@media (max-width: 600px) {
+    .container {
+        padding: 20px 10px;
+    }
+    
+    .signup-card {
+        padding: 20px;
+    }
+    
+    .signup-card h1 {
+        font-size: 1.2em;
+    }
+}
