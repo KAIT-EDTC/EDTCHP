@@ -50,7 +50,7 @@ class UserController extends BaseController
 
         $result = $this->signUpUseCase->execute($userId, $name, $password);
 
-        $statusCode = $result['success'] ? Response::HTTP_OK : Response::HTTP_BAD_REQUEST;
+        $statusCode = $result['success'] ?Response::HTTP_OK : Response::HTTP_BAD_REQUEST;
         Response::json($statusCode, $result);
     }
 
@@ -66,7 +66,7 @@ class UserController extends BaseController
 
         $result = $this->signUpUseCase->execute($userId, $name, $password, $roleId);
 
-        $statusCode = $result['success'] ? Response::HTTP_OK : Response::HTTP_BAD_REQUEST;
+        $statusCode = $result['success'] ?Response::HTTP_OK : Response::HTTP_BAD_REQUEST;
         Response::json($statusCode, $result);
     }
 
@@ -102,12 +102,10 @@ class UserController extends BaseController
         $input = $this->getRequestInput();
 
         // ログイン認可チェック
-
-        $userId = htmlspecialchars($input['user_id'], ENT_QUOTES, 'UTF-8');
-        $name = htmlspecialchars($input['name'], ENT_QUOTES, 'UTF-8');
-        $password = htmlspecialchars($input['password'], ENT_QUOTES, 'UTF-8');
-        $roleId = htmlspecialchars($input['role_id'], ENT_QUOTES, 'UTF-8');
-
+        $userId = htmlspecialchars($input['user_id'] ?? '', ENT_QUOTES, 'UTF-8');
+        $name = htmlspecialchars($input['name'] ?? '', ENT_QUOTES, 'UTF-8');
+        $password = htmlspecialchars($input['password'] ?? '', ENT_QUOTES, 'UTF-8');
+        $roleId = htmlspecialchars($input['role_id'] ?? '', ENT_QUOTES, 'UTF-8');
         $user = [
             'user_id' => $userId,
             'name' => $name,
@@ -116,5 +114,7 @@ class UserController extends BaseController
         ];
 
         $result = $this->updateUserInfoUseCase->execute($user);
+        $statusCode = $result['success'] ?Response::HTTP_OK : Response::HTTP_BAD_REQUEST;
+        Response::json($statusCode, $result);
     }
 }
