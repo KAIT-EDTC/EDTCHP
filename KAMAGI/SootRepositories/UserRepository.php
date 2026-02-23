@@ -103,22 +103,22 @@ class UserRepository
     {
 
         $params = [];
-        $fierds = [];
+        $fields = [];
         if (!empty($user['name'])) {
-            $fierds[] = "name=?";
+            $fields[] = "name=?";
             $params[] = $user['name'];
         }
         if (!empty($user['role_id'])) {
-            $fierds[] = "role_id=?";
+            $fields[] = "role_id=?";
             $params[] = $user['role_id'];
         }
         if (!empty($user['hashed_password'])) {
-            $fierds[] = "pass=?";
+            $fields[] = "pass=?";
             $params[] = $user['hashed_password'];
         }
         $params[] = $user['user_id'];
 
-        $sql = "UPDATE users SET " . implode(",", $fierds) . "WHERE user_id=?";
+        $sql = "UPDATE users SET " . implode(",", $fields) . "WHERE user_id=?";
         $stmt = $this->db->prepare($sql);
         return $stmt->execute($params);
 
