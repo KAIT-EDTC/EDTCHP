@@ -1,5 +1,4 @@
 vendor/
 key/
 .env
-login-form/
-register-form/
+init.sql

@@ -8,6 +8,7 @@ services:
       - "8080:80"
     volumes:
       - .:/var/www/html
+      - /var/www/html/KAMAGI/vendor  # Use vendor from Docker image
     env_file:
       - .env
     depends_on:
