@@ -10,6 +10,14 @@
 
 export const content = [
     {
+        date: "2025-10-26",
+        title: "第96回藤嶺祭に出展させていただきました！",
+        img: "blog/blog-img/25-10-26-toureisai-01.jpg",
+        caption: "EDTCが藤嶺祭にお邪魔しました！",
+        author: "山口",
+        link: "blog/blog-data/25-10-26-toureisai.html"
+    },
+    {
         date: "2025-06-05",
         title: "EDTC親睦会！vol.1",
         img: "blog/blog-img/25-06-05-sinboku01.jpg",
