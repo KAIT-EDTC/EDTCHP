@@ -109,7 +109,7 @@ class UserRepository
             $fields[] = "name=?";
             $params[] = $user['name'];
         }
-        if (!empty($user['role_id'])) {
+        if (array_key_exists('role_id', $user) && $user['role_id'] !== null) {
             $fields[] = "role_id=?";
             $params[] = $user['role_id'];
         }
@@ -119,7 +119,7 @@ class UserRepository
         }
         $params[] = $user['user_id'];
 
-        $sql = "UPDATE users SET " . implode(",", $fields) . "WHERE user_id=?";
+        $sql = "UPDATE users SET " . implode(",", $fields) . " WHERE user_id=?";
         $stmt = $this->db->prepare($sql);
         return $stmt->execute($params);
 
