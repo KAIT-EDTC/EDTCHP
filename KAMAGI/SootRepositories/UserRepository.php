@@ -104,6 +104,7 @@ class UserRepository
 
         $params = [];
         $fields = [];
+
         if (!empty($user['name'])) {
             $fields[] = "name=?";
             $params[] = $user['name'];

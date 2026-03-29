@@ -106,6 +106,7 @@ class UserController extends BaseController
         $name = htmlspecialchars($input['name'] ?? '', ENT_QUOTES, 'UTF-8');
         $password = htmlspecialchars($input['password'] ?? '', ENT_QUOTES, 'UTF-8');
         $roleId = htmlspecialchars($input['role_id'] ?? '', ENT_QUOTES, 'UTF-8');
+
         $user = [
             'user_id' => $userId,
             'name' => $name,

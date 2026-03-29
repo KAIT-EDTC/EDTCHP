@@ -31,7 +31,7 @@ class UpdateUserInfoUseCase
         if (empty($user["user_id"])) {
             return [
                 'success' => false,
-                'message' => '学籍番号ないよー',
+                'message' => '学籍番号を指定してください。',
             ];
         } else {
             // userIdからユーザーが存在するか確認する
@@ -47,6 +47,8 @@ class UpdateUserInfoUseCase
         // UserRepositoryで更新する
         // やり方はEventRepositoryのfindWithFiltersを参考にするといいかも
         // パスワードはハッシュ化してから保存する
+
+        // パスワードが空の場合は不正なので弾く
         if (!empty($user["password"])) {
             $user["hashed_password"] = password_hash($user["password"], PASSWORD_DEFAULT);
             unset($user["password"]);
@@ -55,10 +57,9 @@ class UpdateUserInfoUseCase
 
         return [
             'success' => $result,
-            'message' => $result
-            ? 'ユーザー情報が更新されました。'
-            : 'ユーザー情報が更新されませんでした。',
-
+            'message' => $result 
+            ? 'ユーザー情報が更新されました。' 
+            : 'ユーザー情報の更新に失敗しました。',
         ];
 
     }
