@@ -4,7 +4,7 @@ namespace KAMAGI\SootControllers;
 
 use KAMAGI\SootRepositories\UserRepository;
 use KAMAGI\SootUseCases\signUpUseCase;
-use KAMAGI\SootUseCases\updateUserInfoUseCase;
+use KAMAGI\SootUseCases\UpdateUserInfoUseCase;
 use KAMAGI\SootResources\Response;
 
 /**
@@ -15,7 +15,7 @@ use KAMAGI\SootResources\Response;
 class UserController extends BaseController
 {
     private signUpUseCase $signUpUseCase;
-    private updateUserInfoUseCase $updateUserInfoUseCase;
+    private UpdateUserInfoUseCase $updateUserInfoUseCase;
     private UserRepository $userRepo;
     public function __construct(signUpUseCase $signUpUseCase, UserRepository $userRepo, UpdateUserInfoUseCase $updateUserInfoUseCase)
     {
@@ -102,6 +102,14 @@ class UserController extends BaseController
         $input = $this->getRequestInput();
 
         // ログイン認可チェック
+        if (!isset($_SESSION['userId']) || !isset($_SESSION['role']) || $_SESSION['role'] !== 0) {
+            Response::json(Response::HTTP_UNAUTHORIZED, [
+                'success' => false,
+                'message' => 'Unauthorized access.'
+            ]);
+            return;
+        }
+
         $userId = htmlspecialchars($input['user_id'] ?? '', ENT_QUOTES, 'UTF-8');
         $name = htmlspecialchars($input['name'] ?? '', ENT_QUOTES, 'UTF-8');
         $password = htmlspecialchars($input['password'] ?? '', ENT_QUOTES, 'UTF-8');
