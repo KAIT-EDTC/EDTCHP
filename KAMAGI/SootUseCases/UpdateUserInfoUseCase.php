@@ -33,7 +33,17 @@ class UpdateUserInfoUseCase
                 'success' => false,
                 'message' => '学籍番号ないよー',
             ];
+        } else {
+            // userIdからユーザーが存在するか確認する
+            $existingUser = $this->userRepo->findByUserId($user["user_id"]);
+            if (!$existingUser) {
+                return [
+                    'success' => false,
+                    'message' => '指定された学籍番号のユーザーが存在しません。',
+                ];
+            }
         }
+
         // UserRepositoryで更新する
         // やり方はEventRepositoryのfindWithFiltersを参考にするといいかも
         // パスワードはハッシュ化してから保存する
