@@ -3,7 +3,6 @@
 namespace KAMAGI\SootUseCases;
 
 use KAMAGI\SootRepositories\UserRepository;
-use Google\Service\SQLAdmin\User;
 
 /**
  * ユーザー情報更新ユースケース
@@ -48,11 +47,11 @@ class UpdateUserInfoUseCase
         // やり方はEventRepositoryのfindWithFiltersを参考にするといいかも
         // パスワードはハッシュ化してから保存する
 
-        // パスワードが空の場合は不正なので弾く
         if (!empty($user["password"])) {
             $user["hashed_password"] = password_hash($user["password"], PASSWORD_DEFAULT);
             unset($user["password"]);
         }
+
         $result = $this->userRepo->update($user);
 
         return [
