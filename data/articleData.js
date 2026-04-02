@@ -10,6 +10,14 @@
 
 export const content = [
     {
+        date: "2025-12-07",
+        title: "サイエンスウィンターに参加しました！",
+        img: "blog/blog-img/25-12-07-sciencewinter-01.jpg",
+        caption: "厚木市子ども科学館で開催されたサイエンスウィンターに参加してきました！",
+        author: "棚橋",
+        link: "blog/blog-data/25-12-07-sciencewinter.html"
+    },
+    {
         date: "2025-10-26",
         title: "第96回藤嶺祭に出展させていただきました！",
         img: "blog/blog-img/25-10-26-toureisai-01.jpg",
