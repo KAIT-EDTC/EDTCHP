@@ -93,15 +93,15 @@ export const content = [
         author: "根本",
         link: "blog/blog-data/24-06-15-yugyou04.html"
     },
-    // {
-    //     date: "2025-05-05",
-    //     title: "子ども科学館まつり",
-    //     img: "blog/blog-img/.webp",
-    //     caption: "5月5日はこどもの日。ということで本厚木駅前にある、厚木市子ども科学館さんで開催された「子ども科学館まつり」にて<br>\
-    //             我々EDTCのロボットの展示会をさせていただきました。",
-    //     author: "吉田",
-    //     link: "blog/blog-data/25-05-05kodomokagakukan.html"
-    // },
+    {
+        date: "2025-05-05",
+        title: "子ども科学館まつり",
+        img: "blog/blog-img/25-05-05-kodomo_festival-01.jpg",
+        caption: "5月5日はこどもの日。ということで本厚木駅前にある、厚木市子ども科学館さんで開催された「子ども科学館まつり」にて<br>\
+                我々EDTCのロボットの展示会をさせていただきました。",
+        author: "吉田",
+        link: "blog/blog-data/25-05-05-kodomo_festival.html"
+    },
     {
         date: "2025-06-14",
         title: "第四回遊行塾に行ってきました！",
