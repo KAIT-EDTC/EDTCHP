@@ -5,10 +5,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>イベント管理 | EDTCHP</title>
     <link rel="stylesheet" href="../../../css/global.css">
+    <link rel="stylesheet" href="./../../lib/hamburger.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="./style.css">
 </head>
 <body class="anim-fadein" style="display:none;">
+    <!-- ハンバーガーメニュー -->
+    <div class="hamburger-menu">
+        <input type="checkbox" id="menu-toggle">
+        <label for="menu-toggle" class="menu-icon">
+            <span></span>
+            <span></span>
+            <span></span>
+        </label>
+        <nav class="menu-content">
+            <a href="./../mypage/"><i class="fa fa-home"></i> マイページ</a>
+            <a href="./../admin/" id="admin-link" style="display:none;"><i class="fa fa-cog"></i> 管理者メニュー</a>
+            <a href="#" id="logout-btn"><i class="fa fa-sign-out"></i> ログアウト</a>
+        </nav>
+    </div>
+
     <main>
         <header>
             <h1>イベント管理</h1>
@@ -155,5 +171,6 @@
     <script src="./event-create.js"></script>
     <script src="./event-update.js"></script>
     <script src="./event-delete.js"></script>
+    <script src="./../../lib/hamburger.js"></script>
 </body>
 </html>

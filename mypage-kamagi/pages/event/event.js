@@ -13,6 +13,14 @@ let membersCache = [];
 document.addEventListener('DOMContentLoaded', async () => {
 
     await checkIsLoginedIn();
+
+    // 管理者の場合はハンバーガーメニューの管理者リンクを表示
+    const authData = await authService.checkStatus();
+    if (authData.isLoggedIn && authData.user.role == '0') {
+        const adminLink = document.getElementById('admin-link');
+        if (adminLink) adminLink.style.display = 'block';
+    }
+
     // 初期化: メンバー一覧とイベント一覧を取得
     await Promise.all([
         loadMembers(),
