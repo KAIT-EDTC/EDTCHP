@@ -13,10 +13,10 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         try {
             await authService.updateUser(userId, password, name, roleSelect.selectedIndex);
-            showToast('ユーザー情報を更新しました。', 'success');
             updateForm.reset();
+            showToast('ユーザー情報を更新しました。', 'success');
         } catch (error) {
-            showToast('ユーザー情報の更新に失敗しました。', 'error');
+            showToast(error.message || '通信エラーが発生しました。', 'error');
         }
     })
 });
