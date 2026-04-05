@@ -17,7 +17,12 @@ class UserController extends BaseController
     private signUpUseCase $signUpUseCase;
     private UpdateUserInfoUseCase $updateUserInfoUseCase;
     private UserRepository $userRepo;
-    public function __construct(signUpUseCase $signUpUseCase, UserRepository $userRepo, UpdateUserInfoUseCase $updateUserInfoUseCase)
+    public function __construct
+    (
+        signUpUseCase $signUpUseCase, 
+        UserRepository $userRepo, 
+        UpdateUserInfoUseCase $updateUserInfoUseCase
+    )
     {
         $this->signUpUseCase = $signUpUseCase;
         $this->userRepo = $userRepo;
@@ -123,7 +128,7 @@ class UserController extends BaseController
         ];
 
         $result = $this->updateUserInfoUseCase->execute($user);
-        $statusCode = $result['success'] ?Response::HTTP_OK : Response::HTTP_BAD_REQUEST;
+        $statusCode = $result['success'] ? Response::HTTP_OK : Response::HTTP_BAD_REQUEST;
         Response::json($statusCode, $result);
     }
 }
