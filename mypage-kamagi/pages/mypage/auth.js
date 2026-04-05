@@ -5,7 +5,6 @@
 // ページ読み込み時にログイン状態をチェック
 document.addEventListener('DOMContentLoaded', async () => {
     await initializePage();
-    setupLogoutButton();
 });
 
 /**
@@ -79,26 +78,4 @@ async function displayLoggedInContent(user) {
     diplayEvents(events);
 }
 
-/**
- * ログアウトボタンのイベント設定
- */
-function setupLogoutButton() {
-    const logoutBtn = document.getElementById('logout-btn');
-    
-    logoutBtn.addEventListener('click', async () => {
-        if (!confirm('ログアウトしますか？')) return;
-        
-        try {
-            await authService.logout();
-            
-            showToast('ログアウトしました。', 'success');
-            setTimeout(() => {
-                window.location.href = `/mypage-kamagi/pages/login/`;
-            }, 1500);
-            
-        } catch (error) {
-            console.error('ログアウトエラー:', error);
-            showToast('ログアウト中にエラーが発生しました', 'error');
-        }
-    });
-}
+

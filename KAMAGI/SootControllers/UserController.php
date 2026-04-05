@@ -4,6 +4,7 @@ namespace KAMAGI\SootControllers;
 
 use KAMAGI\SootRepositories\UserRepository;
 use KAMAGI\SootUseCases\signUpUseCase;
+use KAMAGI\SootUseCases\UpdateUserInfoUseCase;
 use KAMAGI\SootResources\Response;
 
 /**
@@ -14,11 +15,18 @@ use KAMAGI\SootResources\Response;
 class UserController extends BaseController
 {
     private signUpUseCase $signUpUseCase;
+    private UpdateUserInfoUseCase $updateUserInfoUseCase;
     private UserRepository $userRepo;
-    public function __construct(signUpUseCase $signUpUseCase, UserRepository $userRepo)
+    public function __construct
+    (
+        signUpUseCase $signUpUseCase, 
+        UserRepository $userRepo, 
+        UpdateUserInfoUseCase $updateUserInfoUseCase
+    )
     {
         $this->signUpUseCase = $signUpUseCase;
         $this->userRepo = $userRepo;
+        $this->updateUserInfoUseCase = $updateUserInfoUseCase;
     }
 
     /**
@@ -47,7 +55,7 @@ class UserController extends BaseController
 
         $result = $this->signUpUseCase->execute($userId, $name, $password);
 
-        $statusCode = $result['success'] ? Response::HTTP_OK : Response::HTTP_BAD_REQUEST;
+        $statusCode = $result['success'] ?Response::HTTP_OK : Response::HTTP_BAD_REQUEST;
         Response::json($statusCode, $result);
     }
 
@@ -63,7 +71,7 @@ class UserController extends BaseController
 
         $result = $this->signUpUseCase->execute($userId, $name, $password, $roleId);
 
-        $statusCode = $result['success'] ? Response::HTTP_OK : Response::HTTP_BAD_REQUEST;
+        $statusCode = $result['success'] ?Response::HTTP_OK : Response::HTTP_BAD_REQUEST;
         Response::json($statusCode, $result);
     }
 
@@ -88,5 +96,39 @@ class UserController extends BaseController
             'success' => true,
             'members' => $members
         ]);
+    }
+
+    /**
+     * メンバー情報更新
+     */
+    public function update(): void
+    {
+        $this->validateMethod('POST');
+        $input = $this->getRequestInput();
+
+        // ログイン認可チェック
+        if (!isset($_SESSION['userId']) || !isset($_SESSION['role']) || $_SESSION['role'] !== 0) {
+            Response::json(Response::HTTP_UNAUTHORIZED, [
+                'success' => false,
+                'message' => 'Unauthorized access.'
+            ]);
+            return;
+        }
+
+        $userId = htmlspecialchars($input['user_id'] ?? '', ENT_QUOTES, 'UTF-8');
+        $name = htmlspecialchars($input['name'] ?? '', ENT_QUOTES, 'UTF-8');
+        $password = htmlspecialchars($input['password'] ?? '', ENT_QUOTES, 'UTF-8');
+        $roleId = htmlspecialchars($input['role_id'] ?? '', ENT_QUOTES, 'UTF-8');
+
+        $user = [
+            'user_id' => $userId,
+            'name' => $name,
+            'password' => $password,
+            'role_id' => $roleId,
+        ];
+
+        $result = $this->updateUserInfoUseCase->execute($user);
+        $statusCode = $result['success'] ? Response::HTTP_OK : Response::HTTP_BAD_REQUEST;
+        Response::json($statusCode, $result);
     }
 }

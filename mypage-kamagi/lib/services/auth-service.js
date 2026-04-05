@@ -47,6 +47,23 @@ class AuthService {
     }
 
     /**
+     * 
+     * @param {string} userId 
+     * @param {string} password 
+     * @param {string} name 
+     * @param {string} role 
+     * @returns {Promise<Object>} { success: boolean, message: string }
+     */
+    async updateUser(userId, password, name, role) {
+        return this.api.post('/users.php', {
+            user_id: userId,
+            name: name,
+            password: password,
+            role_id: role
+        });
+    }
+
+    /**
      * ログイン状態チェック
      * 
      * @returns {Promise<Object>} { success: boolean, isLoggedIn: boolean, user?: Object }

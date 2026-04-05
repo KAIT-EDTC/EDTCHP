@@ -63,8 +63,8 @@ class UserRepository
     {
         $stmt = $this->db->query('SELECT user_id, name, role_id FROM users ORDER BY user_id');
         $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        
-        return array_map(function($row) {
+
+        return array_map(function ($row) {
             return [
                 'id' => $row['user_id'],
                 'name' => $row['name'],
@@ -84,18 +84,45 @@ class UserRepository
         if (empty($userIds)) {
             return [];
         }
-        
+
         $placeholders = implode(',', array_fill(0, count($userIds), '?'));
         $stmt = $this->db->prepare(
             "SELECT user_id, name FROM users WHERE user_id IN ({$placeholders})"
         );
         $stmt->execute($userIds);
         $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        
+
         $nameMap = [];
         foreach ($results as $row) {
             $nameMap[$row['user_id']] = $row['name'];
         }
         return $nameMap;
     }
+
+    public function update(array $user)
+    {
+
+        $params = [];
+        $fields = [];
+
+        if (!empty($user['name'])) {
+            $fields[] = "name=?";
+            $params[] = $user['name'];
+        }
+        if (array_key_exists('role_id', $user) && $user['role_id'] !== null) {
+            $fields[] = "role_id=?";
+            $params[] = $user['role_id'];
+        }
+        if (!empty($user['hashed_password'])) {
+            $fields[] = "pass=?";
+            $params[] = $user['hashed_password'];
+        }
+        $params[] = $user['user_id'];
+
+        $sql = "UPDATE users SET " . implode(",", $fields) . " WHERE user_id=?";
+        $stmt = $this->db->prepare($sql);
+        return $stmt->execute($params);
+
+    }
+
 }
