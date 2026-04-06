@@ -1,19 +1,18 @@
 /**
  * JSON記事データを読み込み、ブログ記事ページをレンダリングするモジュール
- * 
+ *
  * URL形式: blog-post.html?id=<article-id>
  * データ:  data/articles/<article-id>.json
- * 
+ *
  * ブログ記事追加手順:
  *   1. data/articles/<id>.json を作成（_template.json を参考に）
  *   2. 画像を blog/blog-img/ に配置
- *   3. data/articleData.js にエントリを追加（一覧表示用）
+ *   3. data/articleData.js に記事IDを追加
  */
-
-const basePath = document.body.dataset.basePath || './';
 
 /**
  * HTMLエスケープ
+ * XSSを防ぐ
  */
 function escapeHtml(text) {
     const div = document.createElement('div');
@@ -21,10 +20,13 @@ function escapeHtml(text) {
     return div.innerHTML;
 }
 
+// showToastはマイページだけにする
 /**
- * エラー表示
+ * エラー表示(ページに表示)
+ * @param {string} message  - エラーメッセージ
+ * @param {string} basePath - ルートへの相対パス
  */
-function showError(message) {
+function showError(message, basePath) {
     const mainEl = document.getElementById('blog-main');
     if (mainEl) {
         mainEl.innerHTML = `
@@ -48,6 +50,7 @@ function showError(message) {
  */
 function renderSection(section) {
     const layoutDiv = document.createElement('div');
+    // horizontal-layout または vertical-layout
     layoutDiv.className = `${section.layout}-layout`;
 
     const sectionEl = document.createElement('section');
@@ -137,15 +140,17 @@ function renderArticle(article) {
     mainEl.appendChild(fragment);
 }
 
+// 固有のエラーハンドリングがあるためヘルパーは使わない
 /**
  * 記事データを読み込んでレンダリング
  */
 async function loadArticle() {
+    const basePath = document.body.dataset.basePath || './';
     const params = new URLSearchParams(window.location.search);
     const articleId = params.get('id');
 
     if (!articleId) {
-        showError('記事IDが指定されていません。URLに ?id=<記事ID> を追加してください。');
+        showError('記事IDが指定されていません。', basePath);
         return;
     }
 
@@ -161,9 +166,8 @@ async function loadArticle() {
         renderArticle(article);
     } catch (error) {
         console.error('Blog post load error:', error);
-        showError(error.message || '記事の読み込みに失敗しました。');
+        showError(error.message || '記事の読み込みに失敗しました。', basePath);
     }
 }
 
-// 記事読み込み開始
 loadArticle();
