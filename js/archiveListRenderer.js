@@ -17,7 +17,6 @@ const articleLoad = () => {
         const boxElement = document.createElement("li");
 
         const AnkerElement = document.createElement("a");
-        article.link = article.link.replace(/blog\/blog-data/, ".");
         AnkerElement.href = article.link;
 
         const titleElement = document.createElement("span");

@@ -1,0 +1,19 @@
+{
+    "id": "YY-MM-DD-slug（例: 25-08-08-sciencesummer）",
+    "date": "YYYY-MM-DD（例: 2025-08-08）",
+    "title": "記事タイトル",
+    "thumbnail": "blog/blog-img/サムネイル画像のパス.webp",
+    "caption": "ブログ一覧ページに表示される記事の概要（1〜2文程度）",
+    "author": "著者名",
+    "sections": [
+        {
+            "layout": "horizontal（横並び）または vertical（縦並び）",
+            "image": "blog/blog-img/画像ファイル名.webp",
+            "imageAlt": "画像の説明（アクセシビリティ用）",
+            "paragraphs": [
+                "段落1のテキスト",
+                "段落2のテキスト（改行したい箇所で段落を分ける）"
+            ]
+        }
+    ]
+}
