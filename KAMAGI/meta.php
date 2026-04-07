@@ -4,7 +4,7 @@
 if (class_exists('Dotenv\Dotenv')) {
     // rootにある.envを読み込む
     // safeLoadを使うことで、.envが存在しない場合（本番サーバー環境変数使用時など）もエラーにしない
-    $dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/../../../../');
+    $dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/../../../');
     $dotenv->safeLoad();
 }
 
