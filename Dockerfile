@@ -19,3 +19,10 @@ RUN sed -i 's/AllowOverride None/AllowOverride All/' /etc/apache2/apache2.conf
 
 # Install Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+
+# Copy composer files and install dependencies
+COPY KAMAGI/composer.json KAMAGI/composer.lock /var/www/html/KAMAGI/
+RUN cd KAMAGI && composer install --no-dev --optimize-autoloader --no-interaction
+
+# Copy application code
+COPY . /var/www/html/

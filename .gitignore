@@ -1,3 +1,4 @@
 vendor/
 key/
 .env
+init.sql

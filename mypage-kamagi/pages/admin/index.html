@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>管理者ページ</title>
+    <link rel="stylesheet" href="./../../../css/global.css">
+    <link rel="stylesheet" href="./../../lib/hamburger.css">
+    <link rel="stylesheet" href="./admin.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+</head>
+
+<body>
+    <!-- ハンバーガーメニュー -->
+    <div class="hamburger-menu">
+        <input type="checkbox" id="menu-toggle">
+        <label for="menu-toggle" class="menu-icon">
+            <span></span>
+            <span></span>
+            <span></span>
+        </label>
+        <nav class="menu-content">
+            <a href="./../mypage/"><i class="fa fa-home"></i> マイページ</a>
+            <a href="./../event/"><i class="fa fa-calendar"></i> イベント管理</a>
+            <a href="#" id="logout-btn"><i class="fa fa-sign-out"></i> ログアウト</a>
+        </nav>
+    </div>
+
+    <div class="container">
+        <div class="card">
+            <h2>新規登録</h2>
+            
+            <form id="signup-form">
+                <div class="form-group">
+                    <label for="user-id">学籍番号</label>
+                    <!-- 数値のみに制限する -->
+                    <!-- 一応UseCaseでもバリデート済み -->
+                    <input type="text" id="user-id" name="user_id" 
+                    pattern="\d{7}" 
+                    minlength="7" 
+                    maxlength="7" 
+                    autocomplete="off"
+                    required>
+                </div>
+                <div class="form-group">
+                    <label for="password">パスワード</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+                <div class="form-group">
+                    <label for="name">名前</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn-signup">登録</button>
+                </div>
+            </form>
+            
+        </div>
+        <div class="card">
+            <form id="update-form">
+                <h2>ユーザー情報の更新</h2>
+                <div class="form-group">
+                    <label for="update-user-id">学籍番号</label>
+                    <input type="text" id="update-user-id" name="update-user_id" 
+                    pattern="\d{7}" 
+                    minlength="7" 
+                    maxlength="7" 
+                    autocomplete="off" 
+                    required>
+                </div>
+                <div class="form-group">
+                    <label for="update-name">名前</label>
+                    <input type="text" id="update-name" name="update_name">
+                </div>
+                <div class="form-group">
+                    <label for="update-password">パスワード</label>
+                    <input type="password" id="update-password" name="update_password">
+                </div>
+                <div class="form-group">
+                    <label for="update-role">ロール</label>
+                    <select id="update-role" name="update_role">
+                        <option value="0">管理者{0}</option>
+                        <option value="1">メンバー{1}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <button type="submit" id="btn-update" class="btn-update">更新</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="footer-link">
+        <a href="./../mypage/">マイページに戻る</a>
+    </div>
+
+    <script src="../../lib/api-client.js"></script>
+    <script src="../../lib/services/auth-service.js"></script>
+    <script src="../../lib/utils.js"></script>
+    <script src="./update.js"></script>
+    <script src="./signup.js"></script>
+    <script src="./../../lib/hamburger.js"></script>
+</body>
+
+</html>
