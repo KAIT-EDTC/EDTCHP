@@ -8,12 +8,14 @@ function diplayEvents(events) {
     const eventList = document.getElementById('event-list');
     const noEvents = document.getElementById('no-events');
 
-    if (!events) {
+    if (!events || events.length === 0) {
         // イベントデータが存在しないことを伝える。
         noEvents.style.display = 'block';
+        eventListTable.style.display = 'none';
         return;
     }
     
+    noEvents.style.display = 'none';
     eventListTable.style.display = 'block';
     eventList.innerHTML = '';
     events.forEach(event => {
