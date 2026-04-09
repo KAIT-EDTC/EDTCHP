@@ -4,8 +4,6 @@ namespace KAMAGI;
 use PDO;
 use PDOException;
 
-require_once __DIR__ . '/meta.php';
-
 class Database
 {
     private static $instance = null;
