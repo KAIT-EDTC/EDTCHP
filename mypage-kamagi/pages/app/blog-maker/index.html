@@ -10,6 +10,17 @@
     <link rel="stylesheet" href="./style.css">
 </head>
 <body class="anim-fadein" style="display:none;">
+
+    <div class="breadcrumbs-bar" id="breadcrumbs">
+        <a href="../../../../base.html">ホーム</a>
+        <i class="fa fa-angle-right"></i>
+        <a href="../../mypage/">マイページ</a>
+        <i class="fa fa-angle-right"></i>
+        <a href="../index.html">アプリ</a>
+        <i class="fa fa-angle-right"></i>
+        <a href="">ブログめーかー</a>
+    </div>
+
     <div class="hamburger-menu">
         <input type="checkbox" id="menu-toggle">
         <label for="menu-toggle" class="menu-icon">
@@ -118,11 +129,20 @@
                 </form>
             </article>
         </section>
+
+        <div class="footer-links">
+            <a href="../../mypage/">マイページに戻る</a>
+        </div>
     </main>
 
     <script src="../../../lib/api-client.js"></script>
     <script src="../../../lib/utils.js"></script>
     <script src="../../../lib/services/auth-service.js"></script>
+    <script src="./modules/utils.js"></script>
+    <script src="./modules/auth.js"></script>
+    <script src="./modules/preview.js"></script>
+    <script src="./modules/validation.js"></script>
+    <script src="./modules/section-editor.js"></script>
     <script src="./app.js"></script>
     <script src="../../../lib/hamburger.js"></script>
 </body>
