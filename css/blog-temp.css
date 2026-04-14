@@ -216,7 +216,7 @@ main .pc-only {
         border-radius: unset;
     }
     .blog-main section div p {
-        margin: 9% 0;
+        /* margin: 9% 0; */
         font-size: 1.0em;
     }
     .horizontal-layout {

@@ -21,7 +21,7 @@ function getBasePath() {
 function renderHeader(basePath) {
     return `
     <header>
-        <a href="${basePath}base.html"><img src="${basePath}img/EDTC-icon.webp" alt="EDTC"
+        <a href="${basePath}base.html"><img src="${basePath}public/img/EDTC-icon.webp" alt="EDTC"
                 style="display: block; height: 60px; width: auto;"></a>
         <a href="${basePath}base.html" class="title">EDTC</a>
         <!--==========モバイルのみ表示==========-->
@@ -74,7 +74,7 @@ function renderFooter(basePath) {
                     <a href="${basePath}contact-us.html">お問い合わせ</a>
                     <hr size="100%">
                     <p class="gyou"></p>
-                    <b><img src="${basePath}img/EDTC-icon.webp" alt="EDTCロゴ" height="50px" width="auto" class="syasinn">
+                    <b><img src="${basePath}public/img/EDTC-icon.webp" alt="EDTCロゴ" height="50px" width="auto" class="syasinn">
                         <font size="12">EDTC</font>
                     </b>
                     <p class="gyou"></p>

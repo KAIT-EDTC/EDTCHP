@@ -198,7 +198,7 @@ function renderSectionEditors() {
 
                 <div class="form-group full-row">
                     <label>image</label>
-                    <input type="text" value="${escapeAttr(section.image)}" data-section-field="image" data-section-index="${sectionIndex}" placeholder="blog/blog-img/your-image.webp">
+                    <input type="text" value="${escapeAttr(section.image)}" data-section-field="image" data-section-index="${sectionIndex}" placeholder="your-image.webp">
                 </div>
 
                 <div class="form-group full-row">

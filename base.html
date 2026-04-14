@@ -16,7 +16,7 @@
 
 <body>
     <header>
-        <a href="base.html"><img src="img/EDTC-icon.webp" alt="EDTC"
+        <a href="base.html"><img src="public/img/EDTC-icon.webp" alt="EDTC"
                 style="display: block; height: 60px; width: auto;"></a>
         <a href="" class="title">EDTC</a>
         <!--==========モバイルのみ表示==========-->
@@ -66,13 +66,13 @@
             <!-- スライド（コンテンツ） -->
             <div id="slide" class="slide">
                 <div>
-                    <img src="img/EDTC-smile-sasaki.webp" alt="smilesasaki">
+                    <img src="public/img/EDTC-smile-sasaki.webp" alt="smilesasaki">
                 </div>
                 <div>
-                    <img src="img/EDTC-nemote-teach.webp" alt="">
+                    <img src="public/img/EDTC-nemote-teach.webp" alt="">
                 </div>
                 <div>
-                    <img src="img/sakura-fix.webp" alt="">
+                    <img src="public/img/sakura-fix.webp" alt="">
                 </div>
             </div>
             <!-- 左右のボタン -->
@@ -116,7 +116,7 @@
         <video class="EDTCmovie" loop autoplay muted playsinline src="img/EDTC_PV(調整後）.mp4" controls></video>
         <!-- 幾徳再限定 -->
         <div class="ikutokusai" style="display: none;">
-                <a href="https://kaitedtc.flop.jp/"><img src="img/20251015_EDTC_.png" alt="学際ポスター" ></a>
+                <a href="https://kaitedtc.flop.jp/"><img src="public/img/20251015_EDTC_.png" alt="学際ポスター" ></a>
                 <p><span style="font-size: 40px; font-weight: bold;">第50回幾徳祭に出店しています！</span>
                     <br><br> <span style="font-size: 20px;font-weight: bold;">中庭にあるガラス張りのKAIT工房にてプログラミングやロボット工作の体験会を行っていますので是非お越しください。</span><br><br>
                     <span style="font-weight: bold;">また開発途中のロボット展示も行っていますので見学だけでもお待ちして居ります。</span><br>
@@ -148,8 +148,8 @@
             
             </ul>
             <script type="module">
-                import { articleIds } from './data/articleData.js';
-                import { fetchArticle } from './js/articleApi.js';
+                import { articleIds } from './public/blog/articleData.js';
+                import { fetchArticle } from './script/contentApi.js';
 
                 const newsList = document.querySelector('.news ul');
                 if (newsList) {
@@ -189,7 +189,7 @@
                     <a href="./contact-us.html">お問い合わせ</a>
                     <hr size="100%">
                     <p class="gyou"></p>
-                    <b><img src="img/EDTC-icon.webp" alt="EDTCロゴ" height="50px" width="auto" class="syasinn">
+                    <b><img src="public/img/EDTC-icon.webp" alt="EDTCロゴ" height="50px" width="auto" class="syasinn">
                         <font size="12">EDTC</font>
                     </b>
                     <p class="gyou">
@@ -200,7 +200,7 @@
             </ul>
         </div>
     </footer>
-    <script type="text/javascript" src="js/slider.js"></script>
+    <script type="text/javascript" src="script/slider.js"></script>
 </body>
 
 </html>
