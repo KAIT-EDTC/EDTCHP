@@ -1,130 +1,113 @@
-import { content } from "./../data/articleData.js";
+import { articleIds } from "./../data/articleData.js";
+import { fetchArticle } from "./articleApi.js";
+
 const PAGE_SIZE = 6;
-let offset = 0;
+const TOTAL_PAGES = Math.ceil(articleIds.length / PAGE_SIZE);
 let currentPage = 1;
-const endPage = Math.ceil(content.length / PAGE_SIZE);
 
-const articleLoad = () => {
-    offset = (currentPage - 1) * PAGE_SIZE;
+/**
+ * 現在ページの記事カードをレンダリング
+ */
+async function articleLoad() {
     const blogArea = document.getElementsByClassName("blog-area")[0];
-    const ulElement = document.createElement("ul");
     blogArea.innerHTML = "";
-    const fragment = document.createDocumentFragment();
+
+    const offset = (currentPage - 1) * PAGE_SIZE;
+    const pageIds = articleIds.slice(offset, offset + PAGE_SIZE);
+
+    // 現在ページ分だけ並列fetch
+    const articles = await Promise.all(pageIds.map((id) => fetchArticle(id)));
+
+    const ulElement = document.createElement("ul");
     ulElement.className = "blog-container";
-    const sorted_content = content.sort((a, b) => new Date(b.date) - new Date(a.date));
+    const fragment = document.createDocumentFragment();
 
-    sorted_content.slice(offset, PAGE_SIZE + offset).forEach((article) => {
-        const boxElement = document.createElement("li");
-        boxElement.className = "blog-contents anim-fadein";
+    articles.forEach((article) => {
+        if (!article) return;
 
-        const AnkerElement = document.createElement("a");
-        AnkerElement.href = article.link;
+        const li = document.createElement("li");
+        li.className = "blog-contents anim-fadein";
 
-        const divElement = document.createElement("div");
-        divElement.className = "blog-box";
+        const a = document.createElement("a");
+        a.href = article.link;
 
-        const imgElement = document.createElement("img");
-        imgElement.className = "blog-img";
-        imgElement.src = article.img;
-        
-        const detailsElement = document.createElement("div");
-        detailsElement.className = "blog-details";
+        const divBox = document.createElement("div");
+        divBox.className = "blog-box";
 
-        const dateElement = document.createElement("span");
-        dateElement.className = "blog-date";
-        dateElement.innerHTML = '<i class="fa-regular fa-clock"></i>' + article.date;
+        const img = document.createElement("img");
+        img.className = "blog-img";
+        img.src = article.thumbnail || "";
+        img.alt = article.title || "";
 
-        const titleElement = document.createElement("h2");
-        titleElement.className = "blog-subject";
-        titleElement.innerText = article.title;
+        const divDetails = document.createElement("div");
+        divDetails.className = "blog-details";
 
-        const captionElement = document.createElement("span");
-        captionElement.className = "blog-caption";
-        captionElement.innerHTML = article.caption;
+        const spanDate = document.createElement("span");
+        spanDate.className = "blog-date";
+        spanDate.innerHTML = '<i class="fa fa-clock-o"></i>' + (article.date || "");
 
-        const authorElement = document.createElement("span");
-        authorElement.className = "blog-author";
-        authorElement.innerText = article.author;
+        const h2 = document.createElement("h2");
+        h2.className = "blog-subject";
+        h2.textContent = article.title || "";
 
-        detailsElement.appendChild(dateElement);
-        detailsElement.appendChild(titleElement);
-        detailsElement.appendChild(captionElement);
-        detailsElement.appendChild(authorElement);
-        divElement.appendChild(imgElement);
-        divElement.appendChild(detailsElement);
+        const spanCaption = document.createElement("span");
+        spanCaption.className = "blog-caption";
+        spanCaption.textContent = article.caption || "";
 
-        AnkerElement.appendChild(divElement);
+        const spanAuthor = document.createElement("span");
+        spanAuthor.className = "blog-author";
+        spanAuthor.textContent = article.author || "";
 
-        boxElement.appendChild(AnkerElement);
-
-        fragment.appendChild(boxElement);
-        /**
-         * <ul class="blog-list">
-         *   <li class="blog-contents">
-         *    <a>
-         *     <div class="blog-box">
-         *      <img class="blog-img">
-         *      <div class="blog-details">
-         *        <span class="blog-date"></p>
-         *        <h2 class="blog-subject">/h2>
-         *        <span class="blog-caption"></p>
-         *        <span class="blog-author"></p>
-         *      </div>
-         *     </div>
-         *    </a>
-         *   </li>
-         * </ul>
-        */
+        divDetails.appendChild(spanDate);
+        divDetails.appendChild(h2);
+        divDetails.appendChild(spanCaption);
+        divDetails.appendChild(spanAuthor);
+        divBox.appendChild(img);
+        divBox.appendChild(divDetails);
+        a.appendChild(divBox);
+        li.appendChild(a);
+        fragment.appendChild(li);
     });
+
     ulElement.appendChild(fragment);
     blogArea.appendChild(ulElement);
-};
+}
 
-const paginationArea = document.getElementsByClassName("pagination-area")[0];
-const prevBtn = document.createElement("button");
-const PageLabel = document.createElement("p");
-const nextBtn = document.createElement("button");
-prevBtn.innerHTML = '<i class="fa fa-chevron-left" aria-hidden="true"></i>';
-nextBtn.innerHTML = '<i class="fa fa-chevron-right" aria-hidden="true"></i>';
-paginationArea.appendChild(prevBtn);
-paginationArea.appendChild(PageLabel);
-paginationArea.appendChild(nextBtn);
-
-const Pagination = () => {
-    if (endPage == 1) {
-        PageLabel.textContent = "1";
-        prevBtn.style.display = "none";
-        nextBtn.style.display = "none";
-    } else {        
-        PageLabel.textContent = currentPage + "/" + endPage;
-
-    }
-
-    if (currentPage == 1) {
-        prevBtn.style.display = "none";
-    } else if (currentPage == endPage) {
-        nextBtn.style.display = "none";
-    } else {
-        prevBtn.style.display = "inline-block";
-        nextBtn.style.display = "inline-block";
-    }
-};
-
-prevBtn.addEventListener("click", () => {
-    if (currentPage - 1 <= 0) return;
-    currentPage--;
-    Pagination();
-    articleLoad();
-})
-
-nextBtn.addEventListener("click", () => {
-    if (currentPage == endPage) return;
-    currentPage++;
-    Pagination();
-    articleLoad();
-})
+// 表示ページが最初、最後の場合、ボタンの表示を切り替える。
+function updatePagination(prevBtn, pageLabel, nextBtn) {
+    pageLabel.textContent = TOTAL_PAGES <= 1 ? "1" : `${currentPage}/${TOTAL_PAGES}`;
+    prevBtn.style.display = currentPage <= 1 ? "none" : "inline-block";
+    nextBtn.style.display = currentPage >= TOTAL_PAGES ? "none" : "inline-block";
+}
 
 document.addEventListener("DOMContentLoaded", () => {
+    // ページネーション DOM 構築
+    const paginationArea = document.getElementsByClassName("pagination-area")[0];
+    if (!paginationArea) return;
+
+    const prevBtn = document.createElement("button");
+    const pageLabel = document.createElement("p");
+    const nextBtn = document.createElement("button");
+    prevBtn.innerHTML = '<i class="fa fa-chevron-left" aria-hidden="true"></i>';
+    nextBtn.innerHTML = '<i class="fa fa-chevron-right" aria-hidden="true"></i>';
+    paginationArea.appendChild(prevBtn);
+    paginationArea.appendChild(pageLabel);
+    paginationArea.appendChild(nextBtn);
+
+    prevBtn.addEventListener("click", () => {
+        if (currentPage <= 1) return;
+        currentPage--;
+        updatePagination(prevBtn, pageLabel, nextBtn);
+        articleLoad();
+    });
+
+    nextBtn.addEventListener("click", () => {
+        if (currentPage >= TOTAL_PAGES) return;
+        currentPage++;
+        updatePagination(prevBtn, pageLabel, nextBtn);
+        articleLoad();
+    });
+
+    updatePagination(prevBtn, pageLabel, nextBtn);
     articleLoad();
-    Pagination();
 });
