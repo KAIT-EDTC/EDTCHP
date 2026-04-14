@@ -1,39 +1,51 @@
 // 商品データのインポート
-import { pdct_list } from "./../data/pdctData.js";
+import { productIds } from "./../../public/product/pdctData.js";
+import { fetchProduct } from "./../contentApi.js";
+
+const ALTER_IMAGE_PATH = "./public/img/EDTC-icon.webp";
+const BASE_IMG_PATH = "./public/product/img";
 
 // ul内に要素を追加する関数
-const pdctLoad = () => {
+const pdctLoad = async () => {
     const mainElement = document.getElementsByTagName("main")[0];
     const ulElement = document.getElementsByClassName("pdct-container")[0];
+
+    // 全プロダクトを並列fetch
+    const products = await Promise.all(
+        productIds.map((id) => fetchProduct(id))
+    );
+
     const fragment = document.createDocumentFragment();
 
-    pdct_list.forEach((pdct) => {
+    products.forEach((pdct) => {
+        if (!pdct) return;
+
         const listElement = document.createElement("li");
         listElement.className = "pdct-contents anim-fadein";
-        listElement.setAttribute("data-price", pdct.tags[0]);
-        listElement.setAttribute("data-age", pdct.tags[1]);
+        listElement.setAttribute("data-price", pdct.tags[0] || "");
+        listElement.setAttribute("data-age", pdct.tags[1] || "");
 
         const AnkerElement = document.createElement("a");
-        AnkerElement.href = "products/page/" + pdct.file;
+        AnkerElement.href = pdct.link;
 
         const boxElement = document.createElement("div");
         boxElement.className = "pdct-box";
 
         const imgElement = document.createElement("img");
         imgElement.className = "pdct-img";
-        imgElement.alt = pdct.name;
-        imgElement.src = pdct.src;
+        imgElement.alt = pdct.title || "";
+        imgElement.src = pdct.thumbnail ? `${BASE_IMG_PATH}/${pdct.thumbnail}` : ALTER_IMAGE_PATH;
 
         const boxChildElement = document.createElement("div");
         boxChildElement.className = "pdct-details";
 
         const titleElement = document.createElement("h2");
         titleElement.className = "pdct-name";
-        titleElement.textContent = pdct.name;
+        titleElement.textContent = pdct.title || "";
 
         const headlineElement = document.createElement("p");
         headlineElement.className = "pdct-headline";
-        headlineElement.innerHTML = pdct.headline || "製品の詳細はまだありません。";
+        headlineElement.textContent = pdct.headline || "製品の詳細はまだありません。";
 
         const viewmoreElement = document.createElement("p");
         viewmoreElement.className = "viewmore";
@@ -42,12 +54,14 @@ const pdctLoad = () => {
         const tagsContainerElement = document.createElement("ul");
         tagsContainerElement.className = "pdct-tags-container";
 
-        pdct.tags.forEach((tag) => {
-            const tagsElement = document.createElement("li");
-            tagsElement.className = "pdct-tag";
-            tagsElement.textContent = tag;
-            tagsContainerElement.appendChild(tagsElement);
-        });
+        if (pdct.tags) {
+            pdct.tags.forEach((tag) => {
+                const tagsElement = document.createElement("li");
+                tagsElement.className = "pdct-tag";
+                tagsElement.textContent = tag;
+                tagsContainerElement.appendChild(tagsElement);
+            });
+        }
 
         boxChildElement.appendChild(tagsContainerElement);
         boxChildElement.appendChild(titleElement);

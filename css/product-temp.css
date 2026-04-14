@@ -190,3 +190,46 @@ main {
     color: #666;
     margin-bottom: 10px;
 }
+
+/* ================================================
+   エラー表示
+   ================================================ */
+.product-error {
+    text-align: center;
+    padding: 80px 20px;
+}
+
+.product-error__icon {
+    font-size: 3em;
+    color: #ddd;
+    margin-bottom: 16px;
+}
+
+.product-error__message {
+    font-size: 1.1em;
+    color: #666;
+    margin-bottom: 24px;
+}
+
+.product-error__link {
+    color: var(--main-color);
+    text-decoration: underline;
+}
+
+/* ================================================
+   戻るリンク
+   ================================================ */
+#prev a {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: #666;
+    text-decoration: none;
+    font-size: 0.95em;
+    padding: 10px;
+    transition: color 0.2s;
+}
+
+#prev a:hover {
+    color: var(--main-color);
+}
