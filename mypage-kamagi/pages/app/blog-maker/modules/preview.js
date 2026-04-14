@@ -13,7 +13,7 @@ function renderPreview() {
 
         state.sections.forEach((section) => {
             const cleanedParagraphs = normalizeParagraphs(section.paragraphs);
-            if (!section.image.trim() && cleanedParagraphs.length === 0) {
+            if (!section.imagePreviewUrl && !section.image.trim() && cleanedParagraphs.length === 0) {
                 return;
             }
 
@@ -23,9 +23,9 @@ function renderPreview() {
 
             const sectionElement = document.createElement("section");
 
-            if (section.image.trim()) {
+            if (section.imagePreviewUrl || section.image.trim()) {
                 const img = document.createElement("img");
-                img.src = section.image.trim();
+                img.src = section.imagePreviewUrl || section.image.trim();
                 img.alt = section.imageAlt.trim() || "";
                 sectionElement.appendChild(img);
             }
