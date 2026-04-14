@@ -148,25 +148,18 @@
             
             </ul>
             <script type="module">
-                import { articleIds } from './data/articleData.js';
-                import { fetchArticle } from './js/articleApi.js';
+                import { content } from './data/articleData.js';
 
+                content.sort((a, b) => new Date(b.date) - new Date(a.date));
                 const newsList = document.querySelector('.news ul');
                 if (newsList) {
-                    const top5 = articleIds.slice(0, 5);
-                    Promise.all(top5.map(async (id) => {
-                        const article = await fetchArticle(id);
-                        return article;
-                    })).then(articles => {
-                        articles.forEach(article => {
-                            if (!article) return;
-                            const li = document.createElement('li');
-                            const a = document.createElement('a');
-                            a.href = article.link;
-                            a.textContent = `${article.date} ${article.title}`;
-                            li.appendChild(a);
-                            newsList.appendChild(li);
-                        });
+                    content.slice(0, 5).forEach(article => {
+                        const li = document.createElement('li');
+                        const a = document.createElement('a');
+                        a.href = article.link;
+                        a.textContent = `${article.date} ${article.title}`;
+                        li.appendChild(a);
+                        newsList.appendChild(li);
                     });
                 }
             </script>
