@@ -1,0 +1,35 @@
+{
+    "id": "25-10-26-toureisai",
+    "date": "2025-10-26",
+    "title": "第96回藤嶺祭に出展させていただきました！",
+    "thumbnail": "blog/blog-img/25-10-26-toureisai-01.jpg",
+    "caption": "EDTCが藤嶺祭にお邪魔しました！",
+    "author": "山口",
+    "sections": [
+        {
+            "layout": "vertical",
+            "image": "blog/blog-img/25-10-26-toureisai-01.jpg",
+            "imageAlt": "子供たちに授業を行っている様子",
+            "paragraphs": [
+                "KAIT EDTCの山口です！",
+                "この度は藤嶺学園藤沢中学校様が開催されている 「第96回藤嶺祭」にご招待いただき、出展させていただきました！"
+            ]
+        },
+        {
+            "layout": "horizontal",
+            "image": "blog/blog-img/25-10-26-toureisai-02.jpg",
+            "imageAlt": "代表がはしゃいでいる様子",
+            "paragraphs": [
+                "今年度は、今までEDTCで開発してきたプロダクトを展示し、子供たちに体験してもらいました！ 体験してくれた子供たちのなかには、 熱中してライントレースカーの線路作りに没頭する姿が見られ、とても嬉しく感じました！"
+            ]
+        },
+        {
+            "layout": "horizontal",
+            "image": "blog/blog-img/25-10-26-toureisai-03.jpg",
+            "imageAlt": "子供たちにぶるぶる君の授業を行っている様子",
+            "paragraphs": [
+                "そして、、、 ぶるぶる君の出張授業も同時に行いました！ ぶるぶる君の授業では子供たちにぶるぶる君の足のモール部分を組み立ててもらい、遊びながら振動の仕組みを勉強！ ぶるぶる君の授業も大好評で沢山の中高生の方が受講してくれました！"
+            ]
+        }
+    ]
+}
