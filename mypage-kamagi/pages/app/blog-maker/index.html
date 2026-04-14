@@ -99,6 +99,11 @@
                             <div class="form-group full-row">
                                 <label for="article-thumbnail">thumbnail</label>
                                 <input id="article-thumbnail" name="thumbnail" type="text" placeholder="blog/blog-img/sample.webp" data-field="thumbnail">
+                                <div class="image-upload-area">
+                                    <input type="file" accept="image/*" id="thumbnail-upload" class="image-file-input">
+                                    <div id="thumbnail-preview-container" class="image-preview-container" style="display:none;"></div>
+                                    <button type="button" class="btn btn-danger image-remove-btn" id="thumbnail-remove-btn" style="display:none;">サムネイル画像を削除</button>
+                                </div>
                             </div>
 
                             <div class="form-group full-row">
@@ -123,7 +128,7 @@
                     </section>
 
                     <section class="form-card export-card">
-                        <button id="download-json-btn" type="button" class="btn btn-primary">JSONをダウンロード</button>
+                        <button id="download-json-btn" type="button" class="btn btn-primary">ダウンロード</button>
                         <p class="form-hint">ファイル名は <span id="download-filename">article.json</span> になります。</p>
                     </section>
                 </form>
@@ -135,11 +140,13 @@
         </div>
     </main>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
     <script src="../../../lib/api-client.js"></script>
     <script src="../../../lib/utils.js"></script>
     <script src="../../../lib/services/auth-service.js"></script>
     <script src="./modules/utils.js"></script>
     <script src="./modules/auth.js"></script>
+    <script src="./modules/image-processor.js"></script>
     <script src="./modules/preview.js"></script>
     <script src="./modules/validation.js"></script>
     <script src="./modules/section-editor.js"></script>

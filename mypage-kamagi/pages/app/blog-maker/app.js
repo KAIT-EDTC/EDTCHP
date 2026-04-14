@@ -9,6 +9,8 @@ const state = {
     date: "",
     title: "",
     thumbnail: "",
+    thumbnailFile: null,
+    thumbnailPreviewUrl: "",
     caption: "",
     author: "",
     sections: [createEmptySection("horizontal")]
@@ -40,6 +42,10 @@ function cacheDom() {
     dom.idInput = document.getElementById("article-id");
     dom.dateInput = document.getElementById("article-date");
     dom.titleInput = document.getElementById("article-title");
+
+    dom.thumbnailUpload = document.getElementById("thumbnail-upload");
+    dom.thumbnailPreview = document.getElementById("thumbnail-preview-container");
+    dom.thumbnailRemoveBtn = document.getElementById("thumbnail-remove-btn");
 }
 
 function initializeDefaultValues() {
@@ -73,6 +79,68 @@ function bindEvents() {
     dom.sectionsContainer.addEventListener("change", onSectionsInput);
 
     dom.downloadButton.addEventListener("click", onDownloadClick);
+
+    if (dom.thumbnailUpload) {
+        dom.thumbnailUpload.addEventListener("change", onThumbnailUpload);
+    }
+    if (dom.thumbnailRemoveBtn) {
+        dom.thumbnailRemoveBtn.addEventListener("click", onThumbnailRemove);
+    }
+}
+
+function onThumbnailUpload(event) {
+    const file = event.target.files && event.target.files[0];
+    if (!file) {
+        return;
+    }
+
+    if (state.thumbnailPreviewUrl) {
+        URL.revokeObjectURL(state.thumbnailPreviewUrl);
+    }
+
+    state.thumbnailFile = file;
+    state.thumbnailPreviewUrl = URL.createObjectURL(file);
+
+    updateThumbnailPreview();
+    renderAll();
+}
+
+function onThumbnailRemove() {
+    if (state.thumbnailPreviewUrl) {
+        URL.revokeObjectURL(state.thumbnailPreviewUrl);
+    }
+
+    state.thumbnailFile = null;
+    state.thumbnailPreviewUrl = "";
+
+    if (dom.thumbnailUpload) {
+        dom.thumbnailUpload.value = "";
+    }
+
+    updateThumbnailPreview();
+    renderAll();
+}
+
+function updateThumbnailPreview() {
+    if (!dom.thumbnailPreview) {
+        return;
+    }
+
+    if (state.thumbnailPreviewUrl) {
+        dom.thumbnailPreview.innerHTML = `
+            <img src="${state.thumbnailPreviewUrl}" alt="サムネイルプレビュー" class="image-preview-thumb">
+        `;
+        dom.thumbnailPreview.style.display = "flex";
+        if (dom.thumbnailRemoveBtn) {
+            dom.thumbnailRemoveBtn.style.display = "inline-block";
+        }
+    } else {
+        dom.thumbnailPreview.innerHTML = "";
+        dom.thumbnailPreview.style.display = "none";
+        if (dom.thumbnailRemoveBtn) {
+            dom.thumbnailRemoveBtn.style.display = "none";
+        }
+    }
 }
 
 function renderAll() {

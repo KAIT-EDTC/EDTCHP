@@ -380,6 +380,50 @@ body {
 	align-items: start;
 }
 
+/* ── 画像アップロード ── */
+.image-upload-area {
+	margin-top: 8px;
+	display: grid;
+	gap: 8px;
+}
+
+.image-file-input {
+	width: 100%;
+	border: 2px dashed #ccc;
+	border-radius: 6px;
+	padding: 10px 12px;
+	font: inherit;
+	background: #fafafa;
+	cursor: pointer;
+	transition: border-color 0.2s, background-color 0.2s;
+}
+
+.image-file-input:hover {
+	border-color: var(--main-color);
+	background: #f0f7fa;
+}
+
+.image-preview-container {
+	display: flex;
+	align-items: flex-start;
+	gap: 10px;
+	flex-wrap: wrap;
+}
+
+.image-preview-thumb {
+	max-height: 120px;
+	max-width: 100%;
+	border-radius: 6px;
+	border: 1px solid #e0e0e0;
+	object-fit: contain;
+}
+
+.image-remove-btn {
+	flex-shrink: 0;
+	font-size: 0.85em;
+	padding: 6px 12px;
+}
+
 /* ── バリデーション ── */
 #validation-errors {
 	margin: 0;
