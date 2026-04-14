@@ -32,7 +32,6 @@ function renderSectionEditors() {
 
                 <div class="form-group full-row">
                     <label>image</label>
-                    <input type="text" value="${escapeAttr(section.image)}" data-section-field="image" data-section-index="${sectionIndex}" placeholder="blog/blog-img/your-image.webp">
                     <div class="image-upload-area">
                         <input type="file" accept="image/*" data-action="upload-section-image" data-section-index="${sectionIndex}" class="image-file-input">
                         ${section.imagePreviewUrl ? `

@@ -48,21 +48,35 @@ function convertToWebp(file) {
 }
 
 /**
+ * ランダムな英数字文字列を生成する
+ * @param {number} length - 文字列の長さ（デフォルト5）
+ * @returns {string} 英数字のランダム文字列
+ */
+function generateRandomId(length = 5) {
+    const chars = "abcdefghijklmnopqrstuvwxyz0123456789";
+    let result = "";
+    for (let i = 0; i < length; i++) {
+        result += chars.charAt(Math.floor(Math.random() * chars.length));
+    }
+    return result;
+}
+
+/**
  * 命名規則に従った画像ファイル名を生成する
  * @param {string} dateStr - "YYYY-MM-DD" 形式の日付
- * @param {string} eventId - イベント名（idフィールド）
- * @param {number} index - 画像番号（0=サムネイル, 1〜=セクション画像）
- * @returns {string} "yy-mm-dd-イベント名-番号.webp"
+ * @param {string} randomTag - 1エクスポート内で共有するランダム文字列
+ * @param {number} index - 画像番号（1始まり、2桁ゼロ埋め）
+ * @returns {string} "yy-mm-dd-randomTag-nn.webp"
  */
-function generateImageFilename(dateStr, eventId, index) {
+function generateImageFilename(dateStr, randomTag, index) {
     const parts = dateStr.split("-");
     const yy = parts[0] ? parts[0].slice(-2) : "00";
     const mm = parts[1] || "01";
     const dd = parts[2] || "01";
 
-    const safeName = eventId.trim() || "untitled";
+    const nn = String(index).padStart(2, "0");
 
-    return `${yy}-${mm}-${dd}-${safeName}-${index}.webp`;
+    return `${yy}-${mm}-${dd}-${randomTag}-${nn}.webp`;
 }
 
 /**
