@@ -33,6 +33,15 @@ function renderSectionEditors() {
                 <div class="form-group full-row">
                     <label>image</label>
                     <input type="text" value="${escapeAttr(section.image)}" data-section-field="image" data-section-index="${sectionIndex}" placeholder="blog/blog-img/your-image.webp">
+                    <div class="image-upload-area">
+                        <input type="file" accept="image/*" data-action="upload-section-image" data-section-index="${sectionIndex}" class="image-file-input">
+                        ${section.imagePreviewUrl ? `
+                            <div class="image-preview-container">
+                                <img src="${escapeAttr(section.imagePreviewUrl)}" alt="プレビュー" class="image-preview-thumb">
+                                <button type="button" class="btn btn-danger image-remove-btn" data-action="remove-section-image" data-section-index="${sectionIndex}">画像を削除</button>
+                            </div>
+                        ` : ""}
+                    </div>
                 </div>
 
                 <div class="form-group full-row">
@@ -98,6 +107,12 @@ function onSectionsClick(event) {
         if (state.sections.length === 0) {
             state.sections.push(createEmptySection("horizontal"));
         }
+    } else if (action === "remove-section-image") {
+        if (state.sections[index].imagePreviewUrl) {
+            URL.revokeObjectURL(state.sections[index].imagePreviewUrl);
+        }
+        state.sections[index].imageFile = null;
+        state.sections[index].imagePreviewUrl = "";
     } else if (action === "add-paragraph") {
         state.sections[index].paragraphs.push("");
     } else if (action === "remove-paragraph") {
@@ -122,6 +137,20 @@ function onSectionsInput(event) {
     }
 
     const section = state.sections[sectionIndex];
+
+    if (target.dataset.action === "upload-section-image") {
+        const file = target.files && target.files[0];
+        if (file) {
+            if (section.imagePreviewUrl) {
+                URL.revokeObjectURL(section.imagePreviewUrl);
+            }
+            section.imageFile = file;
+            section.imagePreviewUrl = URL.createObjectURL(file);
+            renderSectionEditors();
+        }
+        renderAll();
+        return;
+    }
 
     if (target.dataset.sectionField) {
         section[target.dataset.sectionField] = target.value;
