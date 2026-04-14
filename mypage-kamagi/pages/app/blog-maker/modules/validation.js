@@ -30,7 +30,7 @@ function validateState(article) {
             errors.push(`section[${index}].layout は horizontal / vertical のみ指定可能です`);
         }
 
-        const hasImage = section.image.trim().length > 0;
+        const hasImage = section.imageFile !== null;
         const paragraphs = normalizeParagraphs(section.paragraphs);
 
         if (!hasImage && paragraphs.length === 0) {
@@ -74,22 +74,22 @@ function renderValidation() {
     dom.downloadButton.disabled = validation.errors.length > 0;
 }
 
-function buildExportJson(article) {
+function buildExportJson(article, imageMap) {
     const payload = {
         id: article.id.trim(),
         date: article.date.trim(),
         title: article.title.trim(),
-        sections: article.sections.map((section) => {
+        sections: article.sections.map((section, index) => {
             const normalized = {
                 layout: ALLOWED_LAYOUTS.has(section.layout) ? section.layout : "horizontal"
             };
 
-            const image = section.image.trim();
+            const imageFilename = imageMap && imageMap.sections[index];
             const imageAlt = section.imageAlt.trim();
             const paragraphs = normalizeParagraphs(section.paragraphs);
 
-            if (image) {
-                normalized.image = image;
+            if (imageFilename) {
+                normalized.image = imageFilename;
             }
             if (imageAlt) {
                 normalized.imageAlt = imageAlt;
@@ -102,8 +102,8 @@ function buildExportJson(article) {
         }).filter((section) => section.image || (section.paragraphs && section.paragraphs.length > 0))
     };
 
-    if (article.thumbnail.trim()) {
-        payload.thumbnail = article.thumbnail.trim();
+    if (imageMap && imageMap.thumbnail) {
+        payload.thumbnail = imageMap.thumbnail;
     }
     if (article.caption.trim()) {
         payload.caption = article.caption.trim();
@@ -115,16 +115,56 @@ function buildExportJson(article) {
     return payload;
 }
 
-function onDownloadClick() {
+async function onDownloadClick() {
     const validation = validateState(state);
     if (validation.errors.length > 0) {
         showToast("入力エラーを解消してください", "error");
         return;
     }
 
-    const exportData = buildExportJson(state);
-    downloadJson(exportData, `${exportData.id}.json`);
-    showToast("JSONをダウンロードしました", "success");
+    dom.downloadButton.disabled = true;
+
+    try {
+        const randomTag = generateRandomId();
+        const dateStr = state.date.trim();
+        let imageIndex = 1;
+        const imageEntries = [];
+        const imageMap = { thumbnail: null, sections: {} };
+
+        if (state.thumbnailFile) {
+            const filename = generateImageFilename(dateStr, randomTag, imageIndex);
+            const blob = await convertToWebp(state.thumbnailFile);
+            imageEntries.push({ filename, blob });
+            imageMap.thumbnail = filename;
+            imageIndex++;
+        }
+
+        for (let i = 0; i < state.sections.length; i++) {
+            if (state.sections[i].imageFile) {
+                const filename = generateImageFilename(dateStr, randomTag, imageIndex);
+                const blob = await convertToWebp(state.sections[i].imageFile);
+                imageEntries.push({ filename, blob });
+                imageMap.sections[i] = filename;
+                imageIndex++;
+            }
+        }
+
+        const exportData = buildExportJson(state, imageMap);
+        const jsonFilename = `${exportData.id}.json`;
+
+        if (imageEntries.length > 0) {
+            await downloadAsZip(exportData, jsonFilename, imageEntries);
+            showToast("ZIPをダウンロードしました", "success");
+        } else {
+            downloadJson(exportData, jsonFilename);
+            showToast("JSONをダウンロードしました", "success");
+        }
+    } catch (error) {
+        console.error("ダウンロードエラー:", error);
+        showToast("ダウンロードに失敗しました", "error");
+    } finally {
+        renderValidation();
+    }
 }
 
 function downloadJson(data, fileName) {
@@ -143,5 +183,6 @@ function downloadJson(data, fileName) {
 
 function updateDownloadFilename() {
     const safeId = state.id.trim() || "article";
-    dom.downloadFilename.textContent = `${safeId}.json`;
+    const ext = hasUploadedImages() ? ".zip" : ".json";
+    dom.downloadFilename.textContent = `${safeId}${ext}`;
 }
