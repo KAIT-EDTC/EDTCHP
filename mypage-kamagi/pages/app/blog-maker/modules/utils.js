@@ -36,6 +36,8 @@ function createEmptySection(layout) {
         layout,
         image: "",
         imageAlt: "",
+        imageFile: null,
+        imagePreviewUrl: "",
         paragraphs: [""]
     };
 }
