@@ -24,7 +24,7 @@
         <div class="breadcrumbs">
             <a href="./blog.html">ブログ</a>
             <i class="fa fa-angle-right"></i>
-            <span id="breadcrumb-title"></span>
+            <a href="" id="breadcrumb-title"></a>
         </div>
 
         <!-- タイトル・日付 (blogPostRenderer.js が設定) -->
@@ -41,7 +41,7 @@
                 <div class="side-menu">
                     <div class="Archives">
                         <h3><i class="fa fa-list"></i> 他の記事もどうぞ！</h3>
-                        <script type="module" src="./js/archiveListRenderer.js"></script>
+                        <script type="module" src="./script/blog/archiveListRenderer.js"></script>
                     </div>
                 </div>
             </div>
@@ -53,8 +53,8 @@
     <!-- フッター: loadCommon.js により動的挿入 -->
     <div id="common-footer"></div>
 
-    <script type="module" src="./js/loadCommon.js"></script>
-    <script type="module" src="./js/blogPostRenderer.js"></script>
+    <script type="module" src="./script/loadCommon.js"></script>
+    <script type="module" src="./script/blog/blogPostRenderer.js"></script>
 </body>
 
 </html>
