@@ -18,6 +18,10 @@ async function onImportFileChange(event) {
 
     try {
         if (file.name.endsWith(".zip")) {
+            if (typeof JSZip === "undefined") {
+                showToast("ZIPインポートは現在利用できません。JSONファイルを使用してください。", "error");
+                return;
+            }
             await importFromZip(file);
         } else if (file.name.endsWith(".json")) {
             const text = await file.text();
