@@ -1,0 +1,291 @@
+/* =========================================================
+   実績一覧ページ - achievements.css
+   縦スクロールタイムライン + 画像付きカード
+   ========================================================= */
+
+/* ---------- ページ全体 ---------- */
+body {
+    background-color: var(--bg-color);
+}
+
+/* ---------- ヒーローセクション ---------- */
+.achievements-hero {
+    background: linear-gradient(135deg, #f5f7fa 0%, #e4e8ec 100%);
+    padding: 60px 20px 40px;
+    text-align: center;
+}
+
+.achievements-hero h1 {
+    font-size: 48px;
+    color: rgb(71, 71, 71);
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.achievements-hero .hero-sub {
+    font-size: 18px;
+    color: #666;
+    font-weight: 400;
+}
+
+/* ---------- タイムライン（縦スクロール） ---------- */
+.timeline-wrapper {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 40px 20px 60px;
+}
+
+.timeline {
+    position: relative;
+    padding-left: 40px;
+}
+
+/* 縦の中央線 */
+.timeline::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 15px;
+    width: 3px;
+    background: linear-gradient(180deg, transparent 0%, #ccc 3%, #ccc 97%, transparent 100%);
+}
+
+/* ---------- 年ラベル ---------- */
+.timeline-year {
+    position: relative;
+    z-index: 2;
+    margin: 32px 0 16px -25px;
+}
+
+.timeline-year span {
+    display: inline-block;
+    background: #333;
+    color: #fff;
+    padding: 6px 22px;
+    border-radius: 50px;
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* ---------- タイムラインアイテム ---------- */
+.timeline-item {
+    position: relative;
+    margin-bottom: 36px;
+    opacity: 0;
+    animation: tl-fadein 0.6s ease forwards;
+}
+
+@keyframes tl-fadein {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ドットマーカー */
+.timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -33px;
+    top: 28px;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: #ffc107;
+    border: 3px solid #fff;
+    box-shadow: 0 0 0 3px #ffc107, 0 2px 8px rgba(0, 0, 0, 0.15);
+    z-index: 3;
+}
+
+/* ---------- カード ---------- */
+.timeline-card {
+    background: #fff;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: row;
+}
+
+.timeline-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.14);
+}
+
+/* ---------- カード画像 ---------- */
+.card-image {
+    flex: 0 0 260px;
+    min-height: 200px;
+    overflow: hidden;
+    position: relative;
+    background: #eee;
+}
+
+.card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+    display: block;
+}
+
+.timeline-card:hover .card-image img {
+    transform: scale(1.05);
+}
+
+/* 画像がない場合のプレースホルダー */
+.card-image.no-image {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #f0f0f0 0%, #e0e0e0 100%);
+    color: #bbb;
+    font-size: 40px;
+}
+
+/* ---------- カードテキスト ---------- */
+.card-body {
+    flex: 1;
+    padding: 28px 32px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.card-date {
+    font-size: 13px;
+    color: #999;
+    font-weight: 600;
+    margin-bottom: 6px;
+    letter-spacing: 0.5px;
+}
+
+.card-award-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 4px 14px;
+    border-radius: 50px;
+    font-size: 12px;
+    font-weight: 700;
+    color: #fff;
+    background: linear-gradient(135deg, #ffc107 0%, #ff9800 100%);
+    margin-bottom: 12px;
+    width: fit-content;
+    box-shadow: 0 2px 6px rgba(255, 152, 0, 0.3);
+}
+
+.card-award-badge::before {
+    content: '🏆';
+    font-size: 13px;
+}
+
+.card-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 10px;
+    line-height: 1.5;
+}
+
+.card-desc {
+    font-size: 14px;
+    color: #666;
+    line-height: 1.8;
+}
+
+/* ---------- 空メッセージ ---------- */
+.timeline-empty {
+    text-align: center;
+    padding: 60px 20px;
+    font-size: 16px;
+    color: #999;
+}
+
+/* =========================================================
+   レスポンシブ - タブレット (768px 未満)
+   ========================================================= */
+@media screen and (max-width: 767px) {
+    .achievements-hero {
+        padding: 40px 16px 24px;
+    }
+
+    .achievements-hero h1 {
+        font-size: 32px;
+    }
+
+    .achievements-hero .hero-sub {
+        font-size: 15px;
+    }
+
+    .timeline-wrapper {
+        padding: 24px 12px 40px;
+    }
+
+    .timeline {
+        padding-left: 32px;
+    }
+
+    .timeline::before {
+        left: 12px;
+    }
+
+    .timeline-item::before {
+        left: -26px;
+        width: 12px;
+        height: 12px;
+    }
+
+    .timeline-year {
+        margin-left: -18px;
+    }
+
+    /* カードを縦並びに */
+    .timeline-card {
+        flex-direction: column;
+    }
+
+    .card-image {
+        flex: none;
+        height: 200px;
+        min-height: unset;
+    }
+
+    .card-body {
+        padding: 20px;
+    }
+
+    .card-title {
+        font-size: 17px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .achievements-hero h1 {
+        font-size: 28px;
+    }
+
+    .card-image {
+        height: 160px;
+    }
+
+    .card-body {
+        padding: 16px;
+    }
+
+    .card-title {
+        font-size: 16px;
+    }
+
+    .card-desc {
+        font-size: 13px;
+    }
+}
