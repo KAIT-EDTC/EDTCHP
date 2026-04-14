@@ -46,6 +46,9 @@ function cacheDom() {
     dom.thumbnailUpload = document.getElementById("thumbnail-upload");
     dom.thumbnailPreview = document.getElementById("thumbnail-preview-container");
     dom.thumbnailRemoveBtn = document.getElementById("thumbnail-remove-btn");
+
+    dom.importBtn = document.getElementById("import-btn");
+    dom.importFileInput = document.getElementById("import-file-input");
 }
 
 function initializeDefaultValues() {
@@ -85,6 +88,13 @@ function bindEvents() {
     }
     if (dom.thumbnailRemoveBtn) {
         dom.thumbnailRemoveBtn.addEventListener("click", onThumbnailRemove);
+    }
+
+    if (dom.importBtn) {
+        dom.importBtn.addEventListener("click", onImportClick);
+    }
+    if (dom.importFileInput) {
+        dom.importFileInput.addEventListener("change", onImportFileChange);
     }
 }
 

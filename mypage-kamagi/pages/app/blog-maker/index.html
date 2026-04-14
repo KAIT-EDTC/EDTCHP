@@ -97,8 +97,7 @@
                             </div>
 
                             <div class="form-group full-row">
-                                <label for="article-thumbnail">thumbnail</label>
-                                <input id="article-thumbnail" name="thumbnail" type="text" placeholder="blog/blog-img/sample.webp" data-field="thumbnail">
+                                <label>thumbnail</label>
                                 <div class="image-upload-area">
                                     <input type="file" accept="image/*" id="thumbnail-upload" class="image-file-input">
                                     <div id="thumbnail-preview-container" class="image-preview-container" style="display:none;"></div>
@@ -128,7 +127,11 @@
                     </section>
 
                     <section class="form-card export-card">
-                        <button id="download-json-btn" type="button" class="btn btn-primary">ダウンロード</button>
+                        <div class="export-import-row">
+                            <button id="download-json-btn" type="button" class="btn btn-primary">ダウンロード</button>
+                            <button id="import-btn" type="button" class="btn btn-ghost">インポート</button>
+                            <input type="file" accept=".zip,.json" id="import-file-input" class="import-file-input" style="display:none;">
+                        </div>
                         <p class="form-hint">ファイル名は <span id="download-filename">article.json</span> になります。</p>
                     </section>
                 </form>
@@ -149,6 +152,7 @@
     <script src="./modules/image-processor.js"></script>
     <script src="./modules/preview.js"></script>
     <script src="./modules/validation.js"></script>
+    <script src="./modules/import.js"></script>
     <script src="./modules/section-editor.js"></script>
     <script src="./app.js"></script>
     <script src="../../../lib/hamburger.js"></script>

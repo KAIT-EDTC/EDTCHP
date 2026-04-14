@@ -483,6 +483,13 @@ body {
 	cursor: not-allowed;
 }
 
+.export-import-row {
+	display: flex;
+	gap: 10px;
+	align-items: center;
+	flex-wrap: wrap;
+}
+
 /* ── フッターリンク ── */
 .footer-links {
 	background-color: #fff;
