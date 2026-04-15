@@ -2,7 +2,7 @@
     "id": "25-07-25-yugyou05",
     "date": "2025-07-25",
     "title": "第五回遊行塾に行ってきました！",
-    "thumbnail": "25-07-25-yugyou05-01.JPG",
+    "thumbnail": "25-07-25-yugyou05-01.webp",
     "caption": "藤嶺学園藤沢中学校に第五回遊行塾を実施しました。今回はLED制御のプログラミングを行いました！",
     "author": "青沼",
     "sections": [
@@ -13,12 +13,12 @@
         },
         {
             "layout": "vertical",
-            "image": "25-07-25-yugyou05-01.JPG",
+            "image": "25-07-25-yugyou05-01.webp",
             "imageAlt": "LED制御の様子"
         },
         {
             "layout": "horizontal",
-            "image": "25-07-25-yugyou05-02.JPG",
+            "image": "25-07-25-yugyou05-02.webp",
             "imageAlt": "LED制御の様子",
             "paragraphs": [
                 "LED制御では、アナログ出力の値を生徒自身に考えさせ試行錯誤してもらうことで、デジタル出力との違いを理解させることを意識しました。",
@@ -27,7 +27,7 @@
         },
         {
             "layout": "vertical",
-            "image": "25-07-25-yugyou05-03.png",
+            "image": "25-07-25-yugyou05-03.webp",
             "imageAlt": "LED制御の様子",
             "paragraphs": [
                 "ピン設定やLED制御を早めに終えた生徒には、tone関数を用いた周波数や音の長さの調整方法を指導し、 各自が工夫して自作のメロディをビープスピーカーで演奏するなど、応用的な活動にも取り組ませました。",
