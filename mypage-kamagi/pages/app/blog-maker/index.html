@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ブログめーかー</title>
+    <link rel="stylesheet" href="../../../../css/global.css">
+    <link rel="stylesheet" href="../../../lib/hamburger.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body class="anim-fadein" style="display:none;">
+
+    <div class="breadcrumbs-bar" id="breadcrumbs">
+        <a href="../../../../base.html">ホーム</a>
+        <i class="fa fa-angle-right"></i>
+        <a href="../../mypage/">マイページ</a>
+        <i class="fa fa-angle-right"></i>
+        <a href="../index.html">アプリ</a>
+        <i class="fa fa-angle-right"></i>
+        <a href="">ブログめーかー</a>
+    </div>
+
+    <div class="hamburger-menu">
+        <input type="checkbox" id="menu-toggle">
+        <label for="menu-toggle" class="menu-icon">
+            <span></span>
+            <span></span>
+            <span></span>
+        </label>
+        <nav class="menu-content">
+            <a href="../../mypage/"><i class="fa fa-home"></i> マイページ</a>
+            <a href="../../admin/" id="admin-link" style="display:none;"><i class="fa fa-cog"></i> 管理者メニュー</a>
+            <a href="#" id="logout-btn"><i class="fa fa-sign-out"></i> ログアウト</a>
+        </nav>
+    </div>
+
+    <main class="blog-maker-main">
+        <header class="page-header">
+            <h1>ブログ作成アプリ</h1>
+            <p>JSON記事データをフォーム入力しながら、左側で記事ページを即時プレビューできます。</p>
+            <a href="../index.html" class="back-link">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M19 12H5M12 19l-7-7 7-7"></path>
+                </svg>
+                アプリ一覧へ戻る
+            </a>
+        </header>
+
+        <section class="editor-grid" aria-label="ブログエディタ">
+            <article class="preview-panel">
+                <h2>ライブプレビュー</h2>
+                <div class="preview-shell">
+                    <nav class="breadcrumbs" aria-label="パンくず">
+                        <a href="#">HOME</a>
+                        <span>&gt;</span>
+                        <a href="#">BLOG</a>
+                        <span>&gt;</span>
+                        <span id="preview-breadcrumb-title">記事タイトル</span>
+                    </nav>
+
+                    <h1 id="preview-blog-title">記事タイトル</h1>
+                    <p id="preview-blog-date"><i class="fa fa-calendar"></i> 2026-04-09</p>
+
+                    <div class="blog-body">
+                        <div id="preview-blog-main" class="blog-main"></div>
+                    </div>
+
+                    <a id="preview-prev" href="#">＜ ブログトップへ戻る</a>
+                </div>
+            </article>
+
+            <article class="form-panel">
+                <h2>記事フォーム</h2>
+                <form id="blog-form" novalidate>
+                    <section class="form-card">
+                        <h3>基本情報</h3>
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="article-id">id</label>
+                                <input id="article-id" name="id" type="text" placeholder="25-08-08-sciencesummer" data-field="id" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="article-date">date</label>
+                                <input id="article-date" name="date" type="date" data-field="date" required>
+                            </div>
+
+                            <div class="form-group full-row">
+                                <label for="article-title">title</label>
+                                <input id="article-title" name="title" type="text" placeholder="記事タイトル" data-field="title" required>
+                            </div>
+
+                            <div class="form-group full-row">
+                                <label for="article-author">author</label>
+                                <input id="article-author" name="author" type="text" placeholder="著者名" data-field="author">
+                            </div>
+
+                            <div class="form-group full-row">
+                                <label>thumbnail</label>
+                                <div class="image-upload-area">
+                                    <input type="file" accept="image/*" id="thumbnail-upload" class="image-file-input">
+                                    <div id="thumbnail-preview-container" class="image-preview-container" style="display:none;"></div>
+                                    <button type="button" class="btn btn-danger image-remove-btn" id="thumbnail-remove-btn" style="display:none;">サムネイル画像を削除</button>
+                                </div>
+                            </div>
+
+                            <div class="form-group full-row">
+                                <label for="article-caption">caption</label>
+                                <textarea id="article-caption" name="caption" rows="2" placeholder="記事一覧で使う説明文" data-field="caption"></textarea>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section class="form-card">
+                        <div class="section-header-row">
+                            <h3>セクション</h3>
+                            <button id="add-section-btn" type="button" class="btn btn-ghost">+ セクション追加</button>
+                        </div>
+                        <p class="form-hint">各セクションは image または paragraphs の少なくとも一方が必要です。</p>
+                        <div id="sections-container"></div>
+                    </section>
+
+                    <section class="form-card validation-card">
+                        <h3>検証結果</h3>
+                        <ul id="validation-errors"></ul>
+                    </section>
+
+                    <section class="form-card export-card">
+                        <div class="export-import-row">
+                            <button id="download-json-btn" type="button" class="btn btn-primary">ダウンロード</button>
+                            <button id="import-btn" type="button" class="btn btn-ghost">インポート</button>
+                            <input type="file" accept=".zip,.json" id="import-file-input" class="import-file-input" style="display:none;">
+                        </div>
+                        <p class="form-hint">ファイル名は <span id="download-filename">article.json</span> になります。</p>
+                    </section>
+                </form>
+            </article>
+        </section>
+
+        <div class="footer-links">
+            <a href="../../mypage/">マイページに戻る</a>
+        </div>
+    </main>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <script src="../../../lib/api-client.js"></script>
+    <script src="../../../lib/utils.js"></script>
+    <script src="../../../lib/services/auth-service.js"></script>
+    <script src="./modules/utils.js"></script>
+    <script src="./modules/auth.js"></script>
+    <script src="./modules/image-processor.js"></script>
+    <script src="./modules/preview.js"></script>
+    <script src="./modules/validation.js"></script>
+    <script src="./modules/import.js"></script>
+    <script src="./modules/section-editor.js"></script>
+    <script src="./app.js"></script>
+    <script src="../../../lib/hamburger.js"></script>
+</body>
+</html>

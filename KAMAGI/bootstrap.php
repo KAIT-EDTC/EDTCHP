@@ -1,22 +1,12 @@
 <?php
 
 // vendor/autoload.php と .env のパスを環境に応じて解決する
-// ローカル(Docker): KAMAGI/vendor/autoload.php
-// 本番(さくら等):   ../../../../vendor/autoload.php (KAMAGI/api/ から見て)
-
 // .envはDocker環境では直接パス指定できないのでgetenv()で取得する。
 
 $autoloadPaths = [
     __DIR__ . '/vendor/autoload.php', // ローカル / Docker
     __DIR__ . '/../../../vendor/autoload.php', // 本番環境
 ];
-
-if (class_exists('Dotenv\Dotenv')) {
-    // rootにある.envを読み込む
-    // safeLoadを使うことで、.envが存在しない場合（本番サーバー環境変数使用時など）もエラーにしない
-    $dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/../../../');
-    $dotenv->safeLoad();
-}
 
 $autoloadLoaded = false;
 foreach ($autoloadPaths as $path) {
@@ -30,6 +20,13 @@ foreach ($autoloadPaths as $path) {
 if (!$autoloadLoaded) {
     http_response_code(500);
     die('設定ファイルの読み込みに失敗しました。');
+}
+
+if (class_exists('Dotenv\Dotenv')) {
+    // rootにある.envを読み込む
+    // safeLoadを使うことで、.envが存在しない場合（本番サーバー環境変数使用時など）もエラーにしない
+    $dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/../../../');
+    $dotenv->safeLoad();
 }
 
 if (!function_exists('kamagi_env')) {

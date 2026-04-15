@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="page-title">商品詳細|神奈川工科大学EDTC</title>
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/headfoot.css">
+    <link rel="stylesheet" href="css/product-temp.css">
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <!-- icon link tag -->
+    <link rel="icon" href="favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon-180x180.webp">
+</head>
+
+<body data-base-path="./">
+    <!-- ヘッダー: loadCommon.js により動的挿入 -->
+    <div id="common-header"></div>
+
+    <main>
+        <!-- パンくずリスト -->
+        <div class="breadcrumbs">
+            <a href="./product-top.html">商品一覧</a>
+            <i class="fa fa-angle-right"></i>
+            <a href="" id="breadcrumb-title"></a>
+        </div>
+
+        <!-- メインコンテンツ (productPostRenderer.js がJSONデータからレンダリング) -->
+        <div id="product-main">
+        </div>
+
+        <div id="prev"><a href="./product-top.html"><i class="fa fa-arrow-left"></i> 商品一覧へ戻る</a></div>
+    </main>
+
+    <!-- フッター: loadCommon.js により動的挿入 -->
+    <div id="common-footer"></div>
+
+    <script type="module" src="./script/loadCommon.js"></script>
+    <script type="module" src="./script/product/productPostRenderer.js"></script>
+</body>
+
+</html>

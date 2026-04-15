@@ -5,7 +5,7 @@
     },
     "autoload": {
         "psr-4": {
-            "KAMAGI\\": "www/EDTC/KAMAGI/"
+            "KAMAGI\\": "./"
         }
     },
     "config": {
