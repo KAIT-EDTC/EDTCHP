@@ -20,6 +20,18 @@ function validateState(article) {
         errors.push("title未入力です");
     }
 
+    if (!article.author.trim()) {
+        errors.push("author未入力です");
+    }
+
+    if (!article.caption.trim()) {
+        errors.push("caption未入力です");
+    }
+
+    if (!article.thumbnailFile) {
+        errors.push("thumbnailが未設定です。記事一覧でサムネイルが表示されません");
+    }
+
     if (!Array.isArray(article.sections) || article.sections.length < 1) {
         errors.push("sectionsは1件以上必要です");
         return { errors, warnings };
