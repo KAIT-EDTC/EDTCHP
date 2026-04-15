@@ -25,8 +25,8 @@ function renderSectionEditors() {
                 <div class="form-group">
                     <label>layout</label>
                     <select data-section-field="layout" data-section-index="${sectionIndex}">
-                        <option value="horizontal" ${section.layout === "horizontal" ? "selected" : ""}>horizontal</option>
-                        <option value="vertical" ${section.layout === "vertical" ? "selected" : ""}>vertical</option>
+                        <option value="horizontal" ${section.layout === "horizontal" ? "selected" : ""}>横並び</option>
+                        <option value="vertical" ${section.layout === "vertical" ? "selected" : ""}>縦並び</option>
                     </select>
                 </div>
 
