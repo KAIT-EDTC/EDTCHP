@@ -26,7 +26,7 @@
             ]
         },
         {
-            "layout": "vertical",
+            "layout": "horizontal",
             "image": "25-07-25-yugyou05-03.webp",
             "imageAlt": "LED制御の様子",
             "paragraphs": [
