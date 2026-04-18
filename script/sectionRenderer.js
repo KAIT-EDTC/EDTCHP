@@ -7,12 +7,29 @@
 
 const BASE_IMG_PATH = "./public/blog/img";
 
+function applyImageDimensions(img) {
+    img.width = 1600;
+    img.height = 900;
+}
+
+function applyImageLoadingHints(img, prioritizeImage) {
+    if (prioritizeImage) {
+        img.loading = 'eager';
+        img.setAttribute('fetchpriority', 'high');
+        return;
+    }
+
+    img.loading = 'lazy';
+}
+
 /**
  * メディア要素を生成する
  * @param {Object} media - mediaオブジェクト { type, src, alt }
+ * @param {Object} [options] - レンダリングオプション
+ * @param {boolean} [options.prioritizeImage] - true の場合、画像を優先読み込みする
  * @returns {HTMLElement|null}
  */
-function renderMedia(media) {
+function renderMedia(media, options = {}) {
     if (!media || !media.src) return null;
 
     switch (media.type) {
@@ -46,7 +63,8 @@ function renderMedia(media) {
             const img = document.createElement('img');
             img.src = `${BASE_IMG_PATH}/${media.src}`;
             img.alt = media.alt || '';
-            img.loading = 'lazy';
+            applyImageDimensions(img);
+            applyImageLoadingHints(img, options.prioritizeImage === true);
             img.decoding = 'async';
             return img;
         }
@@ -61,9 +79,11 @@ function renderMedia(media) {
  * @param {string} [section.image]        - 画像パス（後方互換: mediaがない場合に使用）
  * @param {string} [section.imageAlt]     - 画像alt属性（後方互換）
  * @param {string[]} [section.paragraphs] - テキスト段落の配列
+ * @param {Object} [options]
+ * @param {boolean} [options.prioritizeImage] - true の場合、画像を優先読み込みする
  * @returns {HTMLDivElement}
  */
-export function renderSection(section) {
+export function renderSection(section, options = {}) {
     const layout = section.layout || 'horizontal';
     const layoutDiv = document.createElement('div');
     layoutDiv.className = `${layout}-layout`;
@@ -72,7 +92,7 @@ export function renderSection(section) {
 
     // メディア（新形式: media オブジェクト）
     if (section.media) {
-        const mediaEl = renderMedia(section.media);
+        const mediaEl = renderMedia(section.media, options);
         if (mediaEl) sectionEl.appendChild(mediaEl);
     }
     // 後方互換: 直接 image 指定（ブログ既存JSON）
@@ -80,7 +100,8 @@ export function renderSection(section) {
         const img = document.createElement('img');
         img.src = `${BASE_IMG_PATH}/${section.image}`;
         img.alt = section.imageAlt || '';
-        img.loading = 'lazy';
+        applyImageDimensions(img);
+        applyImageLoadingHints(img, options.prioritizeImage === true);
         img.decoding = 'async';
         sectionEl.appendChild(img);
     }

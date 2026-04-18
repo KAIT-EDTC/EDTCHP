@@ -46,6 +46,17 @@ function showError(message, basePath) {
             </div>
         `;
     }
+
+}
+
+function sectionHasImage(section) {
+    if (!section) return false;
+
+    if (section.media && section.media.type === 'image' && section.media.src) {
+        return true;
+    }
+
+    return Boolean(section.image);
 }
 
 /**
@@ -79,13 +90,20 @@ function renderArticle(article) {
     // 本文セクション
     const mainEl = document.getElementById('blog-main');
     if (!mainEl) return;
+    mainEl.textContent = '';
 
     const fragment = document.createDocumentFragment();
+    let prioritizedImageAssigned = false;
 
     // 各セクションをレンダリング
     if (article.sections && article.sections.length > 0) {
         article.sections.forEach(section => {
-            fragment.appendChild(renderSection(section));
+            const prioritizeImage = !prioritizedImageAssigned && sectionHasImage(section);
+            fragment.appendChild(renderSection(section, { prioritizeImage }));
+
+            if (prioritizeImage) {
+                prioritizedImageAssigned = true;
+            }
         });
     }
 

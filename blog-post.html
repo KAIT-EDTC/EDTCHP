@@ -5,7 +5,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
     <title id="page-title">ブログ|神奈川工科大学EDTC</title>
     <?php echo $ogpTags; ?>
     <link rel="stylesheet" href="css/reset.css">
@@ -47,7 +46,6 @@
                 <div class="side-menu">
                     <div class="Archives">
                         <h3>他の記事もどうぞ！</h3>
-                        <script type="module" src="./script/blog/archiveListRenderer.js"></script>
                     </div>
                 </div>
             </div>
@@ -61,6 +59,11 @@
 
     <script type="module" src="./script/loadCommon.js"></script>
     <script type="module" src="./script/blog/blogPostRenderer.js"></script>
+    <script type="module">
+        if (window.matchMedia("(min-width: 820px)").matches) {
+            import("./script/blog/archiveListRenderer.js");
+        }
+    </script>
 </body>
 
 </html>

@@ -22,7 +22,7 @@ function renderHeader(basePath) {
     return `
     <header>
         <a href="${basePath}base.html"><img src="${basePath}public/img/EDTC-icon.webp" alt="EDTC"
-                style="display: block; height: 60px; width: auto;"></a>
+                width="60" height="60" style="display: block;"></a>
         <a href="${basePath}base.html" class="title">EDTC</a>
         <!--==========モバイルのみ表示==========-->
         <nav class="sp-only">
@@ -82,7 +82,7 @@ function renderFooter(basePath) {
                     <a href="${basePath}contact-us.html">お問い合わせ</a>
                     <hr size="100%">
                     <p class="gyou"></p>
-                    <b><img src="${basePath}public/img/EDTC-icon.webp" alt="EDTCロゴ" height="50px" width="auto" class="syasinn">
+                    <b><img src="${basePath}public/img/EDTC-icon.webp" alt="EDTCロゴ" width="50" height="50" class="syasinn">
                         <span class="footer-title">EDTC</span>
                     </b>
                     <p class="gyou">
@@ -110,7 +110,10 @@ function initCommon() {
     }
 }
 
-// ES modules are deferred — DOM is parsed when this runs
-document.addEventListener('DOMContentLoaded', initCommon);
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initCommon, { once: true });
+} else {
+    initCommon();
+}
 
 export { renderHeader, renderFooter, initCommon };
