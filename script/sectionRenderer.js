@@ -25,6 +25,7 @@ function renderMedia(media) {
             iframe.setAttribute('frameborder', '0');
             iframe.setAttribute('allowfullscreen', '');
             iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture');
+            iframe.setAttribute('loading', 'lazy');
             wrapper.appendChild(iframe);
             return wrapper;
         }
@@ -36,6 +37,7 @@ function renderMedia(media) {
             iframe.title = media.alt || '';
             iframe.setAttribute('frameborder', '0');
             iframe.setAttribute('allowfullscreen', '');
+            iframe.setAttribute('loading', 'lazy');
             wrapper.appendChild(iframe);
             return wrapper;
         }
@@ -44,6 +46,8 @@ function renderMedia(media) {
             const img = document.createElement('img');
             img.src = `${BASE_IMG_PATH}/${media.src}`;
             img.alt = media.alt || '';
+            img.loading = 'lazy';
+            img.decoding = 'async';
             return img;
         }
     }
@@ -76,6 +80,8 @@ export function renderSection(section) {
         const img = document.createElement('img');
         img.src = `${BASE_IMG_PATH}/${section.image}`;
         img.alt = section.imageAlt || '';
+        img.loading = 'lazy';
+        img.decoding = 'async';
         sectionEl.appendChild(img);
     }
 

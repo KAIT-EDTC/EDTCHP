@@ -33,8 +33,10 @@ const pdctLoad = async () => {
 
         const imgElement = document.createElement("img");
         imgElement.className = "pdct-img";
-        imgElement.alt = pdct.title || "";
         imgElement.src = pdct.thumbnail ? `${BASE_IMG_PATH}/${pdct.thumbnail}` : ALTER_IMAGE_PATH;
+        imgElement.alt = pdct.title || "製品の画像";
+        imgElement.width = 640;
+        imgElement.height = 360;
 
         const boxChildElement = document.createElement("div");
         boxChildElement.className = "pdct-details";

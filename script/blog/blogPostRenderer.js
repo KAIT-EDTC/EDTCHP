@@ -35,7 +35,7 @@ function showError(message, basePath) {
         mainEl.innerHTML = `
             <div style="text-align: center; padding: 40px 20px;">
                 <p style="font-size: 2em; color: #ccc; margin-bottom: 16px;">
-                    <i class="fa fa-exclamation-triangle"></i>
+                    ⚠
                 </p>
                 <p style="font-size: 1.1em; color: #666;">${escapeHtml(message)}</p>
                 <p style="margin-top: 24px;">
@@ -73,7 +73,7 @@ function renderArticle(article) {
     // 日付
     const blogDateEl = document.getElementById('blog-date');
     if (blogDateEl) {
-        blogDateEl.innerHTML = `<i class="fa fa-clock-o"></i>${escapeHtml(article.date)}`;
+        blogDateEl.textContent = `投稿日: ${article.date}`;
     }
 
     // 本文セクション

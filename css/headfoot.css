@@ -230,6 +230,13 @@ body {
     vertical-align: middle;
 }
 
+.sns_button svg {
+    width: 20px;
+    height: 20px;
+    fill: currentColor;
+    vertical-align: middle;
+}
+
 .sns_button:hover {
     box-shadow: inset 0 0 0 22px #fff;
 }
@@ -279,6 +286,14 @@ footer .gyou-b{
 
 footer .syasinn{
     vertical-align: text-bottom;
+}
+
+.footer-title {
+    font-size: 3em;
+}
+
+.footer-info {
+    font-size: 0.9em;
 }
 .footer{
     color: white;

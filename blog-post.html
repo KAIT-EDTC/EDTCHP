@@ -1,15 +1,17 @@
+<?php include __DIR__ . '/ogp.php'; $ogpTags = generateOgpTags('blog', $_GET['id'] ?? null); ?>
 <!DOCTYPE html>
 <html lang="ja">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
     <title id="page-title">ブログ|神奈川工科大学EDTC</title>
+    <?php echo $ogpTags; ?>
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/headfoot.css">
     <link rel="stylesheet" href="css/blog-temp.css">
     <link rel="stylesheet" href="css/global.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
     <!-- icon link tag -->
     <link rel="icon" href="favicon.ico">
     <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon-180x180.webp">
@@ -21,15 +23,19 @@
 
     <main>
         <!-- パンくずリスト -->
-        <div class="breadcrumbs">
-            <a href="./blog.html">ブログ</a>
-            <i class="fa fa-angle-right"></i>
-            <a href="" id="breadcrumb-title"></a>
-        </div>
+        <nav aria-label="パンくずリスト">
+            <div class="breadcrumbs">
+                <a href="./blog.html">ブログ</a>
+                <span aria-hidden="true">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708"/></svg>
+                </span>
+                <a href="" id="breadcrumb-title"></a>
+            </div>
+        </nav>
 
         <!-- タイトル・日付 (blogPostRenderer.js が設定) -->
         <div class="blog-title" id="blog-title"></div>
-        <div class="blog-date" id="blog-date"><i class="fa fa-clock-o"></i></div>
+        <div class="blog-date" id="blog-date">投稿日:</div>
 
         <!-- 本文エリア -->
         <div class="blog-body">
@@ -40,14 +46,14 @@
             <div class="pc-only">
                 <div class="side-menu">
                     <div class="Archives">
-                        <h3><i class="fa fa-list"></i> 他の記事もどうぞ！</h3>
+                        <h3>他の記事もどうぞ！</h3>
                         <script type="module" src="./script/blog/archiveListRenderer.js"></script>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div id="prev"><a href="./blog.html"><i class="fa fa-arrow-left"></i> ブログトップへ戻る</a></div>
+        <div id="prev"><a href="./blog.html">← ブログトップへ戻る</a></div>
     </main>
 
     <!-- フッター: loadCommon.js により動的挿入 -->

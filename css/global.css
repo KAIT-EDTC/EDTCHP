@@ -12,6 +12,16 @@
     --breadcrumbs-hover-color: #cfcecb;
 }
 
+/* フォーカス可視化（アクセシビリティ） */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+[tabindex]:focus-visible {
+    outline: 2px solid var(--main-color);
+    outline-offset: 2px;
+}
+
 .anim-fadein {
   animation: fade-in 1s;
 }

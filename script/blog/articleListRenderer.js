@@ -40,14 +40,16 @@ async function articleLoad() {
         const img = document.createElement("img");
         img.className = "blog-img";
         img.src = article.thumbnail ? `${BASE_IMG_PATH}/${article.thumbnail}` : ALTER_IMAGE_PATH;
-        img.alt = article.title || "";
+        img.alt = article.title || "記事の画像";
+        img.width = 640;
+        img.height = 360;
 
         const divDetails = document.createElement("div");
         divDetails.className = "blog-details";
 
         const spanDate = document.createElement("span");
         spanDate.className = "blog-date";
-        spanDate.innerHTML = '<i class="fa fa-clock-o"></i>' + (article.date || "");
+        spanDate.textContent = `投稿日: ${article.date || ""}`;
 
         const h2 = document.createElement("h2");
         h2.className = "blog-subject";
@@ -91,8 +93,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const prevBtn = document.createElement("button");
     const pageLabel = document.createElement("p");
     const nextBtn = document.createElement("button");
-    prevBtn.innerHTML = '<i class="fa fa-chevron-left" aria-hidden="true"></i>';
-    nextBtn.innerHTML = '<i class="fa fa-chevron-right" aria-hidden="true"></i>';
+    prevBtn.textContent = "前へ";
+    nextBtn.textContent = "次へ";
     paginationArea.appendChild(prevBtn);
     paginationArea.appendChild(pageLabel);
     paginationArea.appendChild(nextBtn);
