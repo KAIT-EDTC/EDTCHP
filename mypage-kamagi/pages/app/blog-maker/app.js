@@ -19,8 +19,8 @@ const state = {
 const dom = {};
 
 document.addEventListener("DOMContentLoaded", async () => {
+    await window.authReady;
     cacheDom();
-    await initializeAuthState();
     initializeDefaultValues();
     bindEvents();
     renderSectionEditors();

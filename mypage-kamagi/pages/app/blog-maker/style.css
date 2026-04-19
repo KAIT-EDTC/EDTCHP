@@ -6,6 +6,11 @@
 	box-sizing: border-box;
 }
 
+/* ハンバーガーメニューは border-box の影響を受けないようにリセット */
+.hamburger-menu * {
+	box-sizing: content-box;
+}
+
 html, body {
 	background-color: #f0f0f0;
 	min-height: 100%;
