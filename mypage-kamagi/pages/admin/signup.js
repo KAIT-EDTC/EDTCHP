@@ -5,13 +5,8 @@
 document.addEventListener('DOMContentLoaded', async () => {
     const signupForm = document.getElementById('signup-form');
 
-    const isAdmin = await checkIsAdmin();
-
-    // 管理者の場合のみ画面を表示
-    if (isAdmin) document.body.style.display = 'block';
-    // ログインしていない、もしくは管理者でなければ、ログインページにリダイレクト
-    else window.location.href = '/mypage-kamagi/pages/login/';
-
+    // 認可チェック完了を待つ（lib/auth.js が body 表示 + currentUser セットを行う）
+    await window.authReady;
 
     signupForm.addEventListener('submit', async (e) => {
         // 画面遷移をキャンセル
@@ -38,14 +33,3 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
     });
 });
-
-const checkIsAdmin = async () => {
-    try {
-        const data = await authService.checkStatus();
-        return (data.isLoggedIn && data.user.role == 0);
-    } catch (error) {
-        const errorMessage = error.message || '通信エラーが発生しました。';
-        showToast(errorMessage, 'error');
-        return false;
-    }
-};

@@ -12,16 +12,8 @@ let membersCache = [];
 
 document.addEventListener('DOMContentLoaded', async () => {
 
-    const authData = await authService.checkStatus();
-
-    if (authData.isLoggedIn && authData.user.role == '0') {
-        document.body.style.display = 'block';
-        // 管理者の場合はハンバーガーメニューの管理者リンクを表示
-        const adminLink = document.getElementById('admin-link');
-        if (adminLink) adminLink.style.display = 'block';
-    } else {
-        window.location.href = '/mypage-kamagi/pages/login/';
-    }
+    // 認可チェック完了を待つ（lib/auth.js が body 表示 + currentUser セットを行う）
+    await window.authReady;
 
     // 初期化: メンバー一覧とイベント一覧を取得
     await Promise.all([
