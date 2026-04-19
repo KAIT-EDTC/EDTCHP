@@ -33,16 +33,3 @@ function showToast(message, type = 'info') {
         });
     }, 3000);
 }
-
-/**
- * 認可チェック
- */
-async function checkIsLoginedIn() {
-    const authData = await authService.checkStatus();
-
-    if (!authData.isLoggedIn) {
-        window.location.href = '/mypage-kamagi/pages/login/'
-    } else {
-        document.body.style.display = 'block';
-    }
-}
