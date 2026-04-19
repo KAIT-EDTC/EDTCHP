@@ -1,6 +1,7 @@
-/* モバイル初期描画を優先するため、システムフォントを使用 */
+/* Noto Sans JPのインポート */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100..900&display=swap');
 * {
-  font-family: "Hiragino Kaku Gothic ProN", "Yu Gothic UI", "Yu Gothic", "Meiryo", system-ui, -apple-system, "Segoe UI", sans-serif;
+    font-family: "Noto Sans JP", sans-serif;
 }
 
 :root {
