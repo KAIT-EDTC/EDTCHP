@@ -11,10 +11,6 @@ let eventsCache = [];
 let membersCache = [];
 
 document.addEventListener('DOMContentLoaded', async () => {
-
-    // 認可チェック完了を待つ（lib/auth.js が body 表示 + currentUser セットを行う）
-    await window.authReady;
-
     // 初期化: メンバー一覧とイベント一覧を取得
     await Promise.all([
         loadMembers(),

@@ -6,6 +6,7 @@
  */
 
 document.addEventListener('DOMContentLoaded', async () => {
+    // 認可チェックを待つ(window.currentUser がセットされるのを待つ)
     await window.authReady;
 
     const user = window.currentUser;

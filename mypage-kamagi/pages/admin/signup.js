@@ -5,9 +5,6 @@
 document.addEventListener('DOMContentLoaded', async () => {
     const signupForm = document.getElementById('signup-form');
 
-    // 認可チェック完了を待つ（lib/auth.js が body 表示 + currentUser セットを行う）
-    await window.authReady;
-
     signupForm.addEventListener('submit', async (e) => {
         // 画面遷移をキャンセル
         e.preventDefault();
