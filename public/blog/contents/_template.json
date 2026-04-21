@@ -5,7 +5,6 @@
     "thumbnail": "サムネイル画像のパス.webp",
     "caption": "ブログ一覧ページに表示される記事の概要（1〜2文程度）",
     "author": "著者名",
-    "tags": ["遊行塾 / 富士市 / イベント / 活動報告 / 学祭 から1つ以上（public/blog/articleData.js の BLOG_TAGS 参照）"],
     "sections": [
         {
             "layout": "horizontal（横並び）または vertical（縦並び）",
