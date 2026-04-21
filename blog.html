@@ -78,18 +78,55 @@
         </nav>
     </header>
     <main>
-        <div class="blog-title">
-            <p>
-                Blog
-            </p>
-            <img src="public/img/EDTC-GroupPhoto.webp" alt="EDTC集合写真" class="blog-mainimg" width="1280" height="720">
-        </div>
-        <div class="blog-area">
-            <script type="module" src="script/blog/articleListRenderer.js"></script>
-        </div>
-        <div class="pagination-area">
+        <!-- ヒーロー -->
+        <section class="blog-hero" aria-label="ブログヒーロー">
+            <img src="public/img/EDTC-GroupPhoto.webp" alt="" class="blog-hero__bg" width="1280" height="720" fetchpriority="high">
+            <div class="blog-hero__overlay">
+                <h1 class="blog-hero__title">Blog</h1>
+                <p class="blog-hero__desc">EDTCの活動や日々の取り組みをお届けします。</p>
+            </div>
+        </section>
 
+        <!-- フィルタ -->
+        <section class="blog-filters" aria-label="記事フィルタ">
+            <div class="blog-filters__row">
+                <div class="blog-filters__year">
+                    <label for="year-select">年で絞り込み</label>
+                    <select id="year-select">
+                        <option value="">すべての年</option>
+                    </select>
+                </div>
+                <div class="blog-filters__tags" role="group" aria-label="タグフィルタ">
+                    <!-- JSで生成 -->
+                </div>
+            </div>
+            <div class="blog-filters__meta">
+                <span class="blog-filters__count" aria-live="polite"></span>
+                <button class="blog-filters__clear" type="button" hidden>フィルタをクリア</button>
+            </div>
+        </section>
+
+        <!-- 記事一覧 -->
+        <nav class="pagination-area pagination-area--top" aria-label="ページネーション（上部）" hidden></nav>
+        <div class="blog-nav-wrap">
+            <button class="blog-nav__prev" type="button" aria-label="前のページ" disabled>
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                    <path d="M13 4l-6 6 6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </button>
+            <div class="blog-area">
+                <script type="module" src="script/blog/articleListRenderer.js"></script>
+            </div>
+            <button class="blog-nav__next" type="button" aria-label="次のページ" disabled>
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                    <path d="M7 4l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </button>
         </div>
+        <nav class="blog-nav__dots" role="navigation" aria-label="ページインジケーター"></nav>
+
+        <!-- ページネーション -->
+        <nav class="pagination-area pagination-area--bottom" aria-label="ページネーション" hidden></nav>
     </main>
     <footer class="footer">
         <div class="footer__inner">
