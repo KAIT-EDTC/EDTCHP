@@ -1,161 +1,118 @@
-import { articleIds, BLOG_TAGS } from "./../../public/blog/articleData.js";
+import { articleIds } from "./../../public/blog/articleData.js";
 import { fetchArticle } from "./../contentApi.js";
-import { readState, writeState } from "./blogUrlState.js";
-import { renderMobilePagination, renderDesktopPagination } from "./blogPagination.js";
-import { PAGE_SIZE, filterArticles, getAvailableYears, renderCards } from "./blogCardRenderer.js";
 
-/** 全記事データ（初回一括fetch後にキャッシュ） */
-let allArticles = [];
-let isInitialRender = true;
+const PAGE_SIZE = 6;
+const TOTAL_PAGES = Math.ceil(articleIds.length / PAGE_SIZE);
+let currentPage = 1;
+// html基準のパス
+const BASE_IMG_PATH = "./public/blog/img";
+const ALTER_IMAGE_PATH = "./public/img/EDTC-icon.webp";
 
-const mobileQuery = window.matchMedia("(max-width: 480px)");
-const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+/**
+ * 現在ページの記事カードをレンダリング
+ */
+async function articleLoad() {
+    const blogArea = document.getElementsByClassName("blog-area")[0];
+    blogArea.innerHTML = "";
 
-// DOM列挙
-let yearSelect, tagsContainer, countEl, clearBtn, blogArea, paginationAreaTop, paginationArea;
-let prevBtn, nextBtn, dotsContainer;
+    const offset = (currentPage - 1) * PAGE_SIZE;
+    const pageIds = articleIds.slice(offset, offset + PAGE_SIZE);
 
-// =====レンダラー(フィルタリング・ページネーション)=====
+    // 現在ページ分だけ並列fetch
+    const articles = await Promise.all(pageIds.map((id) => fetchArticle(id)));
 
-function render() {
-    const state = readState();
+    const ulElement = document.createElement("ul");
+    ulElement.className = "blog-container";
+    const fragment = document.createDocumentFragment();
 
-    yearSelect.value = state.year;
-    document.querySelectorAll(".blog-filters__tag-btn").forEach((btn) => {
-        if (btn.dataset.tag === "すべて") {
-            btn.setAttribute("aria-pressed", state.tags.length === 0);
-        } else {
-            btn.setAttribute("aria-pressed", state.tags.includes(btn.dataset.tag));
-        }
+    articles.forEach((article) => {
+        if (!article) return;
+
+        const li = document.createElement("li");
+        li.className = "blog-contents anim-fadein";
+
+        const a = document.createElement("a");
+        a.href = article.link;
+
+        const divBox = document.createElement("div");
+        divBox.className = "blog-box";
+
+        const img = document.createElement("img");
+        img.className = "blog-img";
+        img.src = article.thumbnail ? `${BASE_IMG_PATH}/${article.thumbnail}` : ALTER_IMAGE_PATH;
+        img.alt = article.title || "記事の画像";
+        img.width = 640;
+        img.height = 360;
+
+        const divDetails = document.createElement("div");
+        divDetails.className = "blog-details";
+
+        const spanDate = document.createElement("span");
+        spanDate.className = "blog-date";
+        spanDate.textContent = `投稿日: ${article.date || ""}`;
+
+        const h2 = document.createElement("h2");
+        h2.className = "blog-subject";
+        h2.textContent = article.title || "";
+
+        const spanCaption = document.createElement("span");
+        spanCaption.className = "blog-caption";
+        spanCaption.textContent = article.caption || "";
+
+        const spanAuthor = document.createElement("span");
+        spanAuthor.className = "blog-author";
+        spanAuthor.textContent = article.author || "";
+
+        divDetails.appendChild(spanDate);
+        divDetails.appendChild(h2);
+        divDetails.appendChild(spanCaption);
+        divDetails.appendChild(spanAuthor);
+        divBox.appendChild(img);
+        divBox.appendChild(divDetails);
+        a.appendChild(divBox);
+        li.appendChild(a);
+        fragment.appendChild(li);
     });
 
-    const filtered = filterArticles(allArticles, state.year, state.tags);
-    const totalPages = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
-    const page = Math.min(state.page, totalPages);
-
-    // 記事件数
-    countEl.textContent = `${filtered.length}件の記事`;
-
-    // 年/タグフィルターが有効なときのみクリアボタン表示
-    clearBtn.hidden = !state.year && !state.tags.length;
-
-    // 記事をレンダリング
-    renderCards(blogArea, filtered, page, { isInitialRender });
-
-    // ページネーション — 
-    // SP:番号付き
-    // PC:サイドアロー+ドット
-    if (mobileQuery.matches) {
-        renderMobilePagination(paginationAreaTop, paginationArea, page, totalPages, changePage);
-    } else {
-        renderDesktopPagination(prevBtn, nextBtn, dotsContainer, page, totalPages, changePage);
-        paginationArea.hidden = true;
-        if (paginationAreaTop) paginationAreaTop.hidden = true;
-    }
-    isInitialRender = false;
+    ulElement.appendChild(fragment);
+    blogArea.appendChild(ulElement);
 }
 
-// ===== 状態更新ヘルパー =====
-
-function changePage(newPage) {
-    const state = readState();
-    state.page = newPage;
-    writeState(state);
-    render();
-
-    // フィルター位置までスクロール
-    const target = document.querySelector(".blog-filters");
-    if (target) {
-        target.scrollIntoView({
-            behavior: reducedMotion.matches ? "instant" : "smooth",
-        });
-    }
+// 表示ページが最初、最後の場合、ボタンの表示を切り替える。
+function updatePagination(prevBtn, pageLabel, nextBtn) {
+    pageLabel.textContent = TOTAL_PAGES <= 1 ? "1" : `${currentPage}/${TOTAL_PAGES}`;
+    prevBtn.style.display = currentPage <= 1 ? "none" : "inline-block";
+    nextBtn.style.display = currentPage >= TOTAL_PAGES ? "none" : "inline-block";
 }
 
-function applyFilter(year, tags) {
-    const state = { year, tags, page: 1 };
-    writeState(state);
-    render();
-}
+document.addEventListener("DOMContentLoaded", () => {
+    // ページネーション DOM 構築
+    const paginationArea = document.getElementsByClassName("pagination-area")[0];
+    if (!paginationArea) return;
 
-// ===== 初期化 =====
+    const prevBtn = document.createElement("button");
+    const pageLabel = document.createElement("p");
+    const nextBtn = document.createElement("button");
+    prevBtn.textContent = "前へ";
+    nextBtn.textContent = "次へ";
+    paginationArea.appendChild(prevBtn);
+    paginationArea.appendChild(pageLabel);
+    paginationArea.appendChild(nextBtn);
 
-document.addEventListener("DOMContentLoaded", async () => {
-    yearSelect = document.getElementById("year-select");
-    tagsContainer = document.querySelector(".blog-filters__tags");
-    countEl = document.querySelector(".blog-filters__count");
-    clearBtn = document.querySelector(".blog-filters__clear");
-    blogArea = document.querySelector(".blog-area");
-    paginationAreaTop = document.querySelector(".pagination-area--top");
-    paginationArea = document.querySelector(".pagination-area--bottom");
-    prevBtn = document.querySelector(".blog-nav__prev");
-    nextBtn = document.querySelector(".blog-nav__next");
-    dotsContainer = document.querySelector(".blog-nav__dots");
-
-    // 記事を一度だけ取得してキャッシュ
-    allArticles = (await Promise.all(articleIds.map((id) => fetchArticle(id)))).filter(Boolean);
-
-    // 年セレクト生成/イベント設定
-    const years = getAvailableYears(allArticles);
-    years.forEach((y) => {
-        const opt = document.createElement("option");
-        opt.value = y;
-        opt.textContent = `${y}年`;
-        yearSelect.appendChild(opt);
-    });
-
-    yearSelect.addEventListener("change", () => {
-        const state = readState();
-        applyFilter(yearSelect.value, state.tags);
-    });
-
-    // タグボタン生成/イベント設定
-    BLOG_TAGS.forEach((tag) => {
-        const btn = document.createElement("button");
-        btn.type = "button";
-        btn.className = "blog-filters__tag-btn";
-        btn.textContent = tag;
-        btn.dataset.tag = tag;
-
-        if (tag === "すべて") {
-            btn.setAttribute("aria-pressed", "true");
-            btn.addEventListener("click", () => {
-                const state = readState();
-                applyFilter(state.year, []);
-            });
-        } else {
-            btn.setAttribute("aria-pressed", "false");
-            btn.addEventListener("click", () => {
-                const state = readState();
-                const idx = state.tags.indexOf(tag);
-                if (idx >= 0) state.tags.splice(idx, 1);
-                else state.tags.push(tag);
-                applyFilter(state.year, state.tags);
-            });
-        }
-        tagsContainer.appendChild(btn);
-    });
-
-    // フィルタクリア
-    clearBtn.addEventListener("click", () => {
-        applyFilter("", []);
-    });
-
-    // ブログリスト側面のアローボタン
     prevBtn.addEventListener("click", () => {
-        const s = readState();
-        changePage(s.page - 1);
+        if (currentPage <= 1) return;
+        currentPage--;
+        updatePagination(prevBtn, pageLabel, nextBtn);
+        articleLoad();
     });
+
     nextBtn.addEventListener("click", () => {
-        const s = readState();
-        changePage(s.page + 1);
+        if (currentPage >= TOTAL_PAGES) return;
+        currentPage++;
+        updatePagination(prevBtn, pageLabel, nextBtn);
+        articleLoad();
     });
 
-    // ポップステート(戻る/進むで発火)
-    window.addEventListener("popstate", render);
-
-    // モバイル⇔PC切替時に再描画
-    mobileQuery.addEventListener("change", render);
-
-    render();
+    updatePagination(prevBtn, pageLabel, nextBtn);
+    articleLoad();
 });
