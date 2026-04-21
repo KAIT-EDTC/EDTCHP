@@ -1,10 +1,4 @@
 /*=========== header menuの設定 ==========*/
-/*PC用のスタイル 768-->820*/
-@media screen and (min-width:820px) {
-    .inner {
-        max-width: 1200px;
-    }
-}
 
 /*モバイルとPCで表示に関するスタイル*/
 .sp-only {
@@ -30,7 +24,7 @@
         /*PCでは表示*/
     }
 }
-header {
+.header {
     padding: 5px 4% 5px 4%;
     position: fixed;
     top: 0;
@@ -39,9 +33,6 @@ header {
     display: flex;
     align-items: center;
     z-index: 3;
-}
-body{
-    margin-top: 70px;
 }
 /*モバイルのみ表示*/
 
@@ -154,9 +145,6 @@ body{
 
 /* PCのメニュー */
 
-.gnav-sec{
-    box-sizing: none;
-}
 .gnav-sec span{
     font-size: 17px;
     font-weight: bold;
@@ -174,27 +162,18 @@ body{
     color: #85a7cc;
 }
 
-a {
-    text-decoration: none;
-    color: #4b4b4b;
-}
-
-ul {
+.header__nav-list {
     list-style: none;
     display: flex;
 }
 
-li {
+.header__nav-item {
     margin: 0 15px 0 0;
     font-size: 14px;
 }
 
-nav {
+.header__nav {
     margin: 0 1% 0 auto;
-}
-
-body {
-    line-height:normal;
 }
 .title {
     padding: 0;
@@ -206,9 +185,6 @@ body {
     float: left;
     box-shadow: inset 0 0 0 2px #333;
     border-radius: 100%;
-    -moz-transition: all 280ms ease;
-    -o-transition: all 280ms ease;
-    -webkit-transition: all 280ms ease;
     transition: all 280ms ease;
 }
 
@@ -219,9 +195,6 @@ body {
     color: #555;
     text-align: center;
     vertical-align: middle;
-    -moz-transition: all 280ms ease;
-    -o-transition: all 280ms ease;
-    -webkit-transition: all 280ms ease;
     transition: all 280ms ease;
 }
 
@@ -258,33 +231,34 @@ body {
 ======================================================================================
 ======================================================================================*/
 /* footerの設定 */
-.flex p{ /*Added Programs*/
+.footer__inner p{
     text-align: center;
 }
-.flex a{
+.footer__inner a{
     margin: 0 auto; 
     text-align: center;
     color: antiquewhite;
 }
-footer .footer-list {
+.footer .footer-list {
     display: block;
     margin: 0 auto;
+    list-style: none;
 }
 
-footer .gyou{
+.footer .gyou{
     margin-top: 5px;
 }
 
-footer .gyou-a{
+.footer .gyou-a{
     margin-top: 15px;
 }
 
-footer .gyou-b{
+.footer .gyou-b{
     margin-top: 3px;
     margin-bottom: 15px;
 }
 
-footer .syasinn{
+.footer .syasinn{
     vertical-align: text-bottom;
 }
 
@@ -299,30 +273,12 @@ footer .syasinn{
     color: white;
     background-color: #333;
 }
-.footer-area-copy {
-    color: #ccc;
-    font-size: 12px;
-    width: 100%;
-    background-color: #333;
-}
-.flex {
-    display: flex; /*横並び*/
-    background-color: #333;
+.footer__inner {
+    display: flex;
     color:#fff;
     padding-left: 0px;
 }
-.flex .image {
-    width: 60px; /*画像サイズ指定*/
-    margin: 0;
-    padding: 0;
-    position: relative;
-}
-.flex .text {
-    margin: 0 0 0 20px;
-    padding: 0;
-    text-align: center;
-}
-.flex li{
+.footer__inner li{
     margin:0;
     padding-inline-start: 0;
 }

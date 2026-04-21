@@ -34,6 +34,7 @@ select:focus {
 .pdct-container {
     padding: 0;
     display: grid;
+    list-style: none;
     gap: 20px;
     margin: 0;
     user-select: none;

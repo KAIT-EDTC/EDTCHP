@@ -4,6 +4,15 @@
     font-family: "Noto Sans JP", sans-serif;
 }
 
+a {
+    color: #4b4b4b;
+}
+
+body {
+    line-height: normal;
+    margin-top: 70px;
+}
+
 :root {
     --main-color: #0a8cd8;
     --bg-color: #e6e6e6;
