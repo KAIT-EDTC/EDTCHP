@@ -2,6 +2,19 @@
 // ※ 新しい記事は上に追加してください
 // ※ 対応する public/contents/<id>.json を必ず作成すること
 
+/**
+ * ブログで使えるタグの正規語彙（表示順）。
+ * 記事JSONの `tags` フィールドに含められる値はこの配列のもののみ有効。
+ * 新しいタグを追加する場合はここに登録してからJSONに付与すること。
+ */
+export const BLOG_TAGS = [
+    "遊行塾",
+    "富士市",
+    "イベント",
+    "活動報告",
+    "学祭",
+];
+
 export const articleIds = [
     "25-12-07-sciencewinter",
     "25-10-26-toureisai",
