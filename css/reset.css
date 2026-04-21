@@ -98,7 +98,9 @@ header,
 hgroup,
 menu,
 nav,
-section 
+section {
+    display: block;
+}
 
 nav ul {
     list-style: none;
