@@ -75,30 +75,52 @@
     </header>
 
     <main>
-        <h1>商品一覧</h1>
-        <div class="filter-area">
-            <label for="filter-combox">絞り込み</label>
-            <div class="filter-combox" id="filter-combox">
-                <select class="pdct-orderBy" id="orderBy">
-                    <option>値段</option>
-                    <option value="asce">昇順</option>
-                    <option value="desc">降順</option>
-                </select>
-                <select class="pdct-ageBy" id="ageBy">
-                    <option>年齢層</option>
-                    <option value="小学生">小学生</option>
-                    <option value="中学生">中学生</option>
-                    <option value="高校生">高校生</option>
-                    <option value="大学生">大学生</option>
-                    <option value="大人">大人</option>
-                    <option value="シニア">シニア</option>
-                    <option value="全年齢">全年齢</option>
-                </select>
+        <!-- ヒーロー -->
+        <section class="pdct-hero" aria-label="プロダクトヒーロー">
+            <img src="public/img/EDTC-teaching-machine.webp" alt="" class="pdct-hero__bg" width="1280" height="720" fetchpriority="high">
+            <div class="pdct-hero__overlay">
+                <h1 class="pdct-hero__title">Product</h1>
+                <p class="pdct-hero__desc">EDTCが開発した教材・製品をご紹介します。</p>
             </div>
+        </section>
+
+        <!-- フィルタ -->
+        <section class="pdct-filters" aria-label="プロダクトフィルタ">
+            <div class="pdct-filters__row">
+                <div class="pdct-filters__age">
+                    <label class="pdct-filters__label">対象年齢</label>
+                    <div class="pdct-filters__tags" role="group" aria-label="対象年齢フィルタ">
+                        <!-- JSで生成 -->
+                    </div>
+                </div>
+            </div>
+            <div class="pdct-filters__meta">
+                <span class="pdct-filters__count" aria-live="polite"></span>
+                <button class="pdct-filters__clear" type="button" hidden>フィルタをクリア</button>
+            </div>
+        </section>
+
+        <!-- プロダクト一覧 -->
+        <nav class="pagination-area pagination-area--top" aria-label="ページネーション（上部）" hidden></nav>
+        <div class="pdct-nav-wrap">
+            <button class="pdct-nav__prev" type="button" aria-label="前のページ" disabled>
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                    <path d="M13 4l-6 6 6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </button>
+            <div class="pdct-area">
+                <!-- JSでカードを生成 -->
+            </div>
+            <button class="pdct-nav__next" type="button" aria-label="次のページ" disabled>
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                    <path d="M7 4l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </button>
         </div>
-        <ul class="pdct-container">
-            <!-- pdctSort.jsで商品を並べる -->
-        </ul>
+        <nav class="pdct-nav__dots" role="navigation" aria-label="ページインジケーター"></nav>
+
+        <!-- ページネーション -->
+        <nav class="pagination-area pagination-area--bottom" aria-label="ページネーション" hidden></nav>
     </main>
     
     <footer class="footer">
@@ -127,7 +149,6 @@
         </div>
     </footer>
     <script type="module" src="script/product/productListRenderer.js"></script>
-    <script type="text/javascript" src="script/product/productListSort.js"></script>
 </body>
 
 </html>

@@ -1,109 +1,132 @@
-// 商品データのインポート
-import { productIds } from "./../../public/product/pdctData.js";
+import { productIds, PRODUCT_TAGS } from "./../../public/product/pdctData.js";
 import { fetchProduct } from "./../contentApi.js";
+import { readState, writeState } from "./productUrlState.js";
+import { renderMobilePagination, renderDesktopPagination } from "./../blog/blogPagination.js";
+import { PAGE_SIZE, filterProducts, renderCards } from "./productCardRenderer.js";
 
-const ALTER_IMAGE_PATH = "./public/img/EDTC-icon.webp";
-const BASE_IMG_PATH = "./public/product/img";
+/** 全プロダクトデータ（初回一括fetch後にキャッシュ） */
+let allProducts = [];
+let isInitialRender = true;
 
-// ul内に要素を追加する関数
-const pdctLoad = async () => {
-    const mainElement = document.getElementsByTagName("main")[0];
-    const ulElement = document.getElementsByClassName("pdct-container")[0];
+const mobileQuery = window.matchMedia("(max-width: 480px)");
+const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 
-    // 全プロダクトを並列fetch
-    const products = await Promise.all(
-        productIds.map((id) => fetchProduct(id))
-    );
+// DOM参照
+let tagsContainer, countEl, clearBtn, pdctArea, paginationAreaTop, paginationArea;
+let prevBtn, nextBtn, dotsContainer;
 
-    const fragment = document.createDocumentFragment();
+// ===== レンダラー（フィルタリング・ページネーション） =====
 
-    products.forEach((pdct) => {
-        if (!pdct) return;
+function render() {
+    const state = readState();
 
-        const listElement = document.createElement("li");
-        listElement.className = "pdct-contents anim-fadein";
-        listElement.setAttribute("data-price", pdct.tags[0] || "");
-        listElement.setAttribute("data-age", pdct.tags[1] || "");
-
-        const AnkerElement = document.createElement("a");
-        AnkerElement.href = pdct.link;
-
-        const boxElement = document.createElement("div");
-        boxElement.className = "pdct-box";
-
-        const imgElement = document.createElement("img");
-        imgElement.className = "pdct-img";
-        imgElement.src = pdct.thumbnail ? `${BASE_IMG_PATH}/${pdct.thumbnail}` : ALTER_IMAGE_PATH;
-        imgElement.alt = pdct.title || "製品の画像";
-        imgElement.width = 640;
-        imgElement.height = 360;
-
-        const boxChildElement = document.createElement("div");
-        boxChildElement.className = "pdct-details";
-
-        const titleElement = document.createElement("h2");
-        titleElement.className = "pdct-name";
-        titleElement.textContent = pdct.title || "";
-
-        const headlineElement = document.createElement("p");
-        headlineElement.className = "pdct-headline";
-        headlineElement.textContent = pdct.headline || "製品の詳細はまだありません。";
-
-        const viewmoreElement = document.createElement("p");
-        viewmoreElement.className = "viewmore";
-        viewmoreElement.textContent = "View More ";
-
-        const tagsContainerElement = document.createElement("ul");
-        tagsContainerElement.className = "pdct-tags-container";
-
-        if (pdct.tags) {
-            pdct.tags.forEach((tag) => {
-                const tagsElement = document.createElement("li");
-                tagsElement.className = "pdct-tag";
-                tagsElement.textContent = tag;
-                tagsContainerElement.appendChild(tagsElement);
-            });
+    document.querySelectorAll(".pdct-filters__tag-btn").forEach((btn) => {
+        if (btn.dataset.tag === "すべて") {
+            btn.setAttribute("aria-pressed", state.tags.length === 0);
+        } else {
+            btn.setAttribute("aria-pressed", state.tags.includes(btn.dataset.tag));
         }
-
-        boxChildElement.appendChild(tagsContainerElement);
-        boxChildElement.appendChild(titleElement);
-        boxChildElement.appendChild(headlineElement);
-        boxChildElement.appendChild(viewmoreElement);
-
-        AnkerElement.appendChild(imgElement);
-        AnkerElement.appendChild(boxChildElement);
-        boxElement.appendChild(AnkerElement);
-        listElement.appendChild(boxElement);
-
-        fragment.appendChild(listElement);
     });
 
-    ulElement.appendChild(fragment);
-    mainElement.appendChild(ulElement);
-};
+    const filtered = filterProducts(allProducts, state.tags);
+    const totalPages = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
+    const page = Math.min(state.page, totalPages);
 
-/**
- * <main>
- *  <ul class="pdct-list">
- *    <li class="pdct-contents" data-price="price" data-age="age">
- *      <div class="pdct-box">
- *        <a class="pdct-anker" href="製品の詳細ページ">
- *          <img class="pdct-img">
- *          <div class="pdct-details">
- *            <h2 class-"pdct-name"></h2>
- *            <p class="pdct-headline"></p>
- *            <span class="pdct-price"></p>
- *            <span class="pdct-maker"></p>
- *          </div>
- *          <ul class="pdct-tags-container">
- *            <li class="pdct-tag">price</li>
- *            <li class="pdct-tag">age</li>
- *          </ul>
- *        </a>
- *      </div>
- *    </li>
- *  </ul>
- * </main>
- */
+    countEl.textContent = `${filtered.length}件のプロダクト`;
+    clearBtn.hidden = !state.tags.length;
 
-document.addEventListener("DOMContentLoaded", () => pdctLoad());
+    renderCards(pdctArea, filtered, page, { isInitialRender });
+
+    if (mobileQuery.matches) {
+        renderMobilePagination(paginationAreaTop, paginationArea, page, totalPages, changePage);
+    } else {
+        renderDesktopPagination(prevBtn, nextBtn, dotsContainer, page, totalPages, changePage);
+        paginationArea.hidden = true;
+        if (paginationAreaTop) paginationAreaTop.hidden = true;
+    }
+    isInitialRender = false;
+}
+
+// ===== 状態更新ヘルパー =====
+
+function changePage(newPage) {
+    const state = readState();
+    state.page = newPage;
+    writeState(state);
+    render();
+
+    const target = document.querySelector(".pdct-filters");
+    if (target) {
+        target.scrollIntoView({
+            behavior: reducedMotion.matches ? "instant" : "smooth",
+        });
+    }
+}
+
+function applyFilter(tags) {
+    const state = { tags, page: 1 };
+    writeState(state);
+    render();
+}
+
+// ===== 初期化 =====
+
+document.addEventListener("DOMContentLoaded", async () => {
+    tagsContainer = document.querySelector(".pdct-filters__tags");
+    countEl = document.querySelector(".pdct-filters__count");
+    clearBtn = document.querySelector(".pdct-filters__clear");
+    pdctArea = document.querySelector(".pdct-area");
+    paginationAreaTop = document.querySelector(".pagination-area--top");
+    paginationArea = document.querySelector(".pagination-area--bottom");
+    prevBtn = document.querySelector(".pdct-nav__prev");
+    nextBtn = document.querySelector(".pdct-nav__next");
+    dotsContainer = document.querySelector(".pdct-nav__dots");
+
+    // プロダクトを一度だけ取得してキャッシュ
+    allProducts = (await Promise.all(productIds.map((id) => fetchProduct(id)))).filter(Boolean);
+
+    // タグボタン生成
+    PRODUCT_TAGS.forEach((tag) => {
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = "pdct-filters__tag-btn";
+        btn.textContent = tag;
+        btn.dataset.tag = tag;
+
+        if (tag === "すべて") {
+            btn.setAttribute("aria-pressed", "true");
+            btn.addEventListener("click", () => applyFilter([]));
+        } else {
+            btn.setAttribute("aria-pressed", "false");
+            btn.addEventListener("click", () => {
+                const state = readState();
+                const idx = state.tags.indexOf(tag);
+                if (idx >= 0) state.tags.splice(idx, 1);
+                else state.tags.push(tag);
+                applyFilter(state.tags);
+            });
+        }
+        tagsContainer.appendChild(btn);
+    });
+
+    // フィルタクリア
+    clearBtn.addEventListener("click", () => applyFilter([]));
+
+    // サイドアローボタン
+    prevBtn.addEventListener("click", () => {
+        const s = readState();
+        changePage(s.page - 1);
+    });
+    nextBtn.addEventListener("click", () => {
+        const s = readState();
+        changePage(s.page + 1);
+    });
+
+    // ポップステート（戻る/進むで発火）
+    window.addEventListener("popstate", render);
+
+    // モバイル⇔PC切替時に再描画
+    mobileQuery.addEventListener("change", render);
+
+    render();
+});
