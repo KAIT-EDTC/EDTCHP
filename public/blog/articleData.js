@@ -9,11 +9,11 @@
  */
 export const BLOG_TAGS = [
     "すべて",
+    "ピックアップ",
     "遊行塾",
-    "富士市",
     "イベント",
-    "活動報告",
-    "学祭",
+    "対外活動",
+    "遊び",
 ];
 
 export const articleIds = [
