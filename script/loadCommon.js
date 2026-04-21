@@ -1,6 +1,6 @@
 /**
  * 共通ヘッダー・フッターを動的に生成・挿入するモジュール
- * 
+ *
  * 使い方:
  *   <body data-base-path="./">
  *     <div id="common-header"></div>
@@ -8,18 +8,18 @@
  *     <div id="common-footer"></div>
  *     <script type="module" src="./js/loadCommon.js"></script>
  *   </body>
- * 
+ *
  * data-base-path: ルートディレクトリへの相対パス
  *   ルート直下のページ → "./"
  *   blog/blog-data/ 配下のページ → "./../../"
  */
 
 function getBasePath() {
-    return document.body.dataset.basePath || './';
+  return document.body.dataset.basePath || "./";
 }
 
 function renderHeader(basePath) {
-    return `
+  return `
     <header>
         <a href="${basePath}base.html"><img src="${basePath}public/img/EDTC-icon.webp" alt="EDTC"
                 style="display: block; height: 60px; width: auto;"></a>
@@ -35,6 +35,7 @@ function renderHeader(basePath) {
                         <li class="gnav-item"><a href="${basePath}base.html">Home<br>ホーム</a></li>
                         <li class="gnav-item"><a href="${basePath}blog.html">Blog<br>ブログ</a></li>
                         <li class="gnav-item"><a href="${basePath}product-top.html">Product<br>プロダクト</a></li>
+                        <li class="gnav-item"><a href="${basePath}achievements.html">Achievements<br>実績</a></li>
                         <li class="gnav-item"><a href="${basePath}contact-us.html">Contact<br>お問い合わせ</a></li>
                     </ul>
                 </div>
@@ -46,6 +47,7 @@ function renderHeader(basePath) {
                 <li class="gnav-sec"><a href="${basePath}base.html"><span>Home</span><br>ホーム</a></li>
                 <li class="gnav-sec"><a href="${basePath}blog.html"><span>Blog</span><br>ブログ</a></li>
                 <li class="gnav-sec"><a href="${basePath}product-top.html"><span>Product</span><br>プロダクト</a></li>
+                <li class="gnav-sec"><a href="${basePath}achievements.html"><span>Achievements</span><br>実績</a></li>
                 <li class="gnav-sec"><a href="${basePath}contact-us.html"><span>Contact</span><br>お問い合わせ</a></li>
                 <div class="sns_button twitter">
                     <a href="https://x.com/kait_edtc" title="Tweet"><i class="fa fa-twitter"></i></a>
@@ -59,7 +61,7 @@ function renderHeader(basePath) {
 }
 
 function renderFooter(basePath) {
-    return `
+  return `
     <footer>
         <div class="flex">
             <ul class="footer-list">
@@ -68,6 +70,7 @@ function renderFooter(basePath) {
                     <a href="${basePath}base.html">ホーム　</a>
                     <a href="${basePath}blog.html">ブログ　</a>
                     <a href="${basePath}product-top.html">プロダクト</a>
+                    <a href="${basePath}achievements.html">実績</a>
                     <hr size="100%">
                 </li>
                 <li style="text-align: center;">
@@ -90,20 +93,20 @@ function renderFooter(basePath) {
 }
 
 function initCommon() {
-    const basePath = getBasePath();
+  const basePath = getBasePath();
 
-    const headerEl = document.getElementById('common-header');
-    if (headerEl) {
-        headerEl.outerHTML = renderHeader(basePath);
-    }
+  const headerEl = document.getElementById("common-header");
+  if (headerEl) {
+    headerEl.outerHTML = renderHeader(basePath);
+  }
 
-    const footerEl = document.getElementById('common-footer');
-    if (footerEl) {
-        footerEl.outerHTML = renderFooter(basePath);
-    }
+  const footerEl = document.getElementById("common-footer");
+  if (footerEl) {
+    footerEl.outerHTML = renderFooter(basePath);
+  }
 }
 
 // ES modules are deferred — DOM is parsed when this runs
-document.addEventListener('DOMContentLoaded', initCommon);
+document.addEventListener("DOMContentLoaded", initCommon);
 
 export { renderHeader, renderFooter, initCommon };
