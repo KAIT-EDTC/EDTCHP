@@ -108,6 +108,17 @@
         <p class="hero-sub">EDTCの受賞・活動実績</p>
       </section>
 
+      <!-- フィルターボタン -->
+      <div class="filter-bar" id="filter-bar">
+        <button class="filter-btn active" data-filter="all" id="filter-all">すべて</button>
+        <button class="filter-btn" data-filter="award" id="filter-award">
+          <span class="filter-icon">🏆</span>受賞
+        </button>
+        <button class="filter-btn" data-filter="exhibition" id="filter-exhibition">
+          <span class="filter-icon">🎪</span>出展
+        </button>
+      </div>
+
       <!-- タイムライン -->
       <div class="timeline-wrapper" id="timeline-wrapper">
         <div class="timeline" id="timeline">
@@ -156,8 +167,18 @@
     <script type="module">
       import { achievements } from "./public/achievement/achievementData.js";
 
+      // ── 現在のフィルター ──
+      var currentFilter = "all";
+
+      // ── バッジ設定 ──
+      var badgeConfig = {
+        award: { label: "受賞", className: "card-badge card-badge--award", icon: "🏆" },
+        exhibition: { label: "出展", className: "card-badge card-badge--exhibition", icon: "🎪" },
+        other: { label: "その他", className: "card-badge card-badge--other", icon: "📌" },
+      };
+
       // ── タイムライン描画 ──
-      function renderTimeline() {
+      function renderTimeline(filter) {
         var timeline = document.getElementById("timeline");
         timeline.innerHTML = "";
 
@@ -167,9 +188,26 @@
           return new Date(b.date) - new Date(a.date);
         });
 
-        var currentYear = null;
+        // フィルタリング
+        if (filter && filter !== "all") {
+          data = data.filter(function (item) {
+            return item.type === filter;
+          });
+        }
 
-        data.forEach(function (item, idx) {
+        // 空メッセージ
+        if (data.length === 0) {
+          var emptyEl = document.createElement("div");
+          emptyEl.className = "timeline-empty";
+          emptyEl.textContent = "該当する実績はありません。";
+          timeline.appendChild(emptyEl);
+          return;
+        }
+
+        var currentYear = null;
+        var visibleIdx = 0;
+
+        data.forEach(function (item) {
           var year = new Date(item.date).getFullYear();
 
           // 年が変わったら年ラベルを挿入
@@ -184,7 +222,8 @@
           // タイムラインアイテム
           var el = document.createElement("div");
           el.className = "timeline-item";
-          el.style.animationDelay = idx * 0.1 + "s";
+          el.style.animationDelay = visibleIdx * 0.08 + "s";
+          visibleIdx++;
 
           var dateObj = new Date(item.date);
           var dateStr = dateObj.toLocaleDateString("ja-JP", {
@@ -203,8 +242,17 @@
               item.title +
               '"></div>';
           } else {
-            imageHtml = '<div class="card-image no-image">🏆</div>';
+            // タイプに応じたプレースホルダー
+            var placeholderIcon = item.type === "exhibition" ? "🎪" : item.type === "award" ? "🏆" : "📌";
+            imageHtml = '<div class="card-image no-image ' + 'no-image--' + item.type + '">' + placeholderIcon + '</div>';
           }
+
+          // バッジ
+          var badge = badgeConfig[item.type] || badgeConfig.other;
+          var badgeHtml = '<span class="' + badge.className + '">' + badge.label + '</span>';
+
+          // ドットマーカーの色クラス
+          el.setAttribute("data-type", item.type);
 
           el.innerHTML =
             '<div class="timeline-card">' +
@@ -213,7 +261,7 @@
             '<div class="card-date">' +
             dateStr +
             "</div>" +
-            '<span class="card-award-badge">受賞</span>' +
+            badgeHtml +
             '<div class="card-title">' +
             item.title +
             "</div>" +
@@ -227,8 +275,22 @@
         });
       }
 
+      // ── フィルターボタンイベント ──
+      document.querySelectorAll(".filter-btn").forEach(function (btn) {
+        btn.addEventListener("click", function () {
+          // active クラス切り替え
+          document.querySelectorAll(".filter-btn").forEach(function (b) {
+            b.classList.remove("active");
+          });
+          btn.classList.add("active");
+
+          currentFilter = btn.getAttribute("data-filter");
+          renderTimeline(currentFilter);
+        });
+      });
+
       // 初期描画
-      renderTimeline();
+      renderTimeline("all");
     </script>
   </body>
 </html>
