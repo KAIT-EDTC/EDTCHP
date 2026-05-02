@@ -17,4 +17,4 @@ $signUpUseCase = new signUpUseCase($userRepo);
 $updateUserInfoUseCase = new UpdateUserInfoUseCase($userRepo);
 $userController = new UserController($signUpUseCase, $userRepo, $updateUserInfoUseCase);
 
-$userController->storeWithoutAuth();
+//$userController->storeWithoutAuth();
