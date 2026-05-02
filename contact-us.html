@@ -114,11 +114,12 @@
                     <p class="gyou">
                         <span class="footer-info">学校法人 幾徳学園　神奈川工科大学<br>mail :kait.edtc@gmail.com</span>
                     </p>
-                    <p class="gyou-b">©　2024　KAIT　EDTC　All Rights Reserved</p>
+                    <p class="gyou-b">©　<span id="footer-year"></span>　KAIT　EDTC　All Rights Reserved</p>
                 </li>
             </ul>
         </div>
     </footer>
+    <script>document.getElementById('footer-year').textContent = new Date().getFullYear();</script>
 </body>
 
 </html>
