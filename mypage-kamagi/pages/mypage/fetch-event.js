@@ -4,30 +4,36 @@
  */
 
 function diplayEvents(events) {
-    const eventListTable = document.getElementById('event-list-table');
     const eventList = document.getElementById('event-list');
     const noEvents = document.getElementById('no-events');
 
     if (!events || events.length === 0) {
-        // イベントデータが存在しないことを伝える。
         noEvents.style.display = 'block';
-        eventListTable.style.display = 'none';
+        eventList.style.display = 'none';
         return;
     }
     
     noEvents.style.display = 'none';
-    eventListTable.style.display = 'block';
+    eventList.style.display = 'grid';
     eventList.innerHTML = '';
     events.forEach(event => {
-        const row = document.createElement('tr');
+        const card = document.createElement('div');
+        card.className = 'event-card';
         const formatedDate = formatEventDate(event.start, event.end);
-        row.innerHTML = `
-            <td>${event.title}</td>
-            <td>${formatedDate}</td>
-            <td>${formatDescription(event.description)}</td>
-            <td>${composeParticipants(event.participants)}</td>
+        const participants = composeParticipants(event.participants);
+        card.innerHTML = `
+            <div class="event-card-header">
+                <span class="event-title">${event.title}</span>
+            </div>
+            <div class="event-card-body">
+                <div class="event-meta">
+                    <span class="event-date"><i class="fa fa-calendar"></i> ${formatedDate}</span>
+                    <span class="event-participants"><i class="fa fa-users"></i> ${participants}</span>
+                </div>
+                ${event.description ? formatDescription(event.description) : ''}
+            </div>
         `;
-        eventList.appendChild(row);
+        eventList.appendChild(card);
     });
 }
 
