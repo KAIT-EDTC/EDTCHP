@@ -24,7 +24,7 @@ function diplayEvents(events) {
         row.innerHTML = `
             <td>${event.title}</td>
             <td>${formatedDate}</td>
-            <td>${event.description}</td>
+            <td>${formatDescription(event.description)}</td>
             <td>${composeParticipants(event.participants)}</td>
         `;
         eventList.appendChild(row);
@@ -50,6 +50,13 @@ async function fetchEvents(userId) {
 function composeParticipants(participants) {
     if (!participants || participants.length === 0) return '全員';
     return participants.map(participant => participant.name).join(', ');
+}
+
+function formatDescription(description) {
+    if (!description) return '';
+    description = description.replace(/\n/g, '<br>');
+    const container = "<details><summary>イベント詳細を確認する</summary>" + description + "</details>";
+    return container;
 }
 
 /**
