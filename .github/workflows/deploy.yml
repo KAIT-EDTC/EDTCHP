@@ -60,4 +60,4 @@ jobs:
         run: |
           ssh -i ~/.ssh/deploy_key -p ${{ secrets.SAKURA_PORT }} \
             ${{ secrets.SAKURA_USERNAME }}@${{ secrets.SAKURA_HOST }} \
-            "cd ~/www/EDTC/KAMAGI && COMPOSER_VENDOR_DIR=\$HOME/vendor php ~/vendor/bin/composer dump-autoload --no-dev --optimize"
+            "cd ~/www/EDTC/KAMAGI && env COMPOSER_VENDOR_DIR=/home/${{ secrets.SAKURA_USERNAME }}/vendor php ~/vendor/bin/composer dump-autoload --no-dev --optimize"
