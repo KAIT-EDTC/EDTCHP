@@ -5,6 +5,7 @@
 
 const ALLOWED_LAYOUTS = new Set(["horizontal", "vertical"]);
 const ARTICLE_ID_PATTERN = /^(\d{2}-\d{2}-\d{2})-(.+)$/;
+const DEFAULT_ARTICLE_BASE_NAME = "article";
 
 function buildDatePrefix(dateStr) {
     const matched = String(dateStr || "").trim().match(/^(\d{4})-(\d{1,2})-(\d{1,2})$/);
