@@ -11,7 +11,7 @@
 - Tは「Teacher」、学生の知識を教える活動
 - Cは「Company」、企業のような活動体制
 
-※KAITはKAnagawa Insititute of Technologyの略(神奈川工科大学)
+※KAITはKAnagawa Institute of Technologyの略(神奈川工科大学)
 
 ## 活動体制
 
