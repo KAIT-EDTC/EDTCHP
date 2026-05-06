@@ -194,7 +194,7 @@ function downloadJson(data, fileName) {
 }
 
 function updateDownloadFilename() {
-    const safeId = buildArticleId(state.date, state.id) || "article";
+    const safeId = buildArticleId(state.date, state.id) || DEFAULT_ARTICLE_BASE_NAME;
     const ext = hasUploadedImages() ? ".zip" : ".json";
     dom.downloadFilename.textContent = `${safeId}${ext}`;
 }

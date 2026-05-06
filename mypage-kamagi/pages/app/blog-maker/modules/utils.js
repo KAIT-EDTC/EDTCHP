@@ -5,20 +5,27 @@
 
 const ALLOWED_LAYOUTS = new Set(["horizontal", "vertical"]);
 const ARTICLE_ID_PATTERN = /^(\d{2}-\d{2}-\d{2})-(.+)$/;
+const DEFAULT_ARTICLE_BASE_NAME = "article";
 
 function buildDatePrefix(dateStr) {
-    const parts = String(dateStr || "").split("-");
-    if (!parts[0] || !parts[1] || !parts[2]) {
+    const matched = String(dateStr || "").trim().match(/^(\d{1,4})-(\d{1,2})-(\d{1,2})$/);
+    if (!matched) {
         return "";
     }
 
-    const yy = parts[0].slice(-2).padStart(2, "0");
-    const mm = parts[1].padStart(2, "0");
-    const dd = parts[2].padStart(2, "0");
+    const year = matched[1];
+    const month = matched[2];
+    const day = matched[3];
 
-    if (!yy || !mm || !dd) {
+    const monthNumber = Number(month);
+    const dayNumber = Number(day);
+    if (monthNumber < 1 || monthNumber > 12 || dayNumber < 1 || dayNumber > 31) {
         return "";
     }
+
+    const yy = year.padStart(4, "0").slice(-2);
+    const mm = month.padStart(2, "0");
+    const dd = day.padStart(2, "0");
 
     return `${yy}-${mm}-${dd}`;
 }
