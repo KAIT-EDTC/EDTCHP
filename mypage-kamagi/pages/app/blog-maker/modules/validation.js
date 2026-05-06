@@ -10,6 +10,8 @@ function validateState(article) {
 
     if (!article.id.trim()) {
         errors.push("id未入力です");
+    } else if (!isValidEventId(article.id)) {
+        errors.push("idは半角英数字と_のみ使用できます");
     }
 
     if (!article.date.trim()) {
