@@ -18,6 +18,10 @@ function buildDatePrefix(dateStr) {
 
     const monthNumber = Number(month);
     const dayNumber = Number(day);
+    if (monthNumber < 1 || monthNumber > 12 || dayNumber < 1 || dayNumber > 31) {
+        return "";
+    }
+
     const parsedDate = new Date(Number(year), monthNumber - 1, dayNumber);
     if (
         parsedDate.getFullYear() !== Number(year) ||
