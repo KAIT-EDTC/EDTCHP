@@ -69,7 +69,7 @@ async function importFromZip(file) {
 function restoreStateFromJson(json, imageBlobs) {
     cleanupPreviousState();
 
-    state.id = json.id || "";
+    state.id = extractEventId(json.id, json.date);
     state.date = json.date || "";
     state.title = json.title || "";
     state.caption = json.caption || "";

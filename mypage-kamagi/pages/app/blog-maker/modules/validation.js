@@ -87,8 +87,9 @@ function renderValidation() {
 }
 
 function buildExportJson(article, imageMap) {
+    const exportId = buildArticleId(article.date, article.id);
     const payload = {
-        id: article.id.trim(),
+        id: exportId,
         date: article.date.trim(),
         title: article.title.trim(),
         sections: article.sections.map((section, index) => {
@@ -137,14 +138,13 @@ async function onDownloadClick() {
     dom.downloadButton.disabled = true;
 
     try {
-        const randomTag = generateRandomId();
-        const dateStr = state.date.trim();
+        const exportId = buildArticleId(state.date, state.id);
         let imageIndex = 1;
         const imageEntries = [];
         const imageMap = { thumbnail: null, sections: {} };
 
         if (state.thumbnailFile) {
-            const filename = generateImageFilename(dateStr, randomTag, imageIndex);
+            const filename = generateImageFilename(exportId, imageIndex);
             const blob = await convertToWebp(state.thumbnailFile);
             imageEntries.push({ filename, blob });
             imageMap.thumbnail = filename;
@@ -153,7 +153,7 @@ async function onDownloadClick() {
 
         for (let i = 0; i < state.sections.length; i++) {
             if (state.sections[i].imageFile) {
-                const filename = generateImageFilename(dateStr, randomTag, imageIndex);
+                const filename = generateImageFilename(exportId, imageIndex);
                 const blob = await convertToWebp(state.sections[i].imageFile);
                 imageEntries.push({ filename, blob });
                 imageMap.sections[i] = filename;
@@ -194,7 +194,7 @@ function downloadJson(data, fileName) {
 }
 
 function updateDownloadFilename() {
-    const safeId = state.id.trim() || "article";
+    const safeId = buildArticleId(state.date, state.id) || DEFAULT_ARTICLE_BASE_NAME;
     const ext = hasUploadedImages() ? ".zip" : ".json";
     dom.downloadFilename.textContent = `${safeId}${ext}`;
 }
