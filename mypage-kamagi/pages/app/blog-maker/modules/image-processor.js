@@ -5,6 +5,7 @@
  */
 
 const WEBP_QUALITY = 0.8;
+const DEFAULT_ARTICLE_BASE_NAME = "article";
 
 /**
  * 画像ファイルをWEBP形式に変換する
@@ -54,7 +55,7 @@ function convertToWebp(file) {
  * @returns {string} "yy-mm-dd-event-nn.webp"
  */
 function generateImageFilename(articleId, index) {
-    const safeArticleId = String(articleId || "").trim() || "article";
+    const safeArticleId = String(articleId || "").trim() || DEFAULT_ARTICLE_BASE_NAME;
     const nn = String(index).padStart(2, "0");
     return `${safeArticleId}-${nn}.webp`;
 }

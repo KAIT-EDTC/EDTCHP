@@ -4,12 +4,17 @@
  */
 
 const ALLOWED_LAYOUTS = new Set(["horizontal", "vertical"]);
+const ARTICLE_ID_PATTERN = /^(\d{2}-\d{2}-\d{2})-(.+)$/;
 
 function buildDatePrefix(dateStr) {
     const parts = String(dateStr || "").split("-");
-    const yy = parts[0] ? parts[0].slice(-2) : "";
-    const mm = parts[1] || "";
-    const dd = parts[2] || "";
+    if (!parts[0] || !parts[1] || !parts[2]) {
+        return "";
+    }
+
+    const yy = parts[0].slice(-2).padStart(2, "0");
+    const mm = parts[1].padStart(2, "0");
+    const dd = parts[2].padStart(2, "0");
 
     if (!yy || !mm || !dd) {
         return "";
@@ -41,9 +46,9 @@ function extractEventId(articleId, dateStr) {
         return rawId.slice(prefix.length + 1);
     }
 
-    const matched = rawId.match(/^\d{2}-\d{2}-\d{2}-(.+)$/);
+    const matched = rawId.match(ARTICLE_ID_PATTERN);
     if (matched) {
-        return matched[1];
+        return matched[2];
     }
 
     return rawId;
