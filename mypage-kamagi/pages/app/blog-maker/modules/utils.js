@@ -8,7 +8,7 @@ const ARTICLE_ID_PATTERN = /^(\d{2}-\d{2}-\d{2})-(.+)$/;
 const DEFAULT_ARTICLE_BASE_NAME = "article";
 
 function buildDatePrefix(dateStr) {
-    const matched = String(dateStr || "").trim().match(/^(\d{1,4})-(\d{1,2})-(\d{1,2})$/);
+    const matched = String(dateStr || "").trim().match(/^(\d{4})-(\d{1,2})-(\d{1,2})$/);
     if (!matched) {
         return "";
     }
@@ -19,11 +19,16 @@ function buildDatePrefix(dateStr) {
 
     const monthNumber = Number(month);
     const dayNumber = Number(day);
-    if (monthNumber < 1 || monthNumber > 12 || dayNumber < 1 || dayNumber > 31) {
+    const parsedDate = new Date(Number(year), monthNumber - 1, dayNumber);
+    if (
+        parsedDate.getFullYear() !== Number(year) ||
+        parsedDate.getMonth() !== monthNumber - 1 ||
+        parsedDate.getDate() !== dayNumber
+    ) {
         return "";
     }
 
-    const yy = year.padStart(4, "0").slice(-2);
+    const yy = year.slice(-2);
     const mm = month.padStart(2, "0");
     const dd = day.padStart(2, "0");
 
