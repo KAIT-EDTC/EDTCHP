@@ -5,6 +5,7 @@
  */
 
 const WEBP_QUALITY = 0.8;
+const DEFAULT_ARTICLE_BASE_NAME = "article";
 
 /**
  * 画像ファイルをWEBP形式に変換する

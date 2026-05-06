@@ -4,6 +4,8 @@
  * グローバルの state, dom を参照する。
  */
 
+const DEFAULT_ARTICLE_BASE_NAME = "article";
+
 function validateState(article) {
     const errors = [];
     const warnings = [];
