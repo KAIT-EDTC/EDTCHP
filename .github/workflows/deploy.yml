@@ -48,6 +48,7 @@ jobs:
             --exclude='sitemap.xml' \
             --exclude='.htaccess' \
             --exclude='EDTC_PV(調整後）.mp4' \
+            --exclude='WHAT_IS_EDTC.md' \
             -e "ssh -i ~/.ssh/deploy_key -p ${{ secrets.SAKURA_PORT }}" \
             ./ ${{ secrets.SAKURA_USERNAME }}@${{ secrets.SAKURA_HOST }}:~/www/EDTC/
 
