@@ -1,68 +1,91 @@
 /**
- * マイページにイベント一覧を表示する
- * auth.jsの読み込み後に呼び出される
+ * イベント表示に関するユーティリティ関数
  */
 
-function diplayEvents(events) {
-    const eventList = document.getElementById('event-list');
-    const noEvents = document.getElementById('no-events');
+/** イベントカードを作成する */
+function createEventCard(event) {
+    const card = document.createElement('div');
+    card.className = 'event-card';
 
-    if (!events || events.length === 0) {
-        noEvents.style.display = 'block';
-        eventList.style.display = 'none';
-        return;
+    const cardHeader = document.createElement('div');
+    cardHeader.className = 'event-card-header';
+
+    const title = document.createElement('span');
+    title.className = 'event-title';
+    title.textContent = event.title || '';
+    cardHeader.appendChild(title);
+
+    const cardBody = document.createElement('div');
+    cardBody.className = 'event-card-body';
+
+    const formattedDate = formatEventDate(event.start, event.end);
+    const participants = composeParticipants(event.participants);
+    cardBody.appendChild(createEventMeta(formattedDate, participants));
+
+    if (event.description) {
+        cardBody.appendChild(createDescriptionElement(event.description));
     }
-    
-    noEvents.style.display = 'none';
-    eventList.style.display = 'grid';
-    eventList.innerHTML = '';
-    events.forEach(event => {
-        const card = document.createElement('div');
-        card.className = 'event-card';
-        const formatedDate = formatEventDate(event.start, event.end);
-        const participants = composeParticipants(event.participants);
-        card.innerHTML = `
-            <div class="event-card-header">
-                <span class="event-title">${event.title}</span>
-            </div>
-            <div class="event-card-body">
-                <div class="event-meta">
-                    <span class="event-date"><i class="fa fa-calendar"></i> ${formatedDate}</span>
-                    <span class="event-participants"><i class="fa fa-users"></i> ${participants}</span>
-                </div>
-                ${event.description ? formatDescription(event.description) : ''}
-            </div>
-        `;
-        eventList.appendChild(card);
-    });
+
+    card.append(cardHeader, cardBody);
+    return card;
 }
+
+/** イベントのメタ情報（日時と参加者）を作成する */
+function createEventMeta(formattedDate, participants) {
+    const meta = document.createElement('div');
+    meta.className = 'event-meta';
+
+    const dateLabel = createIconText('event-date', 'fa fa-calendar', formattedDate);
+    const participantsLabel = createIconText('event-participants', 'fa fa-users', participants);
+
+    meta.append(dateLabel, participantsLabel);
+    return meta;
+}
+
+/** イベントの日時と参加者情報をアイコン付きで表示する要素を作成する */
+function createIconText(labelClassName, iconClassName, text) {
+    const label = document.createElement('span');
+    label.className = labelClassName;
+
+    const icon = document.createElement('i');
+    icon.className = iconClassName;
+
+    label.append(icon, document.createTextNode(` ${text || ''}`));
+    return label;
+}
+
 
 /**
- * APIからユーザーに紐づくイベント一覧を取得して表示する
+ * 参加者情報の配列を受け取り、参加者名をカンマ区切りで連結した文字列を返す
  * 
- * @param {string} userId 
+ * @param {Object[]} participants 
+ * @param {string} participants[].id 参加者ID
+ * @param {string} participants[].name 参加者名
+ * @returns {string} 参加者名の文字列
  */
-async function fetchEvents(userId) {
-    try {
-        const response = await eventService.getEvents({ userId: userId });
-        if (!response.events) return null;
-        return response.events;
-    } catch (error) {
-        console.error('Error fetching events:', error);
-        return null;
-    }
-}
-
 function composeParticipants(participants) {
+    // participants:[]のときは全員とする
     if (!participants || participants.length === 0) return '全員';
-    return participants.map(participant => participant.name).join(', ');
+    const names = participants
+        .map(participant => (participant && participant.name ? String(participant.name) : ''))
+        .filter(name => name.length > 0);
+    // participants:[{id: '11111111, name: ''}]みたいなときは不正
+    return names.length > 0 ? names.join(', ') : '正しく参加者情報が取得できませんでした';
 }
 
-function formatDescription(description) {
-    if (!description) return '';
-    description = description.replace(/\n/g, '<br>');
-    const container = "<details><summary>イベント詳細を確認する</summary>" + description + "</details>";
-    return container;
+function createDescriptionElement(description) {
+    const details = document.createElement('details');
+    const summary = document.createElement('summary');
+    summary.textContent = 'イベント詳細を確認する';
+    details.appendChild(summary);
+
+    const lines = String(description).split(/\r?\n/);
+    lines.forEach((line, index) => {
+        if (index > 0) details.appendChild(document.createElement('br'));
+        details.appendChild(document.createTextNode(line));
+    });
+
+    return details;
 }
 
 /**
@@ -75,7 +98,7 @@ function formatDescription(description) {
 function formatEventDate(start, end) {
     const startDate = new Date(start);
     const endDate = new Date(end);
-    if (!startDate || !endDate) return '';
+    if (Number.isNaN(startDate.getTime()) || Number.isNaN(endDate.getTime())) return '';
     const diffDays = (endDate - startDate) / (1000 * 60 * 60 * 24);
     if (diffDays >= 1) {
         return `${formatDate(startDate)} 〜 ${formatDate(endDate)}`;
