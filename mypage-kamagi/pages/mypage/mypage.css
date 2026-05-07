@@ -129,15 +129,15 @@ body {
 }
 
 /* イベント詳細 details */
-.event-card details {
-    cursor: pointer;
+.event-description {
     border-radius: 6px;
     padding: 6px 10px;
     margin-top: 6px;
     transition: background-color 0.2s, box-shadow 0.2s;
 }
 
-.event-card details summary {
+.event-description-summary {
+    cursor: pointer;
     font-size: 0.9em;
     color: var(--main-color);
     font-weight: 500;
@@ -147,31 +147,31 @@ body {
     gap: 6px;
 }
 
-.event-card details summary::before {
+.event-description-summary::before {
     content: '▶';
     font-size: 0.7em;
     transition: transform 0.2s;
 }
 
-.event-card details[open] summary::before {
+.event-description[open] .event-description-summary::before {
     transform: rotate(90deg);
 }
 
-.event-card details summary::-webkit-details-marker {
+.event-description-summary::-webkit-details-marker {
     display: none;
 }
 
-.event-card details:hover {
+.event-description:hover {
     background-color: #f0f7ff;
     box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
 }
 
-.event-card details[open] {
+.event-description[open] {
     background-color: #f9f9f9;
     border: 1px solid #e0e0e0;
 }
 
-.event-card details[open] > *:not(summary) {
+.event-description-content {
     margin-top: 8px;
     font-size: 0.88em;
     color: #555;

@@ -69,21 +69,28 @@ function composeParticipants(participants) {
     const names = participants
         .map(participant => (participant && participant.name ? String(participant.name) : ''))
         .filter(name => name.length > 0);
-    // participants:[{id: '11111111, name: ''}]みたいなときは不正
+    // participants:[{id: '11111111', name: ''}]みたいなときは不正
     return names.length > 0 ? names.join(', ') : '正しく参加者情報が取得できませんでした';
 }
 
 function createDescriptionElement(description) {
     const details = document.createElement('details');
+    details.className = 'event-description';
+
     const summary = document.createElement('summary');
+    summary.className = 'event-description-summary';
     summary.textContent = 'イベント詳細を確認する';
-    details.appendChild(summary);
+
+    const content = document.createElement('div');
+    content.className = 'event-description-content';
 
     const lines = String(description).split(/\r?\n/);
     lines.forEach((line, index) => {
-        if (index > 0) details.appendChild(document.createElement('br'));
-        details.appendChild(document.createTextNode(line));
+        if (index > 0) content.appendChild(document.createElement('br'));
+        content.appendChild(document.createTextNode(line));
     });
+
+    details.append(summary, content);
 
     return details;
 }
