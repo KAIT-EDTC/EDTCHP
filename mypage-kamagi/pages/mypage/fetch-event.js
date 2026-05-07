@@ -1,55 +1,98 @@
 /**
- * マイページにイベント一覧を表示する
- * auth.jsの読み込み後に呼び出される
+ * イベント表示に関するユーティリティ関数
  */
 
-function diplayEvents(events) {
-    const eventListTable = document.getElementById('event-list-table');
-    const eventList = document.getElementById('event-list');
-    const noEvents = document.getElementById('no-events');
+/** イベントカードを作成する */
+function createEventCard(event) {
+    const card = document.createElement('div');
+    card.className = 'event-card';
 
-    if (!events || events.length === 0) {
-        // イベントデータが存在しないことを伝える。
-        noEvents.style.display = 'block';
-        eventListTable.style.display = 'none';
-        return;
+    const cardHeader = document.createElement('div');
+    cardHeader.className = 'event-card-header';
+
+    const title = document.createElement('span');
+    title.className = 'event-title';
+    title.textContent = event.title || '';
+    cardHeader.appendChild(title);
+
+    const cardBody = document.createElement('div');
+    cardBody.className = 'event-card-body';
+
+    const formattedDate = formatEventDate(event.start, event.end);
+    const participants = composeParticipants(event.participants);
+    cardBody.appendChild(createEventMeta(formattedDate, participants));
+
+    if (event.description) {
+        cardBody.appendChild(createDescriptionElement(event.description));
     }
-    
-    noEvents.style.display = 'none';
-    eventListTable.style.display = 'block';
-    eventList.innerHTML = '';
-    events.forEach(event => {
-        const row = document.createElement('tr');
-        const formatedDate = formatEventDate(event.start, event.end);
-        row.innerHTML = `
-            <td>${event.title}</td>
-            <td>${formatedDate}</td>
-            <td>${event.description}</td>
-            <td>${composeParticipants(event.participants)}</td>
-        `;
-        eventList.appendChild(row);
-    });
+
+    card.append(cardHeader, cardBody);
+    return card;
 }
+
+/** イベントのメタ情報（日時と参加者）を作成する */
+function createEventMeta(formattedDate, participants) {
+    const meta = document.createElement('div');
+    meta.className = 'event-meta';
+
+    const dateLabel = createIconText('event-date', 'fa fa-calendar', formattedDate);
+    const participantsLabel = createIconText('event-participants', 'fa fa-users', participants);
+
+    meta.append(dateLabel, participantsLabel);
+    return meta;
+}
+
+/** イベントの日時と参加者情報をアイコン付きで表示する要素を作成する */
+function createIconText(labelClassName, iconClassName, text) {
+    const label = document.createElement('span');
+    label.className = labelClassName;
+
+    const icon = document.createElement('i');
+    icon.className = iconClassName;
+
+    label.append(icon, document.createTextNode(` ${text || ''}`));
+    return label;
+}
+
 
 /**
- * APIからユーザーに紐づくイベント一覧を取得して表示する
+ * 参加者情報の配列を受け取り、参加者名をカンマ区切りで連結した文字列を返す
  * 
- * @param {string} userId 
+ * @param {Object[]} participants 
+ * @param {string} participants[].id 参加者ID
+ * @param {string} participants[].name 参加者名
+ * @returns {string} 参加者名の文字列
  */
-async function fetchEvents(userId) {
-    try {
-        const response = await eventService.getEvents({ userId: userId });
-        if (!response.events) return null;
-        return response.events;
-    } catch (error) {
-        console.error('Error fetching events:', error);
-        return null;
-    }
+function composeParticipants(participants) {
+    // participants:[]のときは全員とする
+    if (!participants || participants.length === 0) return '全員';
+    const names = participants
+        .map(participant => (participant && participant.name ? String(participant.name) : ''))
+        .filter(name => name.length > 0);
+    // participants:[{id: '11111111', name: ''}]みたいなときは不正
+    return names.length > 0 ? names.join(', ') : '正しく参加者情報が取得できませんでした';
 }
 
-function composeParticipants(participants) {
-    if (!participants || participants.length === 0) return '全員';
-    return participants.map(participant => participant.name).join(', ');
+function createDescriptionElement(description) {
+    const details = document.createElement('details');
+    details.className = 'event-description';
+
+    const summary = document.createElement('summary');
+    summary.className = 'event-description-summary';
+    summary.textContent = 'イベント詳細を確認する';
+
+    const content = document.createElement('div');
+    content.className = 'event-description-content';
+
+    const lines = String(description).split(/\r?\n/);
+    lines.forEach((line, index) => {
+        if (index > 0) content.appendChild(document.createElement('br'));
+        content.appendChild(document.createTextNode(line));
+    });
+
+    details.append(summary, content);
+
+    return details;
 }
 
 /**
@@ -62,7 +105,7 @@ function composeParticipants(participants) {
 function formatEventDate(start, end) {
     const startDate = new Date(start);
     const endDate = new Date(end);
-    if (!startDate || !endDate) return '';
+    if (Number.isNaN(startDate.getTime()) || Number.isNaN(endDate.getTime())) return '';
     const diffDays = (endDate - startDate) / (1000 * 60 * 60 * 24);
     if (diffDays >= 1) {
         return `${formatDate(startDate)} 〜 ${formatDate(endDate)}`;

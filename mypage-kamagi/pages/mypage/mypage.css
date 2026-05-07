@@ -73,44 +73,109 @@ body {
     padding: 20px;
 }
 
-/* テーブル */
-table {
-    width: auto;
-    margin-left: auto;
-    margin-right: auto;
-    border-collapse: collapse;
-    text-align: center;
-    font-size: 0.95em;
+/* イベントカード一覧 */
+#event-list {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 12px;
+    width: 100%;
 }
 
-th {
+.event-card {
+    border: 1px solid #e8e8e8;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: box-shadow 0.2s, transform 0.15s;
+}
+
+.event-card:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transform: translateY(-2px);
+}
+
+.event-card-header {
     background-color: var(--main-color);
-    color: white;
-    padding: 12px 10px;
+    padding: 12px 16px;
+}
+
+.event-title {
+    color: #fff;
     font-weight: 600;
+    font-size: 1em;
 }
 
-th:first-child {
-    border-radius: 6px 0 0 0;
+.event-card-body {
+    padding: 14px 16px;
 }
 
-th:last-child {
-    border-radius: 0 6px 0 0;
+.event-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 8px;
+    font-size: 0.9em;
+    color: #555;
 }
 
-td {
+.event-meta i {
+    color: var(--main-color);
+    margin-right: 4px;
+}
+
+.event-date,
+.event-participants {
+    display: flex;
+    align-items: center;
+}
+
+/* イベント詳細 details */
+.event-description {
+    border-radius: 6px;
+    padding: 6px 10px;
+    margin-top: 6px;
+    transition: background-color 0.2s, box-shadow 0.2s;
+}
+
+.event-description-summary {
+    cursor: pointer;
+    font-size: 0.9em;
+    color: var(--main-color);
+    font-weight: 500;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.event-description-summary::before {
+    content: '▶';
+    font-size: 0.7em;
+    transition: transform 0.2s;
+}
+
+.event-description[open] .event-description-summary::before {
+    transform: rotate(90deg);
+}
+
+.event-description-summary::-webkit-details-marker {
+    display: none;
+}
+
+.event-description:hover {
+    background-color: #f0f7ff;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+}
+
+.event-description[open] {
+    background-color: #f9f9f9;
     border: 1px solid #e0e0e0;
-    padding: 12px 10px;
-    color: #444;
 }
 
-tr:nth-child(even) {
-    background-color: #fafafa;
-}
-
-tr:hover {
-    background-color: #f5f5f5;
-    transition: background-color 0.2s;
+.event-description-content {
+    margin-top: 8px;
+    font-size: 0.88em;
+    color: #555;
+    line-height: 1.6;
 }
 
 /* カレンダーセクション */
@@ -175,11 +240,16 @@ tr:hover {
         padding: 15px;
     }
 
-    table {
-        font-size: 0.85em;
+    .event-card-header {
+        padding: 10px 12px;
     }
 
-    th, td {
-        padding: 8px 5px;
+    .event-card-body {
+        padding: 10px 12px;
+    }
+
+    .event-meta {
+        flex-direction: column;
+        gap: 6px;
     }
 }
