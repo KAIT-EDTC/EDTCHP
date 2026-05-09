@@ -15,13 +15,8 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         try {
             const data = await authService.signUp(userId, password, name);
-            showToast(data.message + '3秒後にログインページにリダイレクトします。', 'success');
+            showToast(data.message, 'success');
             signupForm.reset(); // フォームをクリア
-            // 3秒後にログインページにリダイレクト
-            setTimeout(() => {
-                window.location.href = `/mypage-kamagi/pages/login/`;
-            }, 3000);
-
         } catch (error) {
             // サインアップ失敗
             console.error('サインアップエラー:', error);
