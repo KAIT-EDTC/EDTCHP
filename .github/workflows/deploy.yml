@@ -35,7 +35,9 @@ jobs:
           rsync -azv --delete \
             --exclude='.git/' \
             --exclude='.github/' \
+            --exclude='.vscode/' \
             --exclude='KAMAGI/vendor/' \
+            --exclude='.editorconfig' \
             --exclude='.env' \
             --exclude='.env.example' \
             --exclude='docker/' \
