@@ -1,6 +1,6 @@
 // ===== Blog card rendering =====
 
-export const PAGE_SIZE = 15;
+export const PAGE_SIZE = 3;
 export const BASE_IMG_PATH = "./public/blog/img";
 export const ALTER_IMAGE_PATH = "./public/img/EDTC-icon.webp";
 
