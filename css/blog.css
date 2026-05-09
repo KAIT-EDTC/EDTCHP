@@ -138,7 +138,7 @@ body {
 }
 
 .blog-card {
-    border-radius: 10px;
+    border-radius: 0;
     overflow: hidden;
     background: var(--item-color);
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
@@ -146,7 +146,7 @@ body {
 }
 
 .blog-card:hover {
-    /* transform: translateY(-6px); */
+    transform: translateY(-6px);
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
 }
 
@@ -233,11 +233,14 @@ body {
 .pagination-area {
     display: flex;
     margin: 1.5rem auto;
-    gap: 6px;
-    padding: 0 1rem;
+    gap: 8px;
     align-items: center;
     justify-content: center;
     flex-wrap: wrap;
+}
+
+.pagination-area[hidden] {
+    display: none;
 }
 
 .pagination-area button {
@@ -256,8 +259,8 @@ body {
 .pagination-area__arrow {
     background: #333;
     color: #fff;
-    padding: 0.4em 0.7em;
-    font-size: 0.95rem;
+    padding: 0.5em 1em;
+    font-size: 1rem;
 }
 
 .pagination-area__arrow:hover:not(:disabled) {
@@ -273,10 +276,9 @@ body {
 .pagination-area__num {
     background: var(--item-color);
     color: #333;
-    width: 40px;
-    height: 40px;
+    width: 44px;
+    height: 44px;
     padding: 0;
-    font-size: 0.85rem;
     font-weight: 600;
 }
 
@@ -291,7 +293,7 @@ body {
 }
 
 .pagination-area__ellipsis {
-    width: 20px;
+    width: 28px;
     text-align: center;
     color: #888;
     font-size: 1rem;
@@ -307,6 +309,95 @@ body {
     margin-bottom: 3rem;
 }
 
+/* ===== サイドナビゲーション（左右矢印 + ドット） ===== */
+.blog-nav-wrap {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    max-width: 1300px;
+    margin: 1.5rem auto 0;
+    padding: 0 1%;
+}
+
+.blog-nav-wrap .blog-area {
+    min-width: 0; /* grid child overflow防止 */
+}
+
+.blog-nav-wrap .blog-container {
+    max-width: none;
+    margin: 0;
+    padding: 0 2%;
+}
+
+.blog-nav__prev,
+.blog-nav__next {
+    width: 44px;
+    height: 44px;
+    border: none;
+    border-radius: 50%;
+    background: #333;
+    color: #fff;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s, transform 0.2s;
+    flex-shrink: 0;
+}
+
+.blog-nav__prev:hover:not(:disabled),
+.blog-nav__next:hover:not(:disabled) {
+    background: #555;
+    transform: scale(1.1);
+}
+
+.blog-nav__prev:disabled,
+.blog-nav__next:disabled {
+    opacity: 0.25;
+    cursor: not-allowed;
+}
+
+.blog-nav__prev:focus-visible,
+.blog-nav__next:focus-visible {
+    outline: 2px solid var(--main-color);
+    outline-offset: 2px;
+}
+
+/* ドットインジケーター */
+.blog-nav__dots {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    padding: 1.5rem 0 3rem;
+}
+
+.blog-nav__dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #ccc;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.2s;
+}
+
+.blog-nav__dot:hover {
+    background: #999;
+}
+
+.blog-nav__dot--active {
+    background: var(--main-color);
+    transform: scale(1.3);
+    cursor: default;
+}
+
+.blog-nav__dot:focus-visible {
+    outline: 2px solid var(--main-color);
+    outline-offset: 2px;
+}
+
 /* ===== レスポンシブ ===== */
 @media (max-width: 768px) {
     .blog-container {
@@ -314,6 +405,16 @@ body {
     }
     .blog-hero {
         height: 28vh;
+    }
+    .blog-nav__prev,
+    .blog-nav__next {
+        width: 36px;
+        height: 36px;
+    }
+    .blog-nav__prev svg,
+    .blog-nav__next svg {
+        width: 16px;
+        height: 16px;
     }
 }
 
@@ -329,6 +430,36 @@ body {
     }
     .blog-filters__tags {
         padding-top: 0;
+    }
+    .blog-nav-wrap {
+        grid-template-columns: 1fr;
+    }
+    /* モバイル: サイドアロー＋ドットを非表示 */
+    .blog-nav__prev,
+    .blog-nav__next {
+        display: none;
+    }
+    .blog-nav__dots {
+        display: none;
+    }
+    /* モバイル: 番号付きページネーション */
+    .pagination-area {
+        gap: 6px;
+        padding: 0 1rem;
+    }
+    .pagination-area__arrow {
+        min-width: 44px;
+        min-height: 44px;
+        padding: 0.4em 0.7em;
+        font-size: 0.95rem;
+    }
+    .pagination-area__num {
+        width: 40px;
+        height: 40px;
+        font-size: 0.85rem;
+    }
+    .pagination-area__ellipsis {
+        width: 20px;
     }
 }
 
@@ -351,7 +482,10 @@ body {
     }
     .blog-card,
     .blog-card__img,
-    .pagination-area button {
+    .pagination-area button,
+    .blog-nav__prev,
+    .blog-nav__next,
+    .blog-nav__dot {
         transition: none;
     }
     .blog-card:hover {
