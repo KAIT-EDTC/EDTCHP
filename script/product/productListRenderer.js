@@ -1,19 +1,17 @@
 import { productIds, PRODUCT_TAGS } from "./../../public/product/pdctData.js";
 import { fetchProduct } from "./../contentApi.js";
 import { readState, writeState } from "./productUrlState.js";
-import { renderMobilePagination, renderDesktopPagination } from "./../blog/blogPagination.js";
+import { renderPagination } from "./../blog/blogPagination.js";
 import { PAGE_SIZE, filterProducts, renderCards } from "./productCardRenderer.js";
 
 /** 全プロダクトデータ（初回一括fetch後にキャッシュ） */
 let allProducts = [];
 let isInitialRender = true;
 
-const mobileQuery = window.matchMedia("(max-width: 480px)");
 const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 
 // DOM参照
 let tagsContainer, countEl, clearBtn, pdctArea, paginationAreaTop, paginationArea;
-let prevBtn, nextBtn, dotsContainer;
 
 // ===== レンダラー（フィルタリング・ページネーション） =====
 
@@ -37,13 +35,8 @@ function render() {
 
     renderCards(pdctArea, filtered, page, { isInitialRender });
 
-    if (mobileQuery.matches) {
-        renderMobilePagination(paginationAreaTop, paginationArea, page, totalPages, changePage);
-    } else {
-        renderDesktopPagination(prevBtn, nextBtn, dotsContainer, page, totalPages, changePage);
-        paginationArea.hidden = true;
-        if (paginationAreaTop) paginationAreaTop.hidden = true;
-    }
+    // ページネーションはPC/SP共通でモバイル表示を使う
+    renderPagination(paginationAreaTop, paginationArea, page, totalPages, changePage);
     isInitialRender = false;
 }
 
@@ -78,9 +71,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     pdctArea = document.querySelector(".pdct-area");
     paginationAreaTop = document.querySelector(".pagination-area--top");
     paginationArea = document.querySelector(".pagination-area--bottom");
-    prevBtn = document.querySelector(".pdct-nav__prev");
-    nextBtn = document.querySelector(".pdct-nav__next");
-    dotsContainer = document.querySelector(".pdct-nav__dots");
 
     // プロダクトを一度だけ取得してキャッシュ
     allProducts = (await Promise.all(productIds.map((id) => fetchProduct(id)))).filter(Boolean);
@@ -112,21 +102,8 @@ document.addEventListener("DOMContentLoaded", async () => {
     // フィルタクリア
     clearBtn.addEventListener("click", () => applyFilter([]));
 
-    // サイドアローボタン
-    prevBtn.addEventListener("click", () => {
-        const s = readState();
-        changePage(s.page - 1);
-    });
-    nextBtn.addEventListener("click", () => {
-        const s = readState();
-        changePage(s.page + 1);
-    });
-
     // ポップステート（戻る/進むで発火）
     window.addEventListener("popstate", render);
-
-    // モバイル⇔PC切替時に再描画
-    mobileQuery.addEventListener("change", render);
 
     render();
 });

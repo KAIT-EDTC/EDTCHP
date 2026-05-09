@@ -219,14 +219,11 @@ body {
 .pagination-area {
     display: flex;
     margin: 1.5rem auto;
-    gap: 8px;
+    gap: 6px;
+    padding: 0 1rem;
     align-items: center;
     justify-content: center;
     flex-wrap: wrap;
-}
-
-.pagination-area[hidden] {
-    display: none;
 }
 
 .pagination-area button {
@@ -245,8 +242,8 @@ body {
 .pagination-area__arrow {
     background: #333;
     color: #fff;
-    padding: 0.5em 1em;
-    font-size: 1rem;
+    padding: 0.4em 0.7em;
+    font-size: 0.95rem;
 }
 
 .pagination-area__arrow:hover:not(:disabled) {
@@ -262,9 +259,10 @@ body {
 .pagination-area__num {
     background: var(--item-color);
     color: #333;
-    width: 44px;
-    height: 44px;
+    width: 40px;
+    height: 40px;
     padding: 0;
+    font-size: 0.85rem;
     font-weight: 600;
 }
 
@@ -279,7 +277,7 @@ body {
 }
 
 .pagination-area__ellipsis {
-    width: 28px;
+    width: 20px;
     text-align: center;
     color: #888;
     font-size: 1rem;
@@ -295,95 +293,6 @@ body {
     margin-bottom: 3rem;
 }
 
-/* ===== サイドナビゲーション（左右矢印 + ドット） ===== */
-.pdct-nav-wrap {
-    display: grid;
-    grid-template-columns: auto 1fr auto;
-    align-items: center;
-    max-width: 1300px;
-    margin: 1.5rem auto 0;
-    padding: 0 1%;
-}
-
-.pdct-nav-wrap .pdct-area {
-    min-width: 0;
-}
-
-.pdct-nav-wrap .pdct-container {
-    max-width: none;
-    margin: 0;
-    padding: 0 2%;
-}
-
-.pdct-nav__prev,
-.pdct-nav__next {
-    width: 44px;
-    height: 44px;
-    border: none;
-    border-radius: 50%;
-    background: #333;
-    color: #fff;
-    cursor: pointer;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    transition: background 0.2s, transform 0.2s;
-    flex-shrink: 0;
-}
-
-.pdct-nav__prev:hover:not(:disabled),
-.pdct-nav__next:hover:not(:disabled) {
-    background: #555;
-    transform: scale(1.1);
-}
-
-.pdct-nav__prev:disabled,
-.pdct-nav__next:disabled {
-    opacity: 0.25;
-    cursor: not-allowed;
-}
-
-.pdct-nav__prev:focus-visible,
-.pdct-nav__next:focus-visible {
-    outline: 2px solid var(--main-color);
-    outline-offset: 2px;
-}
-
-/* ドットインジケーター（blogPagination.jsが生成するクラス名に対応） */
-.pdct-nav__dots {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-    padding: 1.5rem 0 3rem;
-}
-
-.blog-nav__dot {
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    background: #ccc;
-    border: none;
-    padding: 0;
-    cursor: pointer;
-    transition: background 0.2s, transform 0.2s;
-}
-
-.blog-nav__dot:hover {
-    background: #999;
-}
-
-.blog-nav__dot--active {
-    background: var(--main-color);
-    transform: scale(1.3);
-    cursor: default;
-}
-
-.blog-nav__dot:focus-visible {
-    outline: 2px solid var(--main-color);
-    outline-offset: 2px;
-}
-
 /* ===== レスポンシブ ===== */
 @media (max-width: 768px) {
     .pdct-container {
@@ -391,16 +300,6 @@ body {
     }
     .pdct-hero {
         height: 28vh;
-    }
-    .pdct-nav__prev,
-    .pdct-nav__next {
-        width: 36px;
-        height: 36px;
-    }
-    .pdct-nav__prev svg,
-    .pdct-nav__next svg {
-        width: 16px;
-        height: 16px;
     }
 }
 
@@ -413,34 +312,6 @@ body {
     }
     .pdct-filters__row {
         flex-direction: column;
-    }
-    .pdct-nav-wrap {
-        grid-template-columns: 1fr;
-    }
-    .pdct-nav__prev,
-    .pdct-nav__next {
-        display: none;
-    }
-    .pdct-nav__dots {
-        display: none;
-    }
-    .pagination-area {
-        gap: 6px;
-        padding: 0 1rem;
-    }
-    .pagination-area__arrow {
-        min-width: 44px;
-        min-height: 44px;
-        padding: 0.4em 0.7em;
-        font-size: 0.95rem;
-    }
-    .pagination-area__num {
-        width: 40px;
-        height: 40px;
-        font-size: 0.85rem;
-    }
-    .pagination-area__ellipsis {
-        width: 20px;
     }
 }
 
@@ -463,10 +334,7 @@ body {
     }
     .pdct-card,
     .pdct-card__img,
-    .pagination-area button,
-    .pdct-nav__prev,
-    .pdct-nav__next,
-    .blog-nav__dot {
+    .pagination-area button {
         transition: none;
     }
     .pdct-card:hover {
