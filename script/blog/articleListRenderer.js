@@ -1,19 +1,17 @@
 import { articleIds, BLOG_TAGS } from "./../../public/blog/articleData.js";
 import { fetchArticle } from "./../contentApi.js";
 import { readState, writeState } from "./blogUrlState.js";
-import { renderMobilePagination, renderDesktopPagination } from "./blogPagination.js";
+import { renderPagination } from "../PaginationUI.js";
 import { PAGE_SIZE, filterArticles, getAvailableYears, renderCards } from "./blogCardRenderer.js";
 
 /** 全記事データ（初回一括fetch後にキャッシュ） */
 let allArticles = [];
 let isInitialRender = true;
 
-const mobileQuery = window.matchMedia("(max-width: 480px)");
 const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 
 // DOM列挙
 let yearSelect, tagsContainer, countEl, clearBtn, blogArea, paginationAreaTop, paginationArea;
-let prevBtn, nextBtn, dotsContainer;
 
 // =====レンダラー(フィルタリング・ページネーション)=====
 
@@ -42,16 +40,8 @@ function render() {
     // 記事をレンダリング
     renderCards(blogArea, filtered, page, { isInitialRender });
 
-    // ページネーション — 
-    // SP:番号付き
-    // PC:サイドアロー+ドット
-    if (mobileQuery.matches) {
-        renderMobilePagination(paginationAreaTop, paginationArea, page, totalPages, changePage);
-    } else {
-        renderDesktopPagination(prevBtn, nextBtn, dotsContainer, page, totalPages, changePage);
-        paginationArea.hidden = true;
-        if (paginationAreaTop) paginationAreaTop.hidden = true;
-    }
+    // ページネーションををレンダリング
+    renderPagination(paginationAreaTop, paginationArea, page, totalPages, changePage);
     isInitialRender = false;
 }
 
@@ -88,9 +78,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     blogArea = document.querySelector(".blog-area");
     paginationAreaTop = document.querySelector(".pagination-area--top");
     paginationArea = document.querySelector(".pagination-area--bottom");
-    prevBtn = document.querySelector(".blog-nav__prev");
-    nextBtn = document.querySelector(".blog-nav__next");
-    dotsContainer = document.querySelector(".blog-nav__dots");
 
     // 記事を一度だけ取得してキャッシュ
     allArticles = (await Promise.all(articleIds.map((id) => fetchArticle(id)))).filter(Boolean);
@@ -141,21 +128,8 @@ document.addEventListener("DOMContentLoaded", async () => {
         applyFilter("", []);
     });
 
-    // ブログリスト側面のアローボタン
-    prevBtn.addEventListener("click", () => {
-        const s = readState();
-        changePage(s.page - 1);
-    });
-    nextBtn.addEventListener("click", () => {
-        const s = readState();
-        changePage(s.page + 1);
-    });
-
     // ポップステート(戻る/進むで発火)
     window.addEventListener("popstate", render);
-
-    // モバイル⇔PC切替時に再描画
-    mobileQuery.addEventListener("change", render);
 
     render();
 });
