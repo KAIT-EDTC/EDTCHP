@@ -129,7 +129,7 @@ body {
 }
 
 .pdct-card {
-    border-radius: 0;
+    border-radius: 10px;
     overflow: hidden;
     background: var(--item-color);
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
@@ -137,7 +137,7 @@ body {
 }
 
 .pdct-card:hover {
-    transform: translateY(-6px);
+    /* transform: translateY(-6px); */
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
 }
 
