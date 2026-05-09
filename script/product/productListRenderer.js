@@ -1,7 +1,7 @@
 import { productIds, PRODUCT_TAGS } from "./../../public/product/pdctData.js";
 import { fetchProduct } from "./../contentApi.js";
 import { readState, writeState } from "./productUrlState.js";
-import { renderPagination } from "./../blog/blogPagination.js";
+import { renderPagination } from "../PaginationUI.js";
 import { PAGE_SIZE, filterProducts, renderCards } from "./productCardRenderer.js";
 
 /** 全プロダクトデータ（初回一括fetch後にキャッシュ） */

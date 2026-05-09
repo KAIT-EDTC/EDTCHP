@@ -1,7 +1,7 @@
 import { articleIds, BLOG_TAGS } from "./../../public/blog/articleData.js";
 import { fetchArticle } from "./../contentApi.js";
 import { readState, writeState } from "./blogUrlState.js";
-import { renderPagination } from "./blogPagination.js";
+import { renderPagination } from "../PaginationUI.js";
 import { PAGE_SIZE, filterArticles, getAvailableYears, renderCards } from "./blogCardRenderer.js";
 
 /** 全記事データ（初回一括fetch後にキャッシュ） */
