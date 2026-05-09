@@ -61,35 +61,13 @@ function buildPaginationFragment(page, totalPages, onPageChange) {
     return frag;
 }
 
-export function renderMobilePagination(topNav, bottomNav, page, totalPages, onPageChange) {
+export function renderPagination(topNav, bottomNav, page, totalPages, onPageChange) {
     [topNav, bottomNav].forEach((nav) => {
+        if (!nav) return;
         nav.innerHTML = "";
         if (totalPages <= 1) return;
         nav.appendChild(buildPaginationFragment(page, totalPages, onPageChange));
     });
-    bottomNav.hidden = totalPages <= 1;
-    if (topNav) topNav.hidden = false;
-}
-
-export function renderDesktopPagination(prevBtn, nextBtn, dotsContainer, page, totalPages, onPageChange) {
-    prevBtn.disabled = page <= 1;
-    nextBtn.disabled = page >= totalPages;
-
-    dotsContainer.innerHTML = "";
-    if (totalPages <= 1) return;
-
-    const frag = document.createDocumentFragment();
-    for (let i = 1; i <= totalPages; i++) {
-        const dot = document.createElement("button");
-        dot.type = "button";
-        dot.className = "blog-nav__dot";
-        dot.setAttribute("aria-label", `${i}ページ目`);
-        if (i === page) {
-            dot.classList.add("blog-nav__dot--active");
-            dot.setAttribute("aria-current", "page");
-        }
-        dot.addEventListener("click", () => onPageChange(i));
-        frag.appendChild(dot);
-    }
-    dotsContainer.appendChild(frag);
+    if (bottomNav) bottomNav.hidden = totalPages <= 1;
+    if (topNav) topNav.hidden = totalPages <= 1;
 }
