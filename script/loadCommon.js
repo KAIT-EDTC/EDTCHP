@@ -88,7 +88,7 @@ function renderFooter(basePath) {
                     <p class="gyou">
                         <span class="footer-info">学校法人 幾徳学園　神奈川工科大学<br>mail :kait.edtc@gmail.com</span>
                     </p>
-                    <p class="gyou-b">©　${new Date().getFullYear()}　KAIT　EDTC　All Rights Reserved</p>
+                    <p class="gyou-b">&copy;　${new Date().getFullYear()}　KAIT　EDTC　All Rights Reserved</p>
                 </li>
             </ul>
         </div>
