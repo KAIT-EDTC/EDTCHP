@@ -1,6 +1,6 @@
 // ===== Product card rendering =====
 
-export const PAGE_SIZE = 6;
+export const PAGE_SIZE = 15;
 export const BASE_IMG_PATH = "./public/product/img";
 export const ALTER_IMAGE_PATH = "./public/img/EDTC-icon.webp";
 
