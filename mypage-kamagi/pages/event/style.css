@@ -1,27 +1,38 @@
 body {
-    background-color: var(--bg-color);
+    background-color: #f0f0f0;
     margin: 0;
     padding: 20px;
     color: #333;
 }
 
 main {
-    max-width: 1200px;
+    max-width: 700px;
     margin: 0 auto;
-    padding: 20px;
+    padding: 0;
 }
 
 header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 30px;
+    margin-bottom: 24px;
+    background: #fff;
+    padding: 20px 24px;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
 }
 
 h1 {
     color: var(--main-color);
     margin: 0;
-    font-size: 2rem;
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+h1 i {
+    font-size: 1.2em;
 }
 
 .back-link {
@@ -29,42 +40,106 @@ h1 {
     color: #666;
     display: flex;
     align-items: center;
-    gap: 0.5rem;
-    transition: color 0.3s;
+    gap: 6px;
+    font-size: 0.9rem;
+    padding: 8px 14px;
+    border-radius: 6px;
+    transition: all 0.2s;
 }
 
 .back-link:hover {
     color: var(--main-color);
+    background-color: #f0f7ff;
 }
 
-.event-forms-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-    gap: 30px;
-}
-
-.card {
-    background-color: var(--bg-color-2);
-    padding: 30px;
-    border-radius: 12px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
-}
-
-.card h2 {
-    color: var(--main-color);
-    margin-top: 0;
+/* タブナビゲーション */
+.tab-nav {
+    display: flex;
+    gap: 4px;
     margin-bottom: 20px;
-    border-bottom: 2px solid #ddd;
-    padding-bottom: 10px;
-    font-size: 1.5rem;
+    background: #fff;
+    padding: 6px;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
 }
 
+.tab-btn {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 12px 16px;
+    border: none;
+    background: transparent;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: #666;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.tab-btn:hover {
+    background-color: #f5f5f5;
+    color: #333;
+}
+
+.tab-btn.active {
+    background-color: var(--main-color);
+    color: #fff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.tab-btn i {
+    font-size: 1.1em;
+}
+
+/* タブパネル */
+.tab-panel {
+    display: none;
+}
+
+.tab-panel.active {
+    display: block;
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* カード */
+.card {
+    background-color: #fff;
+    padding: 28px;
+    border-radius: 12px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+}
+
+.card-header {
+    margin-bottom: 24px;
+    padding-bottom: 16px;
+    border-bottom: 2px solid #f0f0f0;
+}
+
+.card-header h2 {
+    color: var(--main-color);
+    margin: 0 0 6px 0;
+    font-size: 1.3rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.card-desc {
+    color: #888;
+    margin: 0;
+    font-size: 0.9rem;
+}
+
+/* フォーム */
 .form-group {
     margin-bottom: 20px;
 }
@@ -72,21 +147,45 @@ h1 {
 .form-group label {
     display: block;
     margin-bottom: 8px;
-    font-weight: bold;
-    color: #555;
+    font-weight: 600;
+    color: #444;
+    font-size: 0.9rem;
+}
+
+.form-group label i {
+    color: var(--main-color);
+    margin-right: 4px;
+    width: 16px;
+    text-align: center;
 }
 
 .form-group input,
 .form-group select,
 .form-group textarea {
     width: 100%;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 6px;
+    padding: 12px 14px;
+    border: 2px solid #e8e8e8;
+    border-radius: 8px;
     font-size: 1rem;
-    background-color: #fff;
+    background-color: #fafafa;
     box-sizing: border-box;
-    transition: border-color 0.3s;
+    transition: border-color 0.2s, background-color 0.2s, box-shadow 0.2s;
+}
+
+.form-group input:hover,
+.form-group select:hover,
+.form-group textarea:hover {
+    border-color: #ccc;
+    background-color: #fff;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    border-color: var(--main-color);
+    background-color: #fff;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(10, 140, 216, 0.1);
 }
 
 .form-group textarea {
@@ -94,23 +193,29 @@ h1 {
     min-height: 100px;
 }
 
-.form-group input:focus,
-.form-group select:focus,
-.form-group textarea:focus {
-    border-color: var(--main-color);
-    outline: none;
+/* 横並びフォーム行 */
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
 }
 
+/* ボタン */
 .btn {
     width: 100%;
-    padding: 12px;
+    padding: 14px;
     border: none;
-    border-radius: 6px;
+    border-radius: 8px;
     font-size: 1rem;
-    font-weight: bold;
+    font-weight: 600;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: all 0.2s;
     color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 8px;
 }
 
 .btn-primary {
@@ -119,43 +224,95 @@ h1 {
 
 .btn-primary:hover {
     opacity: 0.9;
-    box-shadow: 0 4px 10px rgba(10, 140, 216, 0.3);
+    box-shadow: 0 4px 12px rgba(10, 140, 216, 0.3);
+    transform: translateY(-1px);
 }
 
 .btn-danger {
-    background-color: #ef4444; /* Red for delete/danger */
+    background-color: #ef4444;
 }
 
 .btn-danger:hover {
     background-color: #dc2626;
-    box-shadow: 0 4px 10px rgba(239, 68, 68, 0.3);
+    box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
+    transform: translateY(-1px);
 }
 
-/* Specific styling for the update section to separate selection from form */
+.btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+/* イベント選択エリア */
 .selection-area {
-    background-color: #f0f4f8;
-    padding: 15px;
-    border-radius: 8px;
+    background-color: #f8fafc;
+    padding: 18px;
+    border-radius: 10px;
     margin-bottom: 20px;
-    border-left: 4px solid var(--main-color);
+    border: 2px solid #e8f0fe;
 }
 
-/* Form hint text */
+.selection-area label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #444;
+    font-size: 0.9rem;
+}
+
+.selection-area label i {
+    color: var(--main-color);
+    margin-right: 4px;
+}
+
+.selection-area select {
+    width: 100%;
+    padding: 12px 14px;
+    border: 2px solid #e8e8e8;
+    border-radius: 8px;
+    font-size: 1rem;
+    background-color: #fff;
+    box-sizing: border-box;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.selection-area select:focus {
+    border-color: var(--main-color);
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(10, 140, 216, 0.1);
+}
+
+/* 更新フォーム非表示状態 */
+.hidden-form {
+    display: none;
+    animation: fadeIn 0.3s ease;
+}
+
+.hidden-form.visible {
+    display: block;
+}
+
+/* フォームヒント */
 .form-hint {
     display: block;
-    margin-top: 5px;
-    font-size: 0.85rem;
-    color: #666;
+    margin-top: 6px;
+    font-size: 0.82rem;
+    color: #888;
 }
 
-/* Multiple select styling */
+/* 複数選択 */
 .form-group select[multiple] {
     height: auto;
-    min-height: 120px;
+    min-height: 130px;
+    padding: 6px;
 }
 
 .form-group select[multiple] option {
-    padding: 8px 10px;
+    padding: 10px 12px;
+    border-radius: 4px;
+    margin-bottom: 2px;
 }
 
 .form-group select[multiple] option:checked {
@@ -163,8 +320,80 @@ h1 {
     color: white;
 }
 
-/* Loading state */
-.btn:disabled {
-    opacity: 0.7;
-    cursor: not-allowed;
+/* 削除プレビュー */
+.delete-preview {
+    background: #fff8f8;
+    border: 2px solid #fecaca;
+    border-radius: 10px;
+    padding: 16px;
+    margin-bottom: 16px;
+}
+
+.delete-preview h3 {
+    margin: 0 0 10px 0;
+    font-size: 0.9rem;
+    color: #b91c1c;
+}
+
+.preview-content p {
+    margin: 4px 0;
+    font-size: 0.9rem;
+    color: #555;
+}
+
+/* 削除警告 */
+.delete-warning {
+    background: #fef2f2;
+    border: 1px solid #fecaca;
+    border-radius: 8px;
+    padding: 12px 16px;
+    margin-bottom: 16px;
+    font-size: 0.88rem;
+    color: #b91c1c;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.delete-warning i {
+    font-size: 1.1em;
+}
+
+/* レスポンシブ */
+@media (max-width: 600px) {
+    body {
+        padding: 10px;
+    }
+
+    header {
+        flex-direction: column;
+        gap: 12px;
+        text-align: center;
+        padding: 16px;
+    }
+
+    h1 {
+        font-size: 1.3rem;
+    }
+
+    .tab-btn span {
+        display: none;
+    }
+
+    .tab-btn {
+        padding: 12px;
+    }
+
+    .tab-btn i {
+        font-size: 1.3em;
+    }
+
+    .card {
+        padding: 20px;
+    }
+
+    .form-row {
+        grid-template-columns: 1fr;
+        gap: 0;
+    }
 }
