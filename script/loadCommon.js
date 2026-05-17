@@ -1,6 +1,6 @@
 /**
  * 共通ヘッダー・フッターを動的に生成・挿入するモジュール
- * 
+ *
  * 使い方:
  *   <body data-base-path="./">
  *     <div id="common-header"></div>
@@ -8,18 +8,18 @@
  *     <div id="common-footer"></div>
  *     <script type="module" src="./js/loadCommon.js"></script>
  *   </body>
- * 
+ *
  * data-base-path: ルートディレクトリへの相対パス
  *   ルート直下のページ → "./"
  *   blog/blog-data/ 配下のページ → "./../../"
  */
 
 function getBasePath() {
-    return document.body.dataset.basePath || './';
+  return document.body.dataset.basePath || './';
 }
 
 function renderHeader(basePath) {
-    return `
+  return `
     <header class="header">
         <a href="${basePath}base.html"><img src="${basePath}public/img/EDTC-icon.webp" alt="EDTC"
                 width="60" height="60" style="display: block;"></a>
@@ -36,6 +36,7 @@ function renderHeader(basePath) {
                         <li class="gnav-item"><a href="${basePath}blog.html">Blog<br>ブログ</a></li>
                         <li class="gnav-item"><a href="${basePath}product-top.html">Product<br>プロダクト</a></li>
                         <li class="gnav-item"><a href="${basePath}contact-us.html">Contact<br>お問い合わせ</a></li>
+                      ${displayLoginTab(basePath, 'sp')}
                     </ul>
                 </div>
             </div>
@@ -47,6 +48,7 @@ function renderHeader(basePath) {
                 <li class="gnav-sec header__nav-item"><a href="${basePath}blog.html"><span>Blog</span><br>ブログ</a></li>
                 <li class="gnav-sec header__nav-item"><a href="${basePath}product-top.html"><span>Product</span><br>プロダクト</a></li>
                 <li class="gnav-sec header__nav-item"><a href="${basePath}contact-us.html"><span>Contact</span><br>お問い合わせ</a></li>
+                ${displayLoginTab(basePath, 'pc')}
                 <li class="header__nav-item">
                     <div class="sns_button twitter">
                         <a href="https://x.com/kait_edtc" title="X" rel="noopener noreferrer" target="_blank">
@@ -67,7 +69,7 @@ function renderHeader(basePath) {
 }
 
 function renderFooter(basePath) {
-    return `
+  return `
     <footer class="footer">
         <div class="footer__inner">
             <ul class="footer-list">
@@ -96,24 +98,40 @@ function renderFooter(basePath) {
 
 }
 
+function displayLoginTab(basePath, menuType = 'pc') {
+  const currentTab = window.location.pathname.split('/').pop();
+
+  if (currentTab === '' || currentTab === 'base.html') {
+    const loginPath = `${basePath}mypage-kamagi/pages/login/index.html`;
+
+    if (menuType === 'sp') {
+      return `<li class="gnav-item"><a href="${loginPath}">Login<br>ログイン</a></li>`;
+    }
+
+    return `<li class="gnav-sec header__nav-item"><a href="${loginPath}"><span>Login</span><br>ログイン</a></li>`;
+  } else {
+    return '';
+  }
+}
+
 function initCommon() {
-    const basePath = getBasePath();
+  const basePath = getBasePath();
 
-    const headerEl = document.getElementById('common-header');
-    if (headerEl) {
-        headerEl.outerHTML = renderHeader(basePath);
-    }
+  const headerEl = document.getElementById('common-header');
+  if (headerEl) {
+    headerEl.outerHTML = renderHeader(basePath);
+  }
 
-    const footerEl = document.getElementById('common-footer');
-    if (footerEl) {
-        footerEl.outerHTML = renderFooter(basePath);
-    }
+  const footerEl = document.getElementById('common-footer');
+  if (footerEl) {
+    footerEl.outerHTML = renderFooter(basePath);
+  }
 }
 
 if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initCommon, { once: true });
+  document.addEventListener('DOMContentLoaded', initCommon, { once: true });
 } else {
-    initCommon();
+  initCommon();
 }
 
 export { renderHeader, renderFooter, initCommon };
