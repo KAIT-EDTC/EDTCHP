@@ -1,0 +1,49 @@
+name: easy-fomatter
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  format:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout source code
+        uses: actions/checkout@v4
+        with:
+          # Pull Requestの場合、PR元のブランチを対象にするために必要
+          ref: ${{ github.head_ref }}
+
+      # HTMLフォーマット処理
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Format HTML
+        # package.jsonがなくてもnpxで都度ダウンロードして実行
+        run: npx --yes prettier --write "**/*.html"
+
+      # PHPフォーマット処理
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+          tools: php-cs-fixer
+
+      - name: Format PHP
+        # PSR-12の標準コーディング規約を適用
+        run: php-cs-fixer fix . --rules=@PSR12
+
+      # 差分があれば自動コミットしてプッシュ
+      - name: Commit and Push formatting changes
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "style: apply code formatting"
+          commit_user_name: "github-actions[bot]"
+          commit_user_email: "github-actions[bot]@users.noreply.github.com"
