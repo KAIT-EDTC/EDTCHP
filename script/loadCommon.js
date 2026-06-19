@@ -36,6 +36,7 @@ function renderHeader(basePath) {
                         <li class="gnav-item"><a href="${basePath}blog.html">Blog<br>ブログ</a></li>
                         <li class="gnav-item"><a href="${basePath}product-top.html">Product<br>プロダクト</a></li>
                         <li class="gnav-item"><a href="${basePath}contact-us.html">Contact<br>お問い合わせ</a></li>
+                      ${displayLoginTab(basePath, "sp")}
                     </ul>
                 </div>
             </div>
@@ -47,6 +48,7 @@ function renderHeader(basePath) {
                 <li class="gnav-sec header__nav-item"><a href="${basePath}blog.html"><span>Blog</span><br>ブログ</a></li>
                 <li class="gnav-sec header__nav-item"><a href="${basePath}product-top.html"><span>Product</span><br>プロダクト</a></li>
                 <li class="gnav-sec header__nav-item"><a href="${basePath}contact-us.html"><span>Contact</span><br>お問い合わせ</a></li>
+                ${displayLoginTab(basePath, "pc")}
                 <li class="header__nav-item">
                     <div class="sns_button twitter">
                         <a href="https://x.com/kait_edtc" title="X" rel="noopener noreferrer" target="_blank">
@@ -95,7 +97,21 @@ function renderFooter(basePath) {
     </footer>`;
 }
 
-// login tab removed: keep header static, login handled by mypage links in site where needed
+function displayLoginTab(basePath, menuType = "pc") {
+  const currentTab = window.location.pathname.split("/").pop();
+
+  if (currentTab === "" || currentTab === "base.html") {
+    const loginPath = `${basePath}mypage-kamagi/pages/login/index.html`;
+
+    if (menuType === "sp") {
+      return `<li class="gnav-item"><a href="${loginPath}">Login<br>ログイン</a></li>`;
+    }
+
+    return `<li class="gnav-sec header__nav-item"><a href="${loginPath}"><span>Login</span><br>ログイン</a></li>`;
+  } else {
+    return "";
+  }
+}
 
 function initCommon() {
   const basePath = getBasePath();
