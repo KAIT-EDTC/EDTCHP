@@ -15,7 +15,7 @@
  */
 
 function getBasePath() {
-  return document.body.dataset.basePath || './';
+  return document.body.dataset.basePath || "./";
 }
 
 function renderHeader(basePath) {
@@ -93,7 +93,6 @@ function renderFooter(basePath) {
             </ul>
         </div>
     </footer>`;
-
 }
 
 // login tab removed: keep header static, login handled by mypage links in site where needed
@@ -101,19 +100,19 @@ function renderFooter(basePath) {
 function initCommon() {
   const basePath = getBasePath();
 
-  const headerEl = document.getElementById('common-header');
+  const headerEl = document.getElementById("common-header");
   if (headerEl) {
     headerEl.outerHTML = renderHeader(basePath);
   }
 
-  const footerEl = document.getElementById('common-footer');
+  const footerEl = document.getElementById("common-footer");
   if (footerEl) {
     footerEl.outerHTML = renderFooter(basePath);
   }
 }
 
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', initCommon, { once: true });
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", initCommon, { once: true });
 } else {
   initCommon();
 }
