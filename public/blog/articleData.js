@@ -17,6 +17,7 @@ export const BLOG_TAGS = [
 ];
 
 export const articleIds = [
+    "26-05-16-yugyou01",
     "26-06-12-yugyou03",
     "25-12-07-sciencewinter",
     "25-10-26-toureisai",
