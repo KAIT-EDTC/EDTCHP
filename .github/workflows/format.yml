@@ -1,0 +1,68 @@
+name: easy-formatter
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  format:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout source code
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref }}
+          # 差分（コミット履歴）を比較するために全ての履歴を取得する設定
+          fetch-depth: 0
+
+      # 変更されたHTMLファイルの一覧を取得
+      - name: Get changed HTML files
+        id: changed-html
+        uses: tj-actions/changed-files@v44
+        with:
+          files: "**/*.html"
+
+      # 変更されたPHPファイルの一覧を取得
+      - name: Get changed PHP files
+        id: changed-php
+        uses: tj-actions/changed-files@v44
+        with:
+          files: "**/*.php"
+
+      # HTMLフォーマット処理 (HTMLに変更があった場合のみ実行)
+      - name: Setup Node.js
+        if: steps.changed-html.outputs.any_changed == 'true'
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Format HTML
+        if: steps.changed-html.outputs.any_changed == 'true'
+        # 変更されたファイルのパスだけをPrettierに渡す
+        run: npx --yes prettier --write ${{ steps.changed-html.outputs.all_changed_files }}
+
+      # PHPフォーマット処理 (PHPに変更があった場合のみ実行)
+      - name: Setup PHP
+        if: steps.changed-php.outputs.any_changed == 'true'
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+          tools: php-cs-fixer
+
+      - name: Format PHP
+        if: steps.changed-php.outputs.any_changed == 'true'
+        # 変更されたファイルのパスだけをPHP-CS-Fixerに渡す
+        run: php-cs-fixer fix ${{ steps.changed-php.outputs.all_changed_files }} --rules=@PSR12
+
+      # 差分があれば自動コミット
+      - name: Commit and Push formatting changes
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "style: apply code formatting to changed files"
+          commit_user_name: "github-actions[bot]"
+          commit_user_email: "github-actions[bot]@users.noreply.github.com"
