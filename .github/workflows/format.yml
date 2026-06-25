@@ -25,7 +25,10 @@ jobs:
         id: changed-html
         uses: tj-actions/changed-files@v44
         with:
-          files: "**/*.html"
+          files: |
+            "**/*.html"
+            "**/*.css"
+            "**/*.js"
 
       # 変更されたPHPファイルの一覧を取得
       - name: Get changed PHP files
