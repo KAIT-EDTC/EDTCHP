@@ -1,121 +1,80 @@
 <?php include __DIR__ . '/ogp.php'; $ogpTags = generateOgpTags('blog', $_GET['id'] ?? null); ?>
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ja">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title id="page-title">ブログ|神奈川工科大学EDTC</title>
-        <?php echo $ogpTags; ?>
-        <link rel="stylesheet" href="css/reset.css" />
-        <link rel="stylesheet" href="css/headfoot.css" />
-        <link rel="stylesheet" href="css/blog-temp.css" />
-        <link rel="stylesheet" href="css/global.css" />
-        <!-- icon link tag -->
-        <link rel="icon" href="favicon.ico" />
-        <link
-            rel="apple-touch-icon"
-            sizes="180x180"
-            href="apple-touch-icon.png"
-        />
-    </head>
 
-    <body data-base-path="./">
-        <!-- ヘッダー: loadCommon.js により動的挿入 -->
-        <div id="common-header"></div>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="page-title">ブログ|神奈川工科大学EDTC</title>
+    <?php echo $ogpTags; ?>
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/headfoot.css">
+    <link rel="stylesheet" href="css/blog-temp.css">
+    <link rel="stylesheet" href="css/global.css">
+    <!-- icon link tag -->
+    <link rel="icon" href="favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+</head>
 
-        <main>
-            <!-- パンくずリスト -->
-            <nav aria-label="パンくずリスト">
-                <div class="breadcrumbs">
-                    <a href="./blog.html">ブログ</a>
-                    <span aria-hidden="true">
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="16"
-                            height="16"
-                            fill="currentColor"
-                            class="bi bi-chevron-right"
-                            viewBox="0 0 16 16"
-                        >
-                            <path
-                                fill-rule="evenodd"
-                                d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708"
-                            />
-                        </svg>
-                    </span>
-                    <a href="" id="breadcrumb-title"></a>
-                </div>
-            </nav>
+<body data-base-path="./">
+    <!-- ヘッダー: loadCommon.js により動的挿入 -->
+    <div id="common-header"></div>
 
-            <!-- タイトル・日付 (blogPostRenderer.js が設定) -->
-            <div class="blog-title" id="blog-title"></div>
-            <div class="blog-date" id="blog-date">イベント実施日:</div>
+    <main>
+        <!-- パンくずリスト -->
+        <nav aria-label="パンくずリスト">
+            <div class="breadcrumbs">
+                <a href="./blog.html">ブログ</a>
+                <span aria-hidden="true">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708"/></svg>
+                </span>
+                <a href="" id="breadcrumb-title"></a>
+            </div>
+        </nav>
 
-            <!-- 本文エリア -->
-            <div class="blog-body">
-                <div class="blog-main" id="blog-main">
-                    <!-- blogPostRenderer.js がJSONデータからレンダリング -->
-                </div>
-                <!-- サイドバー (PC表示のみ) -->
-                <div class="pc-only">
-                    <div class="side-menu">
-                        <div class="Archives">
-                            <h3>他の記事もどうぞ！</h3>
-                        </div>
+        <!-- タイトル・日付 (blogPostRenderer.js が設定) -->
+        <div class="blog-title" id="blog-title"></div>
+        <div class="blog-date" id="blog-date">イベント実施日:</div>
+
+        <!-- 本文エリア -->
+        <div class="blog-body">
+            <div class="blog-main" id="blog-main">
+                <!-- blogPostRenderer.js がJSONデータからレンダリング -->
+            </div>
+            <!-- サイドバー (PC表示のみ) -->
+            <div class="pc-only">
+                <div class="side-menu">
+                    <div class="Archives">
+                        <h3>他の記事もどうぞ！</h3>
                     </div>
                 </div>
             </div>
+        </div>
 
-            <!-- シェアボタン -->
-            <div class="share-buttons">
-                <button
-                    class="share-btn share-x"
-                    type="button"
-                    aria-label="Xで共有"
-                >
-                    <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="20"
-                        height="20"
-                        viewBox="0 0 24 24"
-                        fill="currentColor"
-                    >
-                        <path
-                            d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"
-                        />
-                    </svg>
-                </button>
-                <button
-                    class="share-btn share-copy"
-                    type="button"
-                    aria-label="リンクをコピー"
-                >
-                    <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="20"
-                        height="20"
-                        viewBox="0 0 24 24"
-                    >
-                        <path
-                            d="M13.723 18.654l-3.61 3.609c-2.316 2.315-6.063 2.315-8.378 0-1.12-1.118-1.735-2.606-1.735-4.188 0-1.582.615-3.07 1.734-4.189l4.866-4.865c2.355-2.355 6.114-2.262 8.377 0 .453.453.81.973 1.089 1.527l-1.593 1.592c-.18-.613-.5-1.189-.964-1.652-1.448-1.448-3.93-1.51-5.439-.001l-.001.002-4.867 4.865c-1.5 1.499-1.5 3.941 0 5.44 1.517 1.517 3.958 1.488 5.442 0l2.425-2.424c.993.284 1.791.335 2.654.284zm.161-16.918l-3.574 3.576c.847-.05 1.655 0 2.653.283l2.393-2.389c1.498-1.502 3.94-1.5 5.44-.001 1.517 1.518 1.486 3.959 0 5.442l-4.831 4.831-.003.002c-1.438 1.437-3.886 1.552-5.439-.002-.473-.474-.785-1.042-.956-1.643l-.084.068-1.517 1.515c.28.556.635 1.075 1.088 1.528 2.245 2.245 6.004 2.374 8.378 0l4.832-4.831c2.314-2.316 2.316-6.062-.001-8.377-2.317-2.321-6.067-2.313-8.379-.002z"
-                        />
-                    </svg>
-                </button>
-            </div>
+        <!-- シェアボタン -->
+        <div class="share-buttons">
+            <button class="share-btn share-x" type="button" aria-label="Xで共有">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+            </button>
+            <button class="share-btn share-copy" type="button" aria-label="リンクをコピー">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path d="M13.723 18.654l-3.61 3.609c-2.316 2.315-6.063 2.315-8.378 0-1.12-1.118-1.735-2.606-1.735-4.188 0-1.582.615-3.07 1.734-4.189l4.866-4.865c2.355-2.355 6.114-2.262 8.377 0 .453.453.81.973 1.089 1.527l-1.593 1.592c-.18-.613-.5-1.189-.964-1.652-1.448-1.448-3.93-1.51-5.439-.001l-.001.002-4.867 4.865c-1.5 1.499-1.5 3.941 0 5.44 1.517 1.517 3.958 1.488 5.442 0l2.425-2.424c.993.284 1.791.335 2.654.284zm.161-16.918l-3.574 3.576c.847-.05 1.655 0 2.653.283l2.393-2.389c1.498-1.502 3.94-1.5 5.44-.001 1.517 1.518 1.486 3.959 0 5.442l-4.831 4.831-.003.002c-1.438 1.437-3.886 1.552-5.439-.002-.473-.474-.785-1.042-.956-1.643l-.084.068-1.517 1.515c.28.556.635 1.075 1.088 1.528 2.245 2.245 6.004 2.374 8.378 0l4.832-4.831c2.314-2.316 2.316-6.062-.001-8.377-2.317-2.321-6.067-2.313-8.379-.002z"/></svg>
+            </button>
+        </div>
 
-            <div id="prev"><a href="./blog.html">← ブログトップへ戻る</a></div>
-        </main>
+        <div id="prev"><a href="./blog.html">← ブログトップへ戻る</a></div>
+    </main>
 
-        <!-- フッター: loadCommon.js により動的挿入 -->
-        <div id="common-footer"></div>
+    <!-- フッター: loadCommon.js により動的挿入 -->
+    <div id="common-footer"></div>
 
-        <script type="module" src="./script/loadCommon.js"></script>
-        <script type="module" src="./script/blog/blogPostRenderer.js"></script>
-        <script type="module" src="./script/blog/shareButtons.js"></script>
-        <script type="module">
-            if (window.matchMedia("(min-width: 820px)").matches) {
-                import("./script/blog/archiveListRenderer.js");
-            }
-        </script>
-    </body>
+    <script type="module" src="./script/loadCommon.js"></script>
+    <script type="module" src="./script/blog/blogPostRenderer.js"></script>
+    <script type="module" src="./script/blog/shareButtons.js"></script>
+    <script type="module">
+        if (window.matchMedia("(min-width: 820px)").matches) {
+            import("./script/blog/archiveListRenderer.js");
+        }
+    </script>
+</body>
+
 </html>
