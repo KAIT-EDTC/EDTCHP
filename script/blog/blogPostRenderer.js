@@ -84,7 +84,7 @@ function renderArticle(article) {
     // 日付
     const blogDateEl = document.getElementById('blog-date');
     if (blogDateEl) {
-        blogDateEl.textContent = `投稿日: ${article.date}`;
+        blogDateEl.textContent = `イベント実施日: ${article.date}`;
     }
 
     // 本文セクション
