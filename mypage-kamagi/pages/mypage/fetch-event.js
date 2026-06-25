@@ -96,6 +96,20 @@ function createDescriptionElement(description) {
 }
 
 /**
+ * 今日の日付を「YYYY-MM-DD HH:MM:SS」として取得する。
+ * @returns [string] フォーマットされた今日の日付文字列
+ */
+function getToday() {
+  const today = new Date();
+
+  const year = today.getFullYear();
+  const month = String(today.getMonth() + 1).padStart(2, '0');
+  const day = String(today.getDate()).padStart(2, '0');
+
+  return `${year}-${month}-${day} 00:00:00`;
+}
+
+/**
  * 単日の場合は 「YYYY/MM/DD(曜日): hh:mm 〜 hh:mm」 にフォーマットする。
  * 複数日の場合は 「YYYY/MM/DD 〜 YYYY/MM/DD」 にフォーマットする。(現状は時間表示なし)
  * @param {string} start 日時文字列
