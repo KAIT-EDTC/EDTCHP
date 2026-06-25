@@ -13,7 +13,7 @@ export function filterArticles(articles, year, tags) {
             if (!tags.every((tag) => articleTags.includes(tag))) return false;
         }
         return true;
-    });
+    }).sort((a, b) => (b.date ?? "").localeCompare(a.date ?? ""));
 }
 
 export function getAvailableYears(articles) {
