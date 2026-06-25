@@ -24,7 +24,8 @@ document.addEventListener('DOMContentLoaded', async () => {
  */
 async function fetchEvents(userId) {
     try {
-        const response = await eventService.getEvents({ userId: userId });
+        const todayStart = getToday();
+        const response = await eventService.getEvents({ userId: userId, startDate: todayStart });
         if (!response.events) return null;
         return response.events;
     } catch (error) {
