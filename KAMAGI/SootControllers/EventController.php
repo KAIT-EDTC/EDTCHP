@@ -85,7 +85,7 @@ class EventController extends BaseController
         // 参加者の学籍番号配列を取得
         $participantIds = [];
         if (isset($input['participant_ids']) && is_array($input['participant_ids'])) {
-            $participantIds = array_map(function($id) {
+            $participantIds = array_map(function ($id) {
                 return htmlspecialchars((string)$id, ENT_QUOTES, 'UTF-8');
             }, $input['participant_ids']);
         }
@@ -148,7 +148,7 @@ class EventController extends BaseController
         // 参加者の学籍番号配列を取得
         $participantIds = [];
         if (isset($input['participant_ids']) && is_array($input['participant_ids'])) {
-            $participantIds = array_map(function($id) {
+            $participantIds = array_map(function ($id) {
                 return htmlspecialchars((string)$id, ENT_QUOTES, 'UTF-8');
             }, $input['participant_ids']);
         }
