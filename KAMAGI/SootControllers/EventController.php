@@ -35,6 +35,14 @@ class EventController extends BaseController
     {
         $this->validateMethod('GET');
 
+        if (!isset($_SESSION['userId']) && !isset($_SESSION['name'])) {
+            Response::json(Response::HTTP_UNAUTHORIZED, [
+                'success' => false,
+                'message' => 'Unauthorized access.'
+            ]);
+            return;
+        }
+
         // フィルター条件を取得
         $filters = [
             'user_id' => htmlspecialchars($_GET['user_id'] ?? '', ENT_QUOTES, 'UTF-8'),
@@ -65,14 +73,6 @@ class EventController extends BaseController
     public function store(): void
     {
         $this->validateMethod('POST');
-
-        if (!isset($_SESSION['userId']) && !isset($_SESSION['name'])) {
-            Response::json(Response::HTTP_UNAUTHORIZED, [
-                'success' => false,
-                'message' => 'Unauthorized access.'
-            ]);
-            return;
-        }
 
         $input = $this->getRequestInput();
 
