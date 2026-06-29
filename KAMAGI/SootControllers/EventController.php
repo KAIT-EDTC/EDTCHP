@@ -22,7 +22,7 @@ class EventController extends BaseController
 
     /**
      * フィルター条件付きでイベントを取得
-     * 
+     *
      * サポートするフィルター:
      * - user_id: ユーザーID（参加者またはpublic）
      * - title: タイトル（部分一致）
@@ -53,7 +53,7 @@ class EventController extends BaseController
 
     /**
      * 新しいイベントを作成
-     * 
+     *
      * リクエストボディ:
      * - title: イベントタイトル（必須）
      * - description: イベントの説明
@@ -66,6 +66,14 @@ class EventController extends BaseController
     {
         $this->validateMethod('POST');
 
+        if (!isset($_SESSION['userId']) && !isset($_SESSION['name'])) {
+            Response::json(Response::HTTP_UNAUTHORIZED, [
+                'success' => false,
+                'message' => 'Unauthorized access.'
+            ]);
+            return;
+        }
+
         $input = $this->getRequestInput();
 
         $title = htmlspecialchars($input['title'] ?? '', ENT_QUOTES, 'UTF-8');
@@ -73,7 +81,7 @@ class EventController extends BaseController
         $visibility = htmlspecialchars($input['visibility'] ?? 'private', ENT_QUOTES, 'UTF-8');
         $start = htmlspecialchars($input['start_time'] ?? '', ENT_QUOTES, 'UTF-8');
         $end = htmlspecialchars($input['end_time'] ?? '', ENT_QUOTES, 'UTF-8');
-        
+
         // 参加者の学籍番号配列を取得
         $participantIds = [];
         if (isset($input['participant_ids']) && is_array($input['participant_ids'])) {
@@ -114,7 +122,7 @@ class EventController extends BaseController
 
     /**
      * イベントを更新
-     * 
+     *
      * リクエストボディ:
      * - google_event_id: GoogleカレンダーのイベントID（必須）
      * - title: イベントタイトル（必須）
@@ -136,7 +144,7 @@ class EventController extends BaseController
         $visibility = htmlspecialchars($input['visibility'] ?? 'private', ENT_QUOTES, 'UTF-8');
         $start = htmlspecialchars($input['start_time'] ?? '', ENT_QUOTES, 'UTF-8');
         $end = htmlspecialchars($input['end_time'] ?? '', ENT_QUOTES, 'UTF-8');
-        
+
         // 参加者の学籍番号配列を取得
         $participantIds = [];
         if (isset($input['participant_ids']) && is_array($input['participant_ids'])) {
@@ -184,7 +192,7 @@ class EventController extends BaseController
 
     /**
      * イベントを削除
-     * 
+     *
      * リクエストボディ:
      * - google_event_id: GoogleカレンダーのイベントID（必須）
      */
