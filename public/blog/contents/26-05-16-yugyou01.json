@@ -1,7 +1,7 @@
 {
   "id": "26-05-16-yugyou01",
   "date": "2026-05-16",
-  "title": "第1回遊行塾に行ってきました！",
+  "title": "第一回遊行塾に行ってきました！",
   "sections": [
     {
       "layout": "horizontal",
@@ -26,5 +26,6 @@
   ],
   "thumbnail": "26-05-16-yugyou01-01.webp",
   "caption": "今年度も遊行塾が開始しました！",
-  "author": "相馬　悠介"
+  "author": "相馬　悠介",
+  "tags": ["遊行塾"]
 }
