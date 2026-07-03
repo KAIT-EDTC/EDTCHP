@@ -20,6 +20,7 @@ export const articleIds = [
     "26-05-16-yugyou01",
     "26-06-06-yugyou02",
     "26-06-12-yugyou03",
+    "26-06-26-yugyou04",
     "25-12-07-sciencewinter",
     "25-10-26-toureisai",
     "25-09-27-yugyou06",
