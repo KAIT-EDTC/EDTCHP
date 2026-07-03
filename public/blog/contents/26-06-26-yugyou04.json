@@ -29,5 +29,8 @@
   ],
   "thumbnail": "26-06-26-yugyou04-01.webp",
   "caption": "6月20日に第4回遊行塾を実施しました。今回はArduino IDEを使ってプログラムを組み立てました。",
-  "author": "小森"
+  "author": "小森",
+  "tags": [
+    "遊行塾"
+  ]
 }
