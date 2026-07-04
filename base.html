@@ -4,77 +4,51 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
     <title>ホーム|神奈川工科大学EDTC</title>
+    <meta name="description" content="神奈川工科大学EDTCの公式サイト。工学教育を通じて子どもたちにモノづくりの楽しさを届ける学生団体です。">
+    <!-- OGP -->
+    <meta property="og:title" content="ホーム|神奈川工科大学EDTC">
+    <meta property="og:description" content="神奈川工科大学EDTCの公式サイト。工学教育を通じて子どもたちにモノづくりの楽しさを届ける学生団体です。">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://kaitedtc.com/base.html">
+    <meta property="og:image" content="https://kaitedtc.com/public/img/EDTC-icon.webp">
+    <meta property="og:site_name" content="神奈川工科大学EDTC">
+    <meta property="og:locale" content="ja_JP">
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@kait_edtc">
+    <meta name="twitter:title" content="ホーム|神奈川工科大学EDTC">
+    <meta name="twitter:description" content="神奈川工科大学EDTCの公式サイト。工学教育を通じて子どもたちにモノづくりの楽しさを届ける学生団体です。">
+    <meta name="twitter:image" content="https://kaitedtc.com/public/img/EDTC-icon.webp">
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/headfoot.css">
     <link rel="stylesheet" href="css/base.css">
     <link rel="stylesheet" href="css/slider.css">
     <link rel="stylesheet" href="css/global.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+     <!-- icon link tag -->
+    <link rel="icon" href="favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
 
 </head>
 
-<body>
-    <header>
-        <a href="base.html"><img src="public/img/EDTC-icon.webp" alt="EDTC"
-                style="display: block; height: 60px; width: auto;"></a>
-        <a href="" class="title">EDTC</a>
-        <!--==========モバイルのみ表示==========-->
-        <nav class="sp-only">
-            <div class="gnav-toggle">
-                <input id="gnav-input" type="checkbox" class="gnav-hidden">
-                <label id="gnav-open" for="gnav-input"><span></span></label>
-                <label class="gnav-unshown" id="gnav-close" for="gnav-input"></label>
-                <div id="gnav-content">
-                    <ul class="gnav-menu">
-                        <li class="gnav-item"><a href="./base.html">Home<br>ホーム</a></li>
-                        <li class="gnav-item"><a href="./blog.html">Blog<br>ブログ</a></li>
-                        <li class="gnav-item"><a href="./product-top.html">Product<br>プロダクト</a></li>
-                        <li class="gnav-item"><a href="./achievements.html">Achievements<br>実績</a></li>
-                        <li class="gnav-item"><a href="./contact-us.html">Contact<br>お問い合わせ</a></li>
-                        <li class="gnav-item"><a href="./mypage-kamagi/"><span>Login</span><br>ログイン</a></li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-        <!--==========PCのみ表示==========-->
-        <nav class="pc-only">
-            <ul>
-                <li class="gnav-sec"><a href="./base.html"><span>Home</span><br>ホーム</a></li>
-                <li class="gnav-sec"><a href="./blog.html"><span>Blog</span><br>ブログ</a></li>
-                <li class="gnav-sec"><a href="./product-top.html"><span>Product</span><br>プロダクト</a></li>
-                <li class="gnav-sec"><a href="./achievements.html"><span>Achievements</span><br>実績</a></li>
-                <li class="gnav-sec"><a href="contact-us.html"><span>Contact</span><br>お問い合わせ</a></li>
-                <li class="gnav-sec"><a href="./mypage-kamagi/"><span>Login</span><br>ログイン</a></li>
-                <li>
-                    <div class="sns_button twitter">
-                        <a href="https://x.com/kait_edtc" title="Tweet"><i class="fa fa-twitter"></i></a>
-                    </div>
-                </li>
-                <li>
-                    <div class="sns_button instagram">
-                        <a href="https://www.instagram.com/kait.edtc/" title="instagram"><i
-                                class="fa fa-instagram"></i></a>
-                    </div>
-                </li>
-            </ul>
-        </nav>
-        </div>
-    </header>
+<body data-base-path="./">
+    <!-- ヘッダー: loadCommon.js により動的挿入 -->
+    <div id="common-header"></div>
     <main>
         <!-- スライドの外枠 -->
         <div class="slide-wrapper">
-            <p>学ぶ側、<span>教える側、</span><span>どちらも学べる</span><span>環境作りを</span></p>
+            <p>学ぶ側、<span>教える側、</span><span>どちらも学べる</span><br><span>環境作りを</span></p>
             <!-- スライド（コンテンツ） -->
             <div id="slide" class="slide">
                 <div>
-                    <img src="public/img/EDTC-smile-sasaki.webp" alt="smilesasaki">
+                    <img src="public/img/EDTC-smile-sasaki.webp" alt="EDTC佐々木の笑顔" width="640" height="360">
                 </div>
                 <div>
-                    <img src="public/img/EDTC-nemote-teach.webp" alt="">
+                    <img src="public/img/EDTC-nemote-teach.webp" alt="EDTC根本の指導の様子" width="640" height="360">
                 </div>
                 <div>
-                    <img src="public/img/sakura-fix.webp" alt="">
+                    <img src="public/img/sakura-fix.webp" alt="メンバーが生徒に教えている画像" width="640" height="360">
                 </div>
             </div>
             <!-- 左右のボタン -->
@@ -90,7 +64,7 @@
         <nav class="pc-only">
             <a href="aboutEDTC.html"><h1 class="about">About <span class="edtc-logo"><span class="e">E</span><span class="d">D</span><span class="t">T</span><span class="c">C</span></span></h1></a>
         </nav>
-        
+
         <div class="sp-only">
             <div class="about">
                 <h1 class="about">About <span class="edtc-logo"><span class="e">E</span><span class="d">D</span><span class="t">T</span><span class="c">C</span></span></h1>
@@ -115,7 +89,7 @@
                 </p>
             </div>
         </div>
-        <video class="EDTCmovie" loop autoplay muted playsinline src="img/EDTC_PV(調整後）.mp4" controls></video>
+        <video class="EDTCmovie" loop autoplay muted playsinline src="public/img/EDTC_PV(調整後）.mp4" controls width="1280" height="720"></video>
         <!-- 幾徳再限定 -->
         <div class="ikutokusai" style="display: none;">
                 <a href="https://kaitedtc.flop.jp/"><img src="public/img/20251015_EDTC_.png" alt="学際ポスター" ></a>
@@ -147,7 +121,7 @@
             </h2>
             <!-- BLOGページができ次第リンク -->
             <ul>
-            
+
             </ul>
             <script type="module">
                 import { articleIds } from './public/blog/articleData.js';
@@ -177,32 +151,10 @@
             </div>
         </div>
     </main>
-    <footer>
-        <div class="flex">
-            <ul class="footer-list">
-                <li style="text-align: center;">
-                    <p class="gyou-a"></p>
-                    <a href="./base.html">ホーム　</a>
-                    <a href="./blog.html">ブログ　</a>
-                    <a href="./product-top.html">プロダクト　</a>
-                    <a href="./achievements.html">実績</a>
-                    <hr size="100%">
-                </li>
-                <li style="padding-bottom: 15px;text-align: center;">
-                    <a href="./contact-us.html">お問い合わせ</a>
-                    <hr size="100%">
-                    <p class="gyou"></p>
-                    <b><img src="public/img/EDTC-icon.webp" alt="EDTCロゴ" height="50px" width="auto" class="syasinn">
-                        <font size="12">EDTC</font>
-                    </b>
-                    <p class="gyou">
-                        <font size="3">学校法人 幾徳学園　神奈川工科大学<br>mail :kait.edtc@gmail.com</font>
-                    </p>
-                    <p class="gyou-b">©　2024　KAIT　EDTC　All Rights Reserved</p>
-                </li>
-            </ul>
-        </div>
-    </footer>
+    <!-- フッター: loadCommon.js により動的挿入 -->
+    <div id="common-footer"></div>
+
+    <script type="module" src="./script/loadCommon.js"></script>
     <script type="text/javascript" src="script/slider.js"></script>
 </body>
 
