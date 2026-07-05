@@ -81,17 +81,20 @@ async function updateEvent(formValues) {
  */
 function handleUpdateEventSelect() {
     const updateSelect = document.getElementById('update-event-select');
+    const updateForm = document.getElementById('update-event-form');
     const selectedId = updateSelect.value;
     
-    // 何も選択していない場合はクリア
+    // 何も選択していない場合はクリア＆非表示
     if (!selectedId) {
         clearUpdateForm();
+        updateForm.classList.remove('visible');
         return;
     }
     
     const event = eventsCache.find(e => e.id === selectedId);
     if (event) {
         populateUpdateForm(event);
+        updateForm.classList.add('visible');
     }
 }
 
@@ -138,6 +141,7 @@ function setupUpdateForm() {
             // セレクトをリセット
             updateSelect.value = '';
             clearUpdateForm();
+            updateForm.classList.remove('visible');
             
         } catch (error) {
             showToast(error.message, 'error');

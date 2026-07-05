@@ -33,7 +33,7 @@ function showError(message, basePath) {
         mainEl.innerHTML = `
             <div class="product-error">
                 <p class="product-error__icon">
-                    <i class="fa fa-exclamation-triangle"></i>
+                    ⚠
                 </p>
                 <p class="product-error__message">${escapeHtml(message)}</p>
                 <p>

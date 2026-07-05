@@ -8,7 +8,29 @@
  */
 function toggleDeleteWarning(show) {
     const deleteWarning = document.getElementById('delete-warning');
-    deleteWarning.style.display = show ? 'block' : 'none';
+    deleteWarning.style.display = show ? 'flex' : 'none';
+}
+
+/**
+ * 削除プレビューの表示
+ * @param {string} eventId イベントID
+ */
+function showDeletePreview(eventId) {
+    const preview = document.getElementById('delete-preview');
+    const previewTitle = document.getElementById('delete-preview-title');
+    const previewDate = document.getElementById('delete-preview-date');
+
+    if (!eventId) {
+        preview.style.display = 'none';
+        return;
+    }
+
+    const event = eventsCache.find(e => e.id === eventId);
+    if (event) {
+        previewTitle.textContent = event.title;
+        previewDate.textContent = formatDateTime(event.start) + ' 〜 ' + formatDateTime(event.end);
+        preview.style.display = 'block';
+    }
 }
 
 /**
@@ -46,9 +68,10 @@ function setupDeleteForm() {
         return;
     }
     
-    // イベント選択時に警告を表示
+    // イベント選択時に警告とプレビューを表示
     deleteSelect.addEventListener('change', () => {
         toggleDeleteWarning(!!deleteSelect.value);
+        showDeletePreview(deleteSelect.value);
     });
     
     // 削除フォーム送信

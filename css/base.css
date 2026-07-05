@@ -2,6 +2,10 @@
 ======================================================================================
 ======================================================================================*/
 /*団体訓の設定*/
+main > nav.pc-only {
+    margin: 0 1% 0 auto;
+}
+
 .about {
     background: linear-gradient(135deg, #f5f7fa 0%, #e4e8ec 100%);
     padding: 60px 20px;
@@ -177,6 +181,10 @@ h1 {
 }
 
 /* Legacy styles - kept for compatibility */
+.about ul {
+    list-style: none;
+}
+
 .about .fmozi {
     font-size: 60px;
     font-weight: bolder;

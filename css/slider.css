@@ -59,6 +59,7 @@ li {
     /* height: auto; */
     /* add */
     height: 70vh; /*スライド高さいっぱい*/
+    aspect-ratio: 16 / 9;
     object-fit: cover;/*縮尺そのまま切り抜き*/
 
     }
@@ -146,4 +147,32 @@ li {
 
 .indicator li:first-of-type {
     background-color: #000;
+}
+
+@media (max-width: 768px) {
+    .slide-wrapper {
+        height: 40vh;
+    }
+
+    .slide img {
+        height: 40vh;
+    }
+
+    .slide-wrapper p {
+        font-size: 3.8vh;
+    }
+}
+
+@media (max-width: 480px) {
+    .slide-wrapper {
+        height: 30vh;
+    }
+
+    .slide img {
+        height: 30vh;
+    }
+
+    .slide-wrapper p {
+        font-size: 3.2vh;
+    }
 }

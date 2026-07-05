@@ -1,0 +1,67 @@
+name: Deploy to Sakura Internet
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: "8.2"
+          tools: composer
+
+      - name: Install Composer dependencies
+        working-directory: KAMAGI
+        run: composer install --no-dev --optimize-autoloader
+
+      - name: Setup SSH
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SAKURA_SSH_KEY }}" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+          ssh-keyscan -H -p ${{ secrets.SAKURA_PORT }} ${{ secrets.SAKURA_HOST }} >> ~/.ssh/known_hosts
+
+      - name: Deploy project files via rsync
+        run: |
+          rsync -azv --delete \
+            --exclude='.git/' \
+            --exclude='.github/' \
+            --exclude='.vscode/' \
+            --exclude='KAMAGI/vendor/' \
+            --exclude='.editorconfig' \
+            --exclude='.env' \
+            --exclude='.env.example' \
+            --exclude='docker/' \
+            --exclude='Dockerfile' \
+            --exclude='docker-compose.yml' \
+            --exclude='学祭ライブラリ/' \
+            --exclude='メモ帳.txt' \
+            --exclude='README.md' \
+            --exclude='robots.txt' \
+            --exclude='sitemap.xml' \
+            --exclude='.htaccess' \
+            --exclude='EDTC_PV(調整後）.mp4' \
+            --exclude='WHAT_IS_EDTC.md' \
+            -e "ssh -i ~/.ssh/deploy_key -p ${{ secrets.SAKURA_PORT }}" \
+            ./ ${{ secrets.SAKURA_USERNAME }}@${{ secrets.SAKURA_HOST }}:~/www/EDTC/
+
+      - name: Deploy vendor directory
+        run: |
+          rsync -azv --delete \
+            -e "ssh -i ~/.ssh/deploy_key -p ${{ secrets.SAKURA_PORT }}" \
+            KAMAGI/vendor/ ${{ secrets.SAKURA_USERNAME }}@${{ secrets.SAKURA_HOST }}:~/vendor/
+
+      - name: Regenerate autoloader on server
+        run: |
+          ssh -i ~/.ssh/deploy_key -p ${{ secrets.SAKURA_PORT }} \
+            ${{ secrets.SAKURA_USERNAME }}@${{ secrets.SAKURA_HOST }} \
+            "cd ~/www/EDTC/KAMAGI && env COMPOSER_VENDOR_DIR=/home/${{ secrets.SAKURA_USERNAME }}/vendor composer dump-autoload --no-dev --optimize"

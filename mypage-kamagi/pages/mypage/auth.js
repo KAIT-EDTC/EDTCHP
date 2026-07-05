@@ -1,81 +1,68 @@
 /**
- * マイページの認証とコンテンツ表示
+ * マイページのコンテンツ表示
+ *
+ * 認証・認可チェックは lib/auth.js が担当。
+ * authReady 完了後に window.currentUser を利用してUIを構築する。
  */
 
-// ページ読み込み時にログイン状態をチェック
 document.addEventListener('DOMContentLoaded', async () => {
-    await initializePage();
+    // 認可チェックを待つ(window.currentUser がセットされるのを待つ)
+    await window.authReady;
+
+    const user = window.currentUser;
+    document.getElementById('user-name').textContent = user.name;
+
+    const events = await fetchEvents(user.id);
+    displayEvents(events);
 });
 
+
 /**
- * ページの初期化処理
+ * APIからユーザーに紐づくイベント一覧を取得して表示する
+ * 
+ * @param {string} userId 
  */
-async function initializePage() {
-    const loadingDiv = document.getElementById('loading');
-    
+async function fetchEvents(userId) {
     try {
-        const authData = await checkLoginStatus();
-        loadingDiv.style.display = 'none';
-        
-        if (authData.isLoggedIn) {
-            displayLoggedInContent(authData.user);
-        } else {
-            displayNotLoggedInContent();
-        }
+        const todayStart = getToday();
+        const response = await eventService.getEvents({ userId: userId, startDate: todayStart });
+        if (!response.events) return null;
+        return response.events;
     } catch (error) {
-        console.error('ログイン状態の確認に失敗:', error);
-        loadingDiv.style.display = 'none';
-        displayNotLoggedInContent();
+        console.error('Error fetching events:', error);
+        return null;
     }
 }
 
 /**
- * ログイン状態をAPIで確認
+ * イベントデータを受け取り、イベントカードを生成して表示する
  * 
- * @returns {Promise<{isLoggedIn: boolean, user?: Object}>} 認証状態
+ * @param {Object[]} events イベントデータの配列
+ * @param {string} events[].id イベントID
+ * @param {string} events[].title イベントタイトル
+ * @param {string} events[].start イベント開始日時
+ * @param {string} events[].end イベント終了日時
+ * @param {string} events[].description イベント説明（任意）
+ * @param {string} events[].visibility イベントの公開範囲（"public", "private"）
+ * @param {Object[]} events[].participants 参加者情報の配列
+ * @param {string} events[].participants[].id 参加者ID
+ * @param {string} events[].participants[].name 参加者名
  */
-async function checkLoginStatus() {
-    return await authService.checkStatus();
-}
+function displayEvents(events) {
+    const eventList = document.getElementById('event-list');
+    const noEvents = document.getElementById('no-events');
 
-/**
- * 未ログイン状態のUIを表示
- */
-function displayNotLoggedInContent() {
-    const notLoggedInDiv = document.getElementById('not-logged-in');
-    const breadcrumbsDiv = document.getElementById('breadcrumbs');
-    
-    breadcrumbsDiv.style.display = 'none';
-    notLoggedInDiv.style.display = 'block';
-}
-
-/**
- * ログイン済みコンテンツを表示
- * 
- * @param {Object} user ユーザー情報
- * @param {string} user.id ユーザーID
- * @param {string} user.name ユーザー名
- * @param {string} user.role ユーザー権限
- */
-async function displayLoggedInContent(user) {
-    const loggedInDiv = document.getElementById('logged-in-content');
-    const userNameSpan = document.getElementById('user-name');
-
-    // 管理者権限の場合、管理者メニューとイベント管理を表示
-    if (user.role == '0') {
-        document.getElementById('admin-link').style.display = 'block';
-        document.getElementById('event-manage-link').style.display = 'block';
+    if (!events || events.length === 0) {
+        noEvents.style.display = 'block';
+        eventList.style.display = 'none';
+        return;
     }
     
-    // ユーザー名を表示
-    userNameSpan.textContent = user.name;
-    
-    // コンテンツを表示
-    loggedInDiv.style.display = 'block';
-
-    // イベント一覧表示
-    const events = await fetchEvents(user.id);
-    diplayEvents(events);
+    noEvents.style.display = 'none';
+    eventList.style.display = 'grid';
+    const fragment = document.createDocumentFragment();
+    events.forEach(event => {
+        fragment.appendChild(createEventCard(event));
+    });
+    eventList.replaceChildren(fragment);
 }
-
-

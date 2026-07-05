@@ -11,17 +11,8 @@ let eventsCache = [];
 let membersCache = [];
 
 document.addEventListener('DOMContentLoaded', async () => {
-
-    const authData = await authService.checkStatus();
-
-    if (authData.isLoggedIn && authData.user.role == '0') {
-        document.body.style.display = 'block';
-        // 管理者の場合はハンバーガーメニューの管理者リンクを表示
-        const adminLink = document.getElementById('admin-link');
-        if (adminLink) adminLink.style.display = 'block';
-    } else {
-        window.location.href = '/mypage-kamagi/pages/login/';
-    }
+    // タブ切り替えのセットアップ
+    setupTabs();
 
     // 初期化: メンバー一覧とイベント一覧を取得
     await Promise.all([
@@ -34,6 +25,32 @@ document.addEventListener('DOMContentLoaded', async () => {
     setupUpdateForm();
     setupDeleteForm();
 });
+
+/**
+ * タブ切り替え機能のセットアップ
+ */
+function setupTabs() {
+    const tabBtns = document.querySelectorAll('.tab-btn');
+    const tabPanels = document.querySelectorAll('.tab-panel');
+
+    tabBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const targetTab = btn.dataset.tab;
+
+            // ボタンのアクティブ状態を切り替え
+            tabBtns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+
+            // パネルの表示を切り替え
+            tabPanels.forEach(panel => {
+                panel.classList.remove('active');
+                if (panel.id === `${targetTab}-section`) {
+                    panel.classList.add('active');
+                }
+            });
+        });
+    });
+}
 
 /**
  * メンバー一覧を取得して参加者セレクトボックスに表示

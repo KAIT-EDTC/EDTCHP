@@ -20,7 +20,6 @@ const dom = {};
 
 document.addEventListener("DOMContentLoaded", async () => {
     cacheDom();
-    await initializeAuthState();
     initializeDefaultValues();
     bindEvents();
     renderSectionEditors();

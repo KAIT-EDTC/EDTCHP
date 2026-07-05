@@ -13,28 +13,27 @@ main {
 /* パンくずリスト */
 .breadcrumbs {
     margin: 1% 0;
-    font-size: 1.0em;
+    font-size: 1.2em;
     padding: 1%;
-    width: fit-content;
 }
 .breadcrumbs a:hover {
     background-color: var(--breadcrumbs-hover-color);
 }
-.breadcrumbs i {
+.breadcrumbs span {
     vertical-align: middle;
-    font-size: 1.3em;
-    margin: 0 5px;
 }
 
 /* メインビジュアル */
 .main-visual {
     position: relative;
     overflow: hidden;
+    min-height: 300px;
 }
 
 .main-visual img {
     width: 100%;
     height: 100%;
+    aspect-ratio: 16 / 9;
     object-fit: cover;
 }
 

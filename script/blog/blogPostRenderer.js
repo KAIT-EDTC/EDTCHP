@@ -35,7 +35,7 @@ function showError(message, basePath) {
         mainEl.innerHTML = `
             <div style="text-align: center; padding: 40px 20px;">
                 <p style="font-size: 2em; color: #ccc; margin-bottom: 16px;">
-                    <i class="fa fa-exclamation-triangle"></i>
+                    ⚠
                 </p>
                 <p style="font-size: 1.1em; color: #666;">${escapeHtml(message)}</p>
                 <p style="margin-top: 24px;">
@@ -46,6 +46,17 @@ function showError(message, basePath) {
             </div>
         `;
     }
+
+}
+
+function sectionHasImage(section) {
+    if (!section) return false;
+
+    if (section.media && section.media.type === 'image' && section.media.src) {
+        return true;
+    }
+
+    return Boolean(section.image);
 }
 
 /**
@@ -73,19 +84,26 @@ function renderArticle(article) {
     // 日付
     const blogDateEl = document.getElementById('blog-date');
     if (blogDateEl) {
-        blogDateEl.innerHTML = `<i class="fa fa-clock-o"></i>${escapeHtml(article.date)}`;
+        blogDateEl.textContent = `イベント実施日: ${article.date}`;
     }
 
     // 本文セクション
     const mainEl = document.getElementById('blog-main');
     if (!mainEl) return;
+    mainEl.textContent = '';
 
     const fragment = document.createDocumentFragment();
+    let prioritizedImageAssigned = false;
 
     // 各セクションをレンダリング
     if (article.sections && article.sections.length > 0) {
         article.sections.forEach(section => {
-            fragment.appendChild(renderSection(section));
+            const prioritizeImage = !prioritizedImageAssigned && sectionHasImage(section);
+            fragment.appendChild(renderSection(section, { prioritizeImage }));
+
+            if (prioritizeImage) {
+                prioritizedImageAssigned = true;
+            }
         });
     }
 

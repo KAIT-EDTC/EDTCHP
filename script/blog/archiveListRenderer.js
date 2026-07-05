@@ -1,7 +1,15 @@
 import { articleIds } from "./../../public/blog/articleData.js";
 import { fetchArticle } from "./../contentApi.js";
 
+const DESKTOP_QUERY = "(min-width: 820px)";
+
+function shouldLoadArchive() {
+    return window.matchMedia(DESKTOP_QUERY).matches;
+}
+
 const articleLoad = async () => {
+    if (!shouldLoadArchive()) return;
+
     const Archives = document.getElementsByClassName("Archives")[0];
     if (!Archives) return;
 
@@ -46,4 +54,29 @@ const articleLoad = async () => {
     Archives.appendChild(ulElement);
 };
 
-document.addEventListener("DOMContentLoaded", () => articleLoad());
+function scheduleArchiveLoad() {
+    const run = () => {
+        articleLoad().catch((error) => {
+            console.error("Archive load error:", error);
+        });
+    };
+
+    if ("requestIdleCallback" in window) {
+        window.requestIdleCallback(run, { timeout: 1500 });
+        return;
+    }
+
+    window.setTimeout(run, 300);
+}
+
+if (document.readyState === "complete") {
+    if (shouldLoadArchive()) {
+        scheduleArchiveLoad();
+    }
+} else {
+    window.addEventListener("load", () => {
+        if (shouldLoadArchive()) {
+            scheduleArchiveLoad();
+        }
+    }, { once: true });
+}

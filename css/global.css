@@ -4,6 +4,15 @@
     font-family: "Noto Sans JP", sans-serif;
 }
 
+a {
+    color: #4b4b4b;
+}
+
+body {
+    line-height: normal;
+    margin-top: 70px;
+}
+
 :root {
     --main-color: #0a8cd8;
     --bg-color: #e6e6e6;
@@ -12,8 +21,18 @@
     --breadcrumbs-hover-color: #cfcecb;
 }
 
+/* フォーカス可視化（アクセシビリティ） */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+[tabindex]:focus-visible {
+    outline: 2px solid var(--main-color);
+    outline-offset: 2px;
+}
+
 .anim-fadein {
-  animation: fade-in 1s;
+  animation: fade-in 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
 }
 
 @keyframes fade-in {

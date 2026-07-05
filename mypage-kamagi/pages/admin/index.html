@@ -11,22 +11,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 </head>
 
-<body>
-    <!-- ハンバーガーメニュー -->
-    <div class="hamburger-menu">
-        <input type="checkbox" id="menu-toggle">
-        <label for="menu-toggle" class="menu-icon">
-            <span></span>
-            <span></span>
-            <span></span>
-        </label>
-        <nav class="menu-content">
-            <a href="./../mypage/"><i class="fa fa-home"></i> マイページ</a>
-            <a href="./../event/"><i class="fa fa-calendar"></i> イベント管理</a>
-            <a href="#" id="logout-btn"><i class="fa fa-sign-out"></i> ログアウト</a>
-        </nav>
-    </div>
-
+<body style="display:none;">
     <div class="container">
         <div class="card">
             <h2>新規登録</h2>
@@ -97,6 +82,7 @@
 
     <script src="../../lib/api-client.js"></script>
     <script src="../../lib/services/auth-service.js"></script>
+    <script src="../../lib/auth.js"></script>
     <script src="../../lib/utils.js"></script>
     <script src="./update.js"></script>
     <script src="./signup.js"></script>
