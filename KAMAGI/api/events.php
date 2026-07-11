@@ -1,5 +1,6 @@
 <?php
 
+require_once __DIR__ . '/../session_start.php';
 require_once __DIR__ . '/../bootstrap.php';
 
 use KAMAGI\Database;
