@@ -1,5 +1,6 @@
 <?php
 
+require_once __DIR__ . '/../session_start.php';
 require_once __DIR__ . '/../bootstrap.php';
 
 use KAMAGI\Database;
@@ -31,22 +32,22 @@ switch ($method) {
         // フィルター無し : 全イベントを取得する(コンボボックス用)
         $eventController->fetchWithFilters();
         break;
-    
+
     case 'POST':
         // イベント作成（参加者情報を含む）
         $eventController->store();
         break;
-    
+
     case 'PUT':
         // イベント更新（参加者情報を含む）
         $eventController->update();
         break;
-    
+
     case 'DELETE':
         // イベント削除
         $eventController->destroy();
         break;
-    
+
     default:
         Response::json(Response::HTTP_METHOD_NOT_ALLOWED, [
             'success' => false,
