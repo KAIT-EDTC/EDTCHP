@@ -43,7 +43,6 @@ jobs:
             --exclude='docker/' \
             --exclude='Dockerfile' \
             --exclude='docker-compose.yml' \
-            --exclude='学祭ライブラリ/' \
             --exclude='メモ帳.txt' \
             --exclude='README.md' \
             --exclude='robots.txt' \
