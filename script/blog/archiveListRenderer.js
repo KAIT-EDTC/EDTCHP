@@ -20,14 +20,15 @@ const articleLoad = async () => {
     const params = new URLSearchParams(window.location.search);
     const currentId = params.get("id");
 
-    // 現在記事を除いた先頭5件を並列fetch
-    const targetIds = articleIds
-        .filter((id) => id !== currentId)
-        .slice(0, 5);
+    // 全件fetch → date降順ソート → 現在記事を除いた先頭5件
+    const allArticles = (await Promise.all(
+        articleIds.map((id) => fetchArticle(id, basePath))
+    )).filter(Boolean);
 
-    const articles = await Promise.all(
-        targetIds.map((id) => fetchArticle(id, basePath))
-    );
+    const articles = allArticles
+        .sort((a, b) => b.date.localeCompare(a.date))
+        .filter((a) => a.id !== currentId)
+        .slice(0, 5);
 
     // DOM 構築
     const ulElement = document.createElement("ul");
