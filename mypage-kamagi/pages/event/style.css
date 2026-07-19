@@ -302,23 +302,7 @@ h1 i {
     color: #888;
 }
 
-/* 複数選択 */
-.form-group select[multiple] {
-    height: auto;
-    min-height: 130px;
-    padding: 6px;
-}
 
-.form-group select[multiple] option {
-    padding: 10px 12px;
-    border-radius: 4px;
-    margin-bottom: 2px;
-}
-
-.form-group select[multiple] option:checked {
-    background: linear-gradient(0deg, var(--main-color) 0%, var(--main-color) 100%);
-    color: white;
-}
 
 /* 削除プレビュー */
 .delete-preview {
@@ -359,6 +343,8 @@ h1 i {
     font-size: 1.1em;
 }
 
+
+
 /* レスポンシブ */
 @media (max-width: 600px) {
     body {
@@ -396,4 +382,5 @@ h1 i {
         grid-template-columns: 1fr;
         gap: 0;
     }
+
 }

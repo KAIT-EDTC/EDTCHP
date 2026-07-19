@@ -19,6 +19,10 @@ document.addEventListener('DOMContentLoaded', async () => {
         loadMembers(),
         loadEvents()
     ]);
+
+    // カスタムマルチセレクトの初期化
+    initMultiSelect('create');
+    initMultiSelect('update');
     
     // フォームイベントの設定（各ファイルから読み込まれた関数を呼び出す）
     setupCreateForm();
@@ -61,7 +65,8 @@ async function loadMembers() {
         
         if (result.success && result.members) {
             membersCache = result.members;
-            populateMemberSelects();
+            // マルチセレクトコンポーネントにメンバーリストを渡す
+            setMultiSelectMembers(result.members);
         }
     } catch (error) {
         console.error('メンバー一覧の取得に失敗:', error.message);
@@ -69,32 +74,6 @@ async function loadMembers() {
     }
 }
 
-/**
- * 参加者セレクトボックスにメンバー一覧を表示
- */
-function populateMemberSelects() {
-    const createParticipants = document.getElementById('create-participants');
-    const updateParticipants = document.getElementById('update-participants');
-    
-    // クリア
-    createParticipants.innerHTML = '';
-    updateParticipants.innerHTML = '';
-    
-    // メンバーをオプションとして追加
-    membersCache.forEach(member => {
-        const optionText = `${member.name} (${member.id})`;
-        
-        const createOption = document.createElement('option');
-        createOption.value = member.id;
-        createOption.textContent = optionText;
-        createParticipants.appendChild(createOption);
-        
-        const updateOption = document.createElement('option');
-        updateOption.value = member.id;
-        updateOption.textContent = optionText;
-        updateParticipants.appendChild(updateOption);
-    });
-}
 
 /**
  * イベント一覧を取得してセレクトボックスに表示
