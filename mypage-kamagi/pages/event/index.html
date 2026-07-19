@@ -73,22 +73,11 @@
                     </div>
 
                     <div class="form-group">
-                        <label><i class="fa fa-users"></i> 参加者</label>
-                        <div class="multi-select" id="create-participants-widget">
-                            <div class="multi-select-control" id="create-participants-control">
-                                <div class="multi-select-tags" id="create-participants-tags">
-                                    <input type="text" class="multi-select-search" id="create-participants-search" placeholder="メンバーを検索..." autocomplete="off">
-                                </div>
-                                <button type="button" class="multi-select-clear" id="create-participants-clear" title="すべてクリア">×</button>
-                                <span class="multi-select-arrow">▾</span>
-                            </div>
-                            <div class="multi-select-dropdown" id="create-participants-dropdown">
-                                <ul class="multi-select-list" id="create-participants-list">
-                                    <!-- JSで動的に追加 -->
-                                </ul>
-                            </div>
-                        </div>
-                        <small class="form-hint">選択するとカレンダーにも表示されます。</small>
+                        <label for="create-participants"><i class="fa fa-users"></i> 参加者</label>
+                        <select id="create-participants" name="participant_ids" multiple size="5">
+                            <!-- JSで動的に追加 -->
+                        </select>
+                        <small class="form-hint">Ctrl/Cmdキーで複数選択可。選択するとカレンダーにも表示されます。</small>
                     </div>
 
                     <button type="submit" class="btn btn-primary">
@@ -147,22 +136,11 @@
                     </div>
 
                     <div class="form-group">
-                        <label><i class="fa fa-users"></i> 参加者</label>
-                        <div class="multi-select" id="update-participants-widget">
-                            <div class="multi-select-control" id="update-participants-control">
-                                <div class="multi-select-tags" id="update-participants-tags">
-                                    <input type="text" class="multi-select-search" id="update-participants-search" placeholder="メンバーを検索..." autocomplete="off">
-                                </div>
-                                <button type="button" class="multi-select-clear" id="update-participants-clear" title="すべてクリア">×</button>
-                                <span class="multi-select-arrow">▾</span>
-                            </div>
-                            <div class="multi-select-dropdown" id="update-participants-dropdown">
-                                <ul class="multi-select-list" id="update-participants-list">
-                                    <!-- JSで動的に追加 -->
-                                </ul>
-                            </div>
-                        </div>
-                        <small class="form-hint">選択するとカレンダーにも表示されます。</small>
+                        <label for="update-participants"><i class="fa fa-users"></i> 参加者</label>
+                        <select id="update-participants" name="participant_ids" multiple size="5">
+                            <!-- JSで動的に追加 -->
+                        </select>
+                        <small class="form-hint">Ctrl/Cmdキーで複数選択可。選択するとカレンダーにも表示されます。</small>
                     </div>
 
                     <button type="submit" class="btn btn-primary">
