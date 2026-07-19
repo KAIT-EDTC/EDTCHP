@@ -119,33 +119,11 @@
             <h2>
                 NEWS
             </h2>
-            <!-- BLOGページができ次第リンク -->
+            <!-- articleData.jsが更新されると自動的に最新記事を取得される -->
             <ul>
 
             </ul>
-            <script type="module">
-                import { articleIds } from './public/blog/articleData.js';
-                import { fetchArticle } from './script/contentApi.js';
-
-                const newsList = document.querySelector('.news ul');
-                if (newsList) {
-                    const top5 = articleIds.slice(0, 5);
-                    Promise.all(top5.map(async (id) => {
-                        const article = await fetchArticle(id);
-                        return article;
-                    })).then(articles => {
-                        articles.forEach(article => {
-                            if (!article) return;
-                            const li = document.createElement('li');
-                            const a = document.createElement('a');
-                            a.href = article.link;
-                            a.textContent = `${article.date} ${article.title}`;
-                            li.appendChild(a);
-                            newsList.appendChild(li);
-                        });
-                    });
-                }
-            </script>
+            <script type="module" src="./script/newsListRenderer.js"></script>
             <div class="itiran">
                 <a href="./blog.html">blog一覧へ</a>
             </div>
