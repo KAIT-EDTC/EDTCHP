@@ -6,15 +6,13 @@
  * 更新フォームをクリア
  */
 function clearUpdateForm() {
-    const updateParticipants = document.getElementById('update-participants');
-    
     document.getElementById('update-event-id').value = '';
     document.getElementById('update-title').value = '';
     document.getElementById('update-description').value = '';
     document.getElementById('update-start-time').value = '';
     document.getElementById('update-end-time').value = '';
     document.getElementById('update-visibility').value = 'public';
-    Array.from(updateParticipants.options).forEach(opt => opt.selected = false);
+    resetMultiSelect('update');
 }
 
 /**
@@ -22,8 +20,6 @@ function clearUpdateForm() {
  * @param {Object} event イベントデータ
  */
 function populateUpdateForm(event) {
-    const updateParticipants = document.getElementById('update-participants');
-    
     document.getElementById('update-event-id').value = event.id;
     document.getElementById('update-title').value = event.title || '';
     document.getElementById('update-description').value = event.description || '';
@@ -33,9 +29,7 @@ function populateUpdateForm(event) {
     
     // 参加者を選択状態にする
     const participantIds = (event.participants || []).map(p => String(p.id));
-    Array.from(updateParticipants.options).forEach(opt => {
-        opt.selected = participantIds.includes(opt.value);
-    });
+    setMultiSelectValues('update', participantIds);
 }
 
 /**
@@ -43,8 +37,6 @@ function populateUpdateForm(event) {
  * @returns {Object} フォームの値
  */
 function getUpdateFormValues() {
-    const updateParticipants = document.getElementById('update-participants');
-    
     return {
         googleEventId: document.getElementById('update-event-id').value,
         title: document.getElementById('update-title').value,
@@ -52,7 +44,7 @@ function getUpdateFormValues() {
         visibility: document.getElementById('update-visibility').value,
         startTime: document.getElementById('update-start-time').value,
         endTime: document.getElementById('update-end-time').value,
-        participantIds: Array.from(updateParticipants.selectedOptions).map(opt => opt.value)
+        participantIds: getMultiSelectValues('update')
     };
 }
 
@@ -103,10 +95,9 @@ function handleUpdateEventSelect() {
  */
 function setupUpdateForm() {
     const updateSelect = document.getElementById('update-event-select');
-    const updateForm = document.getElementById('update-event-form');
-    const updateParticipants = document.getElementById('update-participants');
+    const updateForm   = document.getElementById('update-event-form');
     
-    if (!updateSelect || !updateForm || !updateParticipants) {
+    if (!updateSelect || !updateForm) {
         console.error('event-update: DOM要素が見つかりません。');
         return;
     }
