@@ -190,7 +190,7 @@ function initMultiSelect(prefix) {
                 emptyMsg.textContent = '一致するメンバーがいません';
                 list.appendChild(emptyMsg);
             }
-        } else if (emptyMsg && emptyMsg.dataset.dynamic) {
+        } else if (emptyMsg) {
             emptyMsg.remove();
         }
         // ドロップダウンを開く
