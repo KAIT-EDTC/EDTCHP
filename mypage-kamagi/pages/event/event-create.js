@@ -30,6 +30,7 @@ function setupCreateForm() {
 
             await createEvent(formValues);
             createForm.reset();
+            resetMultiSelect('create');
             await loadEvents();
             
         } catch (error) {
@@ -46,15 +47,13 @@ function setupCreateForm() {
  * @returns {Object} フォームの値
  */
 function getCreateFormValues() {
-    const participantsSelect = document.getElementById('create-participants');
-    
     return {
         title: document.getElementById('create-title').value,
         description: document.getElementById('create-description').value,
         visibility: document.getElementById('create-visibility').value,
         startTime: document.getElementById('create-start-time').value,
         endTime: document.getElementById('create-end-time').value,
-        participantIds: Array.from(participantsSelect.selectedOptions).map(opt => opt.value)
+        participantIds: getMultiSelectValues('create')
     };
 }
 

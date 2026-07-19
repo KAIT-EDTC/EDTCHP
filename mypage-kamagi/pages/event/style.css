@@ -302,22 +302,227 @@ h1 i {
     color: #888;
 }
 
-/* 複数選択 */
-.form-group select[multiple] {
-    height: auto;
-    min-height: 130px;
-    padding: 6px;
+/* カスタムマルチセレクト（チェックボックス付きドロップダウン） */
+.multi-select {
+    position: relative;
+    width: 100%;
+    box-sizing: border-box;
 }
 
-.form-group select[multiple] option {
-    padding: 10px 12px;
+.multi-select-control {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 4px;
+    min-height: 48px;
+    padding: 6px 38px 6px 10px;
+    border: 2px solid #e8e8e8;
+    border-radius: 8px;
+    background-color: #fafafa;
+    cursor: text;
+    box-sizing: border-box;
+    transition: border-color 0.2s, background-color 0.2s, box-shadow 0.2s;
+    position: relative;
+}
+
+.multi-select.open .multi-select-control,
+.multi-select-control:focus-within {
+    border-color: var(--main-color);
+    background-color: #fff;
+    box-shadow: 0 0 0 3px rgba(10, 140, 216, 0.1);
+}
+
+.multi-select-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    flex: 1;
+    align-items: center;
+    min-width: 0;
+}
+
+/* 選択済みタグ */
+.multi-select-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 3px 8px;
+    background-color: var(--main-color);
+    color: #fff;
     border-radius: 4px;
-    margin-bottom: 2px;
+    font-size: 0.82rem;
+    font-weight: 500;
+    white-space: nowrap;
+    animation: tagPop 0.15s ease;
 }
 
-.form-group select[multiple] option:checked {
-    background: linear-gradient(0deg, var(--main-color) 0%, var(--main-color) 100%);
-    color: white;
+@keyframes tagPop {
+    from { transform: scale(0.7); opacity: 0; }
+    to   { transform: scale(1);   opacity: 1; }
+}
+
+.multi-select-tag-remove {
+    background: none;
+    border: none;
+    color: rgba(255,255,255,0.8);
+    cursor: pointer;
+    padding: 0;
+    font-size: 0.9rem;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+}
+
+.multi-select-tag-remove:hover {
+    color: #fff;
+}
+
+/* 検索インプット */
+.multi-select-search {
+    flex: 1;
+    min-width: 80px;
+    border: none !important;
+    background: transparent !important;
+    outline: none !important;
+    box-shadow: none !important;
+    padding: 2px 4px !important;
+    font-size: 0.9rem;
+    color: #333;
+    width: auto !important;
+}
+
+.multi-select-search::placeholder {
+    color: #aaa;
+}
+
+/* クリアボタン */
+.multi-select-clear {
+    position: absolute;
+    right: 28px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: #aaa;
+    font-size: 1.1rem;
+    cursor: pointer;
+    padding: 2px 4px;
+    line-height: 1;
+    display: none;
+}
+
+.multi-select-clear:hover {
+    color: #555;
+}
+
+.multi-select.has-value .multi-select-clear {
+    display: block;
+}
+
+/* 矢印 */
+.multi-select-arrow {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #aaa;
+    font-size: 0.9rem;
+    pointer-events: none;
+    transition: transform 0.2s;
+}
+
+.multi-select.open .multi-select-arrow {
+    transform: translateY(-50%) rotate(180deg);
+}
+
+/* ドロップダウン本体 */
+.multi-select-dropdown {
+    display: none;
+    position: absolute;
+    top: calc(100% + 4px);
+    left: 0;
+    right: 0;
+    background: #fff;
+    border: 2px solid #e8e8e8;
+    border-radius: 8px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+    z-index: 999;
+    max-height: 220px;
+    overflow-y: auto;
+    animation: dropdownOpen 0.15s ease;
+}
+
+.multi-select.open .multi-select-dropdown {
+    display: block;
+}
+
+@keyframes dropdownOpen {
+    from { opacity: 0; transform: translateY(-6px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* スクロールバー */
+.multi-select-dropdown::-webkit-scrollbar {
+    width: 6px;
+}
+.multi-select-dropdown::-webkit-scrollbar-thumb {
+    background: #ddd;
+    border-radius: 3px;
+}
+
+/* リストアイテム */
+.multi-select-list {
+    list-style: none;
+    margin: 0;
+    padding: 4px;
+}
+
+.multi-select-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 10px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.92rem;
+    color: #333;
+    transition: background-color 0.12s;
+    user-select: none;
+}
+
+.multi-select-item:hover {
+    background-color: #f0f7ff;
+}
+
+.multi-select-item.checked {
+    background-color: #edf4ff;
+}
+
+.multi-select-item input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    min-width: 16px;
+    accent-color: var(--main-color);
+    cursor: pointer;
+    border: none;
+    padding: 0;
+    margin: 0;
+    background: transparent;
+    box-shadow: none;
+}
+
+.multi-select-item-label {
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.multi-select-empty {
+    padding: 12px;
+    text-align: center;
+    color: #aaa;
+    font-size: 0.88rem;
 }
 
 /* 削除プレビュー */

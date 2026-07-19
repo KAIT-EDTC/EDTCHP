@@ -19,6 +19,10 @@ document.addEventListener('DOMContentLoaded', async () => {
         loadMembers(),
         loadEvents()
     ]);
+
+    // カスタムマルチセレクトの初期化
+    initMultiSelect('create');
+    initMultiSelect('update');
     
     // フォームイベントの設定（各ファイルから読み込まれた関数を呼び出す）
     setupCreateForm();
@@ -73,27 +77,223 @@ async function loadMembers() {
  * 参加者セレクトボックスにメンバー一覧を表示
  */
 function populateMemberSelects() {
-    const createParticipants = document.getElementById('create-participants');
-    const updateParticipants = document.getElementById('update-participants');
-    
+    const createList = document.getElementById('create-participants-list');
+    const updateList = document.getElementById('update-participants-list');
+
     // クリア
-    createParticipants.innerHTML = '';
-    updateParticipants.innerHTML = '';
-    
-    // メンバーをオプションとして追加
+    createList.innerHTML = '';
+    updateList.innerHTML = '';
+
+    if (membersCache.length === 0) {
+        const empty = '<li class="multi-select-empty">メンバーがいません</li>';
+        createList.innerHTML = empty;
+        updateList.innerHTML = empty;
+        return;
+    }
+
     membersCache.forEach(member => {
-        const optionText = `${member.name} (${member.id})`;
-        
-        const createOption = document.createElement('option');
-        createOption.value = member.id;
-        createOption.textContent = optionText;
-        createParticipants.appendChild(createOption);
-        
-        const updateOption = document.createElement('option');
-        updateOption.value = member.id;
-        updateOption.textContent = optionText;
-        updateParticipants.appendChild(updateOption);
+        const label = `${member.name} (${member.id})`;
+        createList.appendChild(buildMultiSelectItem('create', member.id, label));
+        updateList.appendChild(buildMultiSelectItem('update', member.id, label));
     });
+}
+
+/**
+ * チェックボックスリストアイテムの生成
+ * @param {string} prefix  'create' | 'update'
+ * @param {string} value   メンバー ID
+ * @param {string} label   表示テキスト
+ * @returns {HTMLElement}
+ */
+function buildMultiSelectItem(prefix, value, label) {
+    const li = document.createElement('li');
+    li.className = 'multi-select-item';
+    li.dataset.value = value;
+    li.dataset.label = label;
+
+    const cb = document.createElement('input');
+    cb.type = 'checkbox';
+    cb.value = value;
+    cb.id = `${prefix}-member-${value}`;
+
+    const span = document.createElement('span');
+    span.className = 'multi-select-item-label';
+    span.textContent = label;
+
+    li.appendChild(cb);
+    li.appendChild(span);
+
+    // クリックでトグル
+    li.addEventListener('click', (e) => {
+        if (e.target === cb) return; // checkbox直接クリックは自然に処理される
+        cb.checked = !cb.checked;
+        cb.dispatchEvent(new Event('change'));
+    });
+
+    cb.addEventListener('change', () => {
+        li.classList.toggle('checked', cb.checked);
+        multiSelectRefreshTags(prefix);
+    });
+
+    return li;
+}
+
+/**
+ * カスタムマルチセレクトの初期化（開閉、検索、クリア）
+ * @param {string} prefix  'create' | 'update'
+ */
+function initMultiSelect(prefix) {
+    const widget   = document.getElementById(`${prefix}-participants-widget`);
+    const control  = document.getElementById(`${prefix}-participants-control`);
+    const dropdown = document.getElementById(`${prefix}-participants-dropdown`);
+    const search   = document.getElementById(`${prefix}-participants-search`);
+    const clearBtn = document.getElementById(`${prefix}-participants-clear`);
+    const list     = document.getElementById(`${prefix}-participants-list`);
+
+    if (!widget || !control || !dropdown || !search || !clearBtn || !list) return;
+
+    // コントロール全体クリックで開閉トグル
+    control.addEventListener('mousedown', (e) => {
+        // タグのクリアボタンのみ除外（search と widget 内はすべて開く）
+        if (e.target.classList.contains('multi-select-tag-remove') ||
+            e.target === clearBtn) return;
+        // search インプット以外は focus 移動を防ぎドロップダウンを操作
+        if (e.target !== search) e.preventDefault();
+        const isOpen = widget.classList.contains('open');
+        closeAllMultiSelects();
+        if (!isOpen) {
+            widget.classList.add('open');
+            search.focus();
+        }
+    });
+
+    // 検索欄フォーカス時も必ず開く
+    search.addEventListener('focus', () => {
+        widget.classList.add('open');
+    });
+
+    // 検索テキスト入力でフィルタリング
+    search.addEventListener('input', () => {
+        const q = search.value.trim().toLowerCase();
+        let anyVisible = false;
+        list.querySelectorAll('.multi-select-item').forEach(item => {
+            const match = item.dataset.label.toLowerCase().includes(q);
+            item.style.display = match ? '' : 'none';
+            if (match) anyVisible = true;
+        });
+        // 結果なしメッセージ
+        let emptyMsg = list.querySelector('.multi-select-empty');
+        if (!anyVisible) {
+            if (!emptyMsg) {
+                emptyMsg = document.createElement('li');
+                emptyMsg.className = 'multi-select-empty';
+                emptyMsg.textContent = '一致するメンバーがいません';
+                list.appendChild(emptyMsg);
+            }
+        } else if (emptyMsg) {
+            emptyMsg.remove();
+        }
+        // ドロップダウンを開く
+        widget.classList.add('open');
+    });
+
+    // 検索ボックスでアローキー
+    search.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') closeAllMultiSelects();
+    });
+
+    // 全クリア
+    clearBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        list.querySelectorAll('input[type="checkbox"]:checked').forEach(cb => {
+            cb.checked = false;
+            cb.closest('.multi-select-item').classList.remove('checked');
+        });
+        multiSelectRefreshTags(prefix);
+        search.value = '';
+        list.querySelectorAll('.multi-select-item').forEach(item => item.style.display = '');
+    });
+}
+
+/**
+ * タグ山を再描画
+ * @param {string} prefix
+ */
+function multiSelectRefreshTags(prefix) {
+    const tagsDiv = document.getElementById(`${prefix}-participants-tags`);
+    const search  = document.getElementById(`${prefix}-participants-search`);
+    const widget  = document.getElementById(`${prefix}-participants-widget`);
+    const list    = document.getElementById(`${prefix}-participants-list`);
+
+    // 既存タグを削除
+    tagsDiv.querySelectorAll('.multi-select-tag').forEach(t => t.remove());
+
+    const checked = list.querySelectorAll('input[type="checkbox"]:checked');
+    checked.forEach(cb => {
+        const tag = document.createElement('span');
+        tag.className = 'multi-select-tag';
+        tag.textContent = cb.closest('.multi-select-item').dataset.label;
+
+        const removeBtn = document.createElement('button');
+        removeBtn.type = 'button';
+        removeBtn.className = 'multi-select-tag-remove';
+        removeBtn.textContent = '×';
+        removeBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            cb.checked = false;
+            cb.closest('.multi-select-item').classList.remove('checked');
+            multiSelectRefreshTags(prefix);
+        });
+
+        tag.appendChild(removeBtn);
+        tagsDiv.insertBefore(tag, search);
+    });
+
+    widget.classList.toggle('has-value', checked.length > 0);
+}
+
+/**
+ * すべてのカスタムマルチセレクトを閉じる
+ */
+function closeAllMultiSelects() {
+    document.querySelectorAll('.multi-select.open').forEach(el => el.classList.remove('open'));
+}
+
+// 外側クリックで閉じる
+document.addEventListener('mousedown', (e) => {
+    if (!e.target.closest('.multi-select')) closeAllMultiSelects();
+});
+
+/**
+ * カスタムウィジェットから選択されたID一覧を取得
+ * @param {string} prefix
+ * @returns {string[]}
+ */
+function getMultiSelectValues(prefix) {
+    const list = document.getElementById(`${prefix}-participants-list`);
+    return Array.from(list.querySelectorAll('input[type="checkbox"]:checked')).map(cb => cb.value);
+}
+
+/**
+ * カスタムウィジェットに選択状態を設定
+ * @param {string} prefix
+ * @param {string[]} ids  選択するメンバー ID の配列
+ */
+function setMultiSelectValues(prefix, ids) {
+    const list = document.getElementById(`${prefix}-participants-list`);
+    list.querySelectorAll('input[type="checkbox"]').forEach(cb => {
+        cb.checked = ids.includes(String(cb.value));
+        cb.closest('.multi-select-item').classList.toggle('checked', cb.checked);
+    });
+    multiSelectRefreshTags(prefix);
+}
+
+/**
+ * カスタムウィジェットをリセット
+ * @param {string} prefix
+ */
+function resetMultiSelect(prefix) {
+    setMultiSelectValues(prefix, []);
 }
 
 /**
