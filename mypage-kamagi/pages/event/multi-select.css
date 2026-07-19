@@ -1,0 +1,455 @@
+/* ==========================================================================
+   カスタムマルチセレクト（チェックボックス付きドロップダウン ＆ スマホ用モーダル）
+   ========================================================================== */
+
+.multi-select {
+    position: relative;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.multi-select-control {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 4px;
+    min-height: 48px;
+    padding: 6px 38px 6px 10px;
+    border: 2px solid #e8e8e8;
+    border-radius: 8px;
+    background-color: #fafafa;
+    cursor: text;
+    box-sizing: border-box;
+    transition: border-color 0.2s, background-color 0.2s, box-shadow 0.2s;
+    position: relative;
+}
+
+.multi-select.open .multi-select-control,
+.multi-select-control:focus-within {
+    border-color: var(--main-color);
+    background-color: #fff;
+    box-shadow: 0 0 0 3px rgba(10, 140, 216, 0.1);
+}
+
+.multi-select-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    flex: 1;
+    align-items: center;
+    min-width: 0;
+}
+
+/* 選択済みタグ */
+.multi-select-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 3px 8px;
+    background-color: var(--main-color);
+    color: #fff;
+    border-radius: 4px;
+    font-size: 0.82rem;
+    font-weight: 500;
+    white-space: nowrap;
+    animation: tagPop 0.15s ease;
+}
+
+@keyframes tagPop {
+    from { transform: scale(0.7); opacity: 0; }
+    to   { transform: scale(1);   opacity: 1; }
+}
+
+.multi-select-tag-remove {
+    background: none;
+    border: none;
+    color: rgba(255,255,255,0.8);
+    cursor: pointer;
+    padding: 0;
+    font-size: 0.9rem;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+}
+
+.multi-select-tag-remove:hover {
+    color: #fff;
+}
+
+/* 検索インプット */
+.multi-select-search {
+    flex: 1;
+    min-width: 80px;
+    border: none !important;
+    background: transparent !important;
+    outline: none !important;
+    box-shadow: none !important;
+    padding: 2px 4px !important;
+    font-size: 0.9rem;
+    color: #333;
+    width: auto !important;
+}
+
+.multi-select-search::placeholder {
+    color: #aaa;
+}
+
+/* クリアボタン */
+.multi-select-clear {
+    position: absolute;
+    right: 28px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: #aaa;
+    font-size: 1.1rem;
+    cursor: pointer;
+    padding: 2px 4px;
+    line-height: 1;
+    display: none;
+}
+
+.multi-select-clear:hover {
+    color: #555;
+}
+
+.multi-select.has-value .multi-select-clear {
+    display: block;
+}
+
+/* 矢印 */
+.multi-select-arrow {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #aaa;
+    font-size: 0.9rem;
+    pointer-events: none;
+    transition: transform 0.2s;
+}
+
+.multi-select.open .multi-select-arrow {
+    transform: translateY(-50%) rotate(180deg);
+}
+
+/* ドロップダウン本体 */
+.multi-select-dropdown {
+    display: none;
+    position: absolute;
+    top: calc(100% + 4px);
+    left: 0;
+    right: 0;
+    background: #fff;
+    border: 2px solid #e8e8e8;
+    border-radius: 8px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+    z-index: 999;
+    max-height: 220px;
+    overflow-y: auto;
+    animation: dropdownOpen 0.15s ease;
+}
+
+.multi-select.open .multi-select-dropdown {
+    display: block;
+}
+
+@keyframes dropdownOpen {
+    from { opacity: 0; transform: translateY(-6px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* スクロールバー */
+.multi-select-dropdown::-webkit-scrollbar {
+    width: 6px;
+}
+.multi-select-dropdown::-webkit-scrollbar-thumb {
+    background: #ddd;
+    border-radius: 3px;
+}
+
+/* リストアイテム */
+.multi-select-list {
+    list-style: none;
+    margin: 0;
+    padding: 4px;
+}
+
+.multi-select-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 10px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.92rem;
+    color: #333;
+    transition: background-color 0.12s;
+    user-select: none;
+}
+
+.multi-select-item:hover {
+    background-color: #f0f7ff;
+}
+
+.multi-select-item.checked {
+    background-color: #edf4ff;
+}
+
+.multi-select-item input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    min-width: 16px;
+    accent-color: var(--main-color);
+    cursor: pointer;
+    border: none;
+    padding: 0;
+    margin: 0;
+    background: transparent;
+    box-shadow: none;
+}
+
+.multi-select-item-label {
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.multi-select-empty {
+    padding: 12px;
+    text-align: center;
+    color: #aaa;
+    font-size: 0.88rem;
+}
+
+
+/* ===== スマホ用 全画面モーダル ===== */
+.mobile-modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100vw;
+    height: 100dvh;
+    height: 100vh; /* fallback */
+    margin: 0;
+    padding: 0;
+    z-index: 9999;
+    background: #fff;
+    flex-direction: column;
+    overflow: hidden;
+    box-sizing: border-box;
+}
+
+.mobile-modal-overlay.active {
+    display: flex;
+}
+
+.mobile-modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 16px;
+    border-bottom: 1px solid #e8e8e8;
+    background: #fff;
+    flex-shrink: 0;
+}
+
+.mobile-modal-cancel {
+    display: flex;
+    align-items: center;
+    background: none;
+    border: none;
+    font-size: 0.95rem;
+    color: #666;
+    cursor: pointer;
+    padding: 8px 4px;
+}
+
+.mobile-modal-title {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #333;
+}
+
+.mobile-modal-done {
+    background: var(--main-color);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 8px 18px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: opacity 0.2s;
+}
+
+.mobile-modal-done:active {
+    opacity: 0.8;
+}
+
+.mobile-modal-search-wrap {
+    padding: 10px 16px;
+    border-bottom: 1px solid #f0f0f0;
+    background: #fafafa;
+    flex-shrink: 0;
+}
+
+.mobile-modal-search-input {
+    width: 100%;
+    padding: 12px 14px;
+    border: 2px solid #e8e8e8;
+    border-radius: 8px;
+    font-size: 1rem;
+    background: #fff;
+    box-sizing: border-box;
+    transition: border-color 0.2s;
+}
+
+.mobile-modal-search-input:focus {
+    border-color: var(--main-color);
+    outline: none;
+}
+
+.mobile-modal-list-wrap {
+    flex: 1;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.mobile-modal-list {
+    list-style: none;
+    margin: 0;
+    padding: 4px 0;
+}
+
+.mobile-modal-item {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 16px 20px;
+    border-bottom: 1px solid #f5f5f5;
+    cursor: pointer;
+    transition: background-color 0.12s;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.mobile-modal-item:active {
+    background-color: #f0f7ff;
+}
+
+.mobile-modal-item.checked {
+    background-color: #edf4ff;
+}
+
+.mobile-modal-item-checkbox {
+    width: 22px;
+    height: 22px;
+    min-width: 22px;
+    border: 2px solid #ccc;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.15s;
+    color: transparent;
+    font-size: 0.85rem;
+}
+
+.mobile-modal-item.checked .mobile-modal-item-checkbox {
+    background: var(--main-color);
+    border-color: var(--main-color);
+    color: #fff;
+}
+
+.mobile-modal-item-label {
+    flex: 1;
+    font-size: 1rem;
+    color: #333;
+}
+
+.mobile-modal-empty {
+    padding: 32px 16px;
+    text-align: center;
+    color: #aaa;
+    font-size: 0.95rem;
+}
+
+.mobile-modal-footer {
+    padding: 12px 16px;
+    border-top: 1px solid #e8e8e8;
+    background: #fff;
+    flex-shrink: 0;
+}
+
+.mobile-modal-clear-btn {
+    width: 100%;
+    padding: 12px;
+    background: none;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    color: #888;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.mobile-modal-clear-btn:active {
+    background: #f5f5f5;
+    color: #555;
+}
+
+/* スマホ用 選択人数バッジ（タグの代替） */
+.multi-select-count {
+    display: none;
+    font-size: 0.88rem;
+    color: var(--main-color);
+    font-weight: 500;
+    padding: 2px 0;
+}
+
+/* body スクロールロック */
+body.modal-open {
+    overflow: hidden !important;
+    height: 100vh;
+    touch-action: none;
+}
+
+
+/* ===== レスポンシブ用（SP表示切替） ===== */
+@media (max-width: 600px) {
+    /* スマホではドロップダウンを無効化（モーダルを使用） */
+    .multi-select-dropdown {
+        display: none !important;
+    }
+
+    /* スマホではタグを非表示にして人数バッジを表示 */
+    .multi-select-tag {
+        display: none;
+    }
+
+    .multi-select-count {
+        display: inline;
+    }
+
+    /* 検索インプットをスマホでは非表示（モーダル内に検索がある） */
+    .multi-select-search {
+        max-width: 100%;
+        pointer-events: none;
+    }
+
+    .multi-select.has-value .multi-select-search {
+        display: none;
+    }
+
+    /* コントロール全体をタップ領域にする */
+    .multi-select-control {
+        min-height: 48px;
+        cursor: pointer;
+    }
+}
